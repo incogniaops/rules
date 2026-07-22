@@ -12,7 +12,7 @@ Before making any git commit in projects that follow the rules repository conven
 ## Instructions
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/committing.md` from line 1 to end
-2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS).
+2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS). For `laboral`, expected profile is `Rodrigo Álvarez`, `r.alvarez1@elsevier.com`, role `Systems Engineering Lead`, company Elsevier, location `Tech Hub Ciudad de México (Mexico City)`, GitHub user/org `incogniaops`.
 3. **Validate CHANGELOG gate BEFORE staging (MANDATORY)**:
    a. Run change validation (staged or unstaged):
       ```bash

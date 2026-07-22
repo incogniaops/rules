@@ -20,7 +20,7 @@ Este documento establece cómo darme crédito y atribución en documentos indivi
 
 ## 3. Especialización profesional
 
-Rodrigo es **Ingeniero DevOps** especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
+Rodrigo es **Systems Engineering Lead en Elsevier** especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
 
 Sus competencias técnicas principales incluyen:
 
@@ -38,17 +38,17 @@ Sus competencias técnicas principales incluyen:
 - **GitLab:** `incognia`
 - **Correo electrónico:** `incognia@gmail.com`
 
-### 4.2. Laborales (Promad Business Solutions)
-- **GitHub:** `incogniadev`
+### 4.2. Laborales (Elsevier)
+- **GitHub:** `incogniaops`
 - **GitLab:** `incogniadev`
-- **Correo electrónico:** `ralvarez@kabatone.com`
+- **Correo electrónico:** `r.alvarez1@elsevier.com`
 
 ## 5. Atribución y menciones
 
 ### 5.1. Formatos sugeridos
 - **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
-- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Promad Business Solutions (@incogniadev)»
+- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Systems Engineering Lead para Elsevier (@incogniaops)»
 
 ### 5.2. Firma en commits de Git
 - **Para proyectos personales:**
@@ -56,10 +56,10 @@ Sus competencias técnicas principales incluyen:
   git config user.name "Rodrigo Álvarez"
   git config user.email "incognia@gmail.com"
   ```
-- **Para proyectos laborales (Promad):**
+- **Para proyectos laborales (Elsevier):**
   ```bash
   git config user.name "Rodrigo Álvarez"
-  git config user.email "ralvarez@kabatone.com"
+  git config user.email "r.alvarez1@elsevier.com"
   ```
 
 ## 6. Licenciamiento y firma de contribuciones
@@ -70,7 +70,7 @@ Sus competencias técnicas principales incluyen:
 
 ### 6.2. Firma de contribuciones (alias)
 - **Contribuciones personales:** firmar bajo el alias `incognia`.
-- **Contribuciones laborales o bajo contrato:** firmar bajo el alias `incogniadev`.
+- **Contribuciones laborales o bajo contrato:** firmar bajo el alias `incogniaops`.
 - **Requerimientos legales:** en encabezados de licencia o documentos legales que lo requieran, utilizar el nombre completo: `Rodrigo Ernesto Álvarez Aguilera`.
 
 ## 7. Estándares de codificación y documentación

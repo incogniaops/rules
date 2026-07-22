@@ -19,7 +19,7 @@ When starting work on a new or unfamiliar repository to quickly understand its s
 6. **Check CI/CD**: Look for .github/workflows/, .gitlab-ci.yml, Jenkinsfile
 7. **Analyze structure**: Run `tree -L 2 -I node_modules` or `ls -la`
 8. **Read key files**: First 20 lines of README.md and any AGENTS.md found
-9. **Identify context**: Determine if personal (@incognia) or corporate (@incogniadev) project
+9. **Identify context**: Determine if personal (@incognia) or corporate (@incogniaops) project
 10. **Summarize findings**: Technologies, structure, CI/CD, documentation, context
 
 ## References

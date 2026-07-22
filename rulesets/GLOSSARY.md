@@ -44,7 +44,7 @@ Este glosario recoge términos clave utilizados en los documentos de reglas y fi
 : cultura y conjunto de prácticas que buscan integrar equipos de desarrollo y operaciones para entregar software de manera más ágil, estable y segura.
 
 **Dualidad de contextos (personal/laboral)**
-: distinción entre proyectos personales (licencia GPLv3, alias incognia) y laborales (licencia MIT, alias incogniadev), cada uno con reglas y atribución específicas.
+: distinción entre proyectos personales (licencia GPLv3, alias incognia) y laborales (licencia MIT, alias incogniaops), cada uno con reglas y atribución específicas.
 
 **Emojis (en commits)**
 : iconos gráficos que se desaconsejan totalmente en mensajes de *commit* y documentación profesional dentro de este sistema.
@@ -79,8 +79,8 @@ Este glosario recoge términos clave utilizados en los documentos de reglas y fi
 **Proxmox VE**
 : plataforma de virtualización de código abierto basada en KVM y LXC, usada para desplegar infraestructuras privadas y clústeres Kubernetes *bare-metal*.
 
-**Promad Business Solutions**
-: entidad laboral asociada a proyectos bajo licencia MIT y el alias profesional incogniadev.
+**Elsevier**
+: entidad laboral asociada a proyectos bajo licencia MIT y el alias profesional incogniaops.
 
 **RBAC (Control de Acceso Basado en Roles)**
 : mecanismo de seguridad que restringe el acceso a recursos en Kubernetes y aplicaciones según los roles asignados a usuarios/grupos.

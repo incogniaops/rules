@@ -6,7 +6,7 @@ Este documento describe la configuración inicial necesaria al clonar o iniciali
 
 Antes de configurar, determina si el proyecto es:
 
-- 💼 **Laboral:** Promad Business Solutions
+- 💼 **Laboral:** Elsevier (Tech Hub Ciudad de México / Mexico City)
 - 📺 **Personal:** Proyectos independientes o experimentales
 
 ## 2. Configuración local del repositorio
@@ -27,12 +27,12 @@ git config --list | grep ^user\.
 - **GitLab:** incognia
 - **SSH Key:** `~/.ssh/incognia`
 
-### Proyectos laborales (Promad)
+### Proyectos laborales (Elsevier)
 
 ```bash
 # Configurar usuario para este repositorio
 git config user.name "Rodrigo Álvarez"
-git config user.email "ralvarez@kabatone.com"
+git config user.email "r.alvarez1@elsevier.com"
 
 # Verificar configuración
 git config --list | grep ^user\.
@@ -40,9 +40,9 @@ git config --list | grep ^user\.
 
 **Credenciales de plataforma:**
 
-- **GitHub:** incogniadev
+- **GitHub:** incogniaops
 - **GitLab:** incogniadev
-- **SSH Key:** `~/.ssh/kone`
+- **SSH Key:** `~/.ssh/elsevier`
 
 ## 3. Configuración inicial y SSH por contexto
 
@@ -76,14 +76,14 @@ git config user.name  "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
 git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 
-# Laboral (Promad)
+# Laboral (Elsevier)
 # git config user.name  "Rodrigo Álvarez"
-# git config user.email "ralvarez@kabatone.com"
-# git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"
+# git config user.email "r.alvarez1@elsevier.com"
+# git config core.sshCommand "ssh -i ~/.ssh/elsevier -o IdentitiesOnly=yes"
 
 # Configurar remoto SSH (ejemplos)
 # GitHub personal:  git@github.com:incognia/REPO.git
-# GitHub laboral:   git@github.com:incogniadev/REPO.git
+# GitHub laboral:   git@github.com:incogniaops/REPO.git
 # GitLab personal:  git@gitlab.com:incognia/REPO.git
 # GitLab laboral:   git@gitlab.com:incogniadev/REPO.git
 
@@ -105,7 +105,7 @@ ssh -T git@gitlab.com || true
 
 ```bash
 git clone git@github.com:incognia/repo-name.git              # Personal GitHub
-git clone git@github.com:incogniadev/repo-name.git           # Laboral GitHub
+git clone git@github.com:incogniaops/repo-name.git           # Laboral GitHub
 
 git clone git@gitlab.com:incognia/repo-name.git              # Personal GitLab
 git clone git@gitlab.com:incogniadev/repo-name.git           # Laboral GitLab

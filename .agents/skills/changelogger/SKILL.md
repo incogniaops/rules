@@ -1,6 +1,6 @@
 ---
 name: changelogger
-description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and Spanish Mexican language. Use this skill when updating the changelog."
+description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and International English (UK). Use this skill when updating the changelog."
 ---
 
 # CHANGELOG.md maintenance
@@ -23,18 +23,18 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - **First-attempt rule (MANDATORY)**: for an existing date block, the first attempt MUST use one single-hunk micro-block replacement with exact `search` = `## [YYYY-MM-DD] - ...` + immediate blank line + first existing bullet.
    - **Insertion rule (MANDATORY)**: in that same hunk, reproduce the heading and blank line intact, then insert the new bullet above the previous first bullet.
    - **No intra-block blank line (MANDATORY)**: keep bullets contiguous inside the same date block; never add an empty line between bullets of that block.
-   - **If the date does not exist**: create `## [YYYY-MM-DD] - Título descriptivo breve` at the top and add typed bullets.
+   - **If the date does not exist**: create `## [YYYY-MM-DD] - Short descriptive title` at the top and add typed bullets.
    - **Spacing rule (MANDATORY)**: keep exactly one blank line between the last bullet of the target date block and the next `## [YYYY-MM-DD]` heading.
    - **Fallback rule (MANDATORY, new date only)**: if insertion preview still shows no blank separator line after creating a new date block, switch immediately to a two-hunk edit (first hunk inserts the new block, second hunk enforces `blank line + next heading`).
    - Base format:
      ```markdown
-     ## [YYYY-MM-DD] - Título descriptivo breve
+     ## [YYYY-MM-DD] - Short descriptive title
 
-     - feat: descripción del cambio en español mexicano
-     - docs: descripción adicional si aplica
+     - feat: change description in International English (UK)
+     - docs: additional description if applicable
      ```
-7. **Language**: All entries in Spanish Mexican, no emojis
-8. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
+7. **Language**: All entries in International English (UK), no emojis
+8. **Type in bullets**: Each bullet MUST start with `type:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
 9. **Verify**: Check that the new entry is above all previous entries
 
 ## Critical rules
@@ -42,7 +42,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 - Date format: `[YYYY-MM-DD]` only — no time component
 - CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
 - No emojis in CHANGELOG entries
-- Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
+- Descriptive title after the date: `## [YYYY-MM-DD] - Short descriptive title`
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 - Keep exactly one blank line between consecutive date blocks (`## [YYYY-MM-DD]`)
 - Keep bullets contiguous within the same date block (no blank lines between bullets)
@@ -68,7 +68,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 12. If validation shows changes outside the target date block: stop and ask user confirmation; do NOT auto-correct historical entries.
 13. If it fails again: stop and ask user confirmation before any further attempt.
 14. Never chain 3+ consecutive attempts on CHANGELOG without an intermediate successful diff validation.
-15. For existing-date insertion, NEVER anchor the edit from `# Registro de cambios` or any file-top replacement; anchor only on `heading + blank line + first bullet`.
+15. For existing-date insertion, NEVER anchor the edit from the top heading (for example `# Changelog`) or any file-top replacement; anchor only on `heading + blank line + first bullet`.
 16. If an insertion-only attempt shows any deleted line (`-`) anywhere in `CHANGELOG.md`, abort that patch and rebuild the anchor before retrying; deletions are allowed only with explicit user instruction.
 
 Forbidden anti-patterns:
@@ -87,7 +87,7 @@ Forbidden anti-patterns:
 - Repeating discovery/search loops after the target date block is already identified.
 - Editing entries outside the current day block (`DATE_CST`) without explicit user instruction.
 - Continuing to commit flow when CHANGELOG diff acceptance criterion is not met.
-- Anchoring an existing-date insertion from `# Registro de cambios` or replacing the file-top section instead of the micro-block anchor.
+- Anchoring an existing-date insertion from the top heading (for example `# Changelog`) or replacing the file-top section instead of the micro-block anchor.
 - Accepting a patch that deletes separator blank lines when the goal is only to prepend bullets in the current-day block.
 - Deleting any existing `CHANGELOG.md` line during incremental insertion without explicit user instruction.
 

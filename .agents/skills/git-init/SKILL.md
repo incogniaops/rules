@@ -8,7 +8,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 ## Arguments
 
 - **Context**: $0 (personal or laboral)
-- **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. incognia, kone)
+- **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. incognia, elsevier)
 - **Remote URL**: $2 (SSH URL, e.g. git@github.com:incognia/repo.git)
 - **Branch**: $3 (default branch name, e.g. main)
 
@@ -25,7 +25,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
    - If `laboral`:
      ```bash
      git config user.name "Rodrigo Álvarez"
-     git config user.email "ralvarez@kabatone.com"
+     git config user.email "r.alvarez1@elsevier.com"
      ```
 4. **Configure SSH key**: `git config core.sshCommand "ssh -i ~/.ssh/$1 -o IdentitiesOnly=yes"`
    - Verify the key exists: `ls ~/.ssh/$1` — if not found, list available keys with `ls ~/.ssh/` and ask the user
@@ -47,14 +47,14 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 If arguments are missing, use these defaults based on context:
 
 - **personal**: key=`incognia`, branch=`main`
-- **laboral**: key=`kone`, branch=`main`
+- **laboral**: key=`elsevier`, branch=`main`
 
 If no arguments are provided at all, ask the user for context and remote URL.
 
 ## Examples
 
 - `/git-init personal incognia git@github.com:incognia/myproject.git main`
-- `/git-init laboral kone git@gitlab.com:incogniadev/project.git main`
+- `/git-init laboral elsevier git@github.com:incogniaops/project.git main`
 - `/git-init personal` — uses defaults, asks for remote URL
 
 ## References

@@ -102,11 +102,11 @@ The repository supports dual contexts with different rules:
 - SSH key: ~/.ssh/incognia
 - Documentation: Spanish Mexican
 
-**Corporate Projects (`@incogniadev` for Promad Business Solutions)**:
+**Corporate Projects (`@incogniaops` for Elsevier)**:
 
 - License: MIT (permissive)
-- Email: ralvarez@kabatone.com
-- SSH key: ~/.ssh/kone
+- Email: r.alvarez1@elsevier.com
+- SSH key: ~/.ssh/elsevier
 - Documentation: Spanish Mexican with STYLING.md rules
 
 ### Chain-of-Thought (CoT) system

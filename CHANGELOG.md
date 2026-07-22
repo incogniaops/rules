@@ -3,6 +3,12 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-07-22] - Align corporate profile and git initialisation standards
+
+- docs: update labour identity references to Elsevier, GitHub `incogniaops` and email `r.alvarez1@elsevier.com` across rules and skills
+- feat: align git initialisation flows and helper script with SSH key `~/.ssh/elsevier` and SSH remote examples for `incogniaops`
+- docs: switch changelog maintenance guidance to International English (UK) with consistent `type:` bullets
+
 ## [2026-06-22] - Incorporar flujo bmail para correos empresariales en inglés
 
 - feat: estandarizar las siete plantillas de `templates/bmail/` con nueva estructura HTML, bloque de metadatos (from/to/date/subject) y campos opcionales por escenario

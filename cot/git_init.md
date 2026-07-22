@@ -26,7 +26,7 @@ Pasos (Opción recomendada: asistente interactivo):
 4) (Opcional) Acción: configurar origin si no lo hiciste en el asistente.
    Resultado (ejemplos):
    - GitHub personal: `git remote add origin git@github.com:incognia/REPO.git`
-   - GitHub laboral: `git remote add origin git@github.com:incogniadev/REPO.git`
+   - GitHub laboral: `git remote add origin git@github.com:incogniaops/REPO.git`
    - GitLab personal: `git remote add origin git@gitlab.com:incognia/REPO.git`
    - GitLab laboral: `git remote add origin git@gitlab.com:incogniadev/REPO.git`
    - Verificar: `git remote -v`.
@@ -44,10 +44,10 @@ Pasos (Alternativa manual, si no usas el asistente):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "incognia@gmail.com"`
      - `git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"`
-   - Laboral (Promad):
+   - Laboral (Elsevier):
      - `git config user.name  "Rodrigo Álvarez"`
-     - `git config user.email "ralvarez@kabatone.com"`
-     - `git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"`
+     - `git config user.email "r.alvarez1@elsevier.com"`
+     - `git config core.sshCommand "ssh -i ~/.ssh/elsevier -o IdentitiesOnly=yes"`
 3) Configurar remoto en SSH (ver ejemplos arriba) y verificar con `git remote -v`.
 4) Definir rama por defecto: `git branch -M main`.
 5) Commit y primer push como en los pasos 5-6 de la opción recomendada.

@@ -150,17 +150,17 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ### 1. Identificación del contexto del proyecto
 
-- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Promad Business Solutions**
+- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Elsevier (Tech Hub Ciudad de México / Mexico City)**
 - 📺 **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
 
 ### 2. Aplicación de reglas por contexto
 
-| Aspecto | Personal (`@incognia`) | Laboral (`@incogniadev`) |
+| Aspecto | Personal (`@incognia`) | Laboral (`@incogniaops`) |
 |---------|------------------------|---------------------------|
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
-| **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
-| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@kabatone.com](mailto:ralvarez@kabatone.com) |
-| **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/kone |
+| **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniaops) |
+| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [r.alvarez1@elsevier.com](mailto:r.alvarez1@elsevier.com) |
+| **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/elsevier |
 | **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
