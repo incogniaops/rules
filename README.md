@@ -1,11 +1,11 @@
 ---
-title: "Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM"
-description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían el trabajo técnico de Rodrigo Álvarez (@incognia). Incluye reglas lingüísticas, de licenciamiento, estilo y flujos DevOps."
+title: "Technical rules: prompts and CoTs to accelerate LLM context"
+description: "Standards, philosophy, and chains of reasoning (CoT) that guide Rodrigo Álvarez's technical work (@incognia). Includes linguistic, licensing, styling, and DevOps workflow rules."
 ---
 
-# Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
+# Technical rules: prompts and CoTs to accelerate LLM context
 
-*Última modificación: 27 de marzo de 2026, 23:26 (CST)*
+*Last modified: 27 March 2026, 23:26 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
@@ -14,291 +14,291 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![Skills](https://img.shields.io/badge/Skills-10-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-16-orange.svg)](./rulesets/)
 
-## Definiciones rápidas
+## Quick definitions
 
-- *Prompt*: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
-- CoT (*Chain-of-Thought*): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
+- *Prompt*: an instruction or context you give the model to indicate what to do, with which tone, and under which constraints.
+- CoT (*Chain-of-Thought*): step-by-step reasoning that makes explicit how an answer is reached, especially useful for complex tasks.
 
-Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez. En la práctica diaria se prioriza el uso de los CoT: los documentos describen la lógica de las reglas, pero las herramientas de trabajo cotidianas son los CoT en sí.
+This repository contains the rules, standards, and philosophy that guide technical work and collaboration in Rodrigo Álvarez's projects. In daily practice, CoTs are prioritised: documents describe the logic of the rules, but CoTs are the day-to-day operational tools.
 
-## Filosofía principal
+## Core philosophy
 
-Un manifiesto contra tres males endémicos en tecnología latinoamericana:
+A manifesto against three endemic issues in Latin American technology:
 
-- **Mercenazgo:** trabajos mediocres sin compromiso real
-- **Egoísmo técnico:** acaparar conocimiento para crear dependencia
-- **Falta de identidad:** complejos culturales que degradan la calidad
+- **Mercenary work:** mediocre work without genuine commitment
+- **Technical selfishness:** hoarding knowledge to create dependency
+- **Identity loss:** cultural insecurities that reduce quality
 
-### Contexto académico relacionado
+### Related academic context
 
-- La idea de usar este repositorio como contexto instruccional para LLM se alinea con la línea de investigación «chain-of-thought prompting», que muestra que proporcionar cadenas de razonamiento mejora el desempeño en tareas complejas.
-- Referencia: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903) (resumen: [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)).
+- The idea of using this repository as instructional context for LLMs aligns with the «chain-of-thought prompting» research line, which shows that providing reasoning chains improves performance on complex tasks.
+- Reference: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903) (summary: [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)).
 
-## Flujo de trabajo diario con CoT (recomendado)
+## Daily workflow with CoTs (recommended)
 
-Principio operativo: los documentos de `rulesets/` contienen la lógica y las reglas; sin embargo, las herramientas de trabajo del día a día son los CoT ubicados en `cot/`.
+Operational principle: documents in `rulesets/` contain logic and rules; however, day-to-day execution tools are CoTs located in `cot/`.
 
-### Configuración inicial (una sola vez)
+### Initial setup (one-time)
 
-#### macOS y Linux
+#### macOS and Linux
 
 ```bash
-# 1. Clonar el repositorio
+# 1. Clone the repository
 git clone git@github.com:incognia/rules.git ~/rules
 
-# 2. Instalar skills y workflows globales (detecta plataforma automáticamente)
+# 2. Install global skills and workflows (platform auto-detected)
 ~/rules/scripts/sync_global.sh
 ```
 
 #### Windows (WSL)
 
 ```bash
-# 1. Clonar el repositorio (dentro de WSL)
+# 1. Clone the repository (inside WSL)
 git clone git@github.com:incognia/rules.git ~/rules
 
-# 2. Instalar skills y workflows globales
+# 2. Install global skills and workflows
 ~/rules/scripts/sync_global.sh
 ```
 
-#### Sin clonar (ejecución remota)
+#### Without cloning (remote execution)
 
 ```bash
-# Instalar o actualizar desde el repo público directamente
+# Install or update directly from the public repo
 git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rules pull
 ~/rules/scripts/sync_global.sh
 ```
 
-**Notas**:
+**Notes**:
 
-- `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
-  - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
-  - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
-  - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
-- **No copia** (se accede directo desde `~/rules/`):
-  - `scripts/` — `graph_auth.py` y otros scripts
-  - `templates/` — plantillas HTML e imágenes de firma
-  - `rulesets/`, `cot/` — reglas y cadenas de razonamiento
-- Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
-- No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
+- `sync_global.sh` detects platform (macOS, Linux, Windows/WSL) and copies to correct locations:
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (recognised by Warp, Claude, Cursor, Copilot, Gemini, and others)
+  - *Workflows* (`*.yaml`) on macOS: `~/.warp/workflows/`
+  - *Workflows* on Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
+  - *Workflows* on Windows: `$APPDATA\\warp\\Warp\\data\\workflows\\`
+- **Not copied** (accessed directly from `~/rules/`):
+  - `scripts/` — `graph_auth.py` and other scripts
+  - `templates/` — HTML templates and signature images
+  - `rulesets/`, `cot/` — rules and reasoning chains
+- To refresh after a `git pull`, just run: `~/rules/scripts/sync_global.sh`
+- Symbolic links are not used; all paths are canonical (`~/rules/cot/`, `~/rules/rulesets/`)
 
-### Uso diario
+### Daily usage
 
 ```mermaid
 flowchart LR
-    A["Usuario con tarea"] --> B{"¿Qué necesito hacer?"}
+    A["User with a task"] --> B{"What do I need to do?"}
     B -->|Commits| C["~/rules/cot/committing.md"]
-    B -->|Obtener contexto| D["~/rules/cot/context.md"]
-    B -->|Actualizar CHANGELOG| E["~/rules/cot/changelog.md"]
-    B -->|Configurar Git| F["~/rules/cot/git_init.md"]
-    B -->|Aplicar reglas lingüísticas| G["~/rules/cot/linguistics.md"]
-    B -->|Hacer respaldos| H["~/rules/cot/backup.md"]
+    B -->|Get context| D["~/rules/cot/context.md"]
+    B -->|Update CHANGELOG| E["~/rules/cot/changelog.md"]
+    B -->|Configure Git| F["~/rules/cot/git_init.md"]
+    B -->|Apply language rules| G["~/rules/cot/linguistics.md"]
+    B -->|Create backups| H["~/rules/cot/backup.md"]
     
-    C --> I["Ejecución de CoT<br/>en herramienta LLM"]
+    C --> I["CoT execution<br/>in an LLM tool"]
     D --> I
     E --> I
     F --> I
     G --> I
     H --> I
     
-    I --> J["Tarea completada<br/>según protocolo"]
+    I --> J["Task completed<br/>per protocol"]
     
-    K["📚 Referencia conceptual<br/>~/rules/rulesets/*.md"] -.-> B
+    K["📚 Conceptual reference<br/>~/rules/rulesets/*.md"] -.-> B
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style J fill:#9f9,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
-**Ejemplos de invocación**:
+**Invocation examples**:
 
-- `Aplica ~/rules/cot/committing.md`
-- `Aplica ~/rules/cot/context.md`
-- `Aplica ~/rules/cot/changelog.md`
+- `Apply ~/rules/cot/committing.md`
+- `Apply ~/rules/cot/context.md`
+- `Apply ~/rules/cot/changelog.md`
 
-**Principio clave**: prioriza siempre los CoT para ejecución; usa los documentos de `rulesets/` como referencia conceptual.
+**Key principle**: always prioritise CoTs for execution; use `rulesets/` documents as conceptual references.
 
-## Documentos incluidos
+## Included documents
 
-- **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
-- **[AGENTS.md](./AGENTS.md)** - guía para agentes IA que trabajan con este repositorio
-- **[CORPORATE.md](./rulesets/CORPORATE.md)** - perfil profesional corporativo
-- **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
-- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
-- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[GIT.md](./rulesets/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
-- **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
-- **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
-- **[MAIL.md](./rulesets/MAIL.md)** - reglas de composición de correos HTML para OWA
-- **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa/mac/graph, configuración de Graph API, ciclo de vida del *token*)
-- **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
+- **[PHILOSOPHY.md](./PHILOSOPHY.md)** - core philosophy and development manifesto
+- **[AGENTS.md](./AGENTS.md)** - guide for AI agents working with this repository
+- **[CORPORATE.md](./rulesets/CORPORATE.md)** - corporate professional profile
+- **[TEACHING.md](./rulesets/TEACHING.md)** - educational and scientific outreach profile
+- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - personal attribution rules
+- **[COMMITTING.md](./rulesets/COMMITTING.md)** - rules for *commit* messages and change management
+- **[GIT.md](./rulesets/GIT.md)** - initial setup for GitHub and GitLab accounts
+- **[LICENSING.md](./rulesets/LICENSING.md)** - project licensing rules
+- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - Mexican Spanish linguistic rules as the cultural reference
+- **[STYLING.md](./rulesets/STYLING.md)** - style rules for Markdown documents (work projects)
+- **[BACKUPS.md](./rulesets/BACKUPS.md)** - backup and destructive-operation policies
+- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glossary of technical terms used
+- **[MAIL.md](./rulesets/MAIL.md)** - HTML email composition rules for OWA
+- **[docs/MAIL.md](./docs/MAIL.md)** - sending email from CLI (owa/mac/graph modes, Graph API setup, *token* lifecycle)
+- **[CHANGELOG.md](./CHANGELOG.md)** - project change history
 
-## Especialización técnica
+## Technical specialisation
 
-- ingeniería DevOps con enfoque en Kubernetes nativo
-- plataformas *bare-metal* sobre Proxmox VE
-- GitOps y automatización declarativa
-- observabilidad y mallas de servicios
-- seguridad en entornos distribuidos
+- DevOps engineering focused on cloud-native Kubernetes
+- *Bare-metal* platforms on Proxmox VE
+- GitOps and declarative automation
+- Observability and service meshes
+- Security in distributed environments
 
-## Flujo de decisión para aplicación de reglas
+## Decision flow for applying rules
 
-La mayoría de las reglas en este repositorio tienen una **dualidad de contextos** (personal vs laboral). El flujo de decisión para determinar qué reglas aplicar es el siguiente:
+Most rules in this repository follow a **dual-context model** (personal vs work). The decision flow to determine which rules to apply is:
 
-### 1. Identificación del contexto del proyecto
+### 1. Project context identification
 
-- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Elsevier (Tech Hub Ciudad de México / Mexico City)**
-- 📺 **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
+- 💼 **Work context**: projects developed for or under contract with **Elsevier (Tech Hub Ciudad de México / Mexico City)**
+- 📺 **Personal context**: independent, experimental, or personal-development projects
 
-### 2. Aplicación de reglas por contexto
+### 2. Rule application by context
 
-| Aspecto | Personal (`@incognia`) | Laboral (`@incogniaops`) |
+| Aspect | Personal (`@incognia`) | Work (`@incogniaops`) |
 |---------|------------------------|---------------------------|
-| **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
-| **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniaops) |
+| **Licensing** | GPLv3 (copyleft) | MIT (permissive) |
+| **Authorship** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniaops) |
 | **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [r.alvarez1@elsevier.com](mailto:r.alvarez1@elsevier.com) |
 | **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/elsevier |
 | **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
-| **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
-| **Idioma documentación** | Español mexicano | Español mexicano |
-| **Idioma código/commits** | Inglés internacional | Inglés internacional |
+| **Document style** | Not defined yet | [STYLING.md](./rulesets/STYLING.md) applies |
+| **Documentation language** | Mexican Spanish | International English |
+| **CHANGELOG.md language** | Mexican Spanish | International English |
+| **Code/commit language** | International English | International English |
 
-### 3. Reglas universales (aplican a ambos contextos)
+### 3. Universal rules (apply to both contexts)
 
-- **LINGUISTICS.md**: español mexicano como estándar cultural
-- **COMMITTING.md**: Conventional Commits en inglés
-- **PHILOSOPHY.md**: principios generales de trabajo
-- **BACKUPS.md**: políticas de respaldos y operaciones destructivas
-- **GLOSSARY.md**: términos técnicos estandarizados
-- **GIT.md**: configuración inicial de repositorios
+- **LINGUISTICS.md**: Mexican Spanish as cultural standard
+- **COMMITTING.md**: Conventional Commits in English
+- **PHILOSOPHY.md**: general working principles
+- **BACKUPS.md**: backup and destructive-operation policies
+- **GLOSSARY.md**: standardised technical terms
+- **GIT.md**: repository initialisation setup
 
-### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
+### 4. Dual-use rules (different application by context)
 
-- **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
-- **CORPORATE.md**: perfil profesional adaptado a cada entorno
-- **TEACHING.md**: perfil educativo y de divulgación (contexto personal)
+- **LICENSING.md**: defines which licence to use by context (personal: GPLv3, work: MIT)
+- **CORPORATE.md**: professional profile adapted to each environment
+- **TEACHING.md**: educational and outreach profile (personal context)
 
-### 5. Reglas de uso exclusivamente personal
+### 5. Personal-only rules
 
-- **ATTRIBUTION.md**: atribución personal en documentos/scripts individuales
+- **ATTRIBUTION.md**: personal attribution in individual documents/scripts
 
-### 6. Reglas de uso exclusivamente laboral
+### 6. Work-only rules
 
-- **STYLING.md**: reglas de estilo para documentos Markdown corporativos
+- **STYLING.md**: style rules for corporate Markdown documents
 
-## Arquitectura: *skills*, CoTs y *rulesets*
+## Architecture: *skills*, CoTs, and *rulesets*
 
 ```mermaid
 sequenceDiagram
-    actor U as Usuario
+    actor U as User
     participant S as Skill<br/>(.agents/skills/)
     participant C as CoT<br/>(cot/)
     participant R as Ruleset<br/>(rulesets/)
 
-    U->>S: /skill argumento1 argumento2
+    U->>S: /skill argument1 argument2
     activate S
-    S->>C: lee CoT completo (paso 1 a N)
+    S->>C: read full CoT (step 1 to N)
     activate C
-    C->>R: consulta reglas y restricciones
+    C->>R: consult rules and constraints
     activate R
-    R-->>C: reglas aplicables
+    R-->>C: applicable rules
     deactivate R
-    C-->>S: razonamiento paso a paso
+    C-->>S: step-by-step reasoning
     deactivate C
-    S->>U: ejecuta acciones y reporta resultado
+    S->>U: execute actions and report result
     deactivate S
 ```
 
-- **Skill** (interfaz) — punto de entrada descubierto automáticamente; define *qué hacer* y recibe argumentos
-- **CoT** (*middleware*) — cadena de razonamiento paso a paso; define *cómo razonar* para completar la tarea
-- **Ruleset** (*backend*) — reglas y restricciones de referencia; define *qué está permitido y qué no*
+- **Skill** (interface) — automatically discoverable entry point; defines *what to do* and receives arguments
+- **CoT** (*middleware*) — step-by-step reasoning chain; defines *how to reason* to complete the task
+- **Ruleset** (*backend*) — reference rules and constraints; defines *what is allowed and what is not*
 
-## Estructura del repositorio
+## Repository structure
 
-- **rulesets/** — reglas y documentación de referencia (LINGUISTICS.md, COMMITTING.md, etc.)
-- **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
-- **templates/** — plantillas reutilizables
-- **scripts/** — scripts de automatización y respaldos
-- **.agents/skills/** — *skills* descubribles por agentes IA:
-  - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio
-  - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST
-  - `/linguistics <archivo>` — aplicar reglas de español mexicano
-  - `/context` — detección rápida de contexto de proyecto
-  - `/backup` — respaldo con nomenclatura estándar
-  - `/licensing` — licenciamiento automático (GPLv3 vs MIT)
-  - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH
-  - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
-  - `/mail <delivery|generic> <asunto>` — componer correo HTML compatible con OWA
-  - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
-- **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
-  - `backup_file` — respaldar archivo/directorio
-  - `lint_markdown` — ejecutar *markdownlint*
-  - `commit_flow` — `git add` + `git commit` con tipo y descripción
-  - `cst_date` — obtener fecha/hora en CST
+- **rulesets/** — reference rules and documentation (LINGUISTICS.md, COMMITTING.md, etc.)
+- **cot/** — reasoning chains (CoT) for daily execution
+- **templates/** — reusable templates
+- **scripts/** — automation and backup scripts
+- **.agents/skills/** — AI-agent discoverable *skills*:
+  - `/commit` — full *commit* workflow with mandatory CHANGELOG
+  - `/changelogger` — CHANGELOG.md maintenance with CST dates
+  - `/linguistics <file>` — apply Mexican Spanish language rules
+  - `/context` — quick project context detection
+  - `/backup` — backup using standard naming
+  - `/licensing` — automatic licensing (GPLv3 vs MIT)
+  - `/git-init <personal|laboral> <key> <url> <branch>` — initialise repo with SSH
+  - `/ssh-import <faraday|cad>` — import SSH key from GitHub into a server
+  - `/mail <delivery|generic> <subject>` — compose OWA-compatible HTML email
+  - `/styling <hedgedoc|gitlab|github> [mit|gpl] <file>` — apply Kabat One style to a Markdown document
+- **.warp/workflows/** — parameterised YAML commands (`Ctrl+Shift+R` in Warp):
+  - `backup_file` — backup file/directory
+  - `lint_markdown` — run *markdownlint*
+  - `commit_flow` — `git add` + `git commit` with type and description
+  - `cst_date` — get CST date/time
 
+## Tools and scripts
 
-## Herramientas y scripts
+- Synchronisation: scripts/sync_global.sh (installs global *skills* and *workflows*, cross-platform)
+- Git (post-init): scripts/git-init-context.sh
+- Backups:
+  - scripts/backup_file.sh (files/directories, .tar.zst, *checksum* >=100 MB, CST log)
+  - scripts/backup_rsync_snapshot.sh (daily incrementals with rsync --link-dest)
+  - scripts/verify_backups.sh (bulk .sha256 verification)
 
-- Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
-- Git (post init): scripts/git-init-context.sh
-- Respaldos:
-  - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)
-  - scripts/backup_rsync_snapshot.sh (incrementales diarios con rsync --link-dest)
-  - scripts/verify_backups.sh (verificación masiva de .sha256)
+## How to use CoTs quickly
 
-## Cómo usar CoT rápidamente
-
-- Todos los CoT: carpeta [cot/](./cot/) (22 archivos)
-- Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
+- All CoTs: [cot/](./cot/) folder (22 files)
+- Linguistics: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
-- Contexto de proyecto: [cot/context.md](./cot/context.md)
+- Project context: [cot/context.md](./cot/context.md)
 - CHANGELOG: [cot/changelog.md](./cot/changelog.md)
-- Correos HTML: [cot/mail.md](./cot/mail.md) + [MAIL.md](./rulesets/MAIL.md)
+- HTML emails: [cot/mail.md](./cot/mail.md) + [MAIL.md](./rulesets/MAIL.md)
 
-## Convenciones de fechas/horas
+## Date/time conventions
 
-- Formato: 24 horas, zona «CST (Ciudad de México)».
-- **CRÍTICO**: No rotular «CST» a horas UTC sin cálculo; CST = UTC - 6 horas.
-- **Verificación obligatoria**: usar `TZ=America/Mexico_City date` para obtener tiempo real.
-- Zona a usar en scripts: TZ=America/Mexico_City.
-- CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
+- Format: 24-hour clock, «CST (Mexico City)» zone.
+- **CRITICAL**: Do not label UTC times as «CST» without conversion; CST = UTC - 6 hours.
+- **Mandatory verification**: use `TZ=America/Mexico_City date` to get real time.
+- Zone to use in scripts: TZ=America/Mexico_City.
+- CHANGELOG.md: date only (YYYY-MM-DD), no time.
 
-Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+More details: see [LINGUISTICS.md – Dates and times (CST Mexico City)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
-### Ejemplos de comandos
+### Command examples
 
 ```bash
-# Fecha (CST) para CHANGELOG.md
+# Date (CST) for CHANGELOG.md
 TZ=America/Mexico_City date +"%Y-%m-%d"
 
-# Fecha y hora (CST) legible
+# Readable date and time (CST)
 TZ=America/Mexico_City date '+%F %H:%M %Z'
 LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
 
-# Verificar cálculo correcto comparando UTC vs CST
+# Verify correct conversion by comparing UTC vs CST
 echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
 ```
 
-Ejemplos de conversión UTC → CST:
+UTC → CST conversion examples:
 
 - UTC 14:30 → CST 08:30 (14 - 6 = 8)
-- UTC 03:15 → CST 21:15 (día anterior, 03 - 6 = -3, entonces 24 - 3 = 21)
+- UTC 03:15 → CST 21:15 (previous day, 03 - 6 = -3, so 24 - 3 = 21)
 
-## Uso
+## Usage
 
-Estos documentos sirven como referencia para mantener consistencia en:
+These documents serve as reference to maintain consistency in:
 
-- metodologías de trabajo técnico
-- estándares de infraestructura y documentación
-- políticas de licenciamiento
-- convenciones lingüísticas y culturales
-- aplicación correcta de reglas según el contexto del proyecto
+- technical working methodologies
+- infrastructure and documentation standards
+- licensing policies
+- linguistic and cultural conventions
+- correct application of rules based on project context
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*This project was created by Rodrigo Álvarez (@incognia) and is distributed under the GPLv3 licence. For details, see the LICENSE file.*
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. This is free software under the terms of the GNU General Public License v3.*

@@ -21,17 +21,16 @@ git commit -m "docs: actualizar guía de instalación"
 ## Referencia
 
 - **Fuente**: `~/rules/cot/committing.md` línea 15
-- **Texto exacto**: «CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.»
+- **Texto exacto (política vigente)**: commits siempre en inglés internacional; idioma de documentación y `CHANGELOG.md` depende del contexto (personal: español mexicano, laboral: inglés internacional).
 
 ## Distribución de idiomas
 
-| Contexto | Idioma |
-|----------|--------|
-| **Mensajes de commit** | 🇺🇸 **INGLÉS** |
-| CHANGELOG.md | 🇲🇽 Español mexicano |
-| README.md | 🇲🇽 Español mexicano |
-| Documentación | 🇲🇽 Español mexicano |
-| Código/comentarios | 🇺🇸 Inglés |
+| Contexto | Personal | Laboral |
+|----------|----------|---------|
+| **Mensajes de commit** | 🇺🇸 Inglés internacional | 🇺🇸 Inglés internacional |
+| **CHANGELOG.md** | 🇲🇽 Español mexicano | 🇺🇸 Inglés internacional |
+| **Documentación** | 🇲🇽 Español mexicano | 🇺🇸 Inglés internacional |
+| **Código/comentarios** | 🇺🇸 Inglés internacional | 🇺🇸 Inglés internacional |
 
 ## Protocolo obligatorio para asistente
 

@@ -14,7 +14,9 @@ The repository combats three endemic problems in Latin American technology:
 - **Technical selfishness**: hoarding knowledge to create artificial dependencies
 - **Cultural identity loss**: abandoning Spanish cultural identity for perceived professional advancement
 
-All work prioritizes **Spanish Mexican** as the cultural reference while using **international English** for technical code and commit messages.
+Language policy is context-based:
+- **Personal context**: documentation and `CHANGELOG.md` in **Mexican Spanish**; code and commits in **International English**.
+- **Corporate context**: **100% International English** (documentation, `CHANGELOG.md`, code, and commits).
 
 ## Common development tasks
 
@@ -30,12 +32,12 @@ npm run check:links
 
 ### Working with documentation
 
-All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`:
-
-- Use **Spanish Mexican** terminology and expressions
-- Apply correct capitalization (only first word and proper nouns in titles)
-- Use angular quotes «» in Spanish text, double quotes "" only in code
-- Calculate CST timezone correctly (UTC - 6 hours, not just appending "CST")
+Documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md` and the active context:
+- Personal: use **Mexican Spanish** terminology and expressions.
+- Corporate: use **International English** consistently.
+- Apply correct capitalization (only first word and proper nouns in titles).
+- Use angular quotes «» in Spanish text, double quotes "" only in code.
+- Calculate CST timezone correctly (UTC - 6 hours, not just appending "CST").
 
 ### Backup operations
 
@@ -51,7 +53,7 @@ All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`
 
 **MANDATORY PROCESS - Always follow this exact order:**
 
-1. **FIRST**: Update `CHANGELOG.md` with changes (in Spanish Mexican)
+1. **FIRST**: Update `CHANGELOG.md` with changes in the active context language (personal: Mexican Spanish, corporate: International English)
 2. **SECOND**: Add all files: `git add .`
 3. **THIRD**: Commit with conventional format: `git commit -m "type: description"`
 4. **FOURTH**: Push: `git push`
@@ -107,7 +109,7 @@ The repository supports dual contexts with different rules:
 - License: MIT (permissive)
 - Email: r.alvarez1@elsevier.com
 - SSH key: ~/.ssh/elsevier
-- Documentation: Spanish Mexican with STYLING.md rules
+- Documentation: International English with STYLING.md rules
 
 ### Chain-of-Thought (CoT) system
 
@@ -202,7 +204,7 @@ Primary focus areas reflected in the documentation:
 1. **CRITICAL**: Always read complete CoT files from line 1 to end when referenced - never assume based on partial reading
 2. **CRITICAL**: Update CHANGELOG.md BEFORE every commit - this is mandatory workflow
 3. **CRITICAL**: Convert UTC to CST by subtracting 6 hours - never just append "CST" suffix
-4. **Language**: Spanish Mexican for documentation, English international for code/commits
+4. **Language**: personal context → documentation/CHANGELOG in Mexican Spanish + code/commits in International English; corporate context → 100% International English
 5. **Markdown**: Use .yaml extension (never .yml), always use Mermaid for diagrams (never ASCII)
 6. **Commits**: Non-interactive only, use conventional commits format
 7. **Files**: Markdown files use UPPERCASE.md format (README.md, PHILOSOPHY.md, etc.)

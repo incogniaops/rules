@@ -1,307 +1,192 @@
-# Reglas lingüísticas de español mexicano como referente
+# Mexican Spanish linguistic rules as reference standard
 
-## 📋 Regla principal
+## Main rule
 
-**Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español.**
-
----
-
-## ✅ Usar español mexicano
-
-### Términos técnicos
-
-- **«IA»** (no «AI»)
-- **«Biblioteca»** (no «libreria») [🔥 CRÍTICO]
-- **«TI»** (no «IT»)
-- **«Computadora»** (no «ordenador» ni «computador»)
-- **«Archivo»** (no «fichero»)
-- **«Carpeta»** (no «directorio»)
-- **«Aplicación»** (no «app» ni «aplicativo»)
-- **«Almacenamiento»** (no «storage»)
-- **«Predeterminado»** (no «por defecto»)
-- **«Clúster»** (no «cluster») - con tilde en español
-- **«Nodo»** (no «nodo») - sin tilde
-- **«Métricas»** (con tilde) para datos de observabilidad
-
-### Verbos técnicos
-
-- **«Desplegar»** (no «deployar»)
-- **«Respaldar»** (no «backupear»)
-- **«Compilar»** (no «buildear»)
-- **«Depurar»** (no «debugear»)
-- **«Probar/Poner a prueba/Checar»** (no «testear»)
-- **«Confirmar cambios»** (no «commitear»)
-- **«Reflejar»** (no «mirrorear»)
-- **«Hacer clic»** (no «clickear»)
-- **«Descargar»** (no «bajar»)
-
-### Préstamos técnicos: usar cursivas
-
-- **«Hacer *commit*»** (término técnico específico)
-- **«*Pull request*»** (concepto sin traducción directa)
-- **«*Pipeline* de CI/CD»** («tubería» no capta el concepto)
-- **«*Container*»** (cuando es concepto técnico específico)
-- **«*Render*»** (proceso de renderizado)
-- **«*Stack* tecnológico»** (más usado en México que «pila», que es peninsular)
-- **«*bare-metal*»** (infraestructura física directa, sin equivalencia directa en español técnico)
+**All content must be written in Mexican Spanish, avoiding English calques and regionalisms from other Spanish variants.**
 
 ---
 
-## ❌ Evitar
+## Use Mexican Spanish
 
-### Calcos del inglés
+### Technical terms
 
-- ❌ «AI» → ✅ «IA» (inteligencia artificial)
-- ❌ «Realizar» (perform) → ✅ «Hacer/Ejecutar/Llevar a cabo»
-- ❌ «Actualmente» (currently) → ✅ «En este momento/Ahora»
-- ❌ «Eventualmente» (eventually) → ✅ «Finalmente/Al final/En algún momento»
-- ❌ «Soportar» (support) → ✅ «Admitir/Permitir»
-- ❌ «Implementar» (implement) → ✅ «Poner en práctica/Aplicar»
-- ❌ «Cambios rompedores» (breaking changes) → ✅ «Cambios incompatibles»
+- **«IA»** (not «AI»)
+- **«Biblioteca»** (not «librería») [CRITICAL]
+- **«TI»** (not «IT»)
+- **«Computadora»** (not «ordenador» or «computador»)
+- **«Archivo»** (not «fichero»)
+- **«Carpeta»** (not «directorio»)
+- **«Aplicación»** (not «app» or «aplicativo»)
+- **«Almacenamiento»** (not «storage»)
+- **«Predeterminado»** (not «por defecto»)
+- **«Clúster»** (not «cluster») — with accent in Spanish
+- **«Métricas»** for observability data
 
-### Peninsularismos (España)
+### Spelling when the text is in English
+
+- If a section is written in English, use **International English (UK)**.
+- Avoid American spelling.
+- Mandatory examples:
+  - ✅ `colour` / ❌ `color`
+  - ✅ `organisation` / ❌ `organization`
+  - ✅ `virtualisation` / ❌ `virtualization`
+  - ✅ `optimisation` / ❌ `optimization`
+  - ✅ `standardised` / ❌ `standardized`
+
+### Technical verbs
+
+- **«Desplegar»** (not «deployar»)
+- **«Respaldar»** (not «backupear»)
+- **«Compilar»** (not «buildear»)
+- **«Depurar»** (not «debugear»)
+- **«Probar / poner a prueba»** (not «testear»)
+- **«Confirmar cambios»** (not «commitear»)
+- **«Reflejar»** (not «mirrorear»)
+- **«Hacer clic»** (not «clickear»)
+- **«Descargar»** (not «bajar» in technical docs)
+
+### Technical loanwords: use italics
+
+- **«Hacer *commit*»**
+- **«*Pull request*»**
+- **«*Pipeline* de CI/CD»**
+- **«*Container*»**
+- **«*Render*»**
+- **«*Stack* tecnológico»**
+- **«*bare-metal*»**
+
+---
+
+## Avoid
+
+### Common English calques
+
+- ❌ «AI» → ✅ «IA»
+- ❌ «Realizar» (as perform calque) → ✅ «Hacer / ejecutar / llevar a cabo»
+- ❌ «Actualmente» (as currently calque) → ✅ «Ahora / en este momento»
+- ❌ «Eventualmente» (as eventually calque) → ✅ «Finalmente / al final / en algún momento»
+- ❌ «Soportar» (as support calque) → ✅ «Admitir / permitir»
+- ❌ «Implementar» (as implement calque) → ✅ «Aplicar / poner en práctica»
+- ❌ «Cambios rompedores» → ✅ «Cambios incompatibles»
+
+### Peninsular Spanish
 
 - ❌ «Ordenador» → ✅ «Computadora»
 - ❌ «Fichero» → ✅ «Archivo»
-- ❌ «Aplicativo» → ✅ «Aplicación»
-- ❌ «Vale» → ✅ «Está bien/De acuerdo»
-- ❌ «Tío/Chaval» → ✅ «Compa/Amigo»
+- ❌ «Vale» → ✅ «Está bien / de acuerdo»
 
-### Argentinismos
+### Other regionalisms
 
-- ❌ «Bárbaro/Genial» → ✅ «Excelente/Perfecto»
-- ❌ «Piola» → ✅ «Bueno/Funciona bien»
-
-### Colombianismos
-
-- ❌ «Bacano» → ✅ «Bueno»
-- ❌ «Computador» → ✅ «Computadora»
-
-### Otros regionalismos
-
-- ❌ «Chévere» (Venezuela) → ✅ «Excelente»
-- ❌ «Pana» (Venezuela) → ✅ «Amigo»
+- ❌ «Piola», «bacano», «chévere», «pana» → ✅ use natural Mexican Spanish alternatives
 
 ---
 
-## 🗣️ Expresiones idiomáticas mexicanas
+## Mexican idiomatic expressions
 
-### Expresiones técnicas y profesionales
+Use idioms only when context allows it.
 
-- ✅ **«Inventar el hilo negro»/«Inventar el caldo de pollo»** (no «reinventar la rueda») - Presentar como nuevo algo que ya existe
-- ✅ **«Está padre»** - Funciona excelente, está muy bien hecho (ej. "El clúster de Kubernetes está padre")
-- ✅ **«Le está echando ganas»/«Le está chingando»** - Trabaja con mucho esfuerzo y dedicación
-- ✅ **«Ya quedó»** - Se completó exitosamente (ej. "El despliegue con Argo CD ya quedó")
-- ✅ **«Se la rifó»** - Hizo un trabajo excelente, se esforzó mucho
-- ✅ **«No le sabe»** - No tiene conocimiento suficiente del tema (ej. "No le sabe a Istio")
-- ✅ **«Le sabe un chingo»** - Tiene mucho conocimiento y experiencia (ej. "Le sabe un chingo a Proxmox")
+### Appropriate contexts
 
-### Expresiones de evaluación
+- Internal informal conversations
+- Personal project comments
+- Internal team notes
 
-- ✅ **«Está chido»** - Está bien, funciona correctamente
-- ✅ **«Está padre»** - Funciona muy bien
-- ✅ **«Está con madre»** - Funciona muy bien, excelente calidad
-- ✅ **«Está chingón»** - Funciona muy bien, excelente calidad, agradable a la vista
-- ✅ **«Está perro»** - Muy bueno, impresionante
-- ✅ **«Está machín»** - Muy bueno, robusto, confiable
-- ✅ **«Está del nabo»** - No funciona bien, tiene problemas
-- ✅ **«No está padre»** - No funciona bien, tiene problemas
-- ✅ **«Es chafa»** - De mala calidad, deficiente
-- ✅ **«Ya valió madres»** - Se rompió, falló completamente
+### Moderate or avoid in
 
-### Expresiones de proceso y tiempo
-
-- ✅ **«Al chile»** - Hablando en serio, siendo honesto
-- ✅ **«A toda madre»** - Muy rápido, funcionando perfectamente
-- ✅ **«En chinga»** - Muy rápido, con urgencia
-- ✅ **«De volada»** - Muy rápido, inmediatamente
-- ✅ **«Está relajado»** - Es fácil, sin complicaciones
-- ✅ **«Está cañón»** - Es muy difícil o problemático
-- ✅ **«Está cabrón»** - Es muy difícil o complejo (técnicamente)
-
-### Expresiones de comprensión
-
-- ✅ **«Ya me cayó el veinte»** - Ya entendí, ya me di cuenta
-- ✅ **«Está clarísimo»** - Se entiende perfectamente
-- ✅ **«No le entiendo ni madres»** - No comprendo nada del tema
-- ✅ **«Está bien fácil»** - Es muy sencillo de entender o hacer
-
-### Uso profesional de expresiones
-
-**Apropiadas en:**
-
-- ✅ Conversaciones informales entre colegas mexicanos (quienes las conocen) y de otras nacionalidades (para que se familiaricen con ellas)
-- ✅ Comentarios en código para proyectos personales
-- ✅ Documentación interna de equipos mexicanos
-
-**Moderar en:**
-
-- ⚠️ Documentación oficial o formal
-- ⚠️ Comunicación con clientes internacionales
-- ⚠️ Presentaciones corporativas formales
+- Formal documentation
+- International client communication
+- Corporate formal presentations
 
 ---
 
-## 📐 Reglas tipográficas
+## Typographic rules
 
-### Títulos y encabezados
+### Titles and headings
 
-- ✅ «Instalación de Prometheus»
-- ❌ «Instalación De Prometheus»
-- ✅ «Script para crear VMs en Proxmox VE»
-- ❌ «Script Para Crear VM En Proxmox VE»
-- ⚠️ Sólo la primera palabra y nombres propios llevan mayúscula inicial
-- 🔥 **CRÍTICO:** sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido (error MUY frecuente)
-- ⚠️ No se usan puntos en títulos y subtítulos
-- 🔥 **IMPORTANTE:** En títulos de tercer nivel (###) NO corregir las mayúsculas si ya están bien aplicadas según las reglas anteriores
+- Use sentence case (only first word + proper nouns capitalised).
+- Do not end headings with full stops.
+- After a colon, use lowercase unless a proper noun follows.
 
-**Ejemplos correctos de títulos de tercer nivel (###):**
-- ✅ `### Configuración de Proxmox VE` (ya está correcto, NO cambiar)
-- ✅ `### Instalación de Docker` (ya está correcto, NO cambiar)
-- ✅ `### Métricas de observabilidad` (ya está correcto, NO cambiar)
-- ❌ `### configuración de proxmox ve` (este SÍ necesita corrección)
-- ❌ `### Configuración De Proxmox VE` (este SÍ necesita corrección)
-
-**Ejemplos de mayúsculas después de dos puntos:**
+Examples:
+- ✅ `### Configuración de Proxmox VE`
+- ❌ `### Configuración De Proxmox VE`
 - ✅ **Regla:** los nombres de archivos deben estar en inglés
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
 
-### Tiempos verbales en documentos
+### Verb tenses in documents
 
-- ✅ Reportes y postmortems: usar tiempo pasado y primera persona («yo» o «nosotros» si es trabajo colectivo).
-- ✅ Guías y manuales: usar segunda persona (tú) en presente/imperativo o futuro para pasos por realizar.
-- ✅ En listas de pasos, se puede omitir el sujeto: «Instala», «Ejecuta», «Verifica».
-- ❌ Evitar construcciones impersonales en tercera persona («se configuró», «se debe…»).
+- Reports/postmortems: first-person past tense.
+- Guides/manuals: second person (imperative/present/future).
+- Avoid impersonal third person (`se configuró`, `se debe...`).
 
-**Ejemplos correctos para reportes (pasado, primera persona):**
-- ✅ «Configuré Proxmox en el servidor»
-- ✅ «Instalé Docker y desplegué los contenedores»
-- ✅ «Apliqué las métricas de observabilidad»
-- ❌ «Se configuró Proxmox en el servidor» (tercera persona impersonal)
+### Dates and times (CST, Mexico City)
 
-**Ejemplos correctos para guías (segunda persona, presente/futuro):**
-- ✅ «Configura Proxmox en tu servidor»
-- ✅ «Instala Docker y despliega los contenedores»
-- ✅ «Debes aplicar las métricas de observabilidad»
-- ❌ «Se debe configurar Proxmox en el servidor» (tercera persona impersonal)
+- Use 24-hour format and `America/Mexico_City`.
+- Never label UTC as CST without conversion.
+- Preferred formats:
+  - `2025-07-28 14:30 CST`
+  - `28 de julio de 2025, 14:30 CST (Ciudad de México)`
 
-**Comprobación rápida:**
-- ¿Lo hiciste ya? → describe en pasado y en primera persona.
-- ¿Lo hará la persona lectora? → instruye en segunda persona (presente/imperativo o futuro).
+Shell examples:
+- `TZ=America/Mexico_City date '+%F %H:%M %Z'`
+- `TS=$(TZ=America/Mexico_City date '+%F %H:%M %Z'); echo "$TS"`
 
-### Fechas y horas (CST Ciudad de México)
+### Quotes
 
-- Usar formato de 24 horas y zona horaria de la Ciudad de México.
-- Calcular la hora LOCAL correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
-- Zona a usar: «America/Mexico_City» (UTC−06:00; sin horario de verano).
-- Formatos aceptados:
-  - Corto: «2025-07-28 14:30 CST»
-  - Largo: «28 de julio de 2025, 14:30 CST (Ciudad de México)»
-- Ejemplos en shell:
-  - «TZ=America/Mexico_City date '+%F %H:%M %Z'»
-  - «TS=$(TZ=America/Mexico_City date '+%F %H:%M %Z'); echo "$TS"»
-- En scripts y generadores, NO confiar en la zona por defecto del sistema: establecer «TZ=America/Mexico_City» explícitamente.
+- Use angular quotes «» in Markdown prose.
+- Keep double quotes "" in code and script comments.
 
-### Comillas
+### Writing subtleties
 
-- **Usar comillas angulares «»** en texto markdown
-- **Conservar comillas dobles ""** en comentarios de scripts y código
-- **Ejemplo**: «Biblioteca» (no «librería») en texto markdown
+- Prefer not to start sentences with numerals.
+- Prefer full words over symbol endings in prose (`20 por ciento`, `etcétera`).
 
-```bash
-# "Variable para almacenar el respaldo de la VM"
-BACKUP_DIR="/var/backups"
+### File naming
 
-# "Función para respaldar la máquina virtual"
-respaldar_vm() {
-    echo "Iniciando respaldo..."
-}
-```
-
-### Sutilezas de redacción
-
-- **No iniciar oraciones con cifras.** Preferir redactar con palabras o reordenar la frase.
-  - ❌ «20 años después, sigo aquí esperando»
-  - ✅ «Después de 20 años sigo esperando»
-- **Evitar terminar párrafos con símbolos o abreviaturas.** Sustituir por la palabra completa o reestructurar.
-  - ❌ «Hay un déficit de 20%» → ✅ «Hay un déficit de 20 por ciento»
-  - ❌ «Trajeron higos, mangos, etc.» → ✅ «Trajeron higos, mangos, etcétera» (y, si es posible, especificar el listado completo)
-- Nota: esta práctica proviene de criterios editoriales periodísticos y se observa también en subtitulación profesional (las frases que inician con número se escriben con letra).
-
-### Préstamos lingüísticos
-
-- **Usar cursivas** para términos técnicos sin traducción directa
-- **Ejemplo**: «Hacer *commit* de los cambios» (no «commitear»)
-- **Criterio**: si el término técnico es universalmente usado en inglés
-
-### Nomenclatura de archivos
-
-- **Regla general:** los nombres de archivos, carpetas y scripts deberán estar en inglés internacional, incluso si el contenido del documento o script está redactado en español mexicano.
-- **Regla específica para Markdown:** los archivos Markdown deben usar `NOMBRES_EN_MAYUSCULAS.md` (nombre en mayúsculas, extensión en minúsculas).
-- **Ejemplos válidos:** `README.md`, `PHILOSOPHY.md`, `LINGUISTICS.md`, `COMMITTING.md`
-- **Ejemplos inválidos:** `readme.md`, `Philosophy.md`, `LINGUISTICS.MD`
-- **Justificación:** garantiza consistencia técnica, facilita la interoperabilidad en contextos multilingües y mejora la legibilidad en sistemas de archivos.
+- Filenames and directories: International English.
+- Markdown files: `UPPERCASE_NAME.md` (lowercase extension).
+- Valid: `README.md`, `PHILOSOPHY.md`, `LINGUISTICS.md`
+- Invalid: `readme.md`, `Philosophy.md`, `LINGUISTICS.MD`
 
 ---
 
-## 🎯 Justificación
+## Special hard stops
 
-### Demográfica y cultural
+The following are explicitly unacceptable:
 
-- **México:** la mayor población hispanohablante nativa del mundo (130+ millones de habitantes)
-- **España:** país pequeño con menor relevancia cultural mundial (47 millones)
-- **Productos culturales**: doblaje de películas, series y videojuegos, entre otros, usan español mexicano
-- **Distribución internacional**: Netflix, Disney y otros estudios usan español mexicano como estándar
-
-### Analogía con el inglés
-
-- El **inglés estadounidense:** es el referente mundial (no el británico)
-- **Razón:** Estados Unidos domina culturalmente (Hollywood, tecnología, medios)
-- El **español mexicano:** debe ser el referente por las mismas razones
-- **Coherencia:** usar el dialecto del país culturalmente dominante
+- Using «librería» instead of «biblioteca».
+- Using «IT» instead of «TI» in Spanish content.
+- Using peninsular terms such as «ordenador» or «fichero».
+- Invented Spanglish verbs ending in `-ear` (`commitear`, `deployear`, etc.).
+- Title Case in Spanish headings.
+- Incorrect uppercase after colons.
+- Pluralised acronyms (`VMs`, `ONGs`, etc.).
+- Impersonal third-person writing in contexts requiring first/second person.
 
 ---
 
-## 🔥 Odios especiales
+## Evaluation criterion
 
-Los siguientes términos generan **rechazo particular** y deben evitarse a toda costa:
-- 🔥 **«Librería»** por «biblioteca» - INACEPTABLE
-- 🔥 **«IT»** por «TI» - usar siempre el español
-- 🔥 **Peninsularismos** («ordenador», «fichero») - RECHAZADOS
-- 🔥 **Verbos inventados con -ear** -ear (commitear, deployear) - EVITAR
-- 🔥 **Títulos Con Cada Palabra En Mayúscula** - Usar solo inicial en primera palabra
-- 🔥 **Uso de mayúscula donde no corresponde** - «Lunes» por «lunes» o «Julio» por «julio» - INACEPTABLE
-- 🔥 **Mayúscula después de dos puntos** - «Razón: Los nombres...» por «Razón: los nombres...» - ERROR MUY FRECUENTE E INACEPTABLE
-- 🔥 **Pluralizar las siglas** - «VMs/VEs/ONGs» por «VM/VE/ONG» - Sin importar si es uno o 20: INACEPTABLE
-- 🔥 **Escribir en tercera persona** - «Se realizo/Se hizo/Se diseñó/Se configuró» en vez de «Hice/Llevé a cabo/Apliqué/Configuré» - ESPECIALMENTE INACEPTABLE
+**Would this wording sound natural to a Mexican Spanish speaker with no English dependency?**
+
+- If yes → use it.
+- If no → replace with a natural Mexican Spanish alternative.
 
 ---
 
-## 🔍 Criterio de evaluación
+## Scope
 
-**¿La palabra o expresión sonaría natural para un mexicano sin conocimiento de inglés?**
+These rules apply to:
 
-- Si SÍ → ✅ Usar
-- Si NO → ❌ Buscar alternativa mexicana
-
----
-
-## 📝 Aplicación
-
-Esta regla se aplica en:
-
-- ✅ Documentación técnica
-- ✅ Comentarios en código
-- ✅ Scripts y herramientas
-- ✅ Mensajes de usuario
-- ✅ Toda comunicación escrita
+- Technical documentation
+- Code comments
+- Scripts and tooling messages
+- User-facing written communication
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*This document was created by Rodrigo Álvarez (@incognia) and is distributed under GPLv3. For details, see LICENSE.*
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
-
-**Creado**: 28 de julio de 2025 (CST Ciudad de México)
-**Última modificación**: 17 de agosto de 2025, 01:36 CST (Ciudad de México)
-**Objetivo**: mantener consistencia lingüística con el español mexicano
+**Created**: 28 July 2025 (CST, Mexico City)
+**Last updated**: 17 August 2025, 01:36 CST (Mexico City)
+**Goal**: maintain linguistic consistency with Mexican Spanish

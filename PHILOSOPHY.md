@@ -1,155 +1,155 @@
-# Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
+# Philosophy of a brown bastard who sometimes *codes* but always delivers
 
-*Última modificación: 27 de marzo de 2026, 23:21 (CST)*
+*Last modified: 27 March 2026, 23:21 (CST)*
 
-> «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
+> «Technological development and scientific discoveries cannot be considered progress if they are not within everyone’s reach.»
 >
 > —Rodrigo Álvarez
 
-Los entornos de tecnología en Latinoamérica sufren de tres males endémicos que este manifiesto combate frontalmente:
+Technology environments in Latin America suffer from three endemic issues that this manifesto confronts head-on:
 
-- **Mercenazgo:** profesionales que entregan trabajos mediocres porque solo les mueve la lana, sin compromiso real con la excelencia o con el cliente.
-- **Egoísmo técnico:** acaparar conocimiento y herramientas para crear dependencia artificial, obstaculizando el crecimiento de otros por puro interés económico.
-- **Falta de identidad:** el prieto acomplejado que habla un inglés culero, redacta con las nalgas y bastardiza su propio español en un intento desesperado por sentirse gringo.
+- **Mercenary work:** professionals delivering mediocre output because they are only driven by money, with no real commitment to excellence or to the client.
+- **Technical selfishness:** hoarding knowledge and tools to create artificial dependency, blocking others’ growth for purely economic interest.
+- **Identity loss:** the insecure brown guy who speaks broken English, writes carelessly, and bastardises his own Spanish in a desperate attempt to feel gringo.
 
-Contra estos tres males, aquí está la respuesta: trabajo honesto, compartir el conocimiento y la satisfacción que viene de hacer las cosas bien hechas, sin complejos y sin pendejadas.
+Against these three issues, here is the answer: honest work, shared knowledge, and the satisfaction that comes from doing things properly, without insecurities and without bullshit.
 
-Este manifiesto no es solo para rifármela en DevOps desde el escritorio —donde me llaman «Agüelo» por veterano, aunque sigo tan actualizado como el último *commit*— sino para aplicar esa misma filosofía en el aula, donde dicen que parezco Hagrid por corpulento y barbón. Porque sí, dominar Kubernetes está chido, pero lo que de verdad está con madre es compartir el conocimiento técnico. No venimos a ser mercenarios del código guardando secretos: venimos a enseñar con todo para que todos le sepan a las herramientas que realmente valen la pena.
+This manifesto is not only about excelling in DevOps from the desk—where they call me «Agüelo» because I am a veteran, even though I stay as current as the latest *commit*—but also about applying that same philosophy in the classroom, where they say I look like Hagrid because I am big and bearded. Sure, mastering Kubernetes is cool, but what truly matters is sharing technical knowledge. We are not here to be code mercenaries hoarding secrets: we are here to teach without holding back, so everyone can master the tools that are genuinely worth it.
 
-## 1. Identidad profesional coherente
+## 1. Coherent professional identity
 
-Esta dualidad entre ser «Agüelo» y «Hagrid» no es casualidad: refleja una identidad profesional que opera en dos contextos complementarios, cada uno con su propio ecosistema pero unidos por los mismos principios éticos.
+This duality between being «Agüelo» and «Hagrid» is not accidental: it reflects a professional identity that operates across two complementary contexts, each with its own ecosystem but united by the same ethical principles.
 
-### 1.1. Especialización técnica
+### 1.1. Technical specialisation
 
-Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada:
+My work is centred on **DevOps engineering**, focused on cloud-native Kubernetes platforms and advanced observability:
 
-- **Kubernetes sobre Proxmox *bare-metal*:** aprovisionamiento con kubeadm, containerd y cloud-init
-- **GitOps y automatización:** flujos con Argo CD, Helm *charts* y manifiestos versionados
-- **Malla de servicios y networking:** Istio, Envoy, Cilium, MetalLB, configuración de bridges/VLAN
-- **Observabilidad y trazabilidad:** Prometheus, Grafana, OpenTelemetry, trazas distribuidas
-- **CI/CD empresarial:** Jenkins, GitLab CI con integración GitOps
-- **Seguridad en mallas de servicios:** mTLS, RBAC, políticas de red
+- **Kubernetes on Proxmox *bare-metal*:** provisioning with kubeadm, containerd, and cloud-init
+- **GitOps and automation:** Argo CD workflows, Helm *charts*, and versioned manifests
+- **Service mesh and networking:** Istio, Envoy, Cilium, MetalLB, bridge/VLAN configuration
+- **Observability and traceability:** Prometheus, Grafana, OpenTelemetry, distributed tracing
+- **Enterprise CI/CD:** Jenkins, GitLab CI with GitOps integration
+- **Service mesh security:** mTLS, RBAC, and network policies
 
-### 1.2. Contextos de aplicación
+### 1.2. Application contexts
 
-Esta especialización técnica se aplica en dos entornos:
+This technical specialisation is applied in two environments:
 
-- **Corporativo (`incogniaops`):** proyectos para Elsevier con licenciamiento MIT
-- **Personal y educativo (`incognia`):** proyectos bajo GPLv3 y metodologías pedagógicas que democratizan el acceso a herramientas profesionales
+- **Corporate (`incogniaops`):** projects for Elsevier under MIT licensing
+- **Personal and educational (`incognia`):** projects under GPLv3 and teaching methodologies that democratise access to professional tools
 
-En ambos casos, las metodologías DevOps sirven tanto para infraestructura de producción como para crear entornos de aprendizaje reproducibles mediante Docker Compose y automatización.
+In both cases, DevOps methodologies support both production infrastructure and reproducible learning environments built with Docker Compose and automation.
 
-## 2. Cultura lingüística como referente
+## 2. Linguistic culture as a reference
 
-### 2.1. Español mexicano como estándar
+### 2.1. Mexican Spanish as standard
 
-Toda la documentación se redacta en **español mexicano** como referente cultural, evitando:
+All documentation is written in **Mexican Spanish** as a cultural reference, avoiding:
 
-- Calcos del inglés que no suenan naturales
-- Regionalismos de otras variantes del español
-- Construcciones impersonales en tercera persona
+- English calques that do not sound natural
+- Regionalisms from other Spanish variants
+- Impersonal third-person constructions
 
-### 2.2. Bilingüismo técnico
+### 2.2. Technical bilingualism
 
-El enfoque teórico establece que el código y los mensajes de *commit* se redacten en **inglés internacional** para garantizar la interoperabilidad global, mientras que la documentación utiliza español mexicano para preservar la identidad cultural.
+The theoretical approach states that code and *commit* messages should be written in **international English** to ensure global interoperability, while documentation uses Mexican Spanish to preserve cultural identity.
 
-Sin embargo, la realidad del trabajo en equipos mexicanos requiere una adaptación pragmática:
+However, the reality of working in Mexican teams requires a pragmatic adaptation:
 
-**Comentarios en código:** aunque tengo un nivel de inglés B2 próximo a C1, mis colegas manejan niveles A2 y B1. Para cumplir con los principios de **transparencia y accesibilidad**, los comentarios internos se redactan en español mexicano, garantizando que todo el equipo pueda entender y mantener el código sin barreras lingüísticas.
+**Code comments:** although I have a B2 level of English approaching C1, my colleagues operate at A2 and B1 levels. To comply with **transparency and accessibility** principles, internal comments are written in Mexican Spanish, ensuring the whole team can understand and maintain the code without language barriers.
 
-**Mensajes de *commit*:** se mantienen en inglés por una razón práctica adicional: los PM y gerentes rara vez leen la documentación técnica extendida. Su interacción con el desarrollo técnico se limita a revisar algunos *commits* (si es que los leen) o simplemente contar la frecuencia en las gráficas de actividad. El inglés en los *commits* mantiene un estándar profesional en esas revisiones superficiales.
+**Commit messages:** they remain in English for an additional practical reason: PMs and managers rarely read extended technical documentation. Their interaction with technical development is usually limited to checking a few *commits* (if they read them at all) or simply counting activity frequency in charts. English in *commits* maintains a professional standard in those surface-level reviews.
 
-**Contexto educativo:** la mayoría de los estudiantes de primaria y secundaria en México, sin importar si vienen de escuelas públicas o privadas, no hablan fluidamente inglés. Somos vecinos muy cercanos de EE.UU. en términos geográficos, pero muy distantes en términos culturales. Esta realidad refuerza la importancia de enseñar en español mexicano: democratizar el conocimiento técnico significa hacerlo accesible en el idioma que realmente dominan nuestros estudiantes, no en el que creemos que deberían dominar.
+**Educational context:** most primary and secondary students in Mexico, regardless of whether they come from public or private schools, do not speak fluent English. We are geographically close neighbours to the U.S., but culturally still far away. This reality reinforces the importance of teaching in Mexican Spanish: democratising technical knowledge means making it accessible in the language our students actually command, not the one we think they should command.
 
-## 3. Transparencia y trazabilidad
+## 3. Transparency and traceability
 
-### 3.1. Historial de cambios claro
+### 3.1. Clear change history
 
-Cada modificación debe tener un propósito único y estar documentada de forma que permita:
+Every modification must have a single purpose and be documented in a way that allows:
 
-- Entender el *qué* y el *porqué* de cada cambio
-- Mantener atomicidad en las contribuciones
-- Facilitar la revisión y el mantenimiento futuro
+- Understanding the *what* and the *why* of each change
+- Preserving atomicity in contributions
+- Facilitating future review and maintenance
 
-### 3.2. Documentación sincronizada
+### 3.2. Synchronized documentation
 
-Actualizar el `CHANGELOG.md` **antes** de cada *commit*, manteniendo la sincronización entre la documentación y el código.
+Update `CHANGELOG.md` **before** every *commit*, keeping documentation and code in sync.
 
-## 4. Licenciamiento ético y pragmático
+## 4. Ethical and pragmatic licensing
 
-### 4.1. Filosofía de licencias
+### 4.1. Licensing philosophy
 
-- **Proyectos laborales:** MIT para facilitar la integración comercial.
-- **Proyectos personales:** GPLv3 para preservar la libertad del software.
-- **Hardware:** CERN OHL v2 para diseños abiertos.
-- **Documentación:** LGPLv3 o Creative Commons según el contexto.
-- **Proyectos privados:** negociación específica con cada cliente.
+- **Work projects:** MIT to facilitate commercial integration.
+- **Personal projects:** GPLv3 to preserve software freedom.
+- **Hardware:** CERN OHL v2 for open designs.
+- **Documentation:** LGPLv3 or Creative Commons depending on context.
+- **Private projects:** case-by-case negotiation with each client.
 
-### 4.2. Responsabilidad social
+### 4.2. Social responsibility
 
-Las licencias elegidas reflejan un compromiso con el ecosistema de software libre y el respeto por la propiedad intelectual, equilibrando la practicidad comercial con los principios éticos.
+The chosen licences reflect a commitment to the free software ecosystem and respect for intellectual property, balancing commercial practicality with ethical principles.
 
-## 5. Calidad y consistencia
+## 5. Quality and consistency
 
-### 5.1. Estándares técnicos
+### 5.1. Technical standards
 
-- Adherencia a especificaciones reconocidas (*Conventional Commits*).
-- Uso de herramientas estándar (Mermaid para diagramas).
-- Consistencia en la estructura y el formato.
+- Adherence to recognised specifications (*Conventional Commits*).
+- Use of standard tooling (Mermaid for diagrams).
+- Consistency in structure and format.
 
-### 5.2. Atención al detalle
+### 5.2. Attention to detail
 
-Los pequeños detalles manifiestan la excelencia:
+Small details are where excellence shows:
 
-- Capitalización correcta en títulos.
-- Uso apropiado de comillas angulares en español.
-- Cursiva para préstamos técnicos.
-- Evitar emojis en contextos profesionales.
+- Correct capitalisation in titles.
+- Proper use of angular quotes in Spanish.
+- Italics for technical loanwords.
+- Avoiding emojis in professional contexts.
 
-## 6. Evolución y adaptabilidad
+## 6. Evolution and adaptability
 
-### 6.1. Documentos vivos
+### 6.1. Living documents
 
-Estas reglas y filosofías son documentos vivos que evolucionan con la experiencia y las necesidades cambiantes del trabajo técnico.
+These rules and philosophies are living documents that evolve with experience and changing technical needs.
 
-### 6.2. Aprendizaje continuo
+### 6.2. Continuous learning
 
-La filosofía incorpora lecciones aprendidas y mejores prácticas emergentes, manteniendo un equilibrio entre la estabilidad y la innovación.
+This philosophy incorporates lessons learned and emerging best practices, keeping a balance between stability and innovation.
 
-## 7. Compromiso con la comunidad
+## 7. Commitment to the community
 
-### 7.1. Contribución al ecosistema
+### 7.1. Contribution to the ecosystem
 
-Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre, mientras que los proyectos laborales bajo MIT facilitan la adopción amplia.
+Personal GPLv3 projects contribute to the free software *commons*, while work projects under MIT facilitate broad adoption.
 
-## Referencias
+## References
 
-Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos (para una visión rápida, ver README.md):
+Specific implementation details of this philosophy are organised in the following documents (for a quick overview, see README.md):
 
-### Reglas universales (ambos contextos)
+### Universal rules (both contexts)
 
-- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GIT.md](./rulesets/GIT.md)** - configuración inicial de repositorios
-- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
-- **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
-- **[AGENTS.md](./AGENTS.md)** - guía para agentes IA
+- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - Mexican Spanish linguistic rules as a reference
+- **[COMMITTING.md](./rulesets/COMMITTING.md)** - rules for *commit* messages and change management
+- **[BACKUPS.md](./rulesets/BACKUPS.md)** - backup and destructive-operation policies
+- **[GIT.md](./rulesets/GIT.md)** - initial repository setup
+- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glossary of technical terms used
+- **[CHANGELOG.md](./CHANGELOG.md)** - project change history
+- **[AGENTS.md](./AGENTS.md)** - guide for AI agents
 
-### Reglas de uso dual (aplicación diferenciada por contexto)
+### Dual-use rules (context-dependent application)
 
-- **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[CORPORATE.md](./rulesets/CORPORATE.md)** - perfil profesional corporativo
-- **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
+- **[LICENSING.md](./rulesets/LICENSING.md)** - licensing rules for projects
+- **[CORPORATE.md](./rulesets/CORPORATE.md)** - corporate professional profile
+- **[TEACHING.md](./rulesets/TEACHING.md)** - educational and scientific outreach profile
 
-### Reglas de uso exclusivamente personal
+### Personal-only rules
 
-- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
+- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - personal attribution rules
 
-### Reglas de uso exclusivamente laboral
-- **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
+### Work-only rules
+- **[STYLING.md](./rulesets/STYLING.md)** - style rules for corporate Markdown documents
 
-*Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*This document was created by Rodrigo Álvarez (@incognia) and is distributed under the GPLv3 licence. For details, see the LICENSE file.*
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. This is free software under the terms of the GNU General Public License v3.*

@@ -1,6 +1,6 @@
 ---
 name: changelogger
-description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and International English (UK). Use this skill when updating the changelog."
+description: "Maintain CHANGELOG.md with correct CST dates and reverse chronological order, using context language policy: personal in Mexican Spanish, corporate in International English (UK). Use this skill when updating the changelog."
 ---
 
 # CHANGELOG.md maintenance
@@ -8,6 +8,9 @@ description: "Maintain CHANGELOG.md with correct CST dates, reverse chronologica
 ## When to use
 
 When adding or updating entries in CHANGELOG.md for any project following rules conventions.
+Language policy for entries:
+- Personal context: Mexican Spanish.
+- Corporate context: International English (UK).
 
 ## Instructions
 
@@ -30,11 +33,13 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
      ```markdown
      ## [YYYY-MM-DD] - Short descriptive title
 
-     - feat: change description in International English (UK)
-     - docs: additional description if applicable
+     - type/tipo: context-appropriate change description
      ```
-7. **Language**: All entries in International English (UK), no emojis
-8. **Type in bullets**: Each bullet MUST start with `type:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
+7. **Language**: Personal entries in Mexican Spanish; corporate entries in International English (UK); no emojis.
+8. **Type in bullets**: Use context-appropriate prefix:
+   - Personal: `tipo:`
+   - Corporate: `type:`
+   Prefix must match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`).
 9. **Verify**: Check that the new entry is above all previous entries
 
 ## Critical rules

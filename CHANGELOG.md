@@ -5,6 +5,12 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-22] - Align corporate profile and git initialisation standards
 
+- feat: apply context-based bilingual policy across core rules so personal projects document in Mexican Spanish while corporate projects remain fully in International English
+- docs: update bilingual language policy in `README.md`, `AGENTS.md`, and `rulesets/COMMIT_LANGUAGE_PROTOCOL.md` to enforce personal Spanish documentation/CHANGELOG and fully International English corporate workflows
+- docs: update `.agents/skills/changelogger/SKILL.md` and `cot/changelog.md` to make changelog language and bullet prefix context-aware (`tipo:` personal, `type:` corporate)
+- docs: translate `README.md` and `PHILOSOPHY.md` to International English and preserve Spanish philosophical baseline in `FILOSOFIA.md`
+- docs: translate linguistic guidance corpus to International English in `.agents/skills/linguistics/SKILL.md`, `cot/linguistics.md`, and `rulesets/LINGUISTICS.md` with UK spelling consistency
+- feat: add `linguistica` aliases as direct copies of linguistics assets in `.agents/skills/linguistica/SKILL.md`, `cot/linguistica.md`, and `rulesets/LINGUISTICA.md`
 - docs: update labour identity references to Elsevier, GitHub `incogniaops` and email `r.alvarez1@elsevier.com` across rules and skills
 - feat: align git initialisation flows and helper script with SSH key `~/.ssh/elsevier` and SSH remote examples for `incogniaops`
 - docs: switch changelog maintenance guidance to International English (UK) with consistent `type:` bullets

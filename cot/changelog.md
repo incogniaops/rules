@@ -3,12 +3,12 @@ domain: documentation
 task: actualizar CHANGELOG.md correctamente evitando errores comunes de orden cronológico, cálculo de zona horaria, duplicación y mezcla de idiomas
 dificultad: media-alta
 longitud_objetivo: media
-validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplicados, idioma consistente español mexicano
+validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplicados, idioma consistente según contexto (personal es_MX, laboral inglés internacional)
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
+- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente y lenguaje por contexto (personal en español mexicano, laboral en inglés internacional) (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
 - Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
 - Este CoT se ejecuta vía `/changelogger` antes de `/commit`; el flujo `/commit` no edita changelog y solo valida que exista diff en `CHANGELOG.md`.
@@ -48,15 +48,19 @@ Pasos:
    Resultado: nunca dos encabezados con la misma fecha en el CHANGELOG.
 
 4) Acción: validar consistencia de idioma en la nueva entrada.
-   Validación: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md
-   Resultado: español mexicano sin calcos del inglés, comillas angulares «», terminología técnica correcta.
+   Validación: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md según contexto.
+   Resultado:
+   - Personal: español mexicano sin calcos del inglés, comillas angulares «», terminología técnica correcta.
+   - Laboral: inglés internacional consistente.
 
 5) Acción: verificar formato de encabezado.
    Formato requerido: `## [YYYY-MM-DD] - Título descriptivo`
    Validación: solo fecha sin hora, título en estilo oración (primera mayúscula + nombres propios)
    Resultado: encabezado conforme al formato establecido.
 6) Acción: organizar cambios en bullets tipados dentro de la fecha.
-   Formato de cada bullet: `- tipo: descripción` (ej. `- feat: ...`, `- fix: ...`, `- docs: ...`)
+   Formato de cada bullet:
+   - Personal: `- tipo: descripción`
+   - Laboral: `- type: description`
    Validación: no usar subencabezados `### tipo`; usar bullets directos con prefijo de tipo
    Resultado: entrada compacta y consistente con formato de repos de operaciones-ti.
 
@@ -121,9 +125,11 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 - Confirmar: `TZ=America/Mexico_City date` ejecutado para fecha CST real
 - Validar: orden cronológico inverso con `grep "^## \[" CHANGELOG.md`
 - Verificar: sin duplicados con conteo de encabezados idénticos
-- Revisar: idioma 100% español mexicano según LINGUISTICS.md
+- Revisar idioma según contexto:
+  - Personal: 100% español mexicano
+  - Laboral: 100% inglés internacional
 - Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
-- Comprobar: bullets con prefijo `tipo:` y ausencia de subencabezados `### tipo`
+- Comprobar: bullets con prefijo correcto por contexto (`tipo:` personal / `type:` laboral) y ausencia de subencabezados `### tipo`
 - Validar: `git --no-pager diff -- CHANGELOG.md` cumple criterio de aceptación (solo adiciones mínimas en fecha objetivo)
 - Confirmar: existe evidencia explícita de los pasos 0 (`git --no-pager status --short`) y 0b (lectura precisa 1-200) en la corrida actual; si no existe, hard stop y reinicio
 - Confirmar: existe diff de `CHANGELOG.md` para pasar gate de `/commit`; si no existe, no continuar a `/commit`
@@ -150,7 +156,7 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 19. Intentar reanudar el flujo después de omitir el paso 0 o 0b en vez de reiniciar desde 0.
 
 Conclusión:
-- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.
+- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente según contexto, sin duplicados y bullets tipados organizados semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
 - Operación esperada: ejecutar este CoT desde `/changelogger` y después invocar `/commit` (que solo valida gate de changelog + idioma del commit).
 - Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.

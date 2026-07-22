@@ -1,57 +1,59 @@
 ---
 domain: writing
-task: aplicar correctamente las reglas de LINGUISTICS.md a un documento Markdown
+task: correctly apply LINGUISTICS.md rules to a Markdown document
 dificultad: media
 longitud_objetivo: media
-validacion: lista de hallazgos + correcciones propuestas alineadas a es_MX y reglas tipográficas
+validacion: findings list + proposed corrections aligned with es_MX and typographic rules
 ---
 <!-- markdownlint-disable MD041 -->
+Reasoning:
+- Main rule: content in Mexican Spanish must avoid English calques and non-Mexican regionalisms (see `~/rules/rulesets/LINGUISTICS.md` and `~/rules/PROMPTS.md`).
+- Review from general to specific: dialect/es_MX → calques → terminology → technical verbs → italics for loanwords → typography (titles and post-colon casing) → quotes (text vs code) → writing subtleties → acronyms → tense usage → dates/times (CST) → file naming → explicit anti-patterns → idiomatic expressions (usage/moderation) → International English spelling where applicable.
+- Produce concrete findings and minimal corrected wording where needed.
 
-Razonamiento:
-- Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
-- Recorrer de lo general a lo específico: dialecto/es_MX → evitar calcos → terminología → verbos → préstamos en cursiva → tipografía (títulos y mayúscula tras dos puntos) → comillas (texto vs código) → sutilezas de redacción → siglas → tiempos verbales → fechas/horas (CST) → nomenclatura de archivos → odios especiales → expresiones idiomáticas (uso/moderación).
-- Producir hallazgos concretos y una versión corregida mínima (diff mental) cuando aplique.
+Steps:
+1) Action: verify dialect and regionalisms.
+   Result: flag peninsular forms (`ordenador`, `fichero`, `vale`), Argentinian forms (`piola`), Colombian forms (`bacano`), and other regionalisms (`chévere`), then replace with es_MX equivalents (`computadora`, `archivo`, `está bien`, `excelente`, etc.).
+2) Action: avoid common English calques.
+   Result: prefer `hacer/ejecutar` (instead of calqued `realizar`), `aplicar/poner en práctica` (instead of `implementar` when used as calque), `admitir/permitir` (instead of `soportar`), `cambios incompatibles` (instead of `cambios rompedores`), and other native alternatives.
+3) Action: normalise priority technical terminology.
+   Result: use `IA`, `TI`, `computadora`, `archivo`, `carpeta`, `aplicación`, `almacenamiento`, `predeterminado`, `clúster`, `métricas`, `nodo`.
+4) Action: review technical verbs.
+   Result: use `desplegar`, `respaldar`, `compilar`, `depurar`, `probar/poner a prueba`, `confirmar cambios`, `reflejar`, `hacer clic`, `descargar`; avoid -ear Spanglish forms (`commitear`, `deployear`, `buildear`, etc.).
+5) Action: apply italics to technical loanwords.
+   Result: use italics for *commit*, *pull request*, *pipeline*, *container*, *render*, *stack*, *bare-metal*.
+6) Action: review title and heading typography.
+   Mandatory command: `grep -n "^#" archivo.md` to list all H1-H6 headings.
+   Validation: review every heading line individually and correct Title Case misuse.
+   Result: sentence case only (first word and proper nouns capitalised), no trailing full stop; after colons, lowercase unless proper noun.
+   Critical: do not mark this step complete without documenting each heading and applied correction.
+7) Action: validate quotes (text vs code).
+   Result: use «» in prose and "" only in code/script comments; confirm code examples keep double quotes where needed.
+8) Action: review writing subtleties.
+   Result: avoid starting sentences with numerals where possible; avoid ending paragraphs with symbols/abbreviations when a full term is clearer; rewrite when needed.
+9) Action: review acronyms.
+   Result: keep acronyms invariable (e.g. VM, not VMs); use numerals or phrasing such as `instancias de VM` for clarity.
+10) Action: validate tense usage.
+    Result: reports in first-person past tense; guides in second person (imperative/present/future); avoid impersonal third person (`se configuró...`).
+11) Action: validate dates and times (Mexico City CST).
+    Result: use 24-hour format and `TZ=America/Mexico_City`; never label UTC time as CST. In CHANGELOG: date only `[YYYY-MM-DD]`.
+12) Action: validate file naming.
+    Result: filenames in International English; Markdown files in `UPPERCASE_NAMES.md` (lowercase extension).
+13) Action: apply explicit anti-pattern filters.
+    Result: reject `librería` (for `biblioteca`), `IT`, peninsularisms, -ear verbs, Every-Word-Capitalised headings, uppercase after colons, pluralised acronyms, and impersonal third person.
+14) Action: assess Mexican idioms.
+    Result: allow in internal informal contexts; moderate in formal/corporate documents; keep es_MX consistency.
+15) Action: validate International English (UK) spelling in English segments.
+    Result: replace American spellings in English text (`color`→`colour`, `organization`→`organisation`, `virtualization`→`virtualisation`).
 
-Pasos:
-1) Acción: verificar dialecto y regionalismos.
-   Resultado: marcar peninsularismos («ordenador», «fichero», «vale»), argentinismos («piola»), colombianismos («bacano»), otros («chévere») y reemplazar por es_MX («computadora», «archivo», «está bien», «excelente»...).
-2) Acción: evitar calcos del inglés frecuentes.
-   Resultado: «hacer/ejecutar» (no «realizar» cuando sea calcado), «aplicar/poner en práctica» (no «implementar»), «admitir/permitir» (no «soportar»), «cambios incompatibles» (no «cambios rompedores»), «ahora» (no «actualmente»), etc.
-3) Acción: normalizar terminología técnica prioritaria.
-   Resultado: «IA», «TI», «computadora», «archivo», «carpeta», «aplicación», «almacenamiento», «predeterminado», «clúster», «métricas», «nodo».
-4) Acción: revisar verbos técnicos.
-   Resultado: «desplegar», «respaldar», «compilar», «depurar», «probar/poner a prueba», «confirmar cambios», «reflejar», «hacer clic», «descargar»; evitar -ear spanglish (commitear, deployear, buildear...).
-5) Acción: préstamos técnicos (cursiva).
-   Resultado: cursiva en *commit*, *pull request*, *pipeline*, *container*, *render*, *stack*, *bare-metal*.
-6) Acción: tipografía de títulos y encabezados.
-   COMANDO OBLIGATORIO: `grep -n "^#" archivo.md` para listar TODOS los títulos H1-H6
-   Validación: Revisar cada línea encontrada individualmente y corregir Title Case
-   Resultado: estilo oración (primera palabra y nombres propios con mayúscula), sin punto final; después de dos puntos, minúscula salvo nombre propio.
-   CRÍTICO: No marcar este paso como completo sin documentar cada título encontrado y su corrección aplicada.
-7) Acción: comillas (texto vs código).
-   Resultado: «» en texto; "" solo en comentarios de scripts/código. Verificar que ejemplos de código mantengan comillas dobles.
-8) Acción: sutilezas de redacción.
-   Resultado: no iniciar oración con cifras; evitar cerrar párrafos con símbolos/abreviaturas (usar «por ciento», «etcétera»); reescribir cuando aplique.
-9) Acción: siglas.
-   Resultado: invariables (no pluralizar: VM, no VMs). Usar numerales o «instancias de VM» para claridad.
-10) Acción: tiempos verbales.
-    Resultado: reportes en pasado y primera persona; guías en segunda persona (imperativo/presente/futuro); evitar tercera impersonal («se configuró...»).
-11) Acción: fechas y horas (CST Ciudad de México).
-    Resultado: usar 24 h y TZ=America/Mexico_City; no rotular CST a una hora UTC. En CHANGELOG: solo fecha [YYYY-MM-DD].
-12) Acción: nomenclatura de archivos.
-    Resultado: nombres en inglés internacional; Markdown en NOMBRES_EN_MAYUSCULAS.md (extensión en minúsculas).
-13) Acción: odios especiales (bloqueo explícito).
-    Resultado: rechazar «librería» (por «biblioteca»), «IT», peninsularismos, verbos con -ear, Título Con Cada Palabra En Mayúscula, mayúscula tras dos puntos, pluralizar siglas, tercera persona impersonal.
-14) Acción: expresiones idiomáticas mexicanas.
-    Resultado: permitir en contextos informales internos; moderar en documentación oficial/corporativa; mantener es_MX.
+Mandatory verification (before completion):
+- Run `grep -n "^#" archivo.md` and document every heading found.
+- Confirm no heading remains in Every-Word-Capitalised style.
+- List all capitalisation fixes applied.
+- Validate proper italics for technical loanwords (*stack*, *commit*, etc.).
+- Verify all identified English calques were corrected.
+- Verify all English content uses International English (UK) spelling.
 
-VERIFICACIÓN OBLIGATORIA (antes de completar):
-- Ejecutar: `grep -n "^#" archivo.md` y documentar cada título encontrado
-- Confirmar: ninguno usa "Título Con Cada Palabra En Mayúscula"
-- Listar: todos los cambios de capitalización aplicados
-- Validar: uso correcto de cursivas en préstamos técnicos (*stack*, *commit*, etc.)
-- Verificar: corrección de todos los calcos del inglés identificados
-
-Conclusión:
-- Entregar: (a) lista de hallazgos y reemplazos propuestos; (b) fragmentos corregidos con comillas y mayúsculas adecuadas; (c) si hay timestamps, ejemplo correcto con TZ; (d) nota si se usaron o moderaron expresiones idiomáticas.
-- Referencias: «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)).
+Conclusion:
+- Deliver: (a) findings list and proposed replacements; (b) corrected fragments with proper quotes and capitalisation; (c) if timestamps appear, provide correct TZ examples; (d) note whether idiomatic expressions were kept or moderated.
+- References: `~/rules/LINGUISTICS.md`, `~/rules/README.md`, and `~/rules/PROMPTS.md`.
