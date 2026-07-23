@@ -35,7 +35,7 @@ npm run check:links
 Documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md` and the active context:
 - Personal: use **Mexican Spanish** terminology and expressions.
 - Corporate: use **International English** consistently.
-- Apply correct capitalization (only first word and proper nouns in titles).
+- Apply correct capitalisation (only the first word and proper nouns in titles).
 - Use angular quotes «» in Spanish text, double quotes "" only in code.
 - Calculate CST timezone correctly (UTC - 6 hours, not just appending "CST").
 
@@ -67,17 +67,17 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 
 **Commit message rules:**
 
-- Always use **English international** for commit messages
+- Always use **International English** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
 ## Architecture and structure
 
-### Directory organization
+### Directory organisation
 
 ```
 ├── rulesets/           # Core rules and documentation
-│   ├── LINGUISTICS.md      # Spanish Mexican language standards
+│   ├── LINGUISTICS.md      # Mexican Spanish language standards
 │   ├── COMMITTING.md       # Git workflow and CHANGELOG rules
 │   ├── LICENSING.md        # Licensing strategy (GPLv3 personal, MIT corporate)
 │   └── [other standards]
@@ -85,28 +85,28 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 │   ├── committing.md       # Git commit workflow with SSH validation
 │   ├── context.md          # Project context detection
 │   ├── changelog.md        # CHANGELOG maintenance
-│   ├── linguistics.md      # Spanish Mexican rules application
+│   ├── linguistics.md      # Mexican Spanish rules application
 │   └── [other CoTs]
 ├── templates/          # Reusable document templates
 ├── scripts/            # Utility scripts for backups and automation
 ├── .agents/skills/     # AI agent-discoverable skills (see below)
-└── .warp/workflows/    # Parameterized command workflows (see below)
+└── .warp/workflows/    # Parameterised command workflows (see below)
 ```
 
 ### Context switching (personal vs corporate)
 
 The repository supports dual contexts with different rules:
 
-**Personal Projects (`@incognia`)**:
+**Personal projects (`@incognia`)**:
 
-- License: GPLv3 (copyleft)
+- Licence: GPLv3 (copyleft)
 - Email: incognia@gmail.com
 - SSH key: ~/.ssh/incognia
-- Documentation: Spanish Mexican
+- Documentation: Mexican Spanish
 
-**Corporate Projects (`@incogniaops` for Elsevier)**:
+**Corporate projects (`@incogniaops` for Elsevier)**:
 
-- License: MIT (permissive)
+- Licence: MIT (permissive)
 - Email: r.alvarez1@elsevier.com
 - SSH key: ~/.ssh/elsevier
 - Documentation: International English with STYLING.md rules
@@ -119,20 +119,20 @@ The repository implements structured reasoning prompts following this format:
 ---
 domain: [project area]
 task: [specific task]
-difficulty: [básico|intermedio|avanzado]
-priority: [crítico|alto|medio|bajo]
+difficulty: [basic|intermediate|advanced]
+priority: [critical|high|medium|low]
 ---
 
 # CoT: [descriptive title]
 
-## Razonamiento
+## Reasoning
 [Brief mental framework of approach]
 
-## Pasos
-1. Acción: [what to do]
-   Resultado: [expected outcome]
+## Steps
+1. Action: [what to do]
+   Result: [expected outcome]
 
-## Conclusión
+## Conclusion
 [Clear, verifiable final answer]
 ```
 
@@ -140,7 +140,7 @@ Key CoT files:
 
 - `cot/context.md` - Get project context quickly
 - `cot/committing.md` - Git workflow with SSH validation
-- `cot/linguistics.md` - Apply Spanish Mexican rules
+- `cot/linguistics.md` - Apply Mexican Spanish rules
 - `cot/changelog.md` - Maintain CHANGELOG.md
 
 ## Skills
@@ -151,21 +151,21 @@ Available skills:
 
 - **commit** — Full commit workflow with mandatory CHANGELOG update
 - **changelogger** — CHANGELOG.md maintenance with CST dates
-- **linguistics** — Apply Spanish Mexican linguistic rules
+- **linguistics** — Apply Mexican Spanish linguistic rules
 - **context** — Quick project context detection
 - **backup** — File/directory backup with standard naming
-- **licensing** — Apply correct license based on project context (GPLv3 vs MIT)
+- **licensing** — Apply the correct licence based on project context (GPLv3 vs MIT)
 
 Invoke with natural language (e.g. "use the commit skill") or slash command (e.g. `/commit`).
 
 ## Workflows
 
-Parameterized commands in `.warp/workflows/` for frequent operations:
+Parameterised commands in `.warp/workflows/` for frequent operations:
 
 - **backup_file** — Backup a file or directory with checksums
 - **lint_markdown** — Run markdownlint on all files
 - **commit_flow** — Complete commit flow with type and description
-- **cst_date** — Get current date/time in CST (Ciudad de México)
+- **cst_date** — Get current date/time in CST (México City)
 
 ## Time and date handling (CRITICAL)
 
@@ -189,7 +189,7 @@ TZ=America/Mexico_City date +"%Y-%m-%d"
 echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
 ```
 
-## Technical specialization context
+## Technical specialisation context
 
 Primary focus areas reflected in the documentation:
 
@@ -205,7 +205,7 @@ Primary focus areas reflected in the documentation:
 2. **CRITICAL**: Update CHANGELOG.md BEFORE every commit - this is mandatory workflow
 3. **CRITICAL**: Convert UTC to CST by subtracting 6 hours - never just append "CST" suffix
 4. **Language**: personal context → documentation/CHANGELOG in Mexican Spanish + code/commits in International English; corporate context → 100% International English
-5. **Markdown**: Use .yaml extension (never .yml), always use Mermaid for diagrams (never ASCII)
+5. **Markdown**: Use the `.yaml` extension (never `.yml`), always use Mermaid for diagrams (never ASCII)
 6. **Commits**: Non-interactive only, use conventional commits format
 7. **Files**: Markdown files use UPPERCASE.md format (README.md, PHILOSOPHY.md, etc.)
 

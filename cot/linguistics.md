@@ -35,7 +35,7 @@ Steps:
    Result: keep acronyms invariable (e.g. VM, not VMs); use numerals or phrasing such as `instancias de VM` for clarity.
 10) Action: validate tense usage.
     Result: reports in first-person past tense; guides in second person (imperative/present/future); avoid impersonal third person (`se configuró...`).
-11) Action: validate dates and times (Mexico City CST).
+11) Action: validate dates and times (México City CST).
     Result: use 24-hour format and `TZ=America/Mexico_City`; never label UTC time as CST. In CHANGELOG: date only `[YYYY-MM-DD]`.
 12) Action: validate file naming.
     Result: filenames in International English; Markdown files in `UPPERCASE_NAMES.md` (lowercase extension).

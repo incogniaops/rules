@@ -1,120 +1,120 @@
 ---
 domain: workflow
-task: seguir COMMITTING.md (validar CHANGELOG preactualizado, commit convencional y push simple)
-dificultad: baja
-longitud_objetivo: corta
-validacion: CHANGELOG detectado como modificado, identidad visual confirmada y commit/push exitosos
+task: follow COMMITTING.md (validate pre-updated CHANGELOG, conventional commit, and simple push)
+difficulty: low
+target_length: short
+validation: CHANGELOG detected as modified, identity visually confirmed, and commit/push successful
 version: "1.3"
 last_updated: 2026-05-10
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Cumplir el flujo obligatorio: `CHANGELOG.md` debe llegar previamente actualizado; `/commit` SOLO valida ese prerequisito y luego ejecuta add/commit/push (ver «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
-- Si `CHANGELOG.md` no tiene cambios respecto al repositorio, se debe abortar y delegar la actualización a `/changelogger`.
-- CRÍTICO: usar `git status` para analizar los cambios antes de proceder y determinar si requieren commits separados.
-- Evaluar si los cambios son de tipos mixtos (ej. feat + fix, docs + refactor) que requieran commits atómicos separados.
-- CRÍTICO: mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.
-- El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
+Reasoning:
+- Follow the mandatory flow: `CHANGELOG.md` must already be updated; `/commit` ONLY validates that prerequisite and then executes add/commit/push (see `~/rules/rulesets/COMMITTING.md` ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+- If `CHANGELOG.md` has no changes relative to the repository, abort and delegate the update to `/changelogger`.
+- CRITICAL: use `git status` to analyse changes before proceeding and determine whether separate commits are required.
+- Evaluate whether changes are mixed types (e.g. feat + fix, docs + refactor) that require separate atomic commits.
+- CRITICAL: commit message ALWAYS in International English with Conventional Commits; documentation in Mexican Spanish (personal context) or International English (corporate context), as applicable.
+- Push should remain simple (`git push`) when the repository was configured correctly in advance (see `~/rules/rulesets/GIT.md` initial configuration section).
 
-Pasos:
-0) Acción: validar que el repositorio esté configurado correctamente y mostrar identidad activa antes de proceder.
-   CONDICIÓN DE SESIÓN: Si ya ejecutaste este paso exitosamente en esta misma sesión de conversación, OMITIR este paso y continuar directamente en el paso 1. No repetir la validación dentro de la misma sesión.
-   COMANDOS OBLIGATORIOS:
+Steps:
+0) Action: validate repository configuration and show active identity before proceeding.
+   SESSION CONDITION: If this step has already been completed successfully in the current conversation session, SKIP it and continue directly at step 1. Do not repeat validation in the same session.
+   REQUIRED COMMANDS:
    - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
-   - `git remote -v` para verificar URLs de remotos
-   - **NUEVO**: mostrar identidad activa en pantalla:
+   - `git remote -v` to verify remote URLs
+   - **NEW**: show active identity on screen:
      ```bash
-     echo "=== IDENTIDAD ACTIVA PARA ESTE COMMIT ==="
+     echo "=== ACTIVE IDENTITY FOR THIS COMMIT ==="
      echo "Email: $(git config user.email)"
-     echo "Nombre: $(git config user.name)"
-     echo "Llave SSH: $(git config core.sshCommand | grep -o '/[^"]*' || echo 'default ~/.ssh/id_rsa')"
-     echo "Remoto: $(git remote get-url origin)"
-     echo "============================================"
+     echo "Name: $(git config user.name)"
+     echo "SSH key: $(git config core.sshCommand | grep -o '/[^"]*' || echo 'default ~/.ssh/id_rsa')"
+     echo "Remote: $(git remote get-url origin)"
+     echo "======================================="
      ```
-   Validaciones críticas:
-   - Confirmar que existen: user.name, user.email, core.sshCommand y remote.origin
-   - **CRÍTICO**: verificar que remote.origin usa SSH (git@github.com o git@gitlab.com), NO HTTPS
-   - **CRÍTICO**: confirmar visualmente que la identidad mostrada es la correcta para este repositorio
-   - Si usa HTTPS: indica configuración incorrecta, redirigir a git_init
-   - Si la identidad no es la esperada: pausar y revisar configuración
-   Si falta cualquier configuración: aplicar «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
-   Resultado: repositorio validado con SSH, identidad confirmada visualmente, y listo para commits.
+   Critical validations:
+   - Confirm these exist: user.name, user.email, core.sshCommand, and remote.origin
+   - **CRITICAL**: verify remote.origin uses SSH (`git@github.com` or `git@gitlab.com`), NOT HTTPS
+   - **CRITICAL**: visually confirm that the displayed identity is correct for this repository
+   - If HTTPS is used: configuration is incorrect; redirect to `git_init`
+   - If identity is not expected: pause and review configuration
+   If any required configuration is missing: apply `~/rules/cot/git_init.md` ([./git_init.md](./git_init.md)) before continuing.
+   Result: repository validated with SSH, identity visually confirmed, and ready for commits.
 
-1) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
-   Resultado: `git status` - examinar archivos modificados/añadidos/eliminados y sus propósitos.
-   Evaluación: determinar si los cambios son de un solo tipo (ej. solo docs) o mixtos (ej. feat + fix).
-   Decisión: si son mixtos, planificar commits atómicos separados usando `git add` selectivo por archivo/directorio.
+1) Action: analyse current repository state to identify change types.
+   Result: `git status` — examine modified/added/deleted files and their purpose.
+   Evaluation: determine whether changes are a single type (e.g. docs only) or mixed (e.g. feat + fix).
+   Decision: if mixed, plan separate atomic commits using selective `git add` per file/directory.
 
-2) Acción: validar gate de `CHANGELOG.md` antes de staging/commit.
-   COMANDOS OBLIGATORIOS:
+2) Action: validate the `CHANGELOG.md` gate before staging/commit.
+   REQUIRED COMMANDS:
    - `git --no-pager diff --quiet -- CHANGELOG.md`
    - `git --no-pager diff --cached --quiet -- CHANGELOG.md`
-   Decisión crítica:
-   - Si **ambos comandos retornan 0**: no hay cambios en `CHANGELOG.md` (ni staged ni unstaged) → **ABORTAR** flujo y sugerir `/changelogger`.
-   - Si **alguno retorna 1**: `CHANGELOG.md` sí tiene cambios → continuar.
-   Resultado: prerequisito de changelog confirmado para seguir con `/commit`.
+   Critical decision:
+   - If **both commands return 0**: no changes in `CHANGELOG.md` (neither staged nor unstaged) → **ABORT** flow and suggest `/changelogger`.
+   - If **either returns 1**: `CHANGELOG.md` has changes → continue.
+   Result: changelog prerequisite confirmed for `/commit`.
 
-2b) Acción: inspeccionar diff de `CHANGELOG.md` (opcional recomendado para trazabilidad).
-   COMANDOS:
+2b) Action: inspect `CHANGELOG.md` diff (optional but recommended for traceability).
+   COMMANDS:
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
-   Resultado: visibilidad explícita del cambio de changelog antes del commit.
+   Result: explicit visibility of changelog changes before commit.
 
-3) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.
-   Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
+3) Action: build a detailed commit message in a reusable temporary file.
+   Result: create `/tmp/commit-msg.txt` with this template:
    ```text
-   <tipo>[scope opcional]: <resumen en inglés>
+   <type>[optional scope]: <summary in english>
    
-   - detalle 1 en inglés
-   - detalle 2 en inglés con posible continuación
-     alineada con el texto del bullet
-   - detalle 3 en inglés
+   - detail 1 in english
+   - detail 2 in english with optional continuation
+     aligned with the bullet text
+   - detail 3 in english
 
    Co-Authored-By: Oz <oz-agent@warp.dev>
    ```
-   Validaciones críticas:
-   - Primera línea en inglés internacional usando Conventional Commits.
-   - Cuerpo en viñetas con cambios concretos y sustantivos del trabajo.
-   - NO incluir viñetas del tipo `update/edit CHANGELOG.md` (o equivalentes), porque `CHANGELOG.md` es precondición validada por el gate del paso 2.
-   - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
-   - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
-   - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
+   Critical validations:
+   - First line in International English using Conventional Commits.
+   - Body uses bullets describing concrete, substantive changes.
+   - DO NOT include bullets such as `update/edit CHANGELOG.md` (or equivalents), because `CHANGELOG.md` is a prerequisite validated by step 2 gate.
+   - Bullet marker `-` starts in column 1 (no leading spaces or tabs).
+   - If a bullet is too long, wrap manually and align continuation with two spaces.
+   - Keep one blank line between header/body and body/footer.
 
-3b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
-   Declaración obligatoria:
+3b) Action: mandatory language checkpoint before `git commit -F`.
+   Mandatory declaration:
    - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
-   Validación:
-   - Mostrar/revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en subject/body.
-   - Confirmar presencia de `Co-Authored-By: Oz <oz-agent@warp.dev>`.
-   Resultado: mensaje validado en inglés internacional y listo para commit no interactivo.
+   Validation:
+   - Show/review `/tmp/commit-msg.txt` content and confirm English in subject/body.
+   - Confirm presence of `Co-Authored-By: Oz <oz-agent@warp.dev>`.
+   Result: message validated in International English and ready for non-interactive commit.
 
-4) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 3.
-   - Si cambios homogéneos (un tipo): `git add -A && git commit -F /tmp/commit-msg.txt`
-   - Si cambios mixtos: commits separados usando `git add archivo(s)` selectivo por cada tipo, reescribiendo `/tmp/commit-msg.txt` antes de cada commit:
-     * `git add archivo1 archivo2 && git commit -F /tmp/commit-msg.txt`
-     * `git add archivo3 && git commit -F /tmp/commit-msg.txt`
+4) Action: perform atomic commits based on step 1 analysis using the temporary file from step 3.
+   - If changes are homogeneous (single type): `git add -A && git commit -F /tmp/commit-msg.txt`
+   - If changes are mixed: separate commits with selective `git add file(s)`, rewriting `/tmp/commit-msg.txt` before each commit:
+     * `git add file1 file2 && git commit -F /tmp/commit-msg.txt`
+     * `git add file3 && git commit -F /tmp/commit-msg.txt`
      * etc.
 
-5) Acción: push simple de todos los commits.
-   Resultado: `git push`.
+5) Action: simple push of all commits.
+   Result: `git push`.
 
-6) Acción: verificación no interactiva de los commits realizados.
-   Resultado: `git --no-pager log --oneline -5` (ver últimos commits sin paginador).
+6) Action: non-interactive verification of commits performed.
+   Result: `git --no-pager log --oneline -5` (view latest commits without pager).
 
-Conclusión:
-- Verifica que el/los commit(s) aparecen en `git --no-pager log --oneline -5`.
-- **CRÍTICO**: confirma que la identidad mostrada en el paso 0 coincide con la esperada para este repositorio (email y llave SSH correctas).
-- Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
-- Para evitar `quote>` y errores de escape, preferir siempre `git commit -F /tmp/commit-msg.txt`.
-- **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
-- **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
-- La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
-- Anti-patrones prohibidos (detener y pedir confirmación si aparece cualquiera):
-  - Continuar a `git add`/`git commit` sin pasar el gate de cambios de `CHANGELOG.md`.
-  - Intentar editar `CHANGELOG.md` desde `/commit` en vez de ejecutar `/changelogger`.
-  - Incluir en el body del commit una viñeta de edición/mantenimiento de `CHANGELOG.md` como detalle del cambio.
-  - Hacer commit con mensaje en español o sin checkpoint explícito de idioma.
-  - Usar flujo interactivo (editor/pager) en lugar de `git commit -F /tmp/commit-msg.txt`.
-- Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
+Conclusion:
+- Verify commit(s) appear in `git --no-pager log --oneline -5`.
+- **CRITICAL**: confirm the identity shown in step 0 matches the expected identity for this repository (correct email and SSH key).
+- If multiple commits were made, ensure each is atomic and has an appropriate conventional type (feat, fix, docs, etc.).
+- To avoid `quote>` and escape issues, always prefer `git commit -F /tmp/commit-msg.txt`.
+- **IMPORTANT HINT**: if `git remote -v` shows `https://` URLs instead of `git@`, configuration is incorrect and `git_init` must be applied.
+- **MULTI-ACCOUNT HINT**: if email/key does not match expectations, review repository configuration before proceeding.
+- Commit atomicity improves maintenance: each commit should represent a single logical, functional change.
+- Forbidden anti-patterns (stop and request confirmation if any appears):
+  - Proceeding to `git add`/`git commit` without passing the `CHANGELOG.md` change gate.
+  - Attempting to edit `CHANGELOG.md` from `/commit` instead of running `/changelogger`.
+  - Including a changelog-edit maintenance bullet in the commit body as a change detail.
+  - Committing with a Spanish message or without explicit language checkpoint.
+  - Using interactive flow (editor/pager) instead of `git commit -F /tmp/commit-msg.txt`.
+- References: `~/rules/rulesets/COMMITTING.md` ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), `~/rules/cot/changelog.md` ([./changelog.md](./changelog.md)), `~/rules/cot/git_init.md` ([./git_init.md](./git_init.md)), `~/rules/rulesets/GIT.md` ([../rulesets/GIT.md](../rulesets/GIT.md)), `~/rules/README.md` ([../../README.md](../../README.md)), and `~/rules/rulesets/LINGUISTICS.md` ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
 

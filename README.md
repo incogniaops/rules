@@ -150,7 +150,7 @@ Most rules in this repository follow a **dual-context model** (personal vs work)
 
 ### 1. Project context identification
 
-- 💼 **Work context**: projects developed for or under contract with **Elsevier (Tech Hub Ciudad de México / Mexico City)**
+- 💼 **Work context**: projects developed for or under contract with **Elsevier (Tech Hub Ciudad de México / México City)**
 - 📺 **Personal context**: independent, experimental, or personal-development projects
 
 ### 2. Rule application by context
@@ -260,13 +260,13 @@ sequenceDiagram
 
 ## Date/time conventions
 
-- Format: 24-hour clock, «CST (Mexico City)» zone.
+- Format: 24-hour clock, «CST (México City)» zone.
 - **CRITICAL**: Do not label UTC times as «CST» without conversion; CST = UTC - 6 hours.
 - **Mandatory verification**: use `TZ=America/Mexico_City date` to get real time.
 - Zone to use in scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: date only (YYYY-MM-DD), no time.
 
-More details: see [LINGUISTICS.md – Dates and times (CST Mexico City)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+More details: see [LINGUISTICS.md – Dates and times (CST México City)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 ### Command examples
 

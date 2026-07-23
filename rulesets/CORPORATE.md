@@ -62,7 +62,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 - Autonomía técnica para proponer e implementar mejoras
 - Ambiente de colaboración, documentación y aprendizaje constante
 - Modalidad presencial en **Elsevier**
-- Ubicación: Tech Hub, Ciudad de México (Mexico City)
+- Ubicación: Tech Hub, Ciudad de México (México City)
 
 ---
 

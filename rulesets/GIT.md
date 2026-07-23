@@ -6,7 +6,7 @@ Este documento describe la configuración inicial necesaria al clonar o iniciali
 
 Antes de configurar, determina si el proyecto es:
 
-- 💼 **Laboral:** Elsevier (Tech Hub Ciudad de México / Mexico City)
+- 💼 **Laboral:** Elsevier (Tech Hub Ciudad de México / México City)
 - 📺 **Personal:** Proyectos independientes o experimentales
 
 ## 2. Configuración local del repositorio

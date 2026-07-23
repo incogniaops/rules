@@ -6,6 +6,9 @@
 ## [2026-07-22] - Align corporate profile and git initialisation standards
 
 - feat: apply context-based bilingual policy across core rules so personal projects document in Mexican Spanish while corporate projects remain fully in International English
+- docs: translate `AGENTS.md`, `cot/context.md`, and `cot/committing.md` to International English (UK) and standardise CoT labels in English
+- docs: enforce the `México` accent exception across bilingual references, including `México City`, in rules, skills, and CoT guidance
+- docs: add root `TODO.md` with a translation and consistency backlog aligned to the `linguistics`/`linguistica` migration pattern
 - docs: update bilingual language policy in `README.md`, `AGENTS.md`, and `rulesets/COMMIT_LANGUAGE_PROTOCOL.md` to enforce personal Spanish documentation/CHANGELOG and fully International English corporate workflows
 - docs: update `.agents/skills/changelogger/SKILL.md` and `cot/changelog.md` to make changelog language and bullet prefix context-aware (`tipo:` personal, `type:` corporate)
 - docs: translate `README.md` and `PHILOSOPHY.md` to International English and preserve Spanish philosophical baseline in `FILOSOFIA.md`

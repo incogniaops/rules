@@ -119,7 +119,7 @@ Examples:
 - Guides/manuals: second person (imperative/present/future).
 - Avoid impersonal third person (`se configuró`, `se debe...`).
 
-### Dates and times (CST, Mexico City)
+### Dates and times (CST, México City)
 
 - Use 24-hour format and `America/Mexico_City`.
 - Never label UTC as CST without conversion.
@@ -187,6 +187,6 @@ These rules apply to:
 
 *This document was created by Rodrigo Álvarez (@incognia) and is distributed under GPLv3. For details, see LICENSE.*
 
-**Created**: 28 July 2025 (CST, Mexico City)
-**Last updated**: 17 August 2025, 01:36 CST (Mexico City)
+**Created**: 28 July 2025 (CST, México City)
+**Last updated**: 17 August 2025, 01:36 CST (México City)
 **Goal**: maintain linguistic consistency with Mexican Spanish
