@@ -1,37 +1,36 @@
 ---
 domain: backups
-task: restaurar respaldo y validar integridad
-Dificultad: baja
-longitud_objetivo: corta
-validacion: archivo/directorio restaurado y checksum verificado, log actualizado
+task: restore backup and validate integrity
+difficulty: low
+target_length: short
+validation: file/directory restored and checksum verified, log updated
 ---
 <!-- markdownlint-disable MD041 -->
+Reasoning:
+- Verify integrity before restore (`sha256sum -c`) when `.sha256` exists.
+- Restore while preserving permissions where applicable; validate output.
+- Record actions with CST timestamps.
+- Reference: `~/rules/rulesets/BACKUPS.md` (Restore and Verification section).
 
-Razonamiento:
-- Verificar integridad antes de restaurar (sha256sum -c) cuando exista .sha256.
-- Restaurar conservando permisos cuando aplique; validar resultado.
-- Registrar acciones con timestamps en CST.
-- Referencia: «~/rules/rulesets/BACKUPS.md» (sección Restauración y Verificación).
+Steps:
+1) Action: locate backup (`.bkp`, `.tar.zst`) and its `.sha256` (if present).
+   Result: paths defined, e.g. `BKP=backups/daily/2025-08-18/my_folder_2025-08-18T12-00-00.tar.zst`.
+2) Action: pre-restore verification.
+   Result:
+   - If `.sha256` exists (generated for backups >= 100 MB): `sha256sum -c "$BKP.sha256"`
+   - If not: optionally compute manually and document: `sha256sum "$BKP"` (recommended if corruption is suspected)
+3) Action: restore.
+   Result:
+   - `.bkp` file: `cp "$BKP" ./restored_file.ext` (rename as needed)
+   - `tar.zst`: `unzstd -c "$BKP" | tar -xvf - -C /path/destination`
+4) Action: post-restore validation.
+   Result:
+   - If it was a file: `sha256sum ./restored_file.ext` (compare)
+   - If it was `tar.zst`: inspect with `tar -tvf` beforehand and verify by sampling or internal checksums if generated.
+5) Action: log record.
+   Result: `echo "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S') | restore | $BKP | ok" >> backups/backup.log`.
 
-Pasos:
-1) Acción: localizar respaldo (.bkp, .tar.zst) y su .sha256 (si existe).
-   Resultado: rutas definidas, p. ej. BKP=backups/daily/2025-08-18/mi_carpeta_2025-08-18T12-00-00.tar.zst.
-2) Acción: verificación previa.
-   Resultado:
-   - Si hay .sha256 (se genera para respaldos >= 100 MB): `sha256sum -c "$BKP.sha256"`
-   - Si no hay: opcional calcular manualmente y documentar: `sha256sum "$BKP"` (recomendado si se sospecha corrupción)
-3) Acción: restaurar.
-   Resultado:
-   - Archivo .bkp: `cp "$BKP" ./archivo_restaurado.ext` (renombrar según corresponda)
-   - Tar.zst: `unzstd -c "$BKP" | tar -xvf - -C /ruta/destino`
-4) Acción: validación posterior.
-   Resultado:
-   - Si era archivo: `sha256sum ./archivo_restaurado.ext` (comparar)
-   - Si era tar.zst: inspección `tar -tvf` previa y verificación por muestreo o checksums internos si se generaron.
-5) Acción: registro en log.
-   Resultado: `echo "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S') | restore | $BKP | ok" >> backups/backup.log`.
-
-Conclusión:
-- Restauración completada y validada; registro actualizado con fecha/hora CST.
-- Referencias: «~/rules/BACKUPS.md» y scripts «~/rules/scripts/*».
+Conclusion:
+- Restore completed and validated; log updated with CST date/time.
+- References: `~/rules/BACKUPS.md` and scripts `~/rules/scripts/*`.
 

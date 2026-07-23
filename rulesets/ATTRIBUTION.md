@@ -16,7 +16,7 @@ Este documento establece cómo darme crédito y atribución en documentos indivi
 ### 2.3. Convención de nombres
 - **Contexto hispanohablante:** se utilizan dos apellidos, siendo el paterno «Álvarez» y el materno «Aguilera».
 - **Contexto técnico e internacional:** para garantizar una correcta atribución en sistemas que no manejan nombres compuestos, usar como apellido principal «Álvarez».
-- **Alternativa sin caracteres especiales:** en sistemas que no soporten la `á`, utilizar la versión «Alvarez».
+- **Excepción obligatoria:** el apellido se escribe siempre como «Álvarez» en documentación y texto, incluso en inglés.
 
 ## 3. Especialización profesional
 

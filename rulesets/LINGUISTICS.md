@@ -26,6 +26,10 @@
 
 - If a section is written in English, use **International English (UK)**.
 - Avoid American spelling.
+- Preserve accent marks in proper nouns even in English text.
+- Mandatory exceptions:
+  - ✅ `México` (including `México City`)
+  - ✅ `Álvarez`
 - Mandatory examples:
   - ✅ `colour` / ❌ `color`
   - ✅ `organisation` / ❌ `organization`
@@ -158,6 +162,7 @@ The following are explicitly unacceptable:
 - Using «IT» instead of «TI» in Spanish content.
 - Using peninsular terms such as «ordenador» or «fichero».
 - Invented Spanglish verbs ending in `-ear` (`commitear`, `deployear`, etc.).
+- Writing `Alvarez` without accent in regular text where `Álvarez` is expected.
 - Title Case in Spanish headings.
 - Incorrect uppercase after colons.
 - Pluralised acronyms (`VMs`, `ONGs`, etc.).

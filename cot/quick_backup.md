@@ -1,28 +1,27 @@
 ---
 domain: backups
-task: respaldo rápido en el mismo directorio (quick backup)
-Dificultad: muy baja
-longitud_objetivo: muy corta
-validacion: archivo_YYYY-MM-DD.ext.bkp generado junto al original
+task: quick backup in the same directory
+difficulty: very low
+target_length: very short
+validation: file_YYYY-MM-DD.ext.bkp created next to the original
 ---
 <!-- markdownlint-disable MD041 -->
+Reasoning:
+- For small text files, an immediate local backup is sufficient without compression or checksum.
+- Keep the CST date convention (YYYY-MM-DD) and the `.bkp` suffix.
+- Reference: `~/rules/rulesets/BACKUPS.md` (quick backup section) and script `~/rules/scripts/quick_bkp.sh`.
 
-Razonamiento:
-- Para archivos pequeños de texto, basta un respaldo local inmediato sin compresión ni checksum.
-- Mantener la convención de fecha en CST (YYYY-MM-DD) y el sufijo .bkp.
-- Referencia: «~/rules/rulesets/BACKUPS.md» (sección de respaldo rápido) y script «~/rules/scripts/quick_bkp.sh».
+Steps:
+1) Action: identify files to back up (in the current directory).
+   Result: e.g. `file.txt`.
+2) Action: run quick backup using CST date.
+   Result: `bash ~/rules/scripts/quick_bkp.sh file.txt` (can accept multiple files).
+3) Action: validate that the backup exists next to the original.
+   Result: `ls -1 file_$(TZ=America/Mexico_City date +"%Y-%m-%d").txt.bkp`.
+4) (Optional) Action: repeat for multiple files in one command.
+   Result: `bash ~/rules/scripts/quick_bkp.sh *.md`.
 
-Pasos:
-1) Acción: identificar los archivos a respaldar (en el directorio actual).
-   Resultado: p. ej., `archivo.txt`.
-2) Acción: ejecutar respaldo rápido usando fecha CST.
-   Resultado: `bash ~/rules/scripts/quick_bkp.sh archivo.txt` (puede aceptar varios archivos).
-3) Acción: validar que existe el backup junto al original.
-   Resultado: `ls -1 archivo_$(TZ=America/Mexico_City date +"%Y-%m-%d").txt.bkp`.
-4) (Opcional) Acción: repetir para múltiples archivos en un solo comando.
-   Resultado: `bash ~/rules/scripts/quick_bkp.sh *.md`.
-
-Conclusión:
-- El respaldo queda como `nombre_YYYY-MM-DD.ext.bkp` en el mismo directorio.
-- Restauración manual: copiar/renombrar el .bkp al nombre original cuando se requiera.
+Conclusion:
+- Backup is created as `name_YYYY-MM-DD.ext.bkp` in the same directory.
+- Manual restore: copy/rename the `.bkp` file to the original name when needed.
 

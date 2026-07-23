@@ -9,6 +9,9 @@
 - docs: translate `AGENTS.md`, `cot/context.md`, and `cot/committing.md` to International English (UK) and standardise CoT labels in English
 - docs: enforce the `México` accent exception across bilingual references, including `México City`, in rules, skills, and CoT guidance
 - docs: add root `TODO.md` with a translation and consistency backlog aligned to the `linguistics`/`linguistica` migration pattern
+- docs: translate `cot/quick_backup.md`, `cot/backup.md`, and `cot/restore.md` to International English (UK) while preserving operational commands and CST workflow
+- docs: document mandatory proper-noun accent exceptions (`México`, `Álvarez`) in `rulesets/LINGUISTICS.md` and `rulesets/LINGUISTICA.md`
+- docs: align linguistic skills and attribution guidance so the surname is always written as `Álvarez` in regular documentation text
 - docs: update bilingual language policy in `README.md`, `AGENTS.md`, and `rulesets/COMMIT_LANGUAGE_PROTOCOL.md` to enforce personal Spanish documentation/CHANGELOG and fully International English corporate workflows
 - docs: update `.agents/skills/changelogger/SKILL.md` and `cot/changelog.md` to make changelog language and bullet prefix context-aware (`tipo:` personal, `type:` corporate)
 - docs: translate `README.md` and `PHILOSOPHY.md` to International English and preserve Spanish philosophical baseline in `FILOSOFIA.md`

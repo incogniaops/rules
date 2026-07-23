@@ -23,6 +23,11 @@
 - **«Nodo»** (no «nodo») - sin tilde
 - **«Métricas»** (con tilde) para datos de observabilidad
 
+### Excepciones de acentuación obligatoria (incluso en texto en inglés)
+
+- ✅ `México` (incluyendo `México City`)
+- ✅ `Álvarez`
+
 ### Verbos técnicos
 
 - **«Desplegar»** (no «deployar»)
@@ -81,6 +86,7 @@
 
 - ❌ «Chévere» (Venezuela) → ✅ «Excelente»
 - ❌ «Pana» (Venezuela) → ✅ «Amigo»
+- ❌ «Alvarez» → ✅ «Álvarez» (apellido propio, siempre con tilde)
 
 ---
 

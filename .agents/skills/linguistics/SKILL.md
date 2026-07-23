@@ -30,6 +30,7 @@ If no file was specified, ask the user which file to review.
 - «Desplegar» not «deployar», «Respaldar» not «backupear»
 - Time: 24h format, CST (Ciudad de México), TZ=America/Mexico_City
 - International English (UK): `colour` (not `color`), `organisation` (not `organization`), `virtualisation` (not `virtualization`)
+- Proper-noun accents are mandatory even in English text: `México`, `Álvarez`
 
 ## References
 

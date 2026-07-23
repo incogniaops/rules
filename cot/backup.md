@@ -1,37 +1,36 @@
 ---
 domain: backups
-task: realizar respaldo (archivo o directorio) con checksum y log en CST
-Dificultad: baja
-longitud_objetivo: corta
-validacion: respaldo creado, checksum generado y verificado, entrada en log
+task: perform backup (file or directory) with checksum and CST log
+difficulty: low
+target_length: short
+validation: backup created, checksum generated and verified, log entry recorded
 ---
 <!-- markdownlint-disable MD041 -->
+Reasoning:
+- Always use CST (México City) for timestamps (`TZ=America/Mexico_City`) and log actions.
+- Generate a checksum (`.sha256`) for integrity.
+- For directories, package and compress with `zstd` for efficiency.
+- Reference: `~/rules/rulesets/BACKUPS.md` (restore, verification, compression, incremental rsync).
 
-Razonamiento:
-- Usar siempre CST CDMX para timestamps (TZ=America/Mexico_City) y registrar acciones.
-- Generar checksum (.sha256) para integridad.
-- Para directorios, empaquetar y comprimir con zstd para eficiencia.
-- Referencia: «~/rules/rulesets/BACKUPS.md» (restauración, verificación, compresión, rsync incrementales).
-
-Pasos:
-1) Acción: decidir qué respaldar (archivo o directorio) y destino.
-   Resultado: variables definidas, p. ej. SRC=./mi_carpeta DEST=backups/daily.
-2) Acción: crear (si aplica) carpeta del día en CST.
-   Resultado:
+Steps:
+1) Action: decide what to back up (file or directory) and destination.
+   Result: variables defined, e.g. `SRC=./my_folder DEST=backups/daily`.
+2) Action: create (if applicable) the CST day folder.
+   Result:
    - `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
    - `mkdir -p "$DEST/$DATE_CST"`
-3) Acción: ejecutar respaldo básico con script.
-   Resultado:
-   - Directorio: `bash ~/rules/scripts/backup_file.sh "$SRC" "$DEST/$DATE_CST"`
-   - Archivo: `bash ~/rules/scripts/backup_file.sh ./archivo.txt "$DEST/$DATE_CST"`
-4) Acción: verificar checksum (solo si existe .sha256; se genera para respaldos >= 100 MB).
-   Resultado: `find "$DEST/$DATE_CST" -maxdepth 1 -name "*.sha256" -exec sha256sum -c {} \;`
-5) (Opcional) Acción: snapshot incremental de un árbol con rsync.
-   Resultado: `bash ~/rules/scripts/backup_rsync_snapshot.sh "/ruta/datos" "backups/daily"`
-6) Acción: registrar/ver log en CST.
-   Resultado: revisar/usar `$DEST/backup.log` (o `$BACKUP_LOG_FILE`).
+3) Action: run basic backup with script.
+   Result:
+   - Directory: `bash ~/rules/scripts/backup_file.sh "$SRC" "$DEST/$DATE_CST"`
+   - File: `bash ~/rules/scripts/backup_file.sh ./file.txt "$DEST/$DATE_CST"`
+4) Action: verify checksum (only if `.sha256` exists; generated for backups >= 100 MB).
+   Result: `find "$DEST/$DATE_CST" -maxdepth 1 -name "*.sha256" -exec sha256sum -c {} \;`
+5) (Optional) Action: incremental snapshot of a tree with rsync.
+   Result: `bash ~/rules/scripts/backup_rsync_snapshot.sh "/path/data" "backups/daily"`
+6) Action: record/review CST log.
+   Result: review/use `$DEST/backup.log` (or `$BACKUP_LOG_FILE`).
 
-Conclusión:
-- Copia creada y verificada; log registra la operación en CST.
-- Referencias: «~/rules/BACKUPS.md» y scripts en «~/rules/scripts/».
+Conclusion:
+- Copy is created and verified; log records the operation in CST.
+- References: `~/rules/BACKUPS.md` and scripts in `~/rules/scripts/`.
 
