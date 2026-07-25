@@ -1,58 +1,57 @@
 ---
 domain: workflow
-task: inicializar repo con Git y SSH (sin HTTPS) siguiendo GIT.md
-Dificultad: baja
-longitud_objetivo: corta
-validacion: repo inicializado, identidad correcta, SSH forzado, remoto en SSH y primer push exitoso
+task: initialise repo with Git and SSH (no HTTPS) following GIT.md
+Dificultad: low
+longitud_objetivo: short
+validacion: repo initialised, correct identity, SSH forced, remote on SSH, and first push successful
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Evitar HTTPS y alias SSH; usar SSH con clave adecuada por repo (core.sshCommand).
-- Configurar identidad (user.name, user.email) según contexto Personal/Laboral.
-- Dejar la rama por defecto como main y remoto origin en formato SSH.
-- Referencia principal: «~/rules/rulesets/GIT.md» (sección “Configuración inicial y SSH por contexto”).
+Reasoning:
+- Avoid HTTPS and SSH aliases; use SSH with the appropriate key per repo (core.sshCommand).
+- Configure identity (user.name, user.email) according to Personal/Corporate context.
+- Set the default branch to main and origin remote in SSH format.
+- Main reference: «~/rules/rulesets/GIT.md» (section "Initial configuration and SSH by context").
 
-Pasos (Opción recomendada: asistente interactivo):
-1) Acción: inicializar el repositorio.
-   Resultado: `git init`.
-2) Acción: ejecutar el asistente de contexto.
-   Resultado: `bash scripts/git-init-context.sh`.
-   Nota: el asistente preguntará "Personal" o "Laboral", configurará user.name/user.email, core.sshCommand con la llave correcta y, opcionalmente, el remoto origin en SSH; también define main.
-3) Acción: verificar identidad y SSH.
-   Resultado:
+Steps (recommended option: interactive assistant):
+1) Action: initialise the repository.
+   Result: `git init`.
+2) Action: run the context assistant.
+   Result: `bash scripts/git-init-context.sh`.
+   Note: the assistant will ask for "Personal" or "Laboral", configure user.name/user.email, core.sshCommand with the correct key, and optionally the origin remote in SSH; also sets main.
+3) Action: verify identity and SSH.
+   Result:
    - `git config --list | grep ^user\.`
    - `git config core.sshCommand`
-4) (Opcional) Acción: configurar origin si no lo hiciste en el asistente.
-   Resultado (ejemplos):
+4) (Optional) Action: configure origin if not done in the assistant.
+   Result (examples):
    - GitHub personal: `git remote add origin git@github.com:incognia/REPO.git`
-   - GitHub laboral: `git remote add origin git@github.com:incogniaops/REPO.git`
+   - GitHub corporate: `git remote add origin git@github.com:incogniaops/REPO.git`
    - GitLab personal: `git remote add origin git@gitlab.com:incognia/REPO.git`
-   - GitLab laboral: `git remote add origin git@gitlab.com:incogniadev/REPO.git`
-   - Verificar: `git remote -v`.
-5) Acción: primer commit no interactivo.
-   Resultado:
+   - GitLab corporate: `git remote add origin git@gitlab.com:incogniadev/REPO.git`
+   - Verify: `git remote -v`.
+5) Action: first non-interactive commit.
+   Result:
    - `git add .`
    - `git commit -m "feat: initial project setup"`
-6) Acción: primer push y upstream.
-   Resultado: `git push -u origin main`.
+6) Action: first push and upstream.
+   Result: `git push -u origin main`.
 
-Pasos (Alternativa manual, si no usas el asistente):
+Steps (manual alternative, if not using the assistant):
 1) `git init`
-2) Elegir contexto y configurar identidad + SSH:
+2) Choose context and configure identity + SSH:
    - Personal:
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "incognia@gmail.com"`
      - `git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"`
-   - Laboral (Elsevier):
+   - Corporate (Elsevier):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "r.alvarez1@elsevier.com"`
      - `git config core.sshCommand "ssh -i ~/.ssh/elsevier -o IdentitiesOnly=yes"`
-3) Configurar remoto en SSH (ver ejemplos arriba) y verificar con `git remote -v`.
-4) Definir rama por defecto: `git branch -M main`.
-5) Commit y primer push como en los pasos 5-6 de la opción recomendada.
+3) Configure remote in SSH (see examples above) and verify with `git remote -v`.
+4) Set default branch: `git branch -M main`.
+5) Commit and first push as in steps 5-6 of the recommended option.
 
-Conclusión:
-- Tras la configuración inicial, el flujo diario usa push simple: `git push`.
-- Referencias: «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)) y «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)).
-
+Conclusion:
+- After initial configuration, the daily flow uses a simple push: `git push`.
+- References: «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)) and «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)).

@@ -1,59 +1,59 @@
 ---
 domain: workflow
-task: corregir errores de lint Markdown (markdownlint-cli2) en este repositorio
-dificultad: media
-longitud_objetivo: media
-validacion: errores reducidos significativamente tras aplicar correcciones y re-ejecutar linter
+task: fix Markdown lint errors (markdownlint-cli2) in this repository
+dificultad: medium
+longitud_objetivo: medium
+validacion: errors significantly reduced after applying corrections and re-running the linter
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Priorizar correcciones mecánicas de alto impacto (espacios alrededor de encabezados/listas: MD022/MD032; cercas y lenguajes: MD031/MD040; prefijos de listas ordenadas: MD029).
-- Mantener consistencia con la configuración actual (.markdownlint.yaml con MD013 desactivado y excepciones en CHANGELOG).
-- Evitar cambios semánticos del contenido; limitarse a formato Markdown.
-- Usar ejecución no interactiva para medir avance entre iteraciones.
+Reasoning:
+- Prioritise high-impact mechanical fixes (blank lines around headings/lists: MD022/MD032; fences and languages: MD031/MD040; ordered list prefixes: MD029).
+- Maintain consistency with the current configuration (.markdownlint.yaml with MD013 disabled and exceptions in CHANGELOG).
+- Avoid semantic changes to content; limit changes to Markdown formatting.
+- Use non-interactive execution to measure progress between iterations.
 
-Pasos:
-1) Acción: ejecutar el linter para establecer la línea base.
-   Resultado:
+Steps:
+1) Action: run the linter to establish the baseline.
+   Result:
    - `npx markdownlint-cli2 "**/*.md" "#node_modules"`
-   - Guardar resumen (errores totales y reglas predominantes) para comparar.
+   - Save a summary (total errors and predominant rules) for comparison.
 
-2) Acción: corregir MD022/MD032 (líneas en blanco) en archivos prioritarios.
-   Resultado:
-   - Objetivo: rulesets/LINGUISTICS.md, rulesets/GIT.md, rulesets/TEACHING.md, PROMPTS.md, ROADMAP.md, README.md.
-   - Regla práctica: añadir una línea en blanco después de cada encabezado y antes/después de listas.
+2) Action: fix MD022/MD032 (blank lines) in priority files.
+   Result:
+   - Targets: rulesets/LINGUISTICS.md, rulesets/GIT.md, rulesets/TEACHING.md, ROADMAP.md, README.md.
+   - Practical rule: add a blank line after each heading and before/after lists.
 
-3) Acción: corregir MD031/MD040 (cercas de código y lenguaje).
-   Resultado:
-   - Añadir una línea en blanco antes y después de cada bloque ```.
-   - Especificar lenguaje (bash, text, yaml) cuando corresponda.
+3) Action: fix MD031/MD040 (code fences and language).
+   Result:
+   - Add a blank line before and after each ``` block.
+   - Specify language (bash, text, yaml) where applicable.
 
-4) Acción: normalizar listas ordenadas (MD029) al estilo 1/1/1.
-   Resultado:
-   - Reescribir prefijos de listas numeradas como `1.` de forma consistente en pasos y procedimientos.
+4) Action: normalise ordered lists (MD029) to the 1/1/1 style.
+   Result:
+   - Rewrite numbered list prefixes as consistent `1.` in steps and procedures.
 
-5) Acción: convertir bare URLs problemáticas (MD034) a enlaces con texto.
-   Resultado:
-   - Ejemplos: DOI/arXiv → `[arXiv:2201.11903](https://arxiv.org/abs/2201.11903)`; correos → `mailto:` si aplica.
+5) Action: convert problematic bare URLs (MD034) to links with text.
+   Result:
+   - Examples: DOI/arXiv → `[arXiv:2201.11903](https://arxiv.org/abs/2201.11903)`; emails → `mailto:` where applicable.
 
-6) Acción (acotada): manejar casos especiales.
-   Resultado:
-   - CHANGELOG.md ya ignora MD022/MD032/MD013/MD024 (no cambiar contenido, sólo mantener cabecera de excepciones).
-   - systemd/backups/README.md: resolver múltiples H1 (MD025) fusionando en un H1 y el resto como H2/H3; para literales como `backup@.service`, presentarlos dentro de código inline o listas con contexto para evitar MD034.
-   - “Elaborado por …” (MD036): o convertir a subtítulo “Créditos” o desactivar MD036 al final con comentario local si se desea mantener el estilo.
+6) Action (bounded): handle special cases.
+   Result:
+   - CHANGELOG.md already ignores MD022/MD032/MD013/MD024 (do not change content, only maintain the exception header).
+   - systemd/backups/README.md: resolve multiple H1 (MD025) by merging into one H1 and the rest as H2/H3; for literals like `backup@.service`, present them inside inline code or lists with context to avoid MD034.
+   - "Developed by …" (MD036): either convert to a "Credits" subtitle or disable MD036 at the end with a local comment if the style is intentional.
 
-7) Acción: re-ejecutar el linter y medir mejoras.
-   Resultado:
+7) Action: re-run the linter and measure improvements.
+   Result:
    - `npx markdownlint-cli2 "**/*.md" "#node_modules"`
-   - Comparar errores: esperar reducción notable en MD022/MD032, MD031/MD040, MD029, MD034.
+   - Compare errors: expect a notable reduction in MD022/MD032, MD031/MD040, MD029, MD034.
 
-8) Acción (opcional): ejecutar verificador de enlaces.
-   Resultado:
+8) Action (optional): run the link checker.
+   Result:
    - `npx markdown-link-check -q -c .markdownlinkcheck.json "**/*.md"`
-   - Revisar enlaces quebrados y actualizar referencias internas si fuera necesario.
+   - Review broken links and update internal references as needed.
 
-Conclusión:
-- El conjunto de correcciones mecánicas debe reducir sustancialmente los errores del linter y dejar pendientes mínimos.
-- Si persisten avisos específicos (p. ej., MD036 en pies de página), decidir si ajustar el contenido o documentar una excepción local por archivo.
-- Referencias: «~/rules/.markdownlint.yaml», «~/rules/CHANGELOG.md», «~/rules/README.md».
+Conclusion:
+- The set of mechanical fixes should substantially reduce linter errors and leave minimal pending items.
+- If specific warnings persist (e.g. MD036 in footers), decide whether to adjust the content or document a local per-file exception.
+- References: «~/rules/.markdownlint.yaml», «~/rules/CHANGELOG.md», «~/rules/README.md».

@@ -1,74 +1,74 @@
 ---
 domain: infrastructure
-task: analizar estado de clúster Kubernetes vía SSH
-dificultad: intermedio
-longitud_objetivo: media
-validacion: reporte de estado con nodos, pods, servicios, VirtualServices e Istio
+task: analyse Kubernetes cluster state via SSH
+dificultad: intermediate
+longitud_objetivo: medium
+validacion: status report covering nodes, pods, services, VirtualServices, and Istio
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Los clústeres corren sobre bare-metal con Istio, ArgoCD, Prometheus, Grafana y Kiali.
-- El acceso es vía SSH con usuario `ubuntu` (u otro) y llave `kone` (infra propia) o `cad` (clientes).
-- Los manifiestos están en `/home/<usuario>/kubernetes-<namespace>/services/`.
-- Referencia principal: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
+Reasoning:
+- Clusters run on bare-metal with Istio, ArgoCD, Prometheus, Grafana, and Kiali.
+- Access is via SSH with user `ubuntu` (or other) and key `kone` (own infra) or `cad` (clients).
+- Manifests are in `/home/<user>/kubernetes-<namespace>/services/`.
+- Main reference: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
 
-Pasos:
-1) Acción: conectar al servidor vía SSH.
-   Resultado: `ssh -i ~/.ssh/<llave> <usuario>@<ip>`
-   Verificar: conexión exitosa, `kubectl` disponible.
+Steps:
+1) Action: connect to the server via SSH.
+   Result: `ssh -i ~/.ssh/<key> <user>@<ip>`
+   Verify: successful connection, `kubectl` available.
 
-2) Acción: verificar estado general del clúster.
-   Resultado:
-   - `kubectl get nodes -o wide` → todos los nodos en Ready
-   - `kubectl top nodes` → uso de CPU y memoria
+2) Action: verify general cluster state.
+   Result:
+   - `kubectl get nodes -o wide` → all nodes in Ready state
+   - `kubectl top nodes` → CPU and memory usage
 
-3) Acción: listar pods del *namespace* objetivo.
-   Resultado:
+3) Action: list pods in the target *namespace*.
+   Result:
    - `kubectl get pods -n <namespace> -o wide`
-   - Buscar pods en estado distinto a Running/Completed
-   - Si hay problemas: `kubectl describe pod <pod> -n <namespace>`
+   - Look for pods in a state other than Running/Completed
+   - If there are issues: `kubectl describe pod <pod> -n <namespace>`
 
-4) Acción: revisar servicios y endpoints.
-   Resultado:
+4) Action: review services and endpoints.
+   Result:
    - `kubectl get svc -n <namespace>`
    - `kubectl get endpoints -n <namespace>`
 
-5) Acción: revisar VirtualServices e Istio.
-   Resultado:
+5) Action: review VirtualServices and Istio.
+   Result:
    - `kubectl get vs -n <namespace>`
    - `kubectl get gateway -n <namespace>`
-   - `istioctl analyze -n <namespace>` (si está disponible)
-   - `istioctl proxy-status` (verificar sincronización de sidecars)
+   - `istioctl analyze -n <namespace>` (if available)
+   - `istioctl proxy-status` (verify sidecar synchronisation)
 
-6) Acción: verificar ArgoCD.
-   Resultado:
+6) Action: verify ArgoCD.
+   Result:
    - `kubectl get app -n argocd | grep <namespace>`
-   - Confirmar estado Synced y Healthy
+   - Confirm Synced and Healthy state
 
-7) Acción: revisar eventos recientes.
-   Resultado:
+7) Action: review recent events.
+   Result:
    - `kubectl get events -n <namespace> --sort-by='.lastTimestamp' | tail -20`
 
-8) Acción: revisar manifiestos en disco.
-   Resultado:
-   - `ls /home/<usuario>/kubernetes-<namespace>/services/overlays/dev/`
-   - `ls /home/<usuario>/kubernetes-<namespace>/services/base/`
+8) Action: review manifests on disk.
+   Result:
+   - `ls /home/<user>/kubernetes-<namespace>/services/overlays/dev/`
+   - `ls /home/<user>/kubernetes-<namespace>/services/base/`
 
-9) Acción: verificaciones de salud de servicios.
-   Resultado:
-   - Obtener IP del Gateway: `kubectl get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`
-   - `curl -s http://<gateway_ip>/<prefijo>/actuator/health`
+9) Action: service health checks.
+   Result:
+   - Get Gateway IP: `kubectl get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`
+   - `curl -s http://<gateway_ip>/<prefix>/actuator/health`
 
-10) Acción: verificar observabilidad.
-    Descubrir IPs y puertos: `kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'`
-    Resultado:
-    - Kiali: puerto 20001 (LoadBalancer o NodePort)
-    - Prometheus: puerto 9090 (NodePort)
-    - Grafana: puerto 3000 (LoadBalancer o NodePort)
-    - Verificar acceso: `curl -s -o /dev/null -w "%{http_code}" http://<ip>:<puerto>`
+10) Action: verify observability.
+    Discover IPs and ports: `kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'`
+    Result:
+    - Kiali: port 20001 (LoadBalancer or NodePort)
+    - Prometheus: port 9090 (NodePort)
+    - Grafana: port 3000 (LoadBalancer or NodePort)
+    - Verify access: `curl -s -o /dev/null -w "%{http_code}" http://<ip>:<port>`
 
-Conclusión:
-- Entregar reporte con: estado de nodos, pods problemáticos, servicios y VirtualServices, estado de ArgoCD, eventos recientes y estado de observabilidad.
-- Si hay problemas, incluir logs relevantes (`kubectl logs <pod> -n <namespace> --tail=50`).
-- Referencias: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
+Conclusion:
+- Deliver a report covering: node state, problematic pods, services and VirtualServices, ArgoCD state, recent events, and observability state.
+- If there are issues, include relevant logs (`kubectl logs <pod> -n <namespace> --tail=50`).
+- References: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).

@@ -1,12 +1,11 @@
-Guía rápida: flujo Git (SSH, no HTTPS)
+Quick guide: Git flow (SSH, no HTTPS)
 
-Resumen
-- Configura el repo con SSH por contexto (ver ~/rules/rulesets/GIT.md, sección configuración inicial y asistente).
-- Usa ~/rules/rulesets/COMMITTING.md para el flujo diario: actualizar CHANGELOG (fecha CST), commit y push simple.
+Summary
+- Configure the repo with SSH by context (see ~/rules/rulesets/GIT.md, section on initial configuration and assistant).
+- Use ~/rules/rulesets/COMMITTING.md for the daily flow: update CHANGELOG (CST date), commit, and simple push.
 
-Pasos clave
-1) Inicialización: `git init` y `bash scripts/git-init-context.sh`.
-2) Verificación: `git config --list | grep ^user\.` y `git config core.sshCommand`.
-3) Remoto: `git remote -v` (SSH), upstream en primer push: `git push -u origin main`.
-4) Flujo diario: actualizar CHANGELOG, `git add`, `git commit -m` y `git push`.
-
+Key steps
+1) Initialisation: `git init` and `bash scripts/git-init-context.sh`.
+2) Verification: `git config --list | grep ^user\.` and `git config core.sshCommand`.
+3) Remote: `git remote -v` (SSH), upstream on first push: `git push -u origin main`.
+4) Daily flow: update CHANGELOG, `git add`, `git commit -m` and `git push`.

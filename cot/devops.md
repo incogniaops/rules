@@ -1,26 +1,25 @@
 ---
 domain: devops
-task: falla de despliegue por autenticación al registry
-dificultad: media
-longitud_objetivo: corta
-validacion: pipeline exitoso tras inyectar secreto
+task: deployment failure due to registry authentication
+dificultad: medium
+longitud_objetivo: short
+validacion: pipeline succeeds after injecting the secret
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Aplicar formato CoT y español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
-- Verificar prerequisitos de CI/CD y secretos de acceso al registry.
+Reasoning:
+- Apply CoT format and International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) and flow in «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+- Verify CI/CD prerequisites and registry access secrets.
 
-Pasos:
-1) Acción: revisar el último job fallido en CI.
-   Resultado: error 401 al hacer docker pull del registry corporativo.
-2) Acción: verificar variables/secretos del job.
-   Resultado: no existe variable REGISTRY_TOKEN ni credenciales configuradas.
-3) Acción: definir secreto a nivel de repositorio y referenciarlo en el job.
-   Resultado: REGISTRY_TOKEN definido; job actualizado para usar docker login con token.
-4) Acción: reintentar pipeline.
-   Resultado: docker pull exitoso y despliegue completado.
+Steps:
+1) Action: review the last failed job in CI.
+   Result: 401 error on docker pull from the corporate registry.
+2) Action: verify job variables/secrets.
+   Result: no REGISTRY_TOKEN variable or configured credentials.
+3) Action: define the secret at repository level and reference it in the job.
+   Result: REGISTRY_TOKEN defined; job updated to use docker login with the token.
+4) Action: retry the pipeline.
+   Result: docker pull succeeds and deployment completes.
 
-Conclusión:
-- Solución: inyectar secreto del token de registry a nivel de repositorio y autenticar antes del pull.
-
+Conclusion:
+- Solution: inject the registry token secret at repository level and authenticate before the pull.

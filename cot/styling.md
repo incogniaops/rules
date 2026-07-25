@@ -1,52 +1,51 @@
 ---
 domain: writing
-task: aplicar correctamente las reglas de STYLING.md en un documento Markdown corporativo
-dificultad: media
-longitud_objetivo: media
-validacion: encabezado/pie correctos, timestamp CST válido, estructura y estilos conformes a STYLING.md
+task: correctly apply the rules of STYLING.md in a corporate Markdown document
+dificultad: medium
+longitud_objetivo: medium
+validacion: correct header/footer, valid CST timestamp, structure and styles conforming to STYLING.md
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Usar español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
-- Recorrer de arriba a abajo: encabezado estándar → contenido → pie de página → CSS → validaciones (timestamps, enlaces, accesibilidad).
-- Asegurar consistencia con CST (Ciudad de México) y mermaid donde aplique.
+Reasoning:
+- Use International English (UK) and repo CoT format (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) and «~/rules/README.md» ([../../README.md](../../README.md))).
+- Traverse top to bottom: standard header → content → footer → CSS → validations (timestamps, links, accessibility).
+- Ensure consistency with CST (México City) and mermaid where applicable.
 
-Pasos:
-1) Acción: insertar encabezado estándar según «~/rules/STYLING.md» (tags + logo + H1 + timestamp alineado a la derecha).
-   Resultado: bloque YAML con tags y bloque de encabezado con logo Kabat One y título H1.
-2) Acción: detectar y eliminar campos de fecha reportados existentes antes de insertar el timestamp nuevo.
-   Validación: localizar y limpiar patrones como `Última modificación:`, `Fecha:`, `Fecha de reporte:` y `[time=...]` para evitar duplicidad.
-   Resultado: el documento conserva un solo campo de fecha visible.
-2b) Acción: generar y validar timestamp de «Última modificación» en CST (24 h).
-   Resultado: `TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (CST)'` produce, p. ej., «31 de julio de 2025, 11:59 (CST)».
-3) Acción: revisar estructura de contenido (H2→H3→H4) y evitar saltos de nivel.
-   Resultado: jerarquía clara; títulos en estilo oración y sin punto final.
-4) Acción: aplicar reglas de LINGUISTICS a términos y comillas.
-   Resultado: «IA», «TI», «computadora», comillas «», préstamos en cursiva.
-5) Acción: eliminar separadores `---` innecesarios (REGLA CRÍTICA — documentos generados por IA tienden a abusar de ellos).
-   Paso 5a: Ejecutar `grep -n "^---$" <archivo>` para localizar TODAS las ocurrencias.
-   Paso 5b: Conservar únicamente:
-     - El bloque YAML del frontmatter (líneas 1 y 3)
-     - El `---` inmediatamente anterior a la imagen de firma en el pie de página
-   Paso 5c: Eliminar SIN EXCEPCIÓN todos los demás `---`. Ningún H2, tabla, bloque de código ni párrafo debe estar separado con `---`.
-   Resultado: cero `---` en el cuerpo; uno solo justo antes del pie de página.
-6) Acción: insertar pie de página estándar con separador único, firma corporativa y CSS corporativo.
-   Resultado: pie con imagen de firma oficial, colores corporativos y estilos coherentes.
-7) Acción: validar enlaces e imágenes.
-   Resultado: URLs funcionan; agregar texto alternativo a imágenes.
-8) Acción: revisar accesibilidad y responsive.
-   Resultado: estilos legibles, contraste suficiente, tablas correctas.
-9) Acción: verificar mermaid cuando se requieran diagramas.
-   Resultado: bloques ```mermaid conformes; sin ASCII.
-10) Acción: validar consistencia con linters.
-    Resultado: markdownlint (encabezados/longitud de línea) y Vale (estilo/es_MX) pasan sin errores.
-11) Acción: al editar el archivo con `edit_files`, anclar siempre desde el inicio de la línea.
-    Regla: cuando se especifica `search_start_line_number`, el campo `search` DEBE comenzar en el primer carácter de esa línea. Anclar a mitad de línea falla siempre, sin importar el número de línea ni la codificación del archivo.
-    Resultado: todas las ediciones aplican sin errores de búsqueda.
+Steps:
+1) Action: insert the standard header following «~/rules/STYLING.md» (tags + logo + H1 + right-aligned timestamp).
+   Result: YAML block with tags and header block with Kabat One logo and H1 title.
+2) Action: detect and remove existing date fields before inserting the new timestamp.
+   Validation: locate and clean patterns such as `Last modified:`, `Date:`, `Report date:`, and `[time=...]` to avoid duplication.
+   Result: the document retains a single visible date field.
+2b) Action: generate and validate the «Last modified» timestamp in CST (24 h).
+   Result: `TZ=America/Mexico_City date '+%d %B %Y, %H:%M (CST)'` produces, e.g., «31 July 2025, 11:59 (CST)».
+3) Action: review content structure (H2→H3→H4) and avoid heading level skips.
+   Result: clear hierarchy; titles in sentence case and without a trailing full stop.
+4) Action: apply LINGUISTICS rules to terms and quotes.
+   Result: «AI», «IT», standard quotes, loanwords in italics.
+5) Action: remove unnecessary `---` separators (CRITICAL RULE — AI-generated documents tend to overuse them).
+   Step 5a: run `grep -n "^---$" <file>` to locate ALL occurrences.
+   Step 5b: keep only:
+     - The YAML frontmatter block (lines 1 and 3)
+     - The `---` immediately before the signature image in the footer
+   Step 5c: remove WITHOUT EXCEPTION all other `---`. No H2, table, code block, or paragraph should be separated with `---`.
+   Result: zero `---` in the body; exactly one just before the footer.
+6) Action: insert the standard footer with the single separator, corporate signature, and corporate CSS.
+   Result: footer with official signature image, corporate colours, and consistent styles.
+7) Action: validate links and images.
+   Result: URLs work; add alternative text to images.
+8) Action: review accessibility and responsive behaviour.
+   Result: legible styles, sufficient contrast, correct tables.
+9) Action: verify mermaid where diagrams are required.
+   Result: ````mermaid` blocks conforming to spec; no ASCII diagrams.
+10) Action: validate consistency with linters.
+    Result: markdownlint (headings/line length) and Vale (style/en_GB) pass without errors.
+11) Action: when editing the file with `edit_files`, always anchor from the start of the line.
+    Rule: when `search_start_line_number` is specified, the `search` field MUST begin at the first character of that line. Anchoring mid-line always fails, regardless of the line number or file encoding.
+    Result: all edits apply without search errors.
 
-Conclusión:
-- Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.
-- Confirmar política de fecha única: ninguna fecha redundante permanece después del styling.
-- Referencias: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
-
+Conclusion:
+- Deliver the document with correct header/footer, valid CST timestamp, hierarchical content, and consistent style.
+- Confirm the single-date policy: no redundant date remains after styling.
+- References: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).

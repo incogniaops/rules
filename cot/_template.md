@@ -1,25 +1,24 @@
 ---
 domain: devops
-task: diagnostico de despliegue fallido
-dificultad: media
-longitud_objetivo: corta
-validacion: salida de comando coincide con estado esperado
+task: deployment failure diagnosis
+dificultad: medium
+longitud_objetivo: short
+validacion: command output matches expected state
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Identificar el punto de falla en el pipeline de despliegue.
-- Verificar prerequisitos y dependencias en orden lógico.
-- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+Reasoning:
+- Identify the failure point in the deployment pipeline.
+- Verify prerequisites and dependencies in logical order.
+- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).
 
-Pasos:
-1) Acción: revisar logs de CI en último job fallido.
-   Resultado: error de autenticación al acceder al registro de contenedores.
-2) Acción: verificar variable de entorno del token de acceso.
-   Resultado: variable no definida en el entorno del runner.
-3) Acción: consultar documentación interna para provisión de secretos.
-   Resultado: el secreto debe inyectarse a nivel de repositorio.
+Steps:
+1) Action: review CI logs for the last failed job.
+   Result: authentication error when accessing the container registry.
+2) Action: verify the access token environment variable.
+   Result: variable not defined in the runner environment.
+3) Action: consult internal documentation for secret provisioning.
+   Result: the secret must be injected at repository level.
 
-Conclusión:
-- Solución: definir el token como secreto del repositorio y referenciarlo en el job; reintentar el pipeline.
-
+Conclusion:
+- Solution: define the token as a repository secret and reference it in the job; retry the pipeline.

@@ -1,43 +1,43 @@
 ---
 name: release
-description: "Publica una release semántica no interactiva con validación histórica de tags/releases y notas generadas desde cambios reales. Invocación esperada: /release vX.Y.Z."
+description: "Publish a non-interactive semantic release with historical tag/release validation and notes generated from real changes. Expected invocation: /release vX.Y.Z."
 ---
 
-# Publicación de release
+# Release publication
 
-## Cuando usar
+## When to use
 
-Cuando se va a publicar una nueva versión del repositorio, por ejemplo: `/release v0.5.0`.
+When publishing a new version of the repository, for example: `/release v0.5.0`.
 
-## Parámetro obligatorio
+## Required parameter
 
-- Versión objetivo con formato estricto `vX.Y.Z` (SemVer con prefijo `v`).
+- Target version in strict `vX.Y.Z` format (SemVer with `v` prefix).
 
-## Instrucciones
+## Instructions
 
-1. **Leer CoT completo**: cargar `~/rules/cot/release.md` de la línea 1 al final.
-2. **Validar argumento**: confirmar que el parámetro cumple `^v[0-9]+\\.[0-9]+\\.[0-9]+$`.
-3. **Validar baseline histórico**: revisar tags y releases previas para detectar inconsistencias antes de publicar.
-4. **Derivar nombre y notas**:
-   - Inferir descriptor corto desde el tema dominante de commits y changelog desde el último tag.
-   - Construir nombre final: `vX.Y.Z — Descriptor`.
-   - Construir notas en español con introducción + `## Funcionalidades incluidas` + bullets relevantes.
-5. **Publicar en flujo oficial**:
-   - promover `dev` a `main` con fast-forward;
-   - crear tag anotado en `main`;
-   - publicar tag y crear/actualizar release con `--notes-file`.
-6. **Verificar publicación**: confirmar tag remoto único, release existente y convención de nombre/notas.
-7. **Cerrar flujo**: regresar a `dev` para continuar desarrollo.
+1. **Read full CoT**: load `~/rules/cot/release.md` from line 1 to end.
+2. **Validate argument**: confirm the parameter matches `^v[0-9]+\.[0-9]+\.[0-9]+$`.
+3. **Validate historical baseline**: review prior tags and releases to detect inconsistencies before publishing.
+4. **Derive name and notes**:
+   - Infer short descriptor from the dominant theme of commits and changelog since the last tag.
+   - Build final name: `vX.Y.Z — Descriptor`.
+   - Build notes with introduction + `## Features included` + relevant bullets.
+5. **Publish via official flow**:
+   - promote `dev` to `main` with fast-forward;
+   - create annotated tag on `main`;
+   - push tag and create/update release with `--notes-file`.
+6. **Verify publication**: confirm unique remote tag, existing release, and name/notes convention.
+7. **Close flow**: return to `dev` to continue development.
 
-## Reglas críticas
+## Critical rules
 
-- Prohibido publicar con formato de tag sin prefijo `v`.
-- No usar editores interactivos para release/tags; usar comandos no interactivos y archivo de notas.
-- Si existe inconsistencia (tag/release duplicada o mal formateada), corregir primero y luego publicar.
-- El contenido de release debe quedar en español mexicano.
+- Publishing with a tag format without the `v` prefix is forbidden.
+- Do not use interactive editors for releases/tags; use non-interactive commands and a notes file.
+- If an inconsistency exists (duplicate or malformed tag/release), correct it first, then publish.
+- Release content must be in International English (UK).
 
-## Referencias
+## References
 
-- CoT detallado: `~/rules/cot/release.md`
-- Reglas canónicas: `~/rules/rulesets/RELEASING.md`
-- Flujo de commit/changelog: `~/rules/rulesets/COMMITTING.md`
+- Detailed CoT: `~/rules/cot/release.md`
+- Canonical rules: `~/rules/rulesets/RELEASING.md`
+- Commit/changelog flow: `~/rules/rulesets/COMMITTING.md`

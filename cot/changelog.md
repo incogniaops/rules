@@ -1,162 +1,162 @@
 ---
 domain: documentation
-task: actualizar CHANGELOG.md correctamente evitando errores comunes de orden cronológico, cálculo de zona horaria, duplicación y mezcla de idiomas
-dificultad: media-alta
-longitud_objetivo: media
-validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplicados, idioma consistente según contexto (personal es_MX, laboral inglés internacional)
+task: update CHANGELOG.md correctly, avoiding common errors of chronological order, timezone calculation, duplication, and language mixing
+dificultad: medium-high
+longitud_objetivo: medium
+validacion: CHANGELOG.md in reverse chronological order, correct CST dates, no duplicates, language consistent with context (personal es_MX, corporate International English)
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente y lenguaje por contexto (personal en español mexicano, laboral en inglés internacional) (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
-- Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
-- Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
-- Este CoT se ejecuta vía `/changelogger` antes de `/commit`; el flujo `/commit` no edita changelog y solo valida que exista diff en `CHANGELOG.md`.
+Reasoning:
+- Main rule: CHANGELOG.md must follow reverse chronological order (most recent first) with correctly calculated CST México City dates and language by context (personal in Mexican Spanish, corporate in International English) (see «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
+- Common critical errors: (1) incorrect chronological order, (2) wrong CST calculation (labelling UTC as CST), (3) duplicating identical entries, (4) mixing International English with Mexican Spanish.
+- Flow: verify current timezone → review chronological order → detect duplicates → apply linguistic rules → validate structure.
+- This CoT is executed via `/changelogger` before `/commit`; the `/commit` flow does not edit the changelog and only validates that a diff exists in `CHANGELOG.md`.
 
-Pasos:
-0) Acción: ejecutar `git --no-pager status --short` para validar todos los cambios realizados antes de cualquier otra operación.
-   COMANDO OBLIGATORIO: `git --no-pager status --short`
-   HARD STOP ABSOLUTO: si este comando no se ejecutó en la corrida actual, detener el proceso y reiniciar desde 0.
-   Restricción: no se permite ejecutar lectura de changelog, `grep`, búsquedas, cálculo de fecha, cálculo de anclas, `diff` ni parches antes de completar y validar este paso.
-   Validación: confirmar visibilidad explícita del estado actual del árbol de trabajo.
-   Resultado: contexto inicial de cambios cargado y validado.
-0b) Acción: leer las líneas 1-200 de `CHANGELOG.md` antes de cualquier búsqueda o edición del archivo.
-   HERRAMIENTA OBLIGATORIA: `read_files` sobre `CHANGELOG.md` con rango `1-200`
-   HARD STOP ABSOLUTO: si esta lectura exacta no se ejecutó en la corrida actual, detener el proceso y reiniciar desde 0.
-   Restricción: no se permite ejecutar `grep`, búsquedas, cálculo de fecha, cálculo de anclas, `diff` ni parches antes de completar y validar este paso.
-   Validación: confirmar encabezado del día en turno, separación entre bloques de fecha y primer bullet del bloque objetivo.
-   Resultado: contexto base exacto cargado antes de ejecutar `grep`, calcular anclas o intentar parches.
-0c) Acción: validar precondición transversal de los pasos 0 y 0b antes de cualquier otra sección.
-   Validación: exigir evidencia explícita en la corrida actual de `git --no-pager status --short` y de la lectura precisa `CHANGELOG.md` (1-200).
-   Regla de detención: si falta evidencia de cualquiera de los dos pasos, HARD STOP inmediato y reinicio desde 0; prohibido continuar o «corregir en caliente».
-   Resultado: ninguna sección posterior puede ejecutarse sin pasos 0 y 0b validados.
-1) Acción: calcular fecha y hora CST correcta.
-   COMANDO OBLIGATORIO: `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"`
-   Validación: confirmar cálculo matemático CST = UTC - 6 horas
-   Resultado: fecha actual en CST para nueva entrada, nunca etiquetar hora UTC como CST.
+Steps:
+0) Action: run `git --no-pager status --short` to validate all changes made before any other operation.
+   MANDATORY COMMAND: `git --no-pager status --short`
+   ABSOLUTE HARD STOP: if this command was not executed in the current run, stop the process and restart from 0.
+   Restriction: reading the changelog, `grep`, searches, date calculation, anchor calculation, `diff`, and patches are not permitted before this step is completed and validated.
+   Validation: confirm explicit visibility of the current state of the working tree.
+   Result: initial change context loaded and validated.
+0b) Action: read lines 1-200 of `CHANGELOG.md` before any search or edit of the file.
+   MANDATORY TOOL: `read_files` on `CHANGELOG.md` with range `1-200`
+   ABSOLUTE HARD STOP: if this exact read was not executed in the current run, stop the process and restart from 0.
+   Restriction: `grep`, searches, date calculation, anchor calculation, `diff`, and patches are not permitted before this step is completed and validated.
+   Validation: confirm the current-day heading, separation between date blocks, and the first bullet of the target block.
+   Result: exact base context loaded before running `grep`, calculating anchors, or attempting patches.
+0c) Action: validate the cross-cutting precondition of steps 0 and 0b before any other section.
+   Validation: require explicit evidence in the current run of `git --no-pager status --short` and of the precise read of `CHANGELOG.md` (1-200).
+   Stop rule: if evidence of either step is missing, IMMEDIATE HARD STOP and restart from 0; continuing or recovering mid-run is forbidden.
+   Result: no subsequent section may execute without steps 0 and 0b validated.
+1) Action: calculate the correct current CST date and time.
+   MANDATORY COMMAND: `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"`
+   Validation: confirm mathematical calculation CST = UTC - 6 hours
+   Result: current date in CST for new entry; never label UTC time as CST.
 
-2) Acción: revisar estructura y orden cronológico del CHANGELOG.md.
-   COMANDO OBLIGATORIO: `grep -n "^## \[" CHANGELOG.md | head -10`
-   Validación: confirmar que fechas están ordenadas de más reciente a más antigua
-   Resultado: detectar entradas fuera de orden cronológico inverso.
+2) Action: review the structure and chronological order of CHANGELOG.md.
+   MANDATORY COMMAND: `grep -n "^## \[" CHANGELOG.md | head -10`
+   Validation: confirm dates are ordered from most recent to oldest
+   Result: detect entries out of reverse chronological order.
 
-3) Acción: verificar si ya existe una entrada para la fecha CST actual.
-   COMANDO OBLIGATORIO: `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
-   Decisión crítica:
-   - Si YA EXISTE entrada para esa fecha: agregar nuevos bullets tipados (`- feat: ...`, `- docs: ...`) DENTRO de la entrada existente. NO crear encabezado nuevo.
-   - Si NO existe: crear nuevo encabezado `## [YYYY-MM-DD] - Título descriptivo` en la posición correcta (arriba de todas las entradas).
-   Resultado: nunca dos encabezados con la misma fecha en el CHANGELOG.
+3) Action: verify whether an entry already exists for the current CST date.
+   MANDATORY COMMAND: `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
+   Critical decision:
+   - If an entry for that date ALREADY EXISTS: add new typed bullets (`- feat: ...`, `- docs: ...`) INSIDE the existing entry. Do NOT create a new heading.
+   - If it does NOT exist: create a new heading `## [YYYY-MM-DD] - Descriptive title` in the correct position (above all existing entries).
+   Result: never two headings with the same date in the CHANGELOG.
 
-4) Acción: validar consistencia de idioma en la nueva entrada.
-   Validación: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md según contexto.
-   Resultado:
-   - Personal: español mexicano sin calcos del inglés, comillas angulares «», terminología técnica correcta.
-   - Laboral: inglés internacional consistente.
+4) Action: validate language consistency in the new entry.
+   Validation: apply rules from ~/rules/rulesets/LINGUISTICS.md according to context.
+   Result:
+   - Personal: Mexican Spanish without English calques, angular quotes «», correct technical terminology.
+   - Corporate: consistent International English.
 
-5) Acción: verificar formato de encabezado.
-   Formato requerido: `## [YYYY-MM-DD] - Título descriptivo`
-   Validación: solo fecha sin hora, título en estilo oración (primera mayúscula + nombres propios)
-   Resultado: encabezado conforme al formato establecido.
-6) Acción: organizar cambios en bullets tipados dentro de la fecha.
-   Formato de cada bullet:
+5) Action: verify heading format.
+   Required format: `## [YYYY-MM-DD] - Descriptive title`
+   Validation: date only, no time component; title in sentence case (first word capitalised + proper nouns)
+   Result: heading compliant with the established format.
+6) Action: organise changes into typed bullets within the date entry.
+   Format of each bullet:
    - Personal: `- tipo: descripción`
-   - Laboral: `- type: description`
-   Validación: no usar subencabezados `### tipo`; usar bullets directos con prefijo de tipo
-   Resultado: entrada compacta y consistente con formato de repos de operaciones-ti.
+   - Corporate: `- type: description`
+   Validation: do not use subheadings `### type`; use direct bullets with type prefix
+   Result: compact entry consistent with the format of the operations-it repos.
 
-6b) Acción: insertar bullets en orden cronológico inverso dentro de la entrada de fecha.
-   REGLA CRÍTICA: el nuevo bullet va PRIMERO dentro del bloque de la fecha.
-   TÉCNICA DE EDICIÓN OBLIGATORIA para `edit_files`:
-   - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
-   - REGLA OPERATIVA MANDATORIA para fecha existente: edición directa y simple en hunk único; una vez identificado el bloque objetivo, no repetir búsquedas exploratorias.
-   - HARD STOP TRANSVERSAL: si en cualquier sección se detecta ausencia de evidencia de los pasos 0 o 0b en la corrida actual, detener de inmediato y reiniciar desde 0; no existen excepciones.
-   - PRIMER INTENTO OBLIGATORIO para fecha existente: usar micro-bloque exacto en un solo hunk con `search` = `## [FECHA] - ...` + línea en blanco inmediata + primer bullet existente.
-   - En ese mismo hunk, el `replace` reproduce encabezado y línea en blanco intactos, inserta el bullet nuevo al tope y conserva el bullet previo debajo.
-   - Prohibido usar anclas parciales para fecha existente (por ejemplo, `search` con solo encabezado).
-   - Prohibido insertar línea en blanco entre bullets del mismo bloque de fecha.
-   - Prohibido para fecha existente anclar `search` en `# Registro de cambios` o incluir ese encabezado en el hunk de inserción.
-   - Prohibido reemplazar el bloque superior del archivo para insertar bullets en una fecha existente.
-   - MODO INSERCIÓN INCREMENTAL (OBLIGATORIO): por defecto solo se permiten adiciones (`+`). Si aparece cualquier línea eliminada (`-`) en `CHANGELOG.md`, abortar el parche y reconstruir ancla; solo se permiten borrados con instrucción explícita del usuario.
-   - Para insertar nueva entrada `## [FECHA]` al inicio del archivo: el `search` es SOLO la línea ancla inmediatamente anterior (p. ej. el comentario `<!-- markdownlint-disable -->` o la línea en blanco que lo sigue). El `replace` reproduce esa línea ancla exacta y añade la nueva entrada después. NUNCA incluir la primera `## [FECHA]` existente en el `search` a menos que se reproduzca COMPLETA e INTACTA en el `replace`.
-   - FALLBACK OBLIGATORIO (dos hunks) para nueva fecha si falta la línea en blanco antes del siguiente encabezado:
-     - Hunk 1: insertar el bloque `## [FECHA]` con sus bullets arriba del siguiente `## [FECHA_ANTERIOR]`.
-     - Hunk 2: usar como ancla el siguiente encabezado `## [FECHA_ANTERIOR]` y reemplazarlo por `línea en blanco + el mismo encabezado` para forzar el separador.
-   - Prohibido repetir el mismo parche de inserción (`+6`) cuando la previsualización sigue sin separador en blanco.
-   - Si el `search` falla, leer el archivo con `read_files` para obtener el contenido exacto antes de reintentar.
-   Resultado: bullets tipados ordenados cronológicamente dentro de cada fecha, con nuevo bullet al tope.
+6b) Action: insert bullets in reverse chronological order within the date entry.
+   CRITICAL RULE: the new bullet goes FIRST within the date block.
+   MANDATORY EDITING TECHNIQUE for `edit_files`:
+   - GOLDEN RULE: `search` ends on the LAST LINE to be used as anchor. `replace` reproduces that line intact and ADDS the new content BEFORE or AFTER it. NEVER include in `search` a line that is then reproduced truncated or modified in `replace`.
+   - MANDATORY OPERATIONAL RULE for existing date: direct, simple edit in a single hunk; once the target block is identified, do not repeat exploratory searches.
+   - CROSS-CUTTING HARD STOP: if at any section evidence of steps 0 or 0b is absent from the current run, stop immediately and restart from 0; no exceptions exist.
+   - MANDATORY FIRST ATTEMPT for existing date: use exact micro-block in a single hunk with `search` = `## [DATE] - ...` + immediate blank line + first existing bullet.
+   - In that same hunk, `replace` reproduces the heading and blank line intact, inserts the new bullet at the top, and preserves the previous bullet below.
+   - Partial anchors for existing dates are forbidden (e.g., `search` with heading only).
+   - Inserting a blank line between bullets of the same date block is forbidden.
+   - For existing dates, anchoring `search` on `# Changelog` or including that heading in the insertion hunk is forbidden.
+   - Replacing the top section of the file to insert bullets in an existing date is forbidden.
+   - INCREMENTAL INSERTION MODE (MANDATORY): by default only additions (`+`) are permitted. If any deleted line (`-`) appears in `CHANGELOG.md`, abort the patch and reconstruct the anchor; deletions are permitted only with explicit user instruction.
+   - To insert a new `## [DATE]` entry at the top of the file: `search` is ONLY the immediately preceding anchor line (e.g. the `<!-- markdownlint-disable -->` comment or the blank line that follows it). `replace` reproduces that exact anchor line and adds the new entry after. NEVER include the first existing `## [DATE]` in `search` unless it is reproduced FULLY and INTACT in `replace`.
+   - MANDATORY FALLBACK (two hunks) for a new date when the blank line before the next heading is missing:
+     - Hunk 1: insert the `## [DATE]` block with its bullets above the next `## [PREVIOUS_DATE]`.
+     - Hunk 2: use the next heading `## [PREVIOUS_DATE]` as anchor and replace it with `blank line + the same heading` to force the separator.
+   - Repeating the same insertion patch (`+6`) when the preview still shows no blank separator is forbidden.
+   - If `search` fails, read the file with `read_files` to obtain the exact content before retrying.
+   Result: typed bullets ordered chronologically within each date, with new bullet at the top.
 
-6c) Acción: validar diff mínimo inmediatamente después de cada edición.
-   COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
-   Criterio de aceptación obligatorio:
-   - En modo inserción incremental: solo líneas añadidas (`+`) en el bloque de la fecha objetivo.
-   - Cero líneas eliminadas (`-`) en todo `CHANGELOG.md`, salvo instrucción explícita del usuario para borrar.
-   - NUNCA editar líneas fuera de `DATE_CST` (día en turno) salvo instrucción explícita del usuario.
-   Gestión de fallos:
-   - Si falla la validación: releer bloque exacto y corregir una sola vez con edición mínima.
-   - Si en una inserción incremental aparece cualquier `-` en el diff: abortar ese intento y reconstruir ancla antes de reintentar.
-   - Si `DATE_CST` ya existe y solo se agrega bullet: mantener hunk único con micro-bloque exacto (`encabezado + línea en blanco + primer bullet`); no usar fallback de dos hunks.
-   - Si se está creando nueva fecha y la previsualización muestra que falta la línea en blanco antes del siguiente `## [FECHA]`: aplicar de inmediato el fallback de dos hunks; no repetir el mismo parche de inserción.
-   - Si el diff muestra cambios históricos fuera de `DATE_CST`: detenerse y pedir confirmación; prohibido autocorregir entradas fuera del día en turno.
-   - Si vuelve a fallar: detenerse y pedir confirmación del usuario antes de cualquier nuevo intento.
-   - Prohibido encadenar 3 o más intentos seguidos sobre `CHANGELOG.md` sin validación intermedia exitosa.
-   Resultado: cambios mínimos, trazables y sin efectos colaterales.
-7) Acción: revisar texto del bloque de la fecha objetivo (`DATE_CST`).
-   COMANDO OBLIGATORIO: `grep -A 20 '^## \[${DATE_CST}\]' CHANGELOG.md` para revisar la entrada en turno
-   Validación: detectar mezcla español-inglés, calcos y regionalismos no mexicanos SOLO en el bloque del día en turno
-   Resultado: ajustar únicamente los bullets nuevos de `DATE_CST`; reportar inconsistencias históricas sin editarlas.
+6c) Action: validate the diff immediately after each edit.
+   MANDATORY COMMAND: `git --no-pager diff -- CHANGELOG.md`
+   Mandatory acceptance criterion:
+   - In incremental insertion mode: only added lines (`+`) in the target date block.
+   - Zero deleted lines (`-`) across all of `CHANGELOG.md`, unless the user explicitly instructed a deletion.
+   - NEVER edit lines outside `DATE_CST` (current day) unless the user explicitly instructs it.
+   Failure management:
+   - If validation fails: re-read the exact block and correct once with a minimal edit.
+   - If any `-` appears in the diff during an incremental insertion: abort that attempt and reconstruct the anchor before retrying.
+   - If `DATE_CST` already exists and only a bullet is being added: maintain a single hunk with the exact micro-block (`heading + blank line + first bullet`); do not use the two-hunk fallback.
+   - If a new date is being created and the preview shows the blank line before the next `## [DATE]` is missing: apply the two-hunk fallback immediately; do not repeat the same insertion patch.
+   - If the diff shows historical changes outside `DATE_CST`: stop and request confirmation; auto-correcting entries outside the current day is forbidden.
+   - If it fails again: stop and request user confirmation before any further attempt.
+   - Chaining 3 or more consecutive attempts on CHANGELOG without an intermediate successful diff validation is forbidden.
+   Result: minimal, traceable changes with no side effects.
+7) Action: review text in the target date block (`DATE_CST`).
+   MANDATORY COMMAND: `grep -A 20 '^## \[${DATE_CST}\]' CHANGELOG.md` to review the current entry
+   Validation: detect language mixing, calques, and regionalisms inconsistent with the active context, ONLY in the current day's block
+   Result: adjust only the new bullets in `DATE_CST`; report historical inconsistencies without editing them.
 
-8) Acción: aplicar reglas tipográficas.
-   Validación: guion medio en títulos, comillas angulares en texto, cursivas en préstamos técnicos
-   Resultado: *commit*, *pipeline*, *stack* en cursiva; «código» entre comillas angulares.
+8) Action: apply typographical rules.
+   Validation: em dash in titles, angular quotes in text, italics for technical loanwords
+   Result: *commit*, *pipeline*, *stack* in italics; «code» in angular quotes.
 
-9) Acción: verificar estructura final.
-   COMANDO OBLIGATORIO: `head -30 CHANGELOG.md` para revisar las primeras entradas
-   Validación: orden cronológico inverso, formato consistente, idioma homogéneo
-   Resultado: CHANGELOG.md ordenado correctamente con nueva entrada en posición adecuada.
+9) Action: verify final structure.
+   MANDATORY COMMAND: `head -30 CHANGELOG.md` to review the first entries
+   Validation: reverse chronological order, consistent format, homogeneous language
+   Result: CHANGELOG.md correctly ordered with new entry in the appropriate position.
 
-10) Acción: verificar precondición para `/commit` tras actualizar changelog.
-    COMANDOS RECOMENDADOS:
+10) Action: verify precondition for `/commit` after updating the changelog.
+    RECOMMENDED COMMANDS:
     - `git --no-pager diff -- CHANGELOG.md`
     - `git --no-pager diff --cached -- CHANGELOG.md`
-    Validación: debe existir al menos un cambio en `CHANGELOG.md` (staged o unstaged) para pasar el gate de `/commit`.
-    Resultado: changelog listo para continuar con `/commit` sin edición adicional.
+    Validation: at least one change in `CHANGELOG.md` (staged or unstaged) must exist to pass the `/commit` gate.
+    Result: changelog ready to proceed with `/commit` without further edits.
 
-VERIFICACIÓN CRÍTICA (antes de completar):
-- Confirmar: `TZ=America/Mexico_City date` ejecutado para fecha CST real
-- Validar: orden cronológico inverso con `grep "^## \[" CHANGELOG.md`
-- Verificar: sin duplicados con conteo de encabezados idénticos
-- Revisar idioma según contexto:
-  - Personal: 100% español mexicano
-  - Laboral: 100% inglés internacional
-- Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
-- Comprobar: bullets con prefijo correcto por contexto (`tipo:` personal / `type:` laboral) y ausencia de subencabezados `### tipo`
-- Validar: `git --no-pager diff -- CHANGELOG.md` cumple criterio de aceptación (solo adiciones mínimas en fecha objetivo)
-- Confirmar: existe evidencia explícita de los pasos 0 (`git --no-pager status --short`) y 0b (lectura precisa 1-200) en la corrida actual; si no existe, hard stop y reinicio
-- Confirmar: existe diff de `CHANGELOG.md` para pasar gate de `/commit`; si no existe, no continuar a `/commit`
+CRITICAL VERIFICATION (before completing):
+- Confirm: `TZ=America/Mexico_City date` executed for real CST date
+- Validate: reverse chronological order with `grep "^## \[" CHANGELOG.md`
+- Verify: no duplicates by counting identical headings
+- Review language by context:
+  - Personal: 100% Mexican Spanish
+  - Corporate: 100% International English
+- Check: heading format `[YYYY-MM-DD] - Descriptive title`
+- Check: bullets with correct prefix by context (`tipo:` personal / `type:` corporate) and absence of `### type` subheadings
+- Validate: `git --no-pager diff -- CHANGELOG.md` meets acceptance criterion (only minimal additions in target date)
+- Confirm: explicit evidence of step 0 (`git --no-pager status --short`) and step 0b (precise read 1-200) exists in the current run; if not, hard stop and restart
+- Confirm: a diff of `CHANGELOG.md` exists to pass the `/commit` gate; if not, do not proceed to `/commit`
 
-ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
-1. Reintentar el mismo parche sobre el encabezado sin cambiar la ancla real del bloque.
-2. Escalar a reescritura total de `CHANGELOG.md` para insertar un bullet puntual.
-3. Hacer más de un reintento sin releer antes el bloque exacto.
-4. Encadenar intentos fallidos sin validar diff en cada intento.
-5. NUNCA editar entradas fuera de `DATE_CST` (día en turno), salvo instrucción explícita del usuario.
-6. Continuar con `/commit` cuando `CHANGELOG.md` no está listo para el gate (sin cambios o sin cumplir criterio de aceptación).
-7. Improvisar flujos alternos fuera de `/changelogger` y `/commit` para forzar edición.
-8. Repetir el mismo parche de inserción cuando la previsualización ya mostró que faltó la línea en blanco separadora.
-9. Insertar una línea en blanco entre bullets del mismo bloque de fecha.
-10. Repetir búsquedas exploratorias cuando el bloque objetivo ya está identificado.
-11. Usar anclas parciales para fecha existente (como `search` de solo encabezado) en lugar del micro-bloque exacto del primer intento.
-12. Empezar con lectura de changelog, `grep`, búsquedas exploratorias o intentos de parche sin haber ejecutado `git --no-pager status --short` y sin haber leído `CHANGELOG.md` líneas `1-200` en esa ejecución; si ocurre, aplicar hard stop inmediato y reiniciar desde 0, nunca continuar desde pasos intermedios.
-13. Usar `search = encabezado + primer bullet` sin incluir la línea en blanco intermedia obligatoria en fecha existente.
-14. Anclar inserciones de fecha existente desde `# Registro de cambios` o reescribir el bloque superior del archivo.
-15. Aceptar un parche de “solo inserción” que muestre líneas eliminadas (`-`) en encabezados o separadores en blanco.
-16. Borrar cualquier línea existente de `CHANGELOG.md` durante inserciones incrementales sin instrucción explícita del usuario.
-17. Continuar cualquier sección del flujo sin evidencia explícita de `git --no-pager status --short` en la corrida actual.
-18. Continuar cualquier sección del flujo sin evidencia explícita de lectura precisa de `CHANGELOG.md` (1-200) en la corrida actual.
-19. Intentar reanudar el flujo después de omitir el paso 0 o 0b en vez de reiniciar desde 0.
+FORBIDDEN ANTI-PATTERNS (stop and request confirmation if any of the following occurs):
+1. Retrying the same patch on the heading without changing the real block anchor.
+2. Escalating to a full rewrite of `CHANGELOG.md` to insert a single bullet.
+3. Making more than one retry without first re-reading the exact block.
+4. Chaining failed attempts without validating the diff at each attempt.
+5. NEVER edit entries outside `DATE_CST` (current day) unless the user explicitly instructs it.
+6. Proceeding to `/commit` when `CHANGELOG.md` is not ready for the gate (no changes or acceptance criterion not met).
+7. Improvising alternative flows outside `/changelogger` and `/commit` to force edits.
+8. Repeating the same insertion patch when the preview already showed the blank separator line was missing.
+9. Inserting a blank line between bullets of the same date block.
+10. Repeating exploratory searches when the target block is already identified.
+11. Using partial anchors for existing dates (e.g., `search` with heading only) instead of the exact micro-block on the first attempt.
+12. Starting with changelog reading, `grep`, exploratory searches, or patch attempts without having run `git --no-pager status --short` and without having read `CHANGELOG.md` lines `1-200` in that execution; if it occurs, apply immediate hard stop and restart from 0, never continue from intermediate steps.
+13. Using `search = heading + first bullet` without including the required intermediate blank line for existing dates.
+14. Anchoring existing-date insertions from `# Changelog` or rewriting the top section of the file.
+15. Accepting an "insertion-only" patch that shows deleted lines (`-`) in headings or blank separators.
+16. Deleting any existing line from `CHANGELOG.md` during incremental insertions without explicit user instruction.
+17. Continuing any section of the flow without explicit evidence of `git --no-pager status --short` in the current run.
+18. Continuing any section of the flow without explicit evidence of the precise read of `CHANGELOG.md` (1-200) in the current run.
+19. Attempting to resume the flow after skipping step 0 or 0b instead of restarting from 0.
 
-Conclusión:
-- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente según contexto, sin duplicados y bullets tipados organizados semánticamente.
-- Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
-- Operación esperada: ejecutar este CoT desde `/changelogger` y después invocar `/commit` (que solo valida gate de changelog + idioma del commit).
-- Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.
+Conclusion:
+- Deliver: CHANGELOG.md updated with a new entry in the correct chronological position, accurate CST date, language consistent with context, no duplicates, and typed bullets organised semantically.
+- Avoid: mixing languages, labelling UTC as CST, incorrect chronological order, duplicating entries, ungrouped micro-changes.
+- Expected operation: run this CoT from `/changelogger` and then invoke `/commit` (which only validates the changelog gate + commit language).
+- References: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) for the full flow.

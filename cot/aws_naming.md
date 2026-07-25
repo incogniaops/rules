@@ -1,49 +1,49 @@
 ---
 domain: aws
-task: normalización de nombres de assets para S3 y CloudFront
-dificultad: intermedia
-longitud_objetivo: media
-validacion: nombres resultantes contienen solo caracteres seguros, extensiones normalizadas y registro .tsv generado
+task: normalisation of asset names for S3 and CloudFront
+dificultad: intermediate
+longitud_objetivo: medium
+validacion: resulting names contain only safe characters, normalised extensions, and generated .tsv log
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Normalizar nombres de archivos para que sean 100% seguros como *Object Keys* en Amazon S3 y distribuibles vía Amazon CloudFront.
-- Aplicar reglas estrictas de AWS: *case sensitivity*, eliminación de espacios, filtrado de caracteres no seguros, validación de rutas y longitud.
-- Normalizar extensiones de imagen y recurso web (.jpeg → .jpg, .png, .svg, .ico) para consistencia en el *bucket*.
-- Generar un archivo de registro (.tsv) con la relación nombre original → nombre normalizado para trazabilidad.
-- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+Reasoning:
+- Normalise filenames to be 100% safe as *Object Keys* in Amazon S3 and distributable via Amazon CloudFront.
+- Apply strict AWS rules: *case sensitivity*, removal of spaces, filtering of unsafe characters, path and length validation.
+- Normalise image and web resource extensions (.jpeg → .jpg, .png, .svg, .ico) for consistency in the *bucket*.
+- Generate a log file (.tsv) with the mapping from original name to normalised name for traceability.
+- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).
 
-Pasos:
-1) Acción: convertir todo el nombre de archivo y extensión a minúsculas.
-   Resultado: los *Object Keys* en S3 son sensibles a mayúsculas [1] y los patrones de caché de CloudFront también (`*.jpg` no aplica para `LOGO.JPG`) [2].
+Steps:
+1) Action: convert the entire filename and extension to lowercase.
+   Result: *Object Keys* in S3 are case-sensitive [1] and CloudFront cache patterns are too (`*.jpg` does not apply to `LOGO.JPG`) [2].
 
-2) Acción: reemplazar todos los espacios en blanco por guiones medios (`-`).
-   Resultado: se evitan problemas con codificación URL (`%20`) y secuencias de espacios múltiples que AWS advierte pueden perderse [3, 4, 5].
+2) Action: replace all whitespace with hyphens (`-`).
+   Result: avoids issues with URL encoding (`%20`) and multiple-space sequences that AWS warns may be lost [3, 4, 5].
 
-3) Acción: eliminar acentos (ñ → n) y conservar únicamente caracteres seguros: `a-z`, `0-9`, `-`, `_` y `.` (solo para extensión).
-   Resultado: se eliminan caracteres No-ASCII y símbolos que requieren manejo especial (`&`, `$`, `@`, `~`, etc.) [6, 7, 8, 9, 10].
+3) Action: remove accents (ñ → n) and retain only safe characters: `a-z`, `0-9`, `-`, `_`, and `.` (extension only).
+   Result: removes non-ASCII characters and symbols requiring special handling (`&`, `$`, `@`, `~`, etc.) [6, 7, 8, 9, 10].
 
-4) Acción: normalizar extensiones de archivo según la siguiente tabla.
+4) Action: normalise file extensions according to the following table.
    - `.jpeg` → `.jpg`
-   - `.png` → `.png` (sin cambio)
-   - `.svg` → `.svg` (sin cambio)
-   - `.ico` → `.ico` (sin cambio)
-   - Extensiones en mayúsculas ya se resuelven en el paso 1 (`.PNG` → `.png`, `.JPEG` → `.jpeg` → `.jpg`).
-   Resultado: extensiones consistentes y predecibles para políticas de caché en CloudFront y reglas de *Content-Type* en S3.
+   - `.png` → `.png` (no change)
+   - `.svg` → `.svg` (no change)
+   - `.ico` → `.ico` (no change)
+   - Uppercase extensions are already resolved in step 1 (`.PNG` → `.png`, `.JPEG` → `.jpeg` → `.jpg`).
+   Result: consistent and predictable extensions for CloudFront cache policies and S3 *Content-Type* rules.
 
-5) Acción: verificar que el nombre no contenga puntos consecutivos ni secuencias de ruta relativa (`../`, `./`).
-   Resultado: se evitan comportamientos inesperados por interpretación de directorios [7, 12]. El punto solo aparece antes de la extensión final.
+5) Action: verify the name contains no consecutive dots or relative path sequences (`../`, `./`).
+   Result: avoids unexpected behaviour from directory interpretation [7, 12]. The dot appears only before the final extension.
 
-6) Acción: validar que la ruta resultante no exceda 255 caracteres (límite de CloudFront [2]; el límite de S3 es 1,024 bytes [13]).
-   Resultado: si excede, truncar el nombre conservando la extensión e indicar advertencia.
+6) Action: validate the resulting path does not exceed 255 characters (CloudFront limit [2]; S3 limit is 1,024 bytes [13]).
+   Result: if exceeded, truncate the name preserving the extension and issue a warning.
 
-7) Acción: registrar cada transformación en un archivo `.tsv` con formato `original\tnormalizado`.
-   - Nombre del archivo: `normalizacion_YYYYMMDD.tsv` (fecha CST: `TZ=America/Mexico_City date +"%Y%m%d"`).
-   - Primera línea: encabezados `original\tnormalizado`.
-   - Una línea por archivo procesado, incluyendo los que no requirieron cambios.
-   Resultado: archivo de registro que permite auditoría y reversión de los renombramientos.
+7) Action: record each transformation in a `.tsv` file with format `original\tnormalised`.
+   - Filename: `normalisation_YYYYMMDD.tsv` (CST date: `TZ=America/Mexico_City date +"%Y%m%d"`).
+   - First line: headers `original\tnormalised`.
+   - One line per processed file, including those that required no changes.
+   Result: log file enabling audit and rollback of renames.
 
-Conclusión:
-- Los nombres resultantes solo contienen caracteres seguros para S3/CloudFront: minúsculas, dígitos, guiones medios, guiones bajos y un punto antes de la extensión normalizada.
-- El archivo `normalizacion_YYYYMMDD.tsv` documenta cada transformación para trazabilidad completa.
+Conclusion:
+- Resulting names contain only safe characters for S3/CloudFront: lowercase letters, digits, hyphens, underscores, and one dot before the normalised extension.
+- The `normalisation_YYYYMMDD.tsv` file documents every transformation for full traceability.

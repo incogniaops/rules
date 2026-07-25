@@ -5,6 +5,10 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- i18n: translate 18 CoTs and skills/release to International English (UK) as Phase 1 of the full repository translation plan
+- i18n: translate 17 rulesets to International English (UK); remove emojis from CRITICAL_COT_READING.md and Promad references from cot/licensing.md
+- i18n: translate docs/MAIL.md and 4 templates to International English (UK)
+- docs: translate docs/SYNC.md and add Claude Code integration section documenting the skill symlink mechanism
 - fix: remove duplicate git-init skill entry misplaced in [2025-07-31] date block
 - feat: add CLAUDE.md as a relative symlink to AGENTS.md so Claude Code loads project context automatically
 - docs: add Claude Code specifics section to AGENTS.md with skill invocation, atomic commit rules, and memory path; fix commit workflow to use selective git add instead of git add .

@@ -1,26 +1,25 @@
 ---
-domain: aritmetica
-task: problema de palabras con sumas y multiplicaciones
-dificultad: media
-longitud_objetivo: corta
-validacion: resultado coincide con cálculo verificado a mano
+domain: arithmetic
+task: word problem with additions and multiplications
+dificultad: medium
+longitud_objetivo: short
+validacion: result matches hand-verified calculation
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
-- Descomponer el problema en pasos simples y verificar unidades.
+Reasoning:
+- Follow the CoT format of the repository and maintain International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Break the problem into simple steps and verify units.
 
-Pasos:
-1) Acción: identificar cantidades base.
-   Resultado: Juan tiene 3 cajas con 4 manzanas cada una; María tiene 2 cajas con 5 manzanas cada una.
-2) Acción: calcular manzanas de Juan.
-   Resultado: 3 × 4 = 12.
-3) Acción: calcular manzanas de María.
-   Resultado: 2 × 5 = 10.
-4) Acción: sumar totales.
-   Resultado: 12 + 10 = 22.
+Steps:
+1) Action: identify base quantities.
+   Result: Juan has 3 boxes with 4 apples each; María has 2 boxes with 5 apples each.
+2) Action: calculate Juan's apples.
+   Result: 3 × 4 = 12.
+3) Action: calculate María's apples.
+   Result: 2 × 5 = 10.
+4) Action: add totals.
+   Result: 12 + 10 = 22.
 
-Conclusión:
-- Respuesta final: 22 manzanas en total.
-
+Conclusion:
+- Final answer: 22 apples in total.

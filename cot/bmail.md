@@ -1,45 +1,45 @@
 ---
 domain: workflow
-task: redactar borradores de business email en inglés con plantillas y frases modelo del libro Business Email
-dificultad: media
-longitud_objetivo: media
-validacion: HTML generado con placeholders completos, tono profesional y acción clara
+task: draft business emails in English using templates and model phrases from the Business Email book
+dificultad: medium
+longitud_objetivo: medium
+validacion: HTML generated with complete placeholders, professional tone, and clear action
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- El objetivo de `bmail` es acelerar redacción de correos profesionales en inglés.
-- Se usarán plantillas temáticas y bancos de frases derivados de `docs/business_email.pdf`.
-- La salida debe ser reutilizable como borrador editable, con estructura consistente:
-  asunto claro, apertura contextual, cuerpo accionable y cierre cortés.
+Reasoning:
+- The goal of `bmail` is to accelerate the drafting of professional emails in English.
+- Thematic templates and phrase banks derived from `docs/business_email.pdf` will be used.
+- The output must be reusable as an editable draft with a consistent structure:
+  clear subject, contextual opening, actionable body, and courteous close.
 
-Pasos:
-1) Acción: identificar el tipo de correo solicitado.
+Steps:
+1) Action: identify the type of email requested.
    - opening, enquiry, informing-good, informing-bad, apology-delay, order-status, meeting-request.
-   Resultado: plantilla objetivo seleccionada.
+   Result: target template selected.
 
-2) Acción: recopilar datos mínimos.
-   - Subject, destinatario, contexto, detalle del pedido/información, fecha límite o siguiente paso.
-   Resultado: campos necesarios completos.
+2) Action: gather minimum required data.
+   - Subject, recipient, context, order/information detail, deadline or next step.
+   Result: required fields complete.
 
-3) Acción: seleccionar frases modelo del banco.
-   - Priorizar frases funcionales (referencing, requesting, apologising, informing).
-   - Evitar copia mecánica extensa; adaptar al contexto concreto.
-   Resultado: frases candidatas integradas al borrador.
+3) Action: select model phrases from the bank.
+   - Prioritise functional phrases (referencing, requesting, apologising, informing).
+   - Avoid extensive mechanical copying; adapt to the specific context.
+   Result: candidate phrases integrated into the draft.
 
-4) Acción: sustituir placeholders en la plantilla HTML.
-   Resultado: correo completo con estructura consistente.
+4) Action: substitute placeholders in the HTML template.
+   Result: complete email with consistent structure.
 
-5) Acción: revisar claridad y tono.
-   - Una sola petición principal por correo.
-   - Tono profesional, directo y cortés.
-   - Cierre con acción o confirmación esperada.
-   Resultado: borrador listo para revisión/envío.
+5) Action: review clarity and tone.
+   - One main request per email.
+   - Professional, direct, and courteous tone.
+   - Close with expected action or confirmation.
+   Result: draft ready for review/sending.
 
-6) Acción: guardar archivo con convención de nombre.
+6) Action: save file with naming convention.
    - `YYYY-MM-DD-bmail-{template-key}-{subject-slug}.html`
-   Resultado: archivo persistido en ruta acordada.
+   Result: file saved at the agreed path.
 
-Conclusión:
-- `bmail` transforma ejemplos del libro en plantillas operables.
-- El enfoque es rapidez + consistencia + personalización contextual.
+Conclusion:
+- `bmail` transforms book examples into actionable templates.
+- The focus is speed + consistency + contextual personalisation.

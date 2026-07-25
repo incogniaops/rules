@@ -1,68 +1,75 @@
-# CoT: Aplicación automática de licenciamiento
+# CoT: Automatic licence application
 
-## Contexto
-Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un proyecto basándose en las reglas definidas en `../rulesets/LICENSING.md`. Determina si el proyecto es personal (GPL) o laboral (MIT) analizando el contenido del README.md.
+## Context
 
-## Razonamiento
+This Chain of Thought automatically applies the appropriate licence to a project based on the rules defined in `../rulesets/LICENSING.md`. It determines whether the project is personal (GPL) or corporate (MIT) by analysing the content of README.md.
 
-### 1. Análisis del README.md
-- **Objetivo:** Determinar la naturaleza del proyecto (personal vs laboral)
-- **Indicadores laborales:** Menciones de "Promad", "empresa", "trabajo", correo corporativo (@promad.com.mx)
-- **Indicadores personales:** Menciones de usuario personal (@incognia), correo personal (@gmail.com), proyectos de aprendizaje o experimentación
+## Reasoning
 
-### 2. Selección de licencia
-- **Proyectos laborales:** MIT License (permisiva, facilita adopción comercial)
-- **Proyectos personales:** GNU GPLv3 (copyleft, mantiene el código libre)
+### 1. Analysis of README.md
 
-### 3. Aplicación de licenciamiento
-- Crear archivo LICENSE con texto completo
-- Agregar footer apropiado al README.md
-- Validar consistencia con el contexto del proyecto
+- **Objective:** determine the nature of the project (personal vs corporate)
+- **Corporate indicators:** mentions of corporate entity, corporate email domain, business or enterprise language
+- **Personal indicators:** mentions of personal user handle (@incognia), personal email (@gmail.com), learning or experimental projects
 
-## Pasos
+### 2. Licence selection
 
-### Paso 1: Validar existencia del README.md
+- **Corporate projects:** MIT Licence (permissive, facilitates commercial adoption)
+- **Personal projects:** GNU GPLv3 (copyleft, keeps code free)
+
+### 3. Licence application
+
+- Create a LICENSE file with full licence text
+- Add the appropriate footer to README.md
+- Validate consistency with the project context
+
+## Steps
+
+### Step 1: Validate README.md existence
+
 ```bash
 if [[ -f "README.md" ]]; then
-    echo "✓ README.md encontrado, analizando contenido..."
+    echo "✓ README.md found, analysing content..."
 else
-    echo "✗ README.md no encontrado. Creando README básico..."
-    # Solicitar información del proyecto para crear README
+    echo "✗ README.md not found. Creating basic README..."
+    # Request project information to create README
 fi
 ```
 
-### Paso 2: Analizar naturaleza del proyecto
+### Step 2: Analyse project nature
+
 ```bash
-# Buscar indicadores laborales
-LABORAL_INDICATORS=$(grep -i "promad\|@promad\.com\.mx\|empresa\|corporat\|business" README.md | wc -l)
+# Look for corporate indicators
+CORPORATE_INDICATORS=$(grep -i "@elsevier\.com\|elsevier\|incogniaops\|enterprise\|corporate\|business" README.md | wc -l)
 
-# Buscar indicadores personales  
-PERSONAL_INDICATORS=$(grep -i "@incognia\|@gmail\.com\|personal\|experimento\|aprendizaje\|github\.com/incognia" README.md | wc -l)
+# Look for personal indicators
+PERSONAL_INDICATORS=$(grep -i "@incognia\|@gmail\.com\|personal\|experiment\|learning\|github\.com/incognia" README.md | wc -l)
 
-if [[ $LABORAL_INDICATORS -gt 0 ]]; then
-    PROJECT_TYPE="laboral"
+if [[ $CORPORATE_INDICATORS -gt 0 ]]; then
+    PROJECT_TYPE="corporate"
     LICENSE_TYPE="MIT"
-    echo "🏢 Proyecto laboral detectado - Aplicando MIT License"
+    echo "Corporate project detected — applying MIT Licence"
 elif [[ $PERSONAL_INDICATORS -gt 0 ]]; then
-    PROJECT_TYPE="personal" 
+    PROJECT_TYPE="personal"
     LICENSE_TYPE="GPLv3"
-    echo "👤 Proyecto personal detectado - Aplicando GPL v3"
+    echo "Personal project detected — applying GPL v3"
 else
-    # Solicitar confirmación manual
-    echo "❓ Tipo de proyecto ambiguo. ¿Es personal (p) o laboral (l)?"
+    # Request manual confirmation
+    echo "Project type ambiguous. Is it personal (p) or corporate (c)?"
 fi
 ```
 
-### Paso 3: Generar archivo LICENSE
+### Step 3: Generate LICENSE file
+
 ```bash
 CURRENT_YEAR=$(date +%Y)
 
 if [[ "$LICENSE_TYPE" == "MIT" ]]; then
-    # Crear MIT License
+    # Create MIT Licence
     cat > LICENSE << 'EOF'
 MIT License
 
-Copyright (c) 2026 Promad Business Solutions
+Copyright (c) YEAR ExampleCorp
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -82,27 +89,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 EOF
-    
+
 elif [[ "$LICENSE_TYPE" == "GPLv3" ]]; then
-    # Descargar GPL v3 completa
+    # Download full GPL v3
     curl -s https://www.gnu.org/licenses/gpl-3.0.txt > LICENSE
 fi
 ```
 
-### Paso 4: Agregar footer al README.md
+### Step 4: Add footer to README.md
+
 ```bash
-# Remover footer existente si existe
+# Remove existing footer if present
 sed -i '/^---$/,$d' README.md
 
-# Agregar nuevo footer según tipo de proyecto
-if [[ "$PROJECT_TYPE" == "laboral" ]]; then
+# Add new footer according to project type
+if [[ "$PROJECT_TYPE" == "corporate" ]]; then
     cat >> README.md << 'EOF'
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*This project was developed by Rodrigo Álvarez for the corporate client and is distributed under the MIT Licence. For details, see the LICENSE file.*
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera.*
 EOF
 
 elif [[ "$PROJECT_TYPE" == "personal" ]]; then
@@ -117,42 +125,43 @@ EOF
 fi
 ```
 
-### Paso 5: Validar aplicación
-```bash
-echo "📋 Validando aplicación de licenciamiento..."
+### Step 5: Validate application
 
-# Verificar archivo LICENSE creado
+```bash
+echo "Validating licence application..."
+
+# Verify LICENSE file created
 if [[ -f "LICENSE" ]]; then
-    echo "✓ Archivo LICENSE creado correctamente"
+    echo "✓ LICENSE file created correctly"
     head -3 LICENSE
 else
-    echo "✗ Error: Archivo LICENSE no fue creado"
+    echo "✗ Error: LICENSE file was not created"
 fi
 
-# Verificar footer en README.md
+# Verify footer in README.md
 if grep -q "Copyright.*2026.*Rodrigo" README.md; then
-    echo "✓ Footer de licenciamiento agregado al README.md"
+    echo "✓ Licensing footer added to README.md"
 else
-    echo "✗ Error: Footer no fue agregado correctamente"
+    echo "✗ Error: footer was not added correctly"
 fi
 
-# Mostrar resumen
+# Show summary
 echo ""
-echo "📄 Resumen de licenciamiento aplicado:"
-echo "Tipo de proyecto: $PROJECT_TYPE"
-echo "Licencia aplicada: $LICENSE_TYPE"
-echo "Año de copyright: $CURRENT_YEAR"
+echo "Licensing summary:"
+echo "Project type: $PROJECT_TYPE"
+echo "Licence applied: $LICENSE_TYPE"
+echo "Copyright year: $CURRENT_YEAR"
 ```
 
-## Conclusión
+## Conclusion
 
-Este CoT automatiza la aplicación de licenciamiento siguiendo las reglas establecidas:
+This CoT automates licence application following the established rules:
 
-1. **Detección automática:** Analiza el README.md para determinar la naturaleza del proyecto
-2. **Aplicación consistente:** Usa las plantillas predefinidas según el tipo de proyecto
-3. **Validación:** Verifica que los archivos se hayan creado correctamente
-4. **Flexibilidad:** Permite intervención manual cuando la detección es ambigua
+1. **Automatic detection:** analyses README.md to determine the nature of the project
+2. **Consistent application:** uses predefined templates according to project type
+3. **Validation:** verifies that the files were created correctly
+4. **Flexibility:** allows manual intervention when detection is ambiguous
 
-**Uso:** Ejecutar desde la raíz de cualquier proyecto que tenga README.md para aplicar automáticamente el licenciamiento apropiado.
+**Usage:** run from the root of any project that has a README.md to automatically apply the appropriate licence.
 
-**Requisitos:** README.md existente en el directorio actual, acceso a internet para descargar GPL v3.
+**Requirements:** README.md in the current directory, internet access to download GPL v3.

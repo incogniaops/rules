@@ -1,77 +1,77 @@
 ---
 domain: workflow
-task: componer y enviar correo HTML compatible con OWA usando plantillas y tres modos de entrega
-dificultad: media
-longitud_objetivo: media
-validacion: archivo HTML generado con estilos inline, bgcolor en td, sin CSS externo ni clases; entregado según el modo elegido
+task: compose and send OWA-compatible HTML email using templates and three delivery modes
+dificultad: medium
+longitud_objetivo: medium
+validacion: HTML file generated with inline styles, bgcolor on td, no external CSS or classes; delivered according to the chosen mode
 ---
 <!-- markdownlint-disable MD041 -->
 
-Razonamiento:
-- Los correos se componen como HTML usando plantillas OWA con estilos *inline*.
-- OWA elimina bloques `<style>`, clases CSS, `background-color` en `<table>`, `border-radius`, flexbox, grid y *media queries*.
-- Todo el estilo debe ser *inline* en los `<td>`, duplicando `bgcolor` como atributo HTML.
-- Las plantillas están en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`).
-- Hay tres modos de entrega: `owa` (copiar/pegar), `mac` (AppleScript + Outlook) y `graph` (Microsoft Graph API).
-- Referencia de composición: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
-- Credenciales de Graph API: `~/.secrets.yaml` (clave `GRAPH_API`).
+Reasoning:
+- Emails are composed as HTML using OWA templates with *inline* styles.
+- OWA strips `<style>` blocks, CSS classes, `background-color` on `<table>`, `border-radius`, flexbox, grid, and *media queries*.
+- All styling must be *inline* on `<td>` elements, duplicating `bgcolor` as an HTML attribute.
+- Templates are in `~/rules/templates/mail/` (`delivery_template.html` and `generic_template.html`).
+- There are three delivery modes: `owa` (copy/paste), `mac` (AppleScript + Outlook), and `graph` (Microsoft Graph API).
+- Composition reference: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
+- Graph API credentials: `~/.secrets.yaml` (key `GRAPH_API`).
 
-Pasos:
-1) Acción: determinar el tipo de correo.
-   - Entrega de microservicio → usar `templates/mail/delivery_template.html`
-   - Cualquier otro (cambio, decisión, reporte, corrección) → usar `templates/mail/generic_template.html`
-   Resultado: plantilla seleccionada.
+Steps:
+1) Action: determine the email type.
+   - Microservice delivery → use `templates/mail/delivery_template.html`
+   - Any other (change, decision, report, correction) → use `templates/mail/generic_template.html`
+   Result: template selected.
 
-2) Acción: copiar la plantilla con el nombre correcto.
-   Resultado: `YYYY-MM-DD-{nombre-corto}.html` (fecha CST).
+2) Action: copy the template with the correct name.
+   Result: `YYYY-MM-DD-{short-name}.html` (CST date).
 
-3) Acción: recopilar la información necesaria.
-   Para entrega: NOMBRE_SERVICIO, PREFIJO, VERSION, DESTINATARIO, FECHA, RAMA_BASE, DESCRIPCION.
-   Para genérico: TITULO, DESTINATARIO, FECHA y contenido de cada sección.
-   Resultado: datos listos para sustituir.
+3) Action: gather the required information.
+   For delivery: SERVICE_NAME, PREFIX, VERSION, RECIPIENT, DATE, BASE_BRANCH, DESCRIPTION.
+   For generic: TITLE, RECIPIENT, DATE, and content for each section.
+   Result: data ready for substitution.
 
-4) Acción: reemplazar los *placeholders* en el HTML.
-   Resultado: HTML con datos reales.
+4) Action: replace *placeholders* in the HTML.
+   Result: HTML with real data.
 
-5) Acción: seleccionar el color de acento según el tipo de correo.
-   - Entrega/OK → `#3498db` (azul)
-   - Corrección/cambio → `#e67e22` (naranja)
-   - Alerta crítica → `#e74c3c` (rojo)
-   - Decisión técnica → `#0066cc` (azul oscuro)
-   Resultado: color del `border-bottom` del H1 ajustado.
+5) Action: select the accent colour according to email type.
+   - Delivery/OK → `#3498db` (blue)
+   - Correction/change → `#e67e22` (orange)
+   - Critical alert → `#e74c3c` (red)
+   - Technical decision → `#0066cc` (dark blue)
+   Result: H1 `border-bottom` colour adjusted.
 
-6) Acción: si es plantilla genérica, eliminar los componentes que no se usen.
-   Componentes opcionales: caja de resumen, caja informativa, caja de atención, caja de problema, tabla de datos, bloque de código.
-   Resultado: HTML limpio sin bloques vacíos.
+6) Action: if using the generic template, remove unused components.
+   Optional components: summary box, information box, attention box, problem box, data table, code block.
+   Result: clean HTML with no empty blocks.
 
-7) Acción: si es Angular/Node.js (no Java/Spring Boot), aplicar ajustes.
-   - Eliminar sección SonarQube
-   - Cambiar *pipeline* a 5 *stages*
+7) Action: if Angular/Node.js (not Java/Spring Boot), apply adjustments.
+   - Remove SonarQube section
+   - Change *pipeline* to 5 *stages*
    - Docker: multi-stage Node 22 + Nginx
-   - Quitar Swagger UI de la tabla de acceso
-   Resultado: HTML adaptado al *stack* del servicio.
+   - Remove Swagger UI from the access table
+   Result: HTML adapted to the service *stack*.
 
-8) Acción: verificar reglas HTML críticas antes de finalizar.
-   - [ ] Todos los fondos de color usan `bgcolor` en `<td>`, no en `<table>`
-   - [ ] No hay bloques `<style>` ni clases CSS
-   - [ ] Bloques de código usan `<td>` con `white-space:pre-wrap`, no `<pre>`
-   - [ ] Filas alternas de tabla tienen `style` inline, no `nth-child`
-   - [ ] Todos los estilos son inline
-   Resultado: HTML validado.
+8) Action: verify critical HTML rules before finalising.
+   - [ ] All coloured backgrounds use `bgcolor` on `<td>`, not on `<table>`
+   - [ ] No `<style>` blocks or CSS classes
+   - [ ] Code blocks use `<td>` with `white-space:pre-wrap`, not `<pre>`
+   - [ ] Alternating table rows have inline `style`, not `nth-child`
+   - [ ] All styles are inline
+   Result: HTML validated.
 
-9) Acción: guardar el archivo HTML.
-   - Nombre: `YYYY-MM-DD-{nombre-corto}.html` (fecha CST).
-   - Ubicación: ruta indicada por el usuario, carpeta `mail/` del proyecto, o `~/mail/`.
-   Resultado: archivo guardado.
+9) Action: save the HTML file.
+   - Name: `YYYY-MM-DD-{short-name}.html` (CST date).
+   - Location: path indicated by the user, project `mail/` folder, or `~/mail/`.
+   Result: file saved.
 
-10) Acción: entregar según el modo elegido.
-   - **`owa`**: indica al usuario «abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA». No incluir firma (OWA la agrega).
-   - **`mac`**: abre un borrador en Outlook vía AppleScript (`open newMsg`, nunca `send`). No incluir firma (Outlook la inyecta). Indicar al usuario enviar con ⌘+Enter.
-   - **`graph`**: incluir firma como imagen CID *inline*. Autenticar vía *device code flow* con credenciales de `~/.secrets.yaml` (`GRAPH_API`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
-   Resultado: correo entregado o borrador abierto.
+10) Action: deliver according to the chosen mode.
+    - **`owa`**: tell the user «open in browser → Ctrl+A → Ctrl+C → paste into OWA». Do not include signature (OWA adds it automatically).
+    - **`mac`**: open a draft in Outlook via AppleScript (`open newMsg`, never `send`). Do not include signature (Outlook injects it). Prompt the user to send with ⌘+Enter.
+    - **`graph`**: include signature as an inline CID image. Authenticate via *device code flow* with credentials from `~/.secrets.yaml` (`GRAPH_API`). Send with `POST /me/sendMail`. Also save the HTML as a backup.
+    Result: email delivered or draft opened.
 
-Conclusión:
-- El HTML resultante debe cumplir las reglas OWA (`bgcolor` en `<td>`, estilos *inline*, sin CSS externo).
-- La firma solo va en el HTML cuando el modo es `graph` (como imagen CID *inline*).
-- En `owa` y `mac`, Outlook agrega la firma automáticamente.
-- Referencias: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
+Conclusion:
+- The resulting HTML must comply with OWA rules (`bgcolor` on `<td>`, *inline* styles, no external CSS).
+- The signature is only included in the HTML when the mode is `graph` (as an inline CID image).
+- In `owa` and `mac`, Outlook adds the signature automatically.
+- References: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
