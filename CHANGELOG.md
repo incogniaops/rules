@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- fix: remove duplicate git-init skill entry misplaced in [2025-07-31] date block
 - feat: add CLAUDE.md as a relative symlink to AGENTS.md so Claude Code loads project context automatically
 - docs: add Claude Code specifics section to AGENTS.md with skill invocation, atomic commit rules, and memory path; fix commit workflow to use selective git add instead of git add .
 - feat: add ROADMAP.md with the full EN translation plan: bilingual policy, per-file checklist grouped by directory, ES-source pairs, and pending decisions
@@ -602,8 +603,6 @@
 
 - feat: create BACKUPS.md with backup and destructive operation policies, mandatory CST timezone, and scripts updated with TZ="America/Mexico_City"
 - feat: add informational badges to README.md (GPLv3 licence, Markdown, Mexican Spanish) and decision flow section for dual-use rules
-
-- feat: create parametrised git-init skill with 4 arguments: context (personal/laboral), SSH key, remote URL, and branch
 
 - style: create STYLING.md with style rules for labour Markdown documents: corporate palette (midnight, electric, lavender), standard structure for headers/footers, dynamic CST timestamp in Mexican Spanish
 - style: change icon colour in contact section to --promad for visual consistency
