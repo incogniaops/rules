@@ -35,6 +35,6 @@ project/
 
 ---
 
-*This project was developed by Rodrigo Álvarez for Promad Business Solutions and is distributed under the MIT licence. For more details, see the LICENSE file.*
+*This project was developed by Rodrigo Álvarez for [Client Name] and is distributed under the MIT licence. For more details, see the LICENSE file.*
 
 *Copyright © YYYY, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
