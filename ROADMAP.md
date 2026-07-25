@@ -109,11 +109,11 @@ Replace content with International English (UK); keep filename unchanged.
 
 ---
 
-## Phase 2 — ES source + EN pair ⬜
+## Phase 2 — ES source + EN pair ✅
 
-| Keep Spanish source | Create English file | Reason |
-|---------------------|---------------------|--------|
-| `rulesets/TEACHING.md` | `rulesets/TEACHING_EN.md` (name TBD) | personal educational profile with authentic voice |
+| Spanish source | English translation | Status |
+|----------------|---------------------|--------|
+| `rulesets/ENSEÑANZA.md` | `rulesets/TEACHING.md` | done — pair already in place |
 
 ---
 
