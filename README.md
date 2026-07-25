@@ -5,7 +5,7 @@ description: "Standards, philosophy, and chains of reasoning (CoT) that guide Ro
 
 # Technical rules: prompts and CoTs to accelerate LLM context
 
-*Last modified: 22 July 2026 (CST)*
+*Last modified: 25 July 2026 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
@@ -70,17 +70,30 @@ git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/r
 
 **Notes**:
 
-- `sync_global.sh` detects platform (macOS, Linux, Windows/WSL) and copies to correct locations:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (recognised by Warp, Claude, Cursor, Copilot, Gemini, and others)
+- `sync_global.sh` detects platform (macOS, Linux, Windows/WSL) and installs to the correct locations:
+  - *Skills* (`SKILL.md`) — copied to `~/.agents/skills/<name>/` (recognised by Warp, Cursor, Copilot, Gemini, and others)
+  - *Skills for Claude Code* — symlinked from `~/.agents/skills/<name>/SKILL.md` → `~/.claude/commands/<name>.md` (invoked with `/name` or via the Skill tool)
   - *Workflows* (`*.yaml`) on macOS: `~/.warp/workflows/`
   - *Workflows* on Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
-  - *Workflows* on Windows: `$APPDATA\\warp\\Warp\\data\\workflows\\`
+  - *Workflows* on Windows/WSL: `%APPDATA%\warp\Warp\data\workflows\`
 - **Not copied** (accessed directly from `~/rules/`):
   - `scripts/` — `graph_auth.py` and other scripts
   - `templates/` — HTML templates and signature images
   - `rulesets/`, `cot/` — rules and reasoning chains
 - To refresh after a `git pull`, just run: `~/rules/scripts/sync_global.sh`
-- Symbolic links are not used; all paths are canonical (`~/rules/cot/`, `~/rules/rulesets/`)
+- Warp on WSL installs skills to Windows home (`%USERPROFILE%\.agents\skills\`) so Warp can read them
+- CoT files, rulesets, and templates use canonical paths (`~/rules/cot/`, `~/rules/rulesets/`)
+
+### Skill installation paths by tool
+
+| Tool | Method | Source path | Destination path | Invocation |
+|------|--------|-------------|------------------|------------|
+| Warp (macOS / Linux) | Copy (`cp -r`) | `.agents/skills/<name>/` in repo | `~/.agents/skills/<name>/` | Agents panel |
+| Warp (WSL / Windows) | Copy (`cp -r`) | `.agents/skills/<name>/` in repo | `%USERPROFILE%\.agents\skills\<name>\` | Agents panel |
+| Claude Code | Symlink (`ln -sfn`) | `~/.agents/skills/<name>/SKILL.md` | `~/.claude/commands/<name>.md` | `/name` or Skill tool |
+| Cursor / Copilot / Gemini | Copy (shared with Warp) | `.agents/skills/<name>/` in repo | `~/.agents/skills/<name>/` | Varies by tool |
+
+The Claude Code symlink points to the copy in `~/.agents/skills/`, not directly to the repository. Running `sync_global.sh` refreshes the copy first and the symlink picks up the new content automatically.
 
 ### Daily usage
 
