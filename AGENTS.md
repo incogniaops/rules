@@ -54,9 +54,10 @@ Documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md` and
 **MANDATORY PROCESS - Always follow this exact order:**
 
 1. **FIRST**: Update `CHANGELOG.md` with changes in the active context language (personal: Mexican Spanish, corporate: International English)
-2. **SECOND**: Add all files: `git add .`
-3. **THIRD**: Commit with conventional format: `git commit -m "type: description"`
-4. **FOURTH**: Push: `git push`
+2. **SECOND**: Analyse changed files with `git status` and group them by logical type
+3. **THIRD**: Stage selectively per logical group: `git add file1 file2` — never `git add .` across mixed change types
+4. **FOURTH**: Commit each group atomically: `git commit -F /tmp/commit-msg.txt`
+5. **FIFTH**: Push all commits: `git push`
 
 **Date calculation for CHANGELOG.md:**
 
@@ -218,3 +219,39 @@ When working in other projects, reference this repository:
 - Commit rules: `~/rules/rulesets/COMMITTING.md`
 - Templates: `~/rules/templates/`
 - CoTs: `~/rules/cot/`
+
+---
+
+## Claude Code specifics
+
+> **Note for non-Claude agents:** This section applies exclusively to Claude Code (CLI/IDE). Other AI tools can safely skip it.
+
+This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as project context.
+
+### Skill invocation
+
+Skills in `.agents/skills/` are symlinked to `~/.claude/commands/<name>.md` by `scripts/sync_global.sh`. Invoke them with the `Skill` tool or the `/name` slash command:
+
+- `/commit` — full commit workflow (reads `cot/committing.md`)
+- `/changelogger` — CHANGELOG maintenance (reads `cot/changelog.md`)
+- `/linguistics <file>` — apply Mexican Spanish rules
+- `/context` — detect project context
+- `/release <semver>` — publish a semantic release
+
+Always invoke skills through the `Skill` tool rather than reading CoT files directly — the skill handles the mandatory gates and anti-error protocol.
+
+### Atomic commits (enforced)
+
+Each commit must represent a single logical change type. Workflow:
+
+1. Run `git status` and classify each changed file by type (`feat`, `docs`, `fix`, etc.)
+2. Stage one group: `git add file1 file2`
+3. Write `/tmp/commit-msg.txt` and commit: `git commit -F /tmp/commit-msg.txt`
+4. Repeat for the next group before pushing
+5. Push once all atomic commits are done: `git push`
+
+Never use `git add .` when the working tree contains mixed change types.
+
+### Memory
+
+Project memory lives at `~/.claude/projects/-Users-alvarezr3-rules/memory/`. Check `MEMORY.md` there for stored feedback and preferences before starting non-trivial work.

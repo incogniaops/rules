@@ -5,6 +5,8 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- feat: add CLAUDE.md as a relative symlink to AGENTS.md so Claude Code loads project context automatically
+- docs: add Claude Code specifics section to AGENTS.md with skill invocation, atomic commit rules, and memory path; fix commit workflow to use selective git add instead of git add .
 - feat: add ROADMAP.md with the full EN translation plan: bilingual policy, per-file checklist grouped by directory, ES-source pairs, and pending decisions
 - chore: consolidate TODO.md — merge rulesets/TODO.md into root TODO.md, remove stale completed items, delegate translation tracking to ROADMAP.md, and delete rulesets/TODO.md
 - docs: document Claude Code skill support in README.md installation notes and add a per-tool skill installation paths table comparing copy vs symlink methods across Warp, Claude Code, and other agents
