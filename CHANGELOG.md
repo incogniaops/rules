@@ -3,12 +3,12 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
-## [2026-07-25] - Actualizar README, manifiesto y sincronización con Claude Code
+## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
-- docs: ajustar tono y lenguaje en `PHILOSOPHY.md`: reemplazar frases formales por expresiones más auténticas y directas («*always goes all in*», «*only in it for the cash*», «*shitty English, writes with their ass*», «*badass*»)
-- docs: actualizar `README.md`: fecha de última modificación, conteos de insignias (CoTs 21→25, Skills 10→16, Rulesets 16→21) y URL remota de `incognia` a `incogniaops`
-- docs: agregar referencias a `FILOSOFIA.md` y `LINGUISTICA.md` en `README.md` y completar lista de *skills* con `/aws-naming`, `/bmail`, `/linguistica`, `/release`, `/kube` y `/kubetbs`
-- feat: extender `scripts/sync_global.sh` con bloque de integración Claude Code que enlaza simbólicamente los *skills* hacia `~/.claude/commands/`
+- docs: adjust tone and phrasing in `PHILOSOPHY.md` for a more direct and authentic voice throughout the manifesto
+- docs: update `README.md`: fix last-modified date, refresh badge counts (CoTs 21→25, Skills 10→16, Rulesets 16→21), correct remote URL from `incognia` to `incogniaops`
+- docs: add `FILOSOFIA.md` and `LINGUISTICA.md` to the documents section in `README.md` and extend the skills list with `/aws-naming`, `/bmail`, `/linguistica`, `/release`, `/kube`, and `/kubetbs`
+- feat: extend `scripts/sync_global.sh` with a Claude Code integration block that symlinks skills from `~/.agents/skills/` into `~/.claude/commands/`
 
 ## [2026-07-22] - Align corporate profile and git initialisation standards
 
