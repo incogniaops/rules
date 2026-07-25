@@ -12,7 +12,7 @@ Reasoning:
 - Apply strict AWS rules: *case sensitivity*, removal of spaces, filtering of unsafe characters, path and length validation.
 - Normalise image and web resource extensions (.jpeg → .jpg, .png, .svg, .ico) for consistency in the *bucket*.
 - Generate a log file (.tsv) with the mapping from original name to normalised name for traceability.
-- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).
+- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../README.md](../README.md)).
 
 Steps:
 1) Action: convert the entire filename and extension to lowercase.

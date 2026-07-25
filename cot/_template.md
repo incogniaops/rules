@@ -10,7 +10,7 @@ validacion: command output matches expected state
 Reasoning:
 - Identify the failure point in the deployment pipeline.
 - Verify prerequisites and dependencies in logical order.
-- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).
+- Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../README.md](../README.md)).
 
 Steps:
 1) Action: review CI logs for the last failed job.

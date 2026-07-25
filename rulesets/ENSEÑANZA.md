@@ -1,6 +1,6 @@
 # Perfil educativo y de divulgación científica de Rodrigo Álvarez
 
-> Este perfil educativo se fundamenta en [PHILOSOPHY.md](./PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](./README.md).
+> Este perfil educativo se fundamenta en [PHILOSOPHY.md](../PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](../README.md).
 
 ## Resumen educativo
 
@@ -193,7 +193,7 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 
 ---
 ---
-**Documento principal:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Entrada rápida:** [README.md](./README.md)
+**Documento principal:** [PHILOSOPHY.md](../PHILOSOPHY.md) · **Entrada rápida:** [README.md](../README.md)
 
 ## Evolución y aprendizaje continuo
 

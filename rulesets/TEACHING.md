@@ -2,7 +2,7 @@
 
 *English translation of [ENSEÑANZA.md](./ENSEÑANZA.md) — the Spanish source is canonical.*
 
-> This educational profile is grounded in [PHILOSOPHY.md](./PHILOSOPHY.md). For a general overview and quick navigation, see [README.md](./README.md).
+> This educational profile is grounded in [PHILOSOPHY.md](../PHILOSOPHY.md). For a general overview and quick navigation, see [README.md](../README.md).
 
 ## Educational summary
 
@@ -195,7 +195,7 @@ Diverse experience in Montessori education, active secondary schools, and social
 
 ---
 
-**Main document:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Quick reference:** [README.md](./README.md)
+**Main document:** [PHILOSOPHY.md](../PHILOSOPHY.md) · **Quick reference:** [README.md](../README.md)
 
 ## Evolution and continuous learning
 

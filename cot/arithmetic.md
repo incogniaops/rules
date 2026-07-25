@@ -8,7 +8,7 @@ validacion: result matches hand-verified calculation
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
-- Follow the CoT format of the repository and maintain International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Follow the CoT format of the repository and maintain International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Break the problem into simple steps and verify units.
 
 Steps:

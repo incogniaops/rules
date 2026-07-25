@@ -8,7 +8,7 @@ validacion: pipeline succeeds after injecting the secret
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
-- Apply CoT format and International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) and flow in «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+- Apply CoT format and International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and flow in «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
 - Verify CI/CD prerequisites and registry access secrets.
 
 Steps:

@@ -8,7 +8,7 @@ validacion: correct header/footer, valid CST timestamp, structure and styles con
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
-- Use International English (UK) and repo CoT format (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) and «~/rules/README.md» ([../../README.md](../../README.md))).
+- Use International English (UK) and repo CoT format (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) and «~/rules/README.md» ([../README.md](../README.md))).
 - Traverse top to bottom: standard header → content → footer → CSS → validations (timestamps, links, accessibility).
 - Ensure consistency with CST (México City) and mermaid where applicable.
 
@@ -48,4 +48,4 @@ Steps:
 Conclusion:
 - Deliver the document with correct header/footer, valid CST timestamp, hierarchical content, and consistent style.
 - Confirm the single-date policy: no redundant date remains after styling.
-- References: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/README.md» ([../../README.md](../../README.md)).
+- References: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/README.md» ([../README.md](../README.md)).

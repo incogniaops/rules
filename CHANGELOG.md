@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- fix: repair broken relative links across CoTs and rulesets: correct ../../ depth errors, remove stale PROMPTS.md references, and fix ./PHILOSOPHY.md and ./README.md paths in rulesets/ENSEÑANZA.md and rulesets/TEACHING.md
 - i18n: translate 18 CoTs and skills/release to International English (UK) as Phase 1 of the full repository translation plan
 - i18n: translate 17 rulesets to International English (UK); remove emojis from CRITICAL_COT_READING.md and Promad references from cot/licensing.md
 - i18n: translate docs/MAIL.md and 4 templates to International English (UK)

@@ -8,7 +8,7 @@ validacion: CHANGELOG.md in reverse chronological order, correct CST dates, no d
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
-- Main rule: CHANGELOG.md must follow reverse chronological order (most recent first) with correctly calculated CST México City dates and language by context (personal in Mexican Spanish, corporate in International English) (see «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
+- Main rule: CHANGELOG.md must follow reverse chronological order (most recent first) with correctly calculated CST México City dates and language by context (personal in Mexican Spanish, corporate in International English) (see «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Common critical errors: (1) incorrect chronological order, (2) wrong CST calculation (labelling UTC as CST), (3) duplicating identical entries, (4) mixing International English with Mexican Spanish.
 - Flow: verify current timezone → review chronological order → detect duplicates → apply linguistic rules → validate structure.
 - This CoT is executed via `/changelogger` before `/commit`; the `/commit` flow does not edit the changelog and only validates that a diff exists in `CHANGELOG.md`.
@@ -159,4 +159,4 @@ Conclusion:
 - Deliver: CHANGELOG.md updated with a new entry in the correct chronological position, accurate CST date, language consistent with context, no duplicates, and typed bullets organised semantically.
 - Avoid: mixing languages, labelling UTC as CST, incorrect chronological order, duplicating entries, ungrouped micro-changes.
 - Expected operation: run this CoT from `/changelogger` and then invoke `/commit` (which only validates the changelog gate + commit language).
-- References: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) for the full flow.
+- References: «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) for the full flow.

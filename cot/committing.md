@@ -116,5 +116,5 @@ Conclusion:
   - Including a changelog-edit maintenance bullet in the commit body as a change detail.
   - Committing with a Spanish message or without explicit language checkpoint.
   - Using interactive flow (editor/pager) instead of `git commit -F /tmp/commit-msg.txt`.
-- References: `~/rules/rulesets/COMMITTING.md` ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), `~/rules/cot/changelog.md` ([./changelog.md](./changelog.md)), `~/rules/cot/git_init.md` ([./git_init.md](./git_init.md)), `~/rules/rulesets/GIT.md` ([../rulesets/GIT.md](../rulesets/GIT.md)), `~/rules/README.md` ([../../README.md](../../README.md)), and `~/rules/rulesets/LINGUISTICS.md` ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
+- References: `~/rules/rulesets/COMMITTING.md` ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), `~/rules/cot/changelog.md` ([./changelog.md](./changelog.md)), `~/rules/cot/git_init.md` ([./git_init.md](./git_init.md)), `~/rules/rulesets/GIT.md` ([../rulesets/GIT.md](../rulesets/GIT.md)), `~/rules/README.md` ([../README.md](../README.md)), and `~/rules/rulesets/LINGUISTICS.md` ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
 

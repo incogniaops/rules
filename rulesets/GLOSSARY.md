@@ -95,7 +95,7 @@ This glossary collects key terms used in the rules and development philosophy do
 : data serialisation language widely used for configuration files, especially in DevOps and Kubernetes.
 
 **Reasoning chain (Chain-of-Thought, CoT)**
-: prompting technique for language models in which the model is asked to generate intermediate reasoning steps before giving the final answer. Improves performance on multi-step tasks (arithmetic, logic, technical diagnosis) and facilitates verification of units, assumptions, and dependencies. Best practices in this repository: reasoning in Mexican Spanish; identifiers/code in English where appropriate; numbered steps and a verifiable conclusion; no secrets included; use reference paths `~/rules/...`. See [`~/rules/PROMPTS.md`](./PROMPTS.md) and Wei et al. (arXiv:2201.11903).
+: prompting technique for language models in which the model is asked to generate intermediate reasoning steps before giving the final answer. Improves performance on multi-step tasks (arithmetic, logic, technical diagnosis) and facilitates verification of units, assumptions, and dependencies. Best practices in this repository: reasoning in Mexican Spanish; identifiers/code in English where appropriate; numbered steps and a verifiable conclusion; no secrets included; use reference paths `~/rules/...`. See Wei et al. (arXiv:2201.11903).
 
 ---
 
