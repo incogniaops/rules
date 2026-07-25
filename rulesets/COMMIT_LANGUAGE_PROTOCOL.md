@@ -1,87 +1,87 @@
-# Protocolo crítico: idioma de commits en inglés
+# Critical protocol: commit messages in English
 
-**PRIORIDAD MÁXIMA - NUNCA IGNORAR**
+**MAXIMUM PRIORITY — NEVER IGNORE**
 
-## Regla fundamental
+## Fundamental rule
 
-**TODOS los mensajes de commit DEBEN estar en INGLÉS**
+**ALL commit messages MUST be in ENGLISH**
 
 ```bash
-# ✅ CORRECTO
+# ✅ CORRECT
 git commit -m "feat: add new functionality"
 git commit -m "fix: resolve authentication issue" 
 git commit -m "docs: update installation guide"
 
-# ❌ INCORRECTO
+# ❌ INCORRECT
 git commit -m "feat: agregar nueva funcionalidad"
 git commit -m "fix: resolver problema de autenticación"
 git commit -m "docs: actualizar guía de instalación"
 ```
 
-## Referencia
+## Reference
 
-- **Fuente**: `~/rules/cot/committing.md` línea 15
-- **Texto exacto (política vigente)**: commits siempre en inglés internacional; idioma de documentación y `CHANGELOG.md` depende del contexto (personal: español mexicano, laboral: inglés internacional).
+- **Source**: `~/rules/cot/committing.md` line 15
+- **Exact text (current policy)**: commits always in international English; documentation and `CHANGELOG.md` language depends on context (personal: Mexican Spanish, corporate: international English).
 
-## Distribución de idiomas
+## Language distribution
 
-| Contexto | Personal | Laboral |
-|----------|----------|---------|
-| **Mensajes de commit** | 🇺🇸 Inglés internacional | 🇺🇸 Inglés internacional |
-| **CHANGELOG.md** | 🇲🇽 Español mexicano | 🇺🇸 Inglés internacional |
-| **Documentación** | 🇲🇽 Español mexicano | 🇺🇸 Inglés internacional |
-| **Código/comentarios** | 🇺🇸 Inglés internacional | 🇺🇸 Inglés internacional |
+| Context | Personal | Corporate |
+|---------|----------|-----------|
+| **Commit messages** | 🇺🇸 International English | 🇺🇸 International English |
+| **CHANGELOG.md** | 🇲🇽 Mexican Spanish | 🇺🇸 International English |
+| **Documentation** | 🇲🇽 Mexican Spanish | 🇺🇸 International English |
+| **Code/comments** | 🇺🇸 International English | 🇺🇸 International English |
 
-## Protocolo obligatorio para asistente
+## Mandatory protocol for the assistant
 
-**Cada vez que se ejecute `~/rules/cot/committing.md`, el asistente DEBE:**
+**Each time `~/rules/cot/committing.md` is executed, the assistant MUST:**
 
-### Paso 0: Checkpoint de idioma (ANTES de cualquier commit)
+### Step 0: Language checkpoint (BEFORE any commit)
 
 ```
-🔍 CHECKPOINT: Verificando idioma de commits...
-📋 REGLA: Mensajes de commit en INGLÉS (~/rules/cot/committing.md línea 15)
-⚠️  CRÍTICO: NO proceder hasta confirmar idioma correcto
+🔍 CHECKPOINT: Verifying commit language...
+📋 RULE: Commit messages in ENGLISH (~/rules/cot/committing.md line 15)
+⚠️  CRITICAL: Do NOT proceed until correct language is confirmed
 ```
 
-### Declaración obligatoria
+### Mandatory declaration
 
-**El asistente debe declarar explícitamente:**
+**The assistant must explicitly declare:**
 
 > «⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15»
 
-### Verificación previa al commit
+### Pre-commit verification
 
-**Antes de cada `git commit -F /tmp/commit-msg.txt`:**
+**Before each `git commit -F /tmp/commit-msg.txt`:**
 
-1. ✅ **Construir o actualizar `/tmp/commit-msg.txt`**
-2. ✅ **Mostrar el mensaje planeado y confirmar que está en inglés**  
-3. ✅ **Proceder con el commit usando `-F`**
-4. ✅ **Confirmar que `CHANGELOG.md` tiene cambios (staged o unstaged) con gate obligatorio**
+1. ✅ **Build or update `/tmp/commit-msg.txt`**
+2. ✅ **Show the planned message and confirm it is in English**
+3. ✅ **Proceed with the commit using `-F`**
+4. ✅ **Confirm that `CHANGELOG.md` has changes (staged or unstaged) via mandatory gate**
 
-### Puerta obligatoria de ejecución (changelog + idioma)
+### Mandatory execution gate (changelog + language)
 
-No se permite continuar a `git add`/`git commit` si falla cualquiera de estas dos condiciones:
+Proceeding to `git add`/`git commit` is not permitted if either of these conditions fails:
 
-1. **CHANGELOG gate**: `CHANGELOG.md` debe tener cambios respecto al repo.
-   - Validación: `git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md`
-   - Si ambos comandos retornan 0, no hay cambios: abortar y ejecutar `/changelogger`.
-2. **LANGUAGE gate**: subject y body del commit no están completamente en inglés internacional.
+1. **CHANGELOG gate**: `CHANGELOG.md` must have changes relative to the repo.
+   - Validation: `git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md`
+   - If both commands return 0, there are no changes: abort and run `/changelogger`.
+2. **LANGUAGE gate**: the subject and body of the commit are not fully in international English.
 
-Si cualquiera falla:
+If either fails:
 
-- 🛑 detener flujo,
-- 🔍 si falla CHANGELOG gate: ejecutar `/changelogger`, luego reintentar `/commit`,
-- 🔍 si falla LANGUAGE gate: corregir mensaje en `/tmp/commit-msg.txt`,
-- 🙋 pedir confirmación del usuario antes de un segundo reintento.
+- 🛑 stop the flow,
+- 🔍 if CHANGELOG gate fails: run `/changelogger`, then retry `/commit`,
+- 🔍 if LANGUAGE gate fails: correct the message in `/tmp/commit-msg.txt`,
+- 🙋 ask the user for confirmation before a second attempt.
 
-### Ejemplo de aplicación correcta
+### Example of correct application
 
 ```
-🔍 CHECKPOINT: Verificando idioma de commits...
-📋 REGLA: Mensajes de commit en INGLÉS
+🔍 CHECKPOINT: Verifying commit language...
+📋 RULE: Commit messages in ENGLISH
 
-Archivo temporal planeado (`/tmp/commit-msg.txt`):
+Planned temporary file (`/tmp/commit-msg.txt`):
 feat: integrate Loki and Promtail for centralized logging
 
 - Add Helm values and manifests required for centralized logging
@@ -91,34 +91,34 @@ feat: integrate Loki and Promtail for centralized logging
 
 Co-Authored-By: Oz <oz-agent@warp.dev>
 
-✅ Mensaje en inglés validado - procediendo con:
+✅ Message in English validated — proceeding with:
 git commit -F /tmp/commit-msg.txt
 ```
 
-Formato obligatorio del cuerpo antes de validar idioma:
+Mandatory body format before validating language:
 
-- El bullet `-` debe iniciar en columna 1 (sin espacios previos).
-- Si una línea es larga, partir y continuar en la siguiente línea.
-- La continuación debe ir con dos espacios para alinear el texto del bullet.
+- The bullet `-` must start at column 1 (no leading spaces).
+- If a line is too long, break it and continue on the next line.
+- Continuation lines must be indented with two spaces to align with the bullet text.
 
-## Falla del protocolo
+## Protocol failure
 
-**Si el asistente comete error de idioma:**
+**If the assistant makes a language error:**
 
-1. 🛑 **DETENER** proceso inmediatamente
-2. 🔄 **CORREGIR** con reset/amend si es necesario  
-3. 📝 **DOCUMENTAR** el error para evitar recurrencia
-4. ✅ **REPETIR** proceso con idioma correcto
+1. 🛑 **STOP** the process immediately
+2. 🔄 **CORRECT** with reset/amend if necessary
+3. 📝 **DOCUMENT** the error to prevent recurrence
+4. ✅ **REPEAT** the process with the correct language
 
-## Anti-patrones prohibidos (detener inmediatamente)
+## Forbidden anti-patterns (stop immediately)
 
-- Commitear o pushear con `CHANGELOG.md` sin cambios respecto al repo.
-- Intentar editar `CHANGELOG.md` desde `/commit` en vez de invocar `/changelogger`.
-- Hacer commit en español por omitir checkpoint de idioma.
-- Saltarse `/tmp/commit-msg.txt` y degradar a mensajes ad-hoc sin revisión.
+- Committing or pushing with `CHANGELOG.md` unchanged relative to the repo.
+- Attempting to edit `CHANGELOG.md` from `/commit` instead of invoking `/changelogger`.
+- Committing in Spanish by skipping the language checkpoint.
+- Skipping `/tmp/commit-msg.txt` and falling back to ad-hoc messages without review.
 
-## Error recurrente identificado
+## Identified recurring error
 
-- **Problema**: Tendencia a escribir commits en español
-- **Causa**: No verificar idioma antes de commit
-- **Solución**: Este protocolo de checkpoint obligatorio
+- **Problem**: tendency to write commits in Spanish
+- **Cause**: not verifying language before committing
+- **Solution**: this mandatory checkpoint protocol

@@ -1,101 +1,101 @@
-# Reglas de *troubleshooting* en clústeres Kubernetes
+# Kubernetes troubleshooting rules
 
-## Propósito
+## Purpose
 
-Este documento define las convenciones para diagnosticar y resolver problemas en microservicios desplegados sobre Kubernetes con Istio.
+This document defines the conventions for diagnosing and resolving issues in microservices deployed on Kubernetes with Istio.
 
-## Metodología: de afuera hacia adentro
+## Methodology: outside in
 
-El diagnóstico siempre sigue este orden:
+Diagnosis always follows this order:
 
-1. **Eventos** → detectar *namespaces* y recursos con fallas
-2. **Pods inestables** → priorizar por reinicios
-3. **Patrones de error** → identificar causa en logs
-4. **Dueño** → determinar Deployment/StatefulSet afectado
-5. **Red** → verificar Service, Endpoints, VirtualService
-6. **Dependencias** → buscar dependencias *cross-namespace*
-7. **Corrección** → proponer y validar sin desplegar
+1. **Events** → detect *namespaces* and resources with failures
+2. **Unstable pods** → prioritise by restart count
+3. **Error patterns** → identify root cause in logs
+4. **Owner** → determine the affected Deployment/StatefulSet
+5. **Network** → verify Service, Endpoints, VirtualService
+6. **Dependencies** → look for *cross-namespace* dependencies
+7. **Fix** → propose and validate without deploying
 
-## Comandos de diagnóstico
+## Diagnostic commands
 
-### Eventos recientes (panorama global)
+### Recent events (global overview)
 
 ```bash
 kubectl get events --all-namespaces --sort-by=.lastTimestamp | tail -50
 ```
 
-### Pods con más reinicios
+### Pods with most restarts
 
 ```bash
 kubectl get pods -A --sort-by=.status.containerStatuses[0].restartCount | tail -30
 ```
 
-### Describir pod problemático (eventos + dueño)
+### Describe a problematic pod (events + owner)
 
 ```bash
 kubectl describe pod -n <namespace> <pod>
 ```
 
-### Logs por etiqueta (todas las réplicas)
+### Logs by label (all replicas)
 
 ```bash
-kubectl logs -n <namespace> -l app=<servicio> --since=60m --tail=500
+kubectl logs -n <namespace> -l app=<service> --since=60m --tail=500
 ```
 
-### Verificar Service y Endpoints
+### Verify Service and Endpoints
 
 ```bash
-kubectl get svc,ep -n <namespace> | grep -E "<servicio>|<dependencia>"
+kubectl get svc,ep -n <namespace> | grep -E "<service>|<dependency>"
 ```
 
-### Búsqueda *cross-namespace* de dependencias
+### *Cross-namespace* dependency search
 
 ```bash
-# Buscar un servicio en todos los namespaces
-kubectl get svc -A | grep -i <dependencia>
+# Search for a service across all namespaces
+kubectl get svc -A | grep -i <dependency>
 ```
 
-### Verificar resolución DNS desde un pod temporal
-
-```bash
-kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
-  nslookup <servicio>.<namespace>.svc.cluster.local
-```
-
-### Verificar conectividad de red
+### Verify DNS resolution from a temporary pod
 
 ```bash
 kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
-  nc -vz <servicio>.<namespace>.svc.cluster.local <puerto>
+  nslookup <service>.<namespace>.svc.cluster.local
 ```
 
-## Errores comunes
+### Verify network connectivity
+
+```bash
+kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
+  nc -vz <service>.<namespace>.svc.cluster.local <port>
+```
+
+## Common errors
 
 ### `CrashLoopBackOff`
 
-- Revisar logs del contenedor: `kubectl logs <pod> -n <namespace> --previous`
-- Verificar variables de entorno y *ConfigMaps*
-- Verificar que las dependencias (DB, Redis, *message broker*) estén accesibles
+- Check container logs: `kubectl logs <pod> -n <namespace> --previous`
+- Verify environment variables and *ConfigMaps*
+- Verify that dependencies (DB, Redis, *message broker*) are reachable
 
 ### `ImagePullBackOff`
 
-- Verificar que la imagen existe en el registro (ECR, Harbor, etc.)
-- Verificar *secrets* de acceso al registro: `kubectl get secret -n <namespace> | grep registry`
+- Verify the image exists in the registry (ECR, Harbor, etc.)
+- Verify registry access *secrets*: `kubectl get secret -n <namespace> | grep registry`
 
-### Timeouts en *gateway*/ingreso
+### Timeouts at *gateway*/ingress
 
-- Correlacionar con el servicio *backend*: los *timeouts* del *gateway* suelen ser síntoma de una falla aguas abajo
-- Verificar VirtualService y DestinationRule de Istio
+- Correlate with the *backend* service: *gateway* timeouts are usually a symptom of a downstream failure
+- Verify Istio VirtualService and DestinationRule
 
-### Dependencia *cross-namespace*
+### *Cross-namespace* dependency
 
-- Si `REDIS_HOST=redis` (sin FQDN), resuelve a `redis.<namespace-actual>.svc.cluster.local`
-- Corrección: usar FQDN completo `redis.<namespace-real>.svc.cluster.local` o crear `ExternalName` Service
+- If `REDIS_HOST=redis` (no FQDN), resolves to `redis.<current-namespace>.svc.cluster.local`
+- Fix: use the full FQDN `redis.<real-namespace>.svc.cluster.local` or create an `ExternalName` Service
 
-## Regla de oro
+## Golden rule
 
-**Nunca desplegar una corrección sin validar la hipótesis primero.** Usar pod temporal con `busybox` para verificar DNS y conectividad antes de modificar cualquier recurso.
+**Never deploy a fix without validating the hypothesis first.** Use a temporary pod with `busybox` to verify DNS and connectivity before modifying any resource.
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incogniadev)*
+*Written by Rodrigo Álvarez (@incogniadev)*

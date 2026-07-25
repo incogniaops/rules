@@ -1,50 +1,50 @@
-# Reglas de mensajes de *commit* y gestión de cambios
+# Commit message rules and change management
 
-## 1. Filosofía principal
+## 1. Core philosophy
 
-Un historial de *commits* bien estructurado es una de las herramientas más valiosas para la facilidad de mantenimiento de un proyecto. Cada *commit* debe ser atómico, tener un propósito claro y un mensaje que lo describa de forma concisa.
+A well-structured commit history is one of the most valuable tools for project maintainability. Each commit must be atomic, have a clear purpose, and a message that describes it concisely.
 
-## 2. Formato del mensaje de *commit*
+## 2. Commit message format
 
-Utilizar la especificación de [Commits Convencionales](https://www.conventionalcommits.org/en/v1.0.0/).
+Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
-### 2.1. Estructura general
+### 2.1. General structure
 
 ```text
-<tipo>[ámbito opcional]: <descripción>
+<type>[optional scope]: <description>
 
-[cuerpo opcional]
+[optional body]
 
-[pie opcional]
+[optional footer]
 ```
 
-### 2.2. Tipos de *commit*
+### 2.2. Commit types
 
-- **feat:** una nueva funcionalidad para el usuario.
-- **fix:** una corrección de un error.
-- **docs:** cambios en la documentación.
-- **style:** cambios que no afectan el significado del código (espacios, formato, etc.).
-- **refactor:** una reestructuración de código que no corrige un error ni añade una funcionalidad.
-- **perf:** una mejora de rendimiento.
-- **test:** añadir o corregir pruebas.
-- **build:** cambios que afectan al sistema de *build* o a dependencias externas.
-- **ci:** cambios en los archivos y scripts de configuración de CI.
-- **chore:** otros cambios que no modifican el código fuente ni las pruebas (ej. actualización de dependencias).
+- **feat:** a new feature for the user.
+- **fix:** a bug fix.
+- **docs:** changes to documentation.
+- **style:** changes that do not affect code meaning (whitespace, formatting, etc.).
+- **refactor:** a code restructuring that neither fixes a bug nor adds a feature.
+- **perf:** a performance improvement.
+- **test:** adding or correcting tests.
+- **build:** changes that affect the build system or external dependencies.
+- **ci:** changes to CI configuration files and scripts.
+- **chore:** other changes that do not modify source code or tests (e.g. dependency updates).
 
-**⚠️ IMPORTANTE:** Los archivos CoT (Chain of Thought) como `cot/committing.md` son documentos funcionales que definen workflows automatizados. Se clasifican como **`feat:`** (no `docs:`), ya que representan nueva funcionalidad y automatización del proyecto, no simple documentación.
+**⚠️ IMPORTANT:** CoT (Chain of Thought) files such as `cot/committing.md` are functional documents that define automated workflows. They are classified as **`feat:`** (not `docs:`), as they represent new project functionality and automation, not simple documentation.
 
-### 2.3. Reglas del mensaje
+### 2.3. Message rules
 
-- **Idioma:** redactar siempre en **inglés internacional**.
-- **Emojis:** no usar emojis.
-- **Descripción:** debe ser concisa, en imperativo y en minúsculas (ej. `fix: correct user login flow`).
-- **Cuerpo:** opcional, para explicar el *qué* y el *porqué* del cambio.
-- **Pie:** opcional, para referencias a *issues* (`Refs: #123`) o para marcar cambios incompatibles (`BREAKING CHANGE:`).
-- **Formato recomendado:** para mensajes detallados, construir primero `/tmp/commit-msg.txt` y usar `git commit -F /tmp/commit-msg.txt`.
+- **Language:** always write in **international English**.
+- **Emojis:** do not use emojis.
+- **Description:** must be concise, in the imperative mood, and lower case (e.g. `fix: correct user login flow`).
+- **Body:** optional, to explain the *what* and *why* of the change.
+- **Footer:** optional, for issue references (`Refs: #123`) or to mark breaking changes (`BREAKING CHANGE:`).
+- **Recommended format:** for detailed messages, build `/tmp/commit-msg.txt` first and use `git commit -F /tmp/commit-msg.txt`.
 
-### 2.4. Ejemplos
+### 2.4. Examples
 
-#### Bueno
+#### Good
 
 ```text
 feat(auth): add password reset functionality
@@ -55,7 +55,7 @@ Users will receive an email with a secure link to reset their password.
 Fixes: #42
 ```
 
-#### Malo
+#### Bad
 
 ```text
 fix
@@ -65,9 +65,9 @@ fix
 Updated files
 ```
 
-### 2.5. Plantilla detallada recomendada (archivo temporal)
+### 2.5. Recommended detailed template (temporary file)
 
-Cuando necesites un mensaje de *commit* más claro y reutilizable, usa un archivo temporal con la misma estructura de Commits Convencionales:
+When a clearer, reusable commit message is needed, use a temporary file with the same Conventional Commits structure:
 
 ```text
 docs: add frontend/backend GitLab cross-references
@@ -81,72 +81,72 @@ docs: add frontend/backend GitLab cross-references
 Co-Authored-By: Oz <oz-agent@warp.dev>
 ```
 
-Reglas de formato obligatorias para esta plantilla:
+Mandatory formatting rules for this template:
 
-- El marcador de viñeta `-` va alineado a la izquierda (columna 1), sin espacios ni tabuladores al inicio.
-- Si una viñeta es larga, debes truncar manualmente la línea y continuar abajo.
-- La línea de continuación debe llevar dos espacios de sangría para alinear el texto con el contenido del bullet.
-- Mantener una línea en blanco entre asunto y cuerpo, y otra entre cuerpo y pie.
+- The bullet marker `-` is left-aligned (column 1), with no leading spaces or tabs.
+- If a bullet is too long, break the line manually and continue below.
+- The continuation line must have two spaces of indentation to align text with the bullet content.
+- Keep one blank line between subject and body, and another between body and footer.
 
-Después ejecuta el commit con:
+Then run the commit with:
 
 ```bash
 git commit -F /tmp/commit-msg.txt
 ```
 
-## 3. Flujo de trabajo y gestión de cambios
+## 3. Workflow and change management
 
-### 3.1. Validación de `CHANGELOG.md` antes del *commit* (CRÍTICO)
+### 3.1. Validate `CHANGELOG.md` before committing (CRITICAL)
 
-🔥 **REGLA CRÍTICA: el flujo `/commit` NO modifica `CHANGELOG.md`; solo valida que ya fue actualizado.**
+🔥 **CRITICAL RULE: the `/commit` flow does NOT modify `CHANGELOG.md`; it only validates that it has already been updated.**
 
-**PROCESO OBLIGATORIO:**
-1. **PRIMERO:** Actualizar `CHANGELOG.md` usando `/changelogger` (o flujo dedicado equivalente).
-1. **SEGUNDO:** Validar que `CHANGELOG.md` tiene cambios respecto al repositorio.
-1. **TERCERO:** Hacer `git add` de los archivos necesarios (incluyendo `CHANGELOG.md`).
-1. **CUARTO:** Hacer `git commit`.
-1. **QUINTO:** Hacer `git push`.
+**MANDATORY PROCESS:**
+1. **FIRST:** Update `CHANGELOG.md` using `/changelogger` (or an equivalent dedicated flow).
+1. **SECOND:** Validate that `CHANGELOG.md` has changes relative to the repository.
+1. **THIRD:** Run `git add` for the required files (including `CHANGELOG.md`).
+1. **FOURTH:** Run `git commit`.
+1. **FIFTH:** Run `git push`.
 
-**⚠️ ADVERTENCIA:** Si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
+**⚠️ WARNING:** If `CHANGELOG.md` has no changes, the flow must abort and suggest `/changelogger`.
 
-#### 3.1.1. Protocolo anti-errores y anti-patrones (OBLIGATORIO, SIN EXCEPCIÓN)
+#### 3.1.1. Anti-error and anti-pattern protocol (MANDATORY, NO EXCEPTIONS)
 
-Antes de continuar a `git add`/`git commit`, se debe cumplir este protocolo:
+Before proceeding to `git add`/`git commit`, this protocol must be followed:
 
-1. Ejecutar gate de cambios en `CHANGELOG.md`:
+1. Run the `CHANGELOG.md` change gate:
    ```bash
    if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
-       echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
+       echo "ERROR: CHANGELOG.md has no changes. Run /changelogger and retry /commit."
        exit 1
    fi
    ```
-2. Si el gate falla (sin cambios), detener ejecución inmediatamente.
-3. Si el gate pasa (hay cambios staged o unstaged), continuar con `git add`/`git commit`.
-4. El mantenimiento de formato/idioma del changelog se delega a `/changelogger` + `~/rules/cot/changelog.md`.
+2. If the gate fails (no changes), stop execution immediately.
+3. If the gate passes (staged or unstaged changes exist), proceed with `git add`/`git commit`.
+4. CHANGELOG format and language maintenance is delegated to `/changelogger` + `~/rules/cot/changelog.md`.
 
-Anti-patrones prohibidos:
+Forbidden anti-patterns:
 
-- Continuar con commit/push cuando `CHANGELOG.md` no tiene cambios.
-- Intentar editar `CHANGELOG.md` desde `/commit` en lugar de usar `/changelogger`.
-- Omitir el gate de changelog y depender solo de `git status` general.
-- Continuar commit/push cuando el gate de changelog falla.
+- Proceeding with commit/push when `CHANGELOG.md` has no changes.
+- Attempting to edit `CHANGELOG.md` from `/commit` instead of using `/changelogger`.
+- Omitting the changelog gate and relying solely on `git status`.
+- Proceeding with commit/push when the changelog gate fails.
 
-**Ejemplo del flujo correcto:**
+**Example of the correct flow:**
 
 ```bash
-# 1. PRIMERO: actualizar changelog fuera de /commit
+# 1. FIRST: update changelog outside /commit
 /changelogger
 
-# 2. SEGUNDO: validar gate de changelog
+# 2. SECOND: validate changelog gate
 if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
-    echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
+    echo "ERROR: CHANGELOG.md has no changes. Run /changelogger and retry /commit."
     exit 1
 fi
 
-# 3. TERCERO: Añadir archivos
+# 3. THIRD: stage files
 git add .
 
-# 4. CUARTO: Preparar mensaje detallado y hacer commit (no interactivo)
+# 4. FOURTH: prepare detailed message and commit (non-interactive)
 cat > /tmp/commit-msg.txt <<EOF
 docs: validate changelog gate before commit
 
@@ -158,96 +158,96 @@ Co-Authored-By: Oz <oz-agent@warp.dev>
 EOF
 git commit -F /tmp/commit-msg.txt
 
-# 5. QUINTO: Push
+# 5. FIFTH: push
 git push
 ```
 
-### 3.2. Atomicidad de los *commits*
+### 3.2. Commit atomicity
 
-- **Un propósito por *commit*:** cada *commit* debe reflejar un cambio único y funcional. No mezclar correcciones de errores con nuevas funcionalidades en el mismo *commit*.
-- **Cambios pequeños:** dividir los cambios grandes en *commits* más pequeños y lógicos.
+- **One purpose per commit:** each commit must reflect a single, functional change. Do not mix bug fixes with new features in the same commit.
+- **Small changes:** break large changes into smaller, logical commits.
 
-### 3.3. Asociación con tareas
+### 3.3. Task association
 
-- **Referencia a *issues*:** siempre que sea posible, asociar los *commits* con su *issue*, *ticket* o tarea correspondiente en el pie del mensaje (`Refs: #123`, `Closes: #123`).
+- **Issue references:** whenever possible, associate commits with their corresponding issue, ticket, or task in the footer (`Refs: #123`, `Closes: #123`).
 
-### 3.4. Push simplificado
+### 3.4. Simplified push
 
-Si el repositorio está configurado correctamente (identidad y SSH), el comando de envío es simplemente:
+If the repository is correctly configured (identity and SSH), the push command is simply:
 
 ```bash
 git push
 ```
 
-Para la primera configuración (elegir entre credenciales personales o laborales) consulta [GIT.md](./GIT.md#configuración-inicial-y-ssh-por-contexto).
+For initial configuration (choosing between personal or corporate credentials) see [GIT.md](./GIT.md#initial-configuration-and-ssh-by-context).
 
-**Nota:** Puedes verificar rápidamente la identidad activa del repositorio:
+**Note:** You can quickly verify the active identity of the repository:
 
 ```bash
 git config --list | grep ^user\.
 ```
 
-### 3.5. Comandos git no interactivos
+### 3.5. Non-interactive git commands
 
-**⚠️ IMPORTANTE:** Siempre usar comandos no interactivos para evitar paginadores y editores.
+**⚠️ IMPORTANT:** Always use non-interactive commands to avoid pagers and editors.
 
-**Comandos recomendados:**
+**Recommended commands:**
 
 ```bash
-# Ver historial de commits (no interactivo)
-git --no-pager log --oneline -10  # últimos 10 commits
-git --no-pager log --oneline -5   # últimos 5 commits
-git log -n 5                      # alternativa sin pager
+# View commit history (non-interactive)
+git --no-pager log --oneline -10  # last 10 commits
+git --no-pager log --oneline -5   # last 5 commits
+git log -n 5                      # alternative without pager
 
-# Ver diferencias (no interactivo)
+# View diffs (non-interactive)
 git --no-pager diff
 git --no-pager diff --staged
 
-# Ver estado del repositorio
-git status  # ya es no interactivo por defecto
+# View repository status
+git status  # already non-interactive by default
 
-# Otros comandos de consulta no interactivos
+# Other non-interactive query commands
 git --no-pager show HEAD
 git --no-pager branch -v
 ```
 
-**Configuración global opcional:**
+**Optional global configuration:**
 
 ```bash
-# Deshabilitar pager para todos los comandos git (opcional)
+# Disable pager for all git commands (optional)
 git config --global pager.log false
 git config --global pager.diff false
 ```
 
-### 3.6. Solución de problemas comunes
+### 3.6. Common problem solving
 
-#### Problema: `quote>` en git commit
+#### Problem: `quote>` in git commit
 
-**Síntoma:** Al ejecutar `git commit -m "mensaje"` aparece `quote>` y el comando no termina.
+**Symptom:** Running `git commit -m "message"` shows `quote>` and the command does not finish.
 
-**Causa:** Error de escape de comillas en el mensaje de commit.
+**Cause:** Quote escaping error in the commit message.
 
-**Soluciones:**
+**Solutions:**
 
-1. **Escapar comillas correctamente:**
+1. **Escape quotes correctly:**
    ```bash
-   # MAL: comillas dobles dentro de comillas dobles sin escapar
+   # BAD: double quotes inside double quotes without escaping
    git commit -m "fix: correct "user" validation"
    
-   # BIEN: escapar comillas internas
+   # GOOD: escape inner quotes
    git commit -m "fix: correct \"user\" validation"
    
-   # MEJOR: usar comillas simples para el mensaje
+   # BEST: use single quotes for the message
    git commit -m 'fix: correct "user" validation'
    ```
 
-2. **Cancelar el prompt `quote>` si aparece:**
+2. **Cancel the `quote>` prompt if it appears:**
    ```bash
-   # Presionar Ctrl+C para cancelar el comando incompleto
-   # Luego reescribir el mensaje correctamente
+   # Press Ctrl+C to cancel the incomplete command
+   # Then rewrite the message correctly
    ```
 
-3. **Método preferido: usar archivo temporal detallado**
+3. **Preferred method: use a detailed temporary file**
    ```bash
    cat > /tmp/commit-msg.txt <<EOF
    fix: correct user validation
@@ -262,12 +262,11 @@ git config --global pager.diff false
    git commit -F /tmp/commit-msg.txt
    ```
 
-**Prevención:**
-- Evitar comillas dobles dentro de mensajes entre comillas dobles
-- Preferir comillas simples para mensajes que contengan comillas dobles
-- Verificar balance de comillas antes de ejecutar el comando
+**Prevention:**
+- Avoid double quotes inside double-quoted messages
+- Prefer single quotes for messages that contain double quotes
+- Verify quote balance before running the command
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
-
+*Written by Rodrigo Álvarez (@incognia)*

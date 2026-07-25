@@ -1,143 +1,143 @@
-# Reglas de Vault CLI
+# Vault CLI rules
 
-## Contexto y propósito
+## Context and purpose
 
-Estas reglas están diseñadas para operaciones con HashiCorp Vault CLI en entornos controlados por Rodrigo Álvarez, especialmente en tareas relacionadas con autenticación segura, gestión de secretos y operaciones DevOps dentro de infraestructura distribuida.
+These rules are designed for operations with HashiCorp Vault CLI in environments managed by Rodrigo Álvarez, particularly for tasks related to secure authentication, secret management, and DevOps operations within distributed infrastructure.
 
-## Configuración inicial
+## Initial configuration
 
-### Variables de entorno
+### Environment variables
 
 ```bash
-# URL del servidor Vault
+# Vault server URL
 export VAULT_ADDR="https://vault.example.com:8200"
 
-# Token de autenticación (usar variables seguras)
+# Authentication token (use secure variables)
 export VAULT_TOKEN="$(cat ~/.vault-token)"
 
-# Namespace por defecto (si aplica)
+# Default namespace (if applicable)
 export VAULT_NAMESPACE="kv"
 ```
 
-### Autenticación
+### Authentication
 
 ```bash
-# Autenticación interactiva
+# Interactive authentication
 vault auth -method=userpass username=incognia
 
-# Verificar estado de autenticación
+# Verify authentication status
 vault auth -method=token -verify
 
-# Renovar token
+# Renew token
 vault token renew
 ```
 
-## Estructura de rutas estándar
+## Standard path structure
 
 ### Namespace: kv (Key-Value v2)
 
-| Ruta | Propósito | Formato |
-|------|-----------|----------|
-| `kv/incognia/passwords` | Credenciales y contraseñas temporales | JSON con campos: `username`, `password`, `expires` |
-| `kv/incognia/ssh` | Claves SSH privadas y públicas | JSON con campos: `private_key`, `public_key`, `comment` |
-| `kv/incognia/tokens` | Tokens de API y servicios externos | JSON con campos: `token`, `service`, `expires`, `scope` |
-| `kv/incognia/certificates` | Certificados SSL/TLS | JSON con campos: `cert`, `key`, `ca`, `expires` |
-| `kv/incognia/database` | Credenciales de bases de datos | JSON con campos: `host`, `port`, `username`, `password`, `database` |
-| `kv/incognia/kubernetes` | Secretos de Kubernetes | JSON con campos: `kubeconfig`, `token`, `namespace` |
+| Path | Purpose | Format |
+|------|---------|--------|
+| `kv/incognia/passwords` | Credentials and temporary passwords | JSON with fields: `username`, `password`, `expires` |
+| `kv/incognia/ssh` | Private and public SSH keys | JSON with fields: `private_key`, `public_key`, `comment` |
+| `kv/incognia/tokens` | API tokens and external service tokens | JSON with fields: `token`, `service`, `expires`, `scope` |
+| `kv/incognia/certificates` | SSL/TLS certificates | JSON with fields: `cert`, `key`, `ca`, `expires` |
+| `kv/incognia/database` | Database credentials | JSON with fields: `host`, `port`, `username`, `password`, `database` |
+| `kv/incognia/kubernetes` | Kubernetes secrets | JSON with fields: `kubeconfig`, `token`, `namespace` |
 
-## Operaciones básicas
+## Basic operations
 
-### Gestión de secretos
+### Secret management
 
 ```bash
-# Listar secretos en una ruta
+# List secrets at a path
 vault kv list kv/incognia/
 
-# Crear/actualizar secreto
+# Create/update secret
 vault kv put kv/incognia/passwords/myapp username="admin" password="secure123" expires="2025-12-31T23:59:59Z"
 
-# Leer secreto (formato tabla)
+# Read secret (table format)
 vault kv get kv/incognia/passwords/myapp
 
-# Leer secreto (formato JSON)
+# Read secret (JSON format)
 vault kv get -format=json kv/incognia/passwords/myapp
 
-# Eliminar versión específica
+# Delete specific version
 vault kv delete -versions=1,2 kv/incognia/passwords/myapp
 
-# Eliminar permanentemente
+# Permanently destroy
 vault kv destroy -versions=1 kv/incognia/passwords/myapp
 
-# Deshacer eliminación
+# Undo deletion
 vault kv undelete -versions=1 kv/incognia/passwords/myapp
 ```
 
-### Versionado de secretos
+### Secret versioning
 
 ```bash
-# Ver historial de versiones
+# View version history
 vault kv metadata get kv/incognia/passwords/myapp
 
-# Leer versión específica
+# Read specific version
 vault kv get -version=2 kv/incognia/passwords/myapp
 
-# Configurar retención máxima
+# Configure maximum retention
 vault kv metadata put -max-versions=5 kv/incognia/passwords/myapp
 ```
 
-## Procesamiento de claves SSH
+## SSH key processing
 
-### Descarga y formato de claves SSH
+### Downloading and formatting SSH keys
 
-Las claves almacenadas en `kv/incognia/ssh` requieren post-procesamiento con `jq` para extraerlas correctamente desde la salida JSON.
+Keys stored in `kv/incognia/ssh` require post-processing with `jq` to extract them correctly from the JSON output.
 
 ```bash
-# Extraer clave privada SSH
+# Extract private SSH key
 vault kv get -format=json kv/incognia/ssh/mykey | jq -r '.data.data.private_key' > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 
-# Extraer clave pública SSH
+# Extract public SSH key
 vault kv get -format=json kv/incognia/ssh/mykey | jq -r '.data.data.public_key' > ~/.ssh/id_rsa.pub
 chmod 644 ~/.ssh/id_rsa.pub
 
-# Extraer ambas claves en un solo comando
+# Extract both keys in a single command
 vault kv get -format=json kv/incognia/ssh/mykey | \
   jq -r '.data.data |
     "\(.private_key)" > "~/.ssh/id_rsa",
     "\(.public_key)" > "~/.ssh/id_rsa.pub"'
 ```
 
-### Validación de claves SSH
+### SSH key validation
 
 ```bash
-# Validar formato de clave privada
+# Validate private key format
 ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null && echo "Clave privada válida" || echo "Clave privada inválida"
 
-# Verificar coincidencia entre clave privada y pública
+# Verify match between private and public key
 ssh-keygen -y -f ~/.ssh/id_rsa | diff - ~/.ssh/id_rsa.pub
 ```
 
-## Gestión de tokens y credenciales
+## Token and credential management
 
-### Tokens de API
+### API tokens
 
 ```bash
-# Almacenar token de API
+# Store API token
 vault kv put kv/incognia/tokens/github \
   token="ghp_xxxxxxxxxxxxxxxxxxxx" \
   service="GitHub API" \
   expires="2025-12-31T23:59:59Z" \
   scope="repo,admin:org"
 
-# Extraer token para uso en scripts
+# Extract token for use in scripts
 GITHUB_TOKEN=$(vault kv get -format=json kv/incognia/tokens/github | jq -r '.data.data.token')
 export GITHUB_TOKEN
 ```
 
-### Credenciales de base de datos
+### Database credentials
 
 ```bash
-# Almacenar credenciales de PostgreSQL
+# Store PostgreSQL credentials
 vault kv put kv/incognia/database/postgresql \
   host="postgres.example.com" \
   port="5432" \
@@ -145,58 +145,58 @@ vault kv put kv/incognia/database/postgresql \
   password="secure_password" \
   database="production"
 
-# Extraer credenciales para conexión
+# Extract credentials for connection
 DB_HOST=$(vault kv get -format=json kv/incognia/database/postgresql | jq -r '.data.data.host')
 DB_USER=$(vault kv get -format=json kv/incognia/database/postgresql | jq -r '.data.data.username')
 DB_PASS=$(vault kv get -format=json kv/incognia/database/postgresql | jq -r '.data.data.password')
 ```
 
-## Integración con Kubernetes
+## Kubernetes integration
 
-### Configuración de kubeconfig
+### kubeconfig management
 
 ```bash
-# Almacenar kubeconfig
+# Store kubeconfig
 vault kv put kv/incognia/kubernetes/cluster1 \
   kubeconfig="$(cat ~/.kube/config | base64 -w 0)" \
   namespace="production" \
   context="cluster1-admin"
 
-# Restaurar kubeconfig
+# Restore kubeconfig
 vault kv get -format=json kv/incognia/kubernetes/cluster1 | \
   jq -r '.data.data.kubeconfig' | base64 -d > ~/.kube/config
 chmod 600 ~/.kube/config
 ```
 
-## Mejores prácticas de seguridad
+## Security best practices
 
-### Gestión de tokens
+### Token management
 
-1. **Rotación regular**: Rotar tokens cada 30-90 días
-2. **Principio de menor privilegio**: Otorgar solo los permisos mínimos necesarios
-3. **Auditoría**: Revisar regularmente el acceso a secretos
+1. **Regular rotation**: rotate tokens every 30–90 days
+2. **Principle of least privilege**: grant only the minimum necessary permissions
+3. **Audit**: regularly review secret access
 
 ```bash
-# Crear token con TTL limitado
+# Create token with limited TTL
 vault token create -ttl=24h -display-name="temp-access"
 
-# Verificar capacidades del token actual
+# Verify current token capabilities
 vault token capabilities kv/incognia/passwords/myapp
 ```
 
-### Políticas de acceso
+### Access policies
 
 ```bash
-# Ver políticas asignadas al token actual
+# View policies assigned to the current token
 vault token lookup -format=json | jq -r '.data.policies[]'
 
-# Verificar política específica
+# Verify a specific policy
 vault policy read incognia-dev
 ```
 
-## Automatización y scripting
+## Automation and scripting
 
-### Scripts de respaldo
+### Backup scripts
 
 ```bash
 #!/bin/bash
@@ -213,7 +213,7 @@ done
 echo "Respaldo completado en: $BACKUP_DIR"
 ```
 
-### Validación de secretos
+### Secret validation
 
 ```bash
 #!/bin/bash
@@ -236,31 +236,31 @@ for secret in "${CRITICAL_SECRETS[@]}"; do
 done
 ```
 
-## Monitoreo y auditoría
+## Monitoring and auditing
 
-### Comandos de diagnóstico
+### Diagnostic commands
 
 ```bash
-# Estado del servidor Vault
+# Vault server status
 vault status
 
-# Información del token actual
+# Current token information
 vault token lookup
 
-# Listar montajes de secretos
+# List secret mounts
 vault secrets list
 
-# Ver logs de auditoría (requiere permisos admin)
+# View audit logs (requires admin permissions)
 vault audit list
 ```
 
-### Métricas y uso
+### Metrics and usage
 
 ```bash
-# Estadísticas de uso del KV store
+# KV store usage statistics
 vault kv metadata get kv/incognia/ | grep -E "(created_time|updated_time|version)"
 
-# Listar secretos por fecha de modificación
+# List secrets by modification date
 vault kv list -format=json kv/incognia/ | \
   jq -r '.[] | select(length > 0)' | \
   while read -r secret; do
@@ -268,31 +268,31 @@ vault kv list -format=json kv/incognia/ | \
   done
 ```
 
-## Resolución de problemas comunes
+## Common troubleshooting
 
-### Errores de autenticación
+### Authentication errors
 
 ```bash
-# Token expirado
+# Expired token
 vault token renew || vault auth -method=userpass username=incognia
 
-# Verificar conectividad
+# Verify connectivity
 curl -k "$VAULT_ADDR/v1/sys/health"
 ```
 
-### Problemas de permisos
+### Permission issues
 
 ```bash
-# Verificar políticas del usuario actual
+# Verify current user's policies
 vault token lookup -format=json | jq '.data.policies'
 
-# Probar acceso a una ruta específica
+# Test access to a specific path
 vault kv get kv/incognia/test 2>&1 | grep -q "permission denied" && \
   echo "Sin permisos" || echo "Acceso permitido"
 ```
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez para la gestión segura de secretos en infraestructura DevOps y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*This document was developed by Rodrigo Álvarez for secure secret management in DevOps infrastructure and is distributed under the MIT licence. For further details, see the LICENSE file.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*

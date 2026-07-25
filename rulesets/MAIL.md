@@ -1,70 +1,70 @@
-# Reglas de composición de correos HTML para Outlook Web (OWA)
+# HTML email composition rules for Outlook Web (OWA)
 
-## Propósito
+## Purpose
 
-Este documento define las reglas para componer correos HTML que se copian desde el navegador y se pegan en Outlook Web App (OWA). Las restricciones existen porque OWA elimina gran parte del CSS al pegar.
+This document defines the rules for composing HTML emails that are copied from the browser and pasted into Outlook Web App (OWA). The restrictions exist because OWA strips most CSS on paste.
 
-## Plantillas disponibles
+## Available templates
 
-Las plantillas viven en `templates/mail/` de este repositorio:
+Templates live in `templates/mail/` of this repository:
 
-- **`delivery_template.html`** — entrega de microservicio (Java/Spring Boot). Tiene 7 *placeholders* para reemplazar.
-- **`generic_template.html`** — cualquier otro tipo: cambios de configuración, decisiones técnicas, reportes, correcciones.
+- **`delivery_template.html`** — microservice delivery (Java/Spring Boot). Has 7 *placeholders* to replace.
+- **`generic_template.html`** — any other type: configuration changes, technical decisions, reports, corrections.
 
-## Flujo de trabajo
+## Workflow
 
-1. Copiar la plantilla con nombre `YYYY-MM-DD-{nombre-corto}.html`
-2. Reemplazar los *placeholders*
-3. Entregar según el modo elegido:
-   - **`owa`**: abrir en navegador → `Ctrl+A` → `Ctrl+C` → pegar en OWA. Outlook agrega la firma al enviar.
-   - **`mac`**: abrir borrador en Outlook vía AppleScript. Outlook inyecta la firma «Kabat One». Enviar con ⌘+Enter.
-   - **`graph`**: enviar vía Microsoft Graph API con firma como imagen CID *inline*. Autenticar con `~/rules/scripts/graph_auth.py`.
+1. Copy the template with the name `YYYY-MM-DD-{short-name}.html`
+2. Replace the *placeholders*
+3. Deliver according to the chosen mode:
+   - **`owa`**: open in browser → `Ctrl+A` → `Ctrl+C` → paste into OWA. Outlook adds the signature on send.
+   - **`mac`**: open a draft in Outlook via AppleScript. Outlook injects the "Kabat One" signature. Send with ⌘+Enter.
+   - **`graph`**: send via Microsoft Graph API with signature as an inline CID image. Authenticate with `~/rules/scripts/graph_auth.py`.
 
-> Invocación con *skill*: `/mail <owa|mac|graph> <delivery|generic> <asunto>`
+> Skill invocation: `/mail <owa|mac|graph> <delivery|generic> <subject>`
 
-## Reglas HTML críticas
+## Critical HTML rules
 
-### Fondos de color: `bgcolor` en `<td>`, nunca solo en `<table>`
+### Colour backgrounds: `bgcolor` on `<td>`, never on `<table>` alone
 
-OWA solo captura el `background-color` del `<td>` que contiene el texto. Además, duplicar como atributo HTML `bgcolor`.
+OWA only captures the `background-color` of the `<td>` containing the text. Also duplicate it as the HTML attribute `bgcolor`.
 
 ```html
-<!-- CORRECTO -->
-<td bgcolor="#d4edda" style="background-color:#d4edda; padding:15px;">Contenido</td>
+<!-- CORRECT -->
+<td bgcolor="#d4edda" style="background-color:#d4edda; padding:15px;">Content</td>
 
-<!-- INCORRECTO — el fondo no se copia -->
-<table style="background-color:#d4edda;"><tr><td>Contenido</td></tr></table>
+<!-- INCORRECT — background is not copied -->
+<table style="background-color:#d4edda;"><tr><td>Content</td></tr></table>
 ```
 
-### Estructura del contenedor
+### Container structure
 
-Tabla exterior (fondo gris `#f0f0f0`) → tabla interior (fondo blanco `#ffffff`, max 800px). Los fondos van en los `<td>`.
+Outer table (grey background `#f0f0f0`) → inner table (white background `#ffffff`, max 800px). Backgrounds go on the `<td>` elements.
 
-### Cajas de color
+### Colour boxes
 
-El borde izquierdo va en `<table>` (`border-left:4px solid`), el fondo en `<td>` (`bgcolor` + `background-color`).
+The left border goes on `<table>` (`border-left:4px solid`), the background on `<td>` (`bgcolor` + `background-color`).
 
-### Bloques de código
+### Code blocks
 
-No usar `<pre>` (pierde fondo al copiarse). Usar `<td>` con `white-space:pre-wrap`.
+Do not use `<pre>` (loses background on copy). Use `<td>` with `white-space:pre-wrap`.
 
-### Código *inline*
+### Inline code
 
-`<code>` con estilos *inline* funciona: `background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;`
+`<code>` with inline styles works: `background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;`
 
-### Tablas de datos
+### Data tables
 
-Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada `<tr>` par. CSS `nth-child` no funciona al copiar.
+Alternating rows: add `style="background-color:#f9f9f9;"` manually to each even `<tr>`. CSS `nth-child` does not work on copy.
 
-### Imágenes
+### Images
 
-`<img>` con `style="max-width:100%; display:block;"`.
+`<img>` with `style="max-width:100%; display:block;"`.
 
-## Lo que OWA elimina o ignora
+## What OWA strips or ignores
 
-- Bloques `<style>` completos
-- Clases CSS
-- `background-color` en `<table>` (no en `<td>`)
+- Full `<style>` blocks
+- CSS classes
+- `background-color` on `<table>` (not on `<td>`)
 - `border-radius`
 - `overflow-x:auto`
 - `tr:nth-child(even)`
@@ -72,54 +72,54 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 - `position:absolute`
 - *Media queries*
 
-## Paleta de colores
+## Colour palette
 
-### Colores de acento (borde inferior del H1)
+### Accent colours (H1 bottom border)
 
-- Entrega / estado OK → `#00A1FF` Midday
-- Corrección / cambio → `#7252D8` Video
-- Alerta crítica → `#E10613` Dispatch
-- Decisión técnica → `#007EB5` Code
+- Delivery / OK status → `#00A1FF` Midday
+- Correction / change → `#7252D8` Video
+- Critical alert → `#E10613` Dispatch
+- Technical decision → `#007EB5` Code
 
-### Cajas
+### Boxes
 
-- *Success* (verde): borde `#8DCB3E` Safety, fondo `#E8F5D6`
-- *Info* (azul): borde `#00A1FF` Midday, fondo `#C3D8F3` Ice
-- *Warning* (amarillo): borde `#FFDA00` Traffic, fondo `#FFF8D6`
-- *Danger* (rojo): borde `#E10613` Dispatch, fondo `#FCE4E5`
-- Decisión (azul oscuro): borde `#007EB5` Code, fondo `#E0F0F5`
+- *Success* (green): border `#8DCB3E` Safety, background `#E8F5D6`
+- *Info* (blue): border `#00A1FF` Midday, background `#C3D8F3` Ice
+- *Warning* (yellow): border `#FFDA00` Traffic, background `#FFF8D6`
+- *Danger* (red): border `#E10613` Dispatch, background `#FCE4E5`
+- Decision (dark blue): border `#007EB5` Code, background `#E0F0F5`
 
-### Otros
+### Other
 
-- Código: fondo `#f4f4f4`
-- Encabezado tabla: fondo `#00A1FF` Midday, texto blanco
-- Fila par tabla: `#f9f9f9`
+- Code: background `#f4f4f4`
+- Table header: background `#00A1FF` Midday, white text
+- Even table row: `#f9f9f9`
 
-## *Placeholders* de la plantilla de entrega
+## Delivery template *placeholders*
 
-- `{NOMBRE_SERVICIO}` — nombre completo del microservicio
-- `{PREFIJO}` — prefijo de ruta sin slash inicial
-- `{VERSION}` — versión desplegada
-- `{DESTINATARIO}` — nombre del desarrollador
-- `{FECHA}` — fecha en formato largo (ej. 21 de marzo de 2026)
-- `{RAMA_BASE}` — rama de origen (main, DEV-1.1, etc.)
-- `{DESCRIPCION}` — una oración sobre qué hace el servicio
+- `{NOMBRE_SERVICIO}` — full microservice name
+- `{PREFIJO}` — path prefix without leading slash
+- `{VERSION}` — deployed version
+- `{DESTINATARIO}` — developer name
+- `{FECHA}` — date in long format (e.g. 21 de marzo de 2026)
+- `{RAMA_BASE}` — source branch (main, DEV-1.1, etc.)
+- `{DESCRIPCION}` — one sentence about what the service does
 
-## Ajustes para Angular/Node.js
+## Adjustments for Angular/Node.js
 
-- Eliminar sección «Análisis de código (SonarQube)»
-- *Pipeline*: 5 *stages* (sin compilar ni SonarQube)
-- Docker: cambiar a *multi-stage* Node 22 + Nginx
-- Quitar fila de Swagger UI en tabla de acceso
-- Tiempo estimado: 5-8 min *build* + 3 min ArgoCD
+- Remove the "Análisis de código (SonarQube)" section
+- *Pipeline*: 5 *stages* (no compile or SonarQube stage)
+- Docker: switch to *multi-stage* Node 22 + Nginx
+- Remove the Swagger UI row from the access table
+- Estimated time: 5–8 min *build* + 3 min ArgoCD
 
-## Envío vía Microsoft Graph API
+## Sending via Microsoft Graph API
 
-- Autenticación: `~/rules/scripts/graph_auth.py` (caché → *refresh* → *device code flow*)
-- Credenciales: `~/.secrets.yaml` (clave `GRAPH_API`)
-- Firma *inline*: `~/rules/templates/mail/assets/ralvarez_firma_740.png` como adjunto CID
-- Documentación detallada del registro en Entra y flujo OAuth2: `~/rules/docs/MAIL.md`
+- Authentication: `~/rules/scripts/graph_auth.py` (cache → *refresh* → *device code flow*)
+- Credentials: `~/.secrets.yaml` (key `GRAPH_API`)
+- Inline signature: `~/rules/templates/mail/assets/ralvarez_firma_740.png` as a CID attachment
+- Detailed documentation for the Entra registration and OAuth2 flow: `~/rules/docs/MAIL.md`
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incogniadev)*
+*Written by Rodrigo Álvarez (@incogniadev)*

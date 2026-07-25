@@ -1,98 +1,98 @@
-# Reglas de atribución personal
+# Personal attribution rules
 
-## 1. Propósito
+## 1. Purpose
 
-Este documento establece cómo darme crédito y atribución en documentos individuales, scripts o archivos que no requieren un archivo LICENSE completo. Para proyectos con múltiples archivos que requieren licenciamiento formal, consulta **[LICENSING.md](./LICENSING.md)**.
+This document establishes how to credit and attribute authorship in individual documents, scripts, or files that do not require a full LICENSE file. For projects with multiple files requiring formal licensing, see **[LICENSING.md](./LICENSING.md)**.
 
-## 2. Identidad del autor
+## 2. Author identity
 
-### 2.1. Nombre completo
-- **Nombre legal:** Rodrigo Ernesto Álvarez Aguilera
+### 2.1. Full name
+- **Legal name:** Rodrigo Ernesto Álvarez Aguilera
 
-### 2.2. Nombres de uso común
-- **Nombre abreviado:** Rodrigo Álvarez
-- **Apellido principal para indexación:** Álvarez
+### 2.2. Common names
+- **Short name:** Rodrigo Álvarez
+- **Primary surname for indexing:** Álvarez
 
-### 2.3. Convención de nombres
-- **Contexto hispanohablante:** se utilizan dos apellidos, siendo el paterno «Álvarez» y el materno «Aguilera».
-- **Contexto técnico e internacional:** para garantizar una correcta atribución en sistemas que no manejan nombres compuestos, usar como apellido principal «Álvarez».
-- **Excepción obligatoria:** el apellido se escribe siempre como «Álvarez» en documentación y texto, incluso en inglés.
+### 2.3. Naming convention
+- **Spanish-speaking context:** two surnames are used — paternal «Álvarez» and maternal «Aguilera».
+- **Technical and international context:** to ensure correct attribution in systems that do not handle compound names, use «Álvarez» as the primary surname.
+- **Mandatory exception:** the surname is always written as «Álvarez» in documentation and text, including in English.
 
-## 3. Especialización profesional
+## 3. Professional specialisation
 
-Rodrigo es **Systems Engineering Lead en Elsevier** especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
+Rodrigo is **Systems Engineering Lead at Elsevier**, specialised in native Kubernetes platforms, GitOps, and advanced observability. With experience building and operating full stacks on bare-metal infrastructure, focused on automation, reliability, and service meshes.
 
-Sus competencias técnicas principales incluyen:
+Key technical competencies:
 
-- **Plataformas Kubernetes bare-metal:** construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init
-- **GitOps y automatización declarativa:** implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados
-- **Service mesh y networking avanzado:** configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs
-- **Observabilidad y trazabilidad distribuida:** instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch
-- **CI/CD empresarial:** diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps
-- **Seguridad en mallas de servicios:** implementación de mTLS, RBAC y políticas de red en entornos productivos
+- **Bare-metal Kubernetes platforms:** building and operating clusters on Proxmox VE, provisioning with kubeadm and cloud-init
+- **GitOps and declarative automation:** implementing workflows with Argo CD, managing Helm charts and versioned manifests
+- **Service mesh and advanced networking:** configuring Istio, Envoy, Cilium, MetalLB, bridges, and VLANs
+- **Observability and distributed tracing:** instrumentation with OpenTelemetry, Prometheus, Grafana, Fluentd, and Elasticsearch
+- **Enterprise CI/CD:** designing pipelines with Jenkins and GitLab CI integrated into GitOps workflows
+- **Service mesh security:** implementing mTLS, RBAC, and network policies in production environments
 
-## 4. Identificadores digitales
+## 4. Digital identifiers
 
-### 4.1. Personales
+### 4.1. Personal
 - **GitHub:** `incognia`
 - **GitLab:** `incognia`
-- **Correo electrónico:** `incognia@gmail.com`
+- **Email:** `incognia@gmail.com`
 
-### 4.2. Laborales (Elsevier)
+### 4.2. Corporate (Elsevier)
 - **GitHub:** `incogniaops`
 - **GitLab:** `incogniadev`
-- **Correo electrónico:** `r.alvarez1@elsevier.com`
+- **Email:** `r.alvarez1@elsevier.com`
 
-## 5. Atribución y menciones
+## 5. Attribution and credits
 
-### 5.1. Formatos sugeridos
-- **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
-- **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
-- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Systems Engineering Lead para Elsevier (@incogniaops)»
+### 5.1. Suggested formats
+- **Personal contribution:** «created by Rodrigo Álvarez (@incognia)»
+- **Technical documentation:** «documented by Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
+- **Corporate contribution:** «this work was carried out by Rodrigo Álvarez in his capacity as Systems Engineering Lead for Elsevier (@incogniaops)»
 
-### 5.2. Firma en commits de Git
-- **Para proyectos personales:**
+### 5.2. Git commit signature
+- **For personal projects:**
   ```bash
   git config user.name "Rodrigo Álvarez"
   git config user.email "incognia@gmail.com"
   ```
-- **Para proyectos laborales (Elsevier):**
+- **For corporate projects (Elsevier):**
   ```bash
   git config user.name "Rodrigo Álvarez"
   git config user.email "r.alvarez1@elsevier.com"
   ```
 
-## 6. Licenciamiento y firma de contribuciones
+## 6. Licensing and contribution signature
 
-### 6.1. Filosofía de licenciamiento
-- **Proyectos profesionales/laborales:** la licencia a utilizar es **MIT**, por su permisividad y compatibilidad.
-- **Proyectos personales:** el licenciamiento puede variar, pero la preferencia es por licencias de código abierto como MIT o Apache 2.0.
+### 6.1. Licensing philosophy
+- **Corporate/professional projects:** the licence to use is **MIT**, for its permissiveness and compatibility.
+- **Personal projects:** licensing may vary, but the preference is for open-source licences such as MIT or Apache 2.0.
 
-### 6.2. Firma de contribuciones (alias)
-- **Contribuciones personales:** firmar bajo el alias `incognia`.
-- **Contribuciones laborales o bajo contrato:** firmar bajo el alias `incogniaops`.
-- **Requerimientos legales:** en encabezados de licencia o documentos legales que lo requieran, utilizar el nombre completo: `Rodrigo Ernesto Álvarez Aguilera`.
+### 6.2. Contribution signature (alias)
+- **Personal contributions:** sign under the alias `incognia`.
+- **Corporate or contracted contributions:** sign under the alias `incogniaops`.
+- **Legal requirements:** in licence headers or legal documents that require it, use the full name: `Rodrigo Ernesto Álvarez Aguilera`.
 
-## 7. Estándares de codificación y documentación
+## 7. Coding and documentation standards
 
-### 7.1. Idioma
-- **Mensajes de *commit* y código:** los mensajes de *commit* y los comentarios dentro del código deben estar en **inglés internacional**.
-- **Documentación (README, CHANGELOG, etc.):** el idioma será **español mexicano**, a menos que el contexto del proyecto exija explícitamente el inglés. Los títulos y encabezados en español seguirán la capitalización de frase (solo la primera palabra en mayúscula).
-- **Nombres de archivos y directorios:** siempre en **inglés internacional** para mantener la consistencia técnica.
+### 7.1. Language
+- **Commit messages and code:** commit messages and inline code comments must be in **international English**.
+- **Documentation (README, CHANGELOG, etc.):** the language is **Mexican Spanish**, unless the project context explicitly requires English. Titles and headings in Spanish follow sentence case (only the first word capitalised).
+- **File and directory names:** always in **international English** to maintain technical consistency.
 
-### 7.2. Mensajes de *commit*
-- **Convención:** seguir la convención de *Conventional Commits*.
-- **Idioma:** redactar los mensajes en inglés.
-- **Formato:** estructurarlos con un prefijo (`feat`, `fix`, `docs`, `refactor`, etc.).
-- **Emojis:** no usar emojis.
+### 7.2. Commit messages
+- **Convention:** follow the Conventional Commits specification.
+- **Language:** write messages in English.
+- **Format:** structure them with a prefix (`feat`, `fix`, `docs`, `refactor`, etc.).
+- **Emojis:** do not use emojis.
 
-### 7.3. Diagramas
-Para la creación de diagramas en archivos Markdown, usar exclusivamente **Mermaid**.
-
----
-
-*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples scripts/documentos, consulta **[LICENSING.md](./LICENSING.md)**.*
+### 7.3. Diagrams
+For diagrams in Markdown files, use **Mermaid** exclusively.
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*This document is intended for personal projects, detailing how to provide proper attribution without requiring a full licence file. For corporate projects or those with multiple scripts/documents, see **[LICENSING.md](./LICENSING.md)**.*
+
+---
+
+*Written by Rodrigo Álvarez (@incognia)*

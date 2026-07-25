@@ -1,69 +1,69 @@
-# Perfil profesional de Rodrigo Álvarez – Systems Engineering Lead
+# Professional profile of Rodrigo Álvarez – Systems Engineering Lead
 
-## Resumen profesional
+## Professional summary
 
-Systems Engineering Lead en Elsevier, especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
+Systems Engineering Lead at Elsevier, specialised in native Kubernetes platforms, GitOps, and advanced observability. With experience building and operating full stacks on bare-metal infrastructure, focused on automation, reliability, and service meshes.
 
-Trabajo desde la base: desde levantar clústeres en *bare-metal* hasta instrumentar servicios con trazabilidad y métricas distribuidas. Mi enfoque va más allá del «despliegue en la nube», manteniendo control total sobre la infraestructura y aplicando principios de ingeniería de confiabilidad.
+Working from the ground up: from standing up clusters on bare-metal to instrumenting services with distributed tracing and metrics. My approach goes beyond "cloud deployment", maintaining full control over infrastructure and applying reliability engineering principles.
 
-## Filosofía profesional
+## Professional philosophy
 
-Mi enfoque de trabajo se rige por tres principios clave:
+My working approach is guided by three key principles:
 
-- **Compromiso con la excelencia:** priorizo la calidad y el valor a largo plazo sobre los entregables puramente transaccionales, buscando siempre la satisfacción de un trabajo bien hecho.
-- **Conocimiento compartido:** fomento una cultura colaborativa a través de documentación clara y arquitecturas mantenibles que evitan la dependencia de personal.
-- **Profesionalismo auténtico:** creo en una comunicación directa y honesta, sin calcos culturales innecesarios, para una resolución de problemas eficiente.
-
----
-
-## *Stack* tecnológico
-
-| Categoría           | Herramientas clave |
-|---------------------|--------------------|
-| Infraestructura     | **Proxmox VE (*bare-metal*)**, cloud-init, bridges/VLAN |
-| Orquestación        | Kubernetes (kubeadm, containerd) |
-| Networking          | Cilium, MetalLB |
-| Malla de servicios  | Istio, Envoy, Kiali |
-| Observabilidad      | Prometheus, Grafana, Fluentd, Elasticsearch, Kibana, OpenTelemetry |
-| CI/CD               | Jenkins, GitLab CI |
-| GitOps              | Helm, Argo CD, Kro |
-| Repositorio         | GitLab |
-| Lenguajes conocidos | Bash, YAML, JSON, Go (nivel intermedio) |
+- **Commitment to excellence:** I prioritise quality and long-term value over purely transactional deliverables, always seeking the satisfaction of a job well done.
+- **Shared knowledge:** I foster a collaborative culture through clear documentation and maintainable architectures that avoid personnel dependencies.
+- **Authentic professionalism:** I believe in direct, honest communication, without unnecessary cultural calques, for efficient problem solving.
 
 ---
 
-## Competencias técnicas principales
+## Technology stack
 
-- Experiencia sólida en **Kubernetes sobre Proxmox *bare-metal***
-- Conocimiento práctico de redes, bridges, cloud-init y aprovisionamiento de nodos
-- Dominio de herramientas CI/CD: Jenkins y GitLab CI
-- Implementación de flujos GitOps con Argo CD y Helm
-- Diseño e implementación de arquitecturas de observabilidad y trazabilidad
-- Gestión de entornos multi-ambiente (dev, QA, preprod, prod)
-- Nivel de inglés **C1** (lectura técnica y comunicación escrita)
-- Enfoque en trabajo colaborativo y documentación técnica
-
----
-
-## Especializaciones avanzadas
-
-- Instrumentación con OpenTelemetry y trazas distribuidas
-- Desarrollo y mantenimiento de *charts* de Helm y manifiestos YAML versionados
-- Implementación de seguridad en mallas de servicios (mTLS, RBAC, políticas de red)
-- Filosofía de mejora continua y documentación clara
-- Automatización de procesos de infraestructura y despliegue
+| Category           | Key tools |
+|--------------------|-----------|
+| Infrastructure     | **Proxmox VE (bare-metal)**, cloud-init, bridges/VLAN |
+| Orchestration      | Kubernetes (kubeadm, containerd) |
+| Networking         | Cilium, MetalLB |
+| Service mesh       | Istio, Envoy, Kiali |
+| Observability      | Prometheus, Grafana, Fluentd, Elasticsearch, Kibana, OpenTelemetry |
+| CI/CD              | Jenkins, GitLab CI |
+| GitOps             | Helm, Argo CD, Kro |
+| Repository         | GitLab |
+| Languages          | Bash, YAML, JSON, Go (intermediate level) |
 
 ---
 
-## Contexto laboral actual
+## Core technical competencies
 
-- Proyectos técnicos de alto impacto en producción
-- Operación de *stacks* modernos con infraestructura propia (no nube pública)
-- Autonomía técnica para proponer e implementar mejoras
-- Ambiente de colaboración, documentación y aprendizaje constante
-- Modalidad presencial en **Elsevier**
-- Ubicación: Tech Hub, Ciudad de México (México City)
+- Solid experience with **Kubernetes on Proxmox bare-metal**
+- Practical knowledge of networking, bridges, cloud-init, and node provisioning
+- Proficiency with CI/CD tools: Jenkins and GitLab CI
+- Implementation of GitOps workflows with Argo CD and Helm
+- Design and implementation of observability and tracing architectures
+- Management of multi-environment setups (dev, QA, preprod, prod)
+- English level **C1** (technical reading and written communication)
+- Focus on collaborative work and technical documentation
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+## Advanced specialisations
+
+- Instrumentation with OpenTelemetry and distributed traces
+- Development and maintenance of Helm charts and versioned YAML manifests
+- Security implementation in service meshes (mTLS, RBAC, network policies)
+- Continuous improvement philosophy and clear documentation
+- Automation of infrastructure and deployment processes
+
+---
+
+## Current work context
+
+- High-impact technical projects in production
+- Operation of modern stacks on own infrastructure (not public cloud)
+- Technical autonomy to propose and implement improvements
+- Environment of collaboration, documentation, and continuous learning
+- On-site at **Elsevier**
+- Location: Tech Hub, Ciudad de México (México City)
+
+---
+
+*Written by Rodrigo Álvarez (@incognia)*

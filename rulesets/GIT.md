@@ -1,148 +1,148 @@
-# Configuración inicial de Git para nuevos repositorios
+# Initial Git configuration for new repositories
 
-Este documento describe la configuración inicial necesaria al clonar o inicializar un nuevo repositorio, especificando los ajustes de usuario y las llaves SSH según el contexto del proyecto.
+This document describes the initial configuration required when cloning or initialising a new repository, specifying user settings and SSH keys according to project context.
 
-## 1. Identificación del contexto del proyecto
+## 1. Identify the project context
 
-Antes de configurar, determina si el proyecto es:
+Before configuring, determine whether the project is:
 
-- 💼 **Laboral:** Elsevier (Tech Hub Ciudad de México / México City)
-- 📺 **Personal:** Proyectos independientes o experimentales
+- 💼 **Corporate:** Elsevier (Tech Hub Ciudad de México / México City)
+- 📺 **Personal:** independent or experimental projects
 
-## 2. Configuración local del repositorio
+## 2. Local repository configuration
 
-### Proyectos personales
+### Personal projects
 
 ```bash
-# Configurar usuario para este repositorio
+# Configure user for this repository
 git config user.name "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
 
-# Verificar configuración
+# Verify configuration
 git config --list | grep ^user\.
 ```
 
-**Credenciales de plataforma:**
+**Platform credentials:**
 - **GitHub:** incognia
 - **GitLab:** incognia
 - **SSH Key:** `~/.ssh/incognia`
 
-### Proyectos laborales (Elsevier)
+### Corporate projects (Elsevier)
 
 ```bash
-# Configurar usuario para este repositorio
+# Configure user for this repository
 git config user.name "Rodrigo Álvarez"
 git config user.email "r.alvarez1@elsevier.com"
 
-# Verificar configuración
+# Verify configuration
 git config --list | grep ^user\.
 ```
 
-**Credenciales de plataforma:**
+**Platform credentials:**
 
 - **GitHub:** incogniaops
 - **GitLab:** incogniadev
 - **SSH Key:** `~/.ssh/elsevier`
 
-## 3. Configuración inicial y SSH por contexto
+## 3. Initial configuration and SSH by context
 
-Para que en el uso diario baste con un simple `git push` sin alias SSH y sin HTTPS, configura el repositorio justo después de `git init` usando el script interactivo incluido.
+To allow daily use with a simple `git push` — no SSH alias, no HTTPS — configure the repository right after `git init` using the included interactive script.
 
-### 3.1. Uso del script interactivo
+### 3.1. Using the interactive script
 
 ```bash
-# Tras inicializar el repo
+# After initialising the repo
 git init
 
-# Ejecutar el asistente
+# Run the assistant
 bash scripts/git-init-context.sh
 ```
 
-El asistente te preguntará si el repositorio es Personal o Laboral y hará lo siguiente por ti en el repositorio actual:
+The assistant will ask whether the repository is Personal or Corporate and will do the following in the current repository:
 
-- Configurará `user.name` y `user.email`.
-- Configurará `core.sshCommand` para usar la clave adecuada con `ssh -i` (SSH, no HTTPS).
-- Opcionalmente configurará `origin` con una URL SSH (`git@github.com:ORG/REPO.git` o `git@gitlab.com:ORG/REPO.git`).
-- Definirá `main` como rama por defecto si aún no existe.
+- Configure `user.name` and `user.email`.
+- Configure `core.sshCommand` to use the appropriate key with `ssh -i` (SSH, not HTTPS).
+- Optionally configure `origin` with an SSH URL (`git@github.com:ORG/REPO.git` or `git@gitlab.com:ORG/REPO.git`).
+- Set `main` as the default branch if it does not yet exist.
 
-Al finalizar, podrás usar `git push` directamente.
+Once finished, you can use `git push` directly.
 
-### 3.2. Pasos manuales (si no usas el script)
+### 3.2. Manual steps (if not using the script)
 
 ```bash
-# Elegir contexto
+# Choose context
 # Personal
 git config user.name  "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
 git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 
-# Laboral (Elsevier)
+# Corporate (Elsevier)
 # git config user.name  "Rodrigo Álvarez"
 # git config user.email "r.alvarez1@elsevier.com"
 # git config core.sshCommand "ssh -i ~/.ssh/elsevier -o IdentitiesOnly=yes"
 
-# Configurar remoto SSH (ejemplos)
-# GitHub personal:  git@github.com:incognia/REPO.git
-# GitHub laboral:   git@github.com:incogniaops/REPO.git
-# GitLab personal:  git@gitlab.com:incognia/REPO.git
-# GitLab laboral:   git@gitlab.com:incogniadev/REPO.git
+# Configure SSH remote (examples)
+# Personal GitHub:    git@github.com:incognia/REPO.git
+# Corporate GitHub:   git@github.com:incogniaops/REPO.git
+# Personal GitLab:    git@gitlab.com:incognia/REPO.git
+# Corporate GitLab:   git@gitlab.com:incogniadev/REPO.git
 
 git remote add origin git@github.com:ORG/REPO.git
 
 git branch -M main
 ```
 
-### 3.3. Probar conexión SSH
+### 3.3. Test SSH connection
 
 ```bash
 ssh -T git@github.com || true
 ssh -T git@gitlab.com || true
 ```
 
-## 4. Clonar o inicializar repositorios
+## 4. Clone or initialise repositories
 
-### Clonar repositorio existente (SSH siempre)
+### Clone existing repository (always SSH)
 
 ```bash
 git clone git@github.com:incognia/repo-name.git              # Personal GitHub
-git clone git@github.com:incogniaops/repo-name.git           # Laboral GitHub
+git clone git@github.com:incogniaops/repo-name.git           # Corporate GitHub
 
 git clone git@gitlab.com:incognia/repo-name.git              # Personal GitLab
-git clone git@gitlab.com:incogniadev/repo-name.git           # Laboral GitLab
+git clone git@gitlab.com:incogniadev/repo-name.git           # Corporate GitLab
 ```
 
-### Inicializar nuevo repositorio
+### Initialise new repository
 
 ```bash
-# Inicializar repositorio local y ejecutar el asistente
+# Initialise local repository and run the assistant
 git init
 bash scripts/git-init-context.sh
 
-# Verificar configuración remota (si se configuró)
+# Verify remote configuration (if configured)
 git remote -v || true
 
-# Si deseas tener el script disponible globalmente:
+# To make the script available globally:
 # install -Dm755 scripts/git-init-context.sh ~/.local/bin/git-init-context
-# Luego: git init && git-init-context
+# Then: git init && git-init-context
 ```
 
-## 5. Primer commit y push
+## 5. First commit and push
 
 ```bash
-# Añadir archivos
+# Stage files
 git add .
 
-# Primer commit
+# First commit
 git commit -m "feat: initial project setup"
 
-# Push inicial
+# Initial push
 git push -u origin main
 ```
 
 ---
 
-**Próximo paso:** Una vez configurado el repositorio, consulta **[COMMITTING.md](./COMMITTING.md)** para el flujo de trabajo diario de commits y push.
+**Next step:** Once the repository is configured, see **[COMMITTING.md](./COMMITTING.md)** for the daily commit and push workflow.
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Written by Rodrigo Álvarez (@incognia)*

@@ -1,40 +1,40 @@
-# Reglas de licenciamiento formal para proyectos completos
+# Formal licensing rules for complete projects
 
-## 1. Propósito
+## 1. Purpose
 
-Este documento establece las directrices para crear un archivo LICENSE formal en proyectos que contienen múltiples documentos y/o scripts, asegurando coherencia legal y filosófica.
+This document establishes the guidelines for creating a formal LICENSE file in projects that contain multiple documents and/or scripts, ensuring legal and philosophical consistency.
 
-## 2. Selección de Licencias por Tipo de Proyecto
+## 2. Licence selection by project type
 
-### 2.1. Proyectos Laborales
-- **Licencia recomendada:** MIT
-- **Razón:** Natureza permisiva que facilita integración y adopción comercial.
+### 2.1. Corporate projects
+- **Recommended licence:** MIT
+- **Reason:** Permissive nature that facilitates integration and commercial adoption.
 
-### 2.2. Proyectos Personales (Software)
-- **Licencia recomendada:** GNU GPLv3
-- **Razón:** Asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
+### 2.2. Personal projects (software)
+- **Recommended licence:** GNU GPLv3
+- **Reason:** Ensures that the code and derivatives remain free, promoting *copyleft*.
 
-(Puede aplicarse tanto a proyectos personales como laborales, según las necesidades específicas del proyecto)
+(Can apply to both personal and corporate projects, depending on the specific needs of the project)
 
-### 2.3. Proyectos de Diseño de Hardware
-- **Licencia estándar:** CERN OHL v2
-- **Razón:** Permite modificar y distribuir libremente en el ámbito de hardware libre.
+### 2.3. Hardware design projects
+- **Standard licence:** CERN OHL v2
+- **Reason:** Allows free modification and distribution within the open hardware domain.
 
-### 2.4. Proyectos de Documentación
-- **Licencia:** GNU LGPLv3
-- **Alternativa:** Creative Commons para documentos generales no ligados a software.
+### 2.4. Documentation projects
+- **Licence:** GNU LGPLv3
+- **Alternative:** Creative Commons for general documents not tied to software.
 
-### 2.5. Proyectos Creativos
-- **Licencia estándar:** CC BY 4.0
-- **Razón:** Facilita máxima difusión y uso, requiriendo solo atribución.
+### 2.5. Creative projects
+- **Standard licence:** CC BY 4.0
+- **Reason:** Facilitates maximum dissemination and use, requiring only attribution.
 
-## 3. Ejemplos de aplicación
+## 3. Application examples
 
-A continuación, se muestran ejemplos de cómo incluir la información de licenciamiento y autoría en diferentes tipos de archivos, utilizando la información definida en el documento de autoría.
+The following examples show how to include licensing and authorship information in different types of files, using the information defined in the attribution document.
 
-### 3.1. Pie de página en Markdown (README.md)
+### 3.1. Markdown footer (README.md)
 
-#### Proyecto laboral
+#### Corporate project
 
 ---
 
@@ -42,7 +42,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 
-#### Proyecto personal
+#### Personal project
 
 ---
 
@@ -50,9 +50,9 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 
-### 3.2. Encabezado en script de Bash (.sh)
+### 3.2. Header in a Bash script (.sh)
 
-#### Proyecto laboral
+#### Corporate project
 
 ```bash
 #!/bin/bash
@@ -75,10 +75,10 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # El aviso de copyright anterior y este aviso de permiso se incluirán en todas
 # las copias o porciones sustanciales del Software.
 
-# ... resto del código del script ...
+# ... rest of the script code ...
 ```
 
-#### Proyecto personal
+#### Personal project
 
 ```bash
 #!/bin/bash
@@ -104,12 +104,12 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # Debería haber recibido una copia de la Licencia Pública General de GNU
 # junto con este programa. Si no es así, consulte <https://www.gnu.org/licenses/>.
 
-# ... resto del código del script ...
+# ... rest of the script code ...
 ```
 
-### 3.3. Encabezado en script de Python (.py)
+### 3.3. Header in a Python script (.py)
 
-#### Proyecto laboral
+#### Corporate project
 
 ```python
 #!/usr/bin/env python3
@@ -140,10 +140,10 @@ This module provides functionality to create automated backups of
 PostgreSQL and MySQL databases with configurable retention policies.
 """
 
-# ... resto del código del script ...
+# ... rest of the script code ...
 ```
 
-#### Proyecto personal
+#### Personal project
 
 ```python
 # -*- coding: utf-8 -*-
@@ -172,12 +172,12 @@ PostgreSQL and MySQL databases with configurable retention policies.
 Módulo de ejemplo para demostrar la inclusión de la licencia GPLv3.
 """
 
-# ... resto del código del script ...
+# ... rest of the script code ...
 ```
 
-### 3.4. Manifiestos de Kubernetes, GitOps y Helm
+### 3.4. Kubernetes, GitOps, and Helm manifests
 
-#### Proyecto laboral - Argo CD Application
+#### Corporate project — Argo CD Application
 
 ```yaml
 # production-app.yaml
@@ -213,7 +213,7 @@ spec:
       - CreateNamespace=true
 ```
 
-#### Proyecto personal - Helm Chart
+#### Personal project — Helm Chart
 
 ```yaml
 # Chart.yaml
@@ -241,35 +241,35 @@ maintainers:
     url: https://github.com/incognia
 ```
 
-## 4. Buenas prácticas
+## 4. Best practices
 
-### 4.1. Archivos LICENSE requeridos
+### 4.1. Required LICENSE files
 
-- **Proyectos públicos:** incluir siempre un archivo `LICENSE` en la raíz del repositorio con el texto completo de la licencia elegida.
-- **Repositorios Git:** asegurar que el archivo `LICENSE` esté versionado y disponible desde el primer *commit*.
+- **Public projects:** always include a `LICENSE` file at the repository root with the full text of the chosen licence.
+- **Git repositories:** ensure the `LICENSE` file is versioned and available from the first *commit*.
 
-### 4.2. Encabezados en archivos fuente
+### 4.2. Headers in source files
 
-- **Consistencia:** usar el mismo formato de encabezado en todos los archivos del proyecto.
-- **Información mínima:** autor, fecha, licencia y *copyright*.
-- **Contacto:** incluir correo electrónico o usuario de GitHub/GitLab según el contexto (personal vs laboral).
+- **Consistency:** use the same header format in all files within the project.
+- **Minimum information:** author, date, licence, and *copyright*.
+- **Contact:** include email address or GitHub/GitLab username depending on context (personal vs corporate).
 
-### 4.3. Documentación
+### 4.3. Documentation
 
-- **README.md:** mencionar explícitamente la licencia utilizada y hacer referencia al archivo `LICENSE`.
-- **CHANGELOG.md:** no requiere información de licencia, pero sí debe mantener la atribución de autoría.
+- **README.md:** explicitly mention the licence used and reference the `LICENSE` file.
+- **CHANGELOG.md:** does not require licence information, but must maintain authorship attribution.
 
-### 4.4. Compatibilidad de licencias
+### 4.4. Licence compatibility
 
-- **Proyectos laborales (MIT):** compatible con la mayoría de licencias de código abierto y propietario.
-- **Proyectos personales (GPLv3):** requiere que todos los trabajos derivados mantengan la misma licencia (*copyleft*).
-- **Dependencias externas:** verificar compatibilidad antes de integrar bibliotecas de terceros.
+- **Corporate projects (MIT):** compatible with most open-source and proprietary licences.
+- **Personal projects (GPLv3):** requires all derivative works to maintain the same licence (*copyleft*).
+- **External dependencies:** verify compatibility before integrating third-party libraries.
 
-### 4.5. Atribución en proyectos colaborativos
+### 4.5. Attribution in collaborative projects
 
-- **Múltiples autores:** listar todos los contribuyentes en un archivo `AUTHORS` o `CONTRIBUTORS`.
-- **Contribuciones menores:** mantener la atribución original, añadir contribuyentes en comentarios o documentación.
+- **Multiple authors:** list all contributors in an `AUTHORS` or `CONTRIBUTORS` file.
+- **Minor contributions:** maintain the original attribution, add contributors in comments or documentation.
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Written by Rodrigo Álvarez (@incognia)*

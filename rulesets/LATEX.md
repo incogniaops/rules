@@ -1,42 +1,42 @@
-# Reglas de generación de documentos LaTeX
+# LaTeX document generation rules
 
-Este documento define las convenciones para generar documentos LaTeX corporativos en Fedora Linux con XeLaTeX.
+This document defines the conventions for generating corporate LaTeX documents on Fedora Linux with XeLaTeX.
 
-## Pandoc vs. LaTeX desde cero
+## Pandoc vs. LaTeX from scratch
 
-**Pandoc puede convertir Markdown a PDF vía LaTeX, pero el resultado es mediocre e inconsistente:**
-- Las tablas no llenan el ancho de página y tienen anchos de columna incorrectos.
-- Los bloques de código (`listings`) dejan líneas blancas entre el fondo y el texto.
-- El encabezado/pie corporativo requiere parches externos (`--include-in-header`) que se acumulan y son frágiles.
-- Los errores de paquetes faltantes son difíciles de anticipar y bloquean la compilación.
+**Pandoc can convert Markdown to PDF via LaTeX, but the result is mediocre and inconsistent:**
+- Tables do not fill the page width and have incorrect column widths.
+- Code blocks (`listings`) leave blank lines between the background and the text.
+- The corporate header/footer requires external patches (`--include-in-header`) that accumulate and are fragile.
+- Missing-package errors are hard to anticipate and block compilation.
 
-**Flujo correcto:**
-1. Usar el Markdown como **referencia de contenido** (texto, tablas, datos).
-2. Escribir el `.tex` desde cero siguiendo este documento.
-3. Compilar con `xelatex` directamente.
+**Correct workflow:**
+1. Use the Markdown as a **content reference** (text, tables, data).
+2. Write the `.tex` from scratch following this document.
+3. Compile directly with `xelatex`.
 
-Pandoc solo es aceptable para borradores rápidos internos sin requisito de calidad visual.
+Pandoc is only acceptable for quick internal drafts with no visual quality requirement.
 
-## Motor y compilación
+## Engine and compilation
 
-- **Motor obligatorio:** `xelatex` — soporta Unicode nativo, fontspec y emoji sin conversiones.
-- **Compilación:** `xelatex -interaction=nonstopmode archivo.tex`
-- **Verificación de errores:** usar comillas simples en `grep` para evitar problemas con `!` en zsh:
+- **Mandatory engine:** `xelatex` — native Unicode support, fontspec, and emoji without conversions.
+- **Compilation:** `xelatex -interaction=nonstopmode file.tex`
+- **Error checking:** use single quotes in `grep` to avoid issues with `!` in zsh:
   ```bash
-  xelatex -interaction=nonstopmode archivo.tex 2>&1 | grep -iE 'error|missing|not found'
+  xelatex -interaction=nonstopmode file.tex 2>&1 | grep -iE 'error|missing|not found'
   ```
-- **Nota:** `grep` retorna exit code 1 cuando no encuentra coincidencias (sin errores). No confundir con fallo real.
-- **Instalación de paquetes faltantes:**
+- **Note:** `grep` returns exit code 1 when no matches are found (no errors). Do not confuse this with a real failure.
+- **Installing missing packages:**
   ```bash
-  sudo dnf install -y 'tex(nombre.sty)'
+  sudo dnf install -y 'tex(name.sty)'
   ```
 
-## Fuentes
+## Fonts
 
-- **Cuerpo:** `Liberation Sans` (sans-serif; NO usar Liberation Serif en documentos corporativos)
-- **Código:** `Liberation Mono`
-- **Emoji:** `Noto Emoji` (ya instalado en Fedora vía `google-noto-emoji-fonts`)
-- Configuración mínima:
+- **Body:** `Liberation Sans` (sans-serif; do NOT use Liberation Serif in corporate documents)
+- **Code:** `Liberation Mono`
+- **Emoji:** `Noto Emoji` (already installed on Fedora via `google-noto-emoji-fonts`)
+- Minimal configuration:
   ```latex
   \usepackage{fontspec}
   \setmainfont{Liberation Sans}
@@ -47,13 +47,13 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
   \newunicodechar{✅}{{\emojifont ✅}}
   ```
 
-## Página y tipografía
+## Page and typography
 
-- **Márgenes:** `\usepackage[margin=2cm]{geometry}`
-- **Espaciado entre párrafos:** `\usepackage{parskip}` (sin sangría; espacio vertical entre párrafos)
-- **Mejora tipográfica:** `\usepackage{microtype}`
+- **Margins:** `\usepackage[margin=2cm]{geometry}`
+- **Paragraph spacing:** `\usepackage{parskip}` (no indentation; vertical space between paragraphs)
+- **Typographic enhancement:** `\usepackage{microtype}`
 
-## Encabezado estándar
+## Standard header
 
 ```latex
 \includegraphics[height=1.8cm]{promad-logo.png}\\
@@ -65,17 +65,17 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 \vspace{8pt}
 ```
 
-**Reglas:**
-- El timestamp va **debajo del logo**, alineado a la derecha con `\makebox[\linewidth][r]{...}`
-- **No** usar `\hfill` al inicio de línea — no funciona en ese contexto
-- Título en `\LARGE\bfseries`; subtítulo en `\large` sin negrita
-- Subtítulo con mayúscula inicial (estilo oración)
-- Logo siempre local (`promad-logo.png`); **nunca** usar URLs en `\includegraphics`
-- Descargar imágenes con `curl -sL URL -o archivo.png` antes de compilar
+**Rules:**
+- The timestamp goes **below the logo**, right-aligned with `\makebox[\linewidth][r]{...}`
+- Do **not** use `\hfill` at the start of a line — it does not work in that context
+- Title in `\LARGE\bfseries`; subtitle in `\large` without bold
+- Subtitle with sentence-case initial (title case)
+- Logo always local (`promad-logo.png`); **never** use URLs in `\includegraphics`
+- Download images with `curl -sL URL -o file.png` before compiling
 
-## Metadatos del documento
+## Document metadata
 
-Usar el comando `\meta` para consistencia:
+Use the `\meta` command for consistency:
 
 ```latex
 \newcommand{\meta}[2]{\textbf{#1:} #2\\}
@@ -86,7 +86,7 @@ Usar el comando `\meta` para consistencia:
 \meta{Elaborado por}{Rodrigo Álvarez — Líder DevOps, Promad}
 ```
 
-## Títulos de sección
+## Section titles
 
 ```latex
 \usepackage{titlesec}
@@ -94,12 +94,12 @@ Usar el comando `\meta` para consistencia:
 \titlespacing{\section}{0pt}{14pt}{6pt}
 ```
 
-- **Sin** líneas decorativas bajo los títulos (`\hrule` azul o similar)
-- Las líneas de color van **en las tablas**, no en los títulos
+- **No** decorative lines under titles (`\hrule` in blue or similar)
+- Colour lines go **in tables**, not in titles
 
-## Tablas
+## Tables
 
-**Paquetes obligatorios:**
+**Required packages:**
 ```latex
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -109,37 +109,37 @@ Usar el comando `\meta` para consistencia:
 \setlength{\tabcolsep}{8pt}
 ```
 
-**Color de bordes:** definir una vez en el preámbulo:
+**Border colour:** define once in the preamble:
 ```latex
-\arrayrulecolor{promad}   % bordes en azul PROMAD
+\arrayrulecolor{promad}   % borders in PROMAD blue
 ```
 
-**Estructura estándar** (tabla que ocupa el ancho completo):
+**Standard structure** (full-width table):
 ```latex
 \begin{tabularx}{\linewidth}{>{\bfseries}l X}
 \toprule
-\rowcolor{rowhead} Columna 1 & Columna 2 \\
+\rowcolor{rowhead} Column 1 & Column 2 \\
 \midrule
-Valor A & Descripción larga que se adapta automáticamente \\
+Value A & Long description that wraps automatically \\
 \bottomrule
 \end{tabularx}
 ```
 
-**Especificadores de columna recomendados:**
-- `X` — columna flexible que absorbe el espacio restante
-- `l` — izquierda fijo
-- `c` — centrado fijo
-- `>{\bfseries}l` — izquierda en negrita (para columna de parámetro)
+**Recommended column specifiers:**
+- `X` — flexible column that absorbs remaining space
+- `l` — fixed left-aligned
+- `c` — fixed centred
+- `>{\bfseries}l` — left-aligned bold (for parameter column)
 
-**Reglas críticas:**
-- Usar siempre `\linewidth` como ancho de tabla, **nunca** `\textwidth` dentro de minipages
-- `\toprule`, `\midrule`, `\bottomrule` de `booktabs` — **no** `\hline`
-- `\rowcolor{rowhead}` en la fila de encabezado para fondo gris suave
+**Critical rules:**
+- Always use `\linewidth` as the table width, **never** `\textwidth` inside minipages
+- `\toprule`, `\midrule`, `\bottomrule` from `booktabs` — **not** `\hline`
+- `\rowcolor{rowhead}` on the header row for a soft grey background
 
-## Bloques de código
+## Code blocks
 
-**Paquete:** `tcolorbox` — genera bloques con fondo sólido y bordes redondeados.
-`listings` solo colorea línea por línea y deja espacios blancos entre ellas.
+**Package:** `tcolorbox` — generates blocks with a solid background and rounded corners.
+`listings` only colours line by line and leaves blank spaces between them.
 
 ```latex
 \usepackage{tcolorbox}
@@ -163,24 +163,24 @@ Valor A & Descripción larga que se adapta automáticamente \\
 \newtcblisting{codebox}{codestyle}
 ```
 
-Uso:
+Usage:
 ```latex
 \begin{codebox}
 apt update && apt dist-upgrade
 \end{codebox}
 ```
 
-## Paleta de colores corporativa
+## Corporate colour palette
 
 ```latex
 \usepackage{xcolor}
-\definecolor{codebg}{HTML}{2d2d2d}    % fondo bloques de código
-\definecolor{codefg}{HTML}{f8f8f2}    % texto bloques de código
-\definecolor{promad}{HTML}{00B2E0}    % azul PROMAD (bordes de tabla, acentos)
-\definecolor{rowhead}{HTML}{e8e8e8}   % fondo encabezado de tabla
+\definecolor{codebg}{HTML}{2d2d2d}    % code block background
+\definecolor{codefg}{HTML}{f8f8f2}    % code block text
+\definecolor{promad}{HTML}{00B2E0}    % PROMAD blue (table borders, accents)
+\definecolor{rowhead}{HTML}{e8e8e8}   % table header background
 ```
 
-## Pie de página estándar
+## Standard footer
 
 ```latex
 \vfill
@@ -191,24 +191,24 @@ apt update && apt dist-upgrade
 \href{mailto:ralvarez@kabatone.com}{ralvarez@kabatone.com} · Ejército Nacional 57, Miguel Hidalgo · +52 (55) 7980-9502
 ```
 
-**Reglas:**
-- Separador: línea delgada gris (`0.4pt`), **no** azul
-- **Sin avatar** — las imágenes de perfil no se manejan bien en LaTeX sin CSS
-- Contacto en una o dos líneas de texto plano
+**Rules:**
+- Separator: thin grey line (`0.4pt`), **not** blue
+- **No avatar** — profile images do not work well in LaTeX without CSS
+- Contact in one or two lines of plain text
 
-## Imágenes
+## Images
 
-- **Obligatorio:** descargar localmente antes de compilar
-- **No usar URLs** en `\includegraphics` con XeLaTeX
-- Verificar con `file imagen.png` que la descarga fue exitosa
-- Suprimir «Figura 1»:
+- **Mandatory:** download locally before compiling
+- **Do not use URLs** in `\includegraphics` with XeLaTeX
+- Verify with `file image.png` that the download was successful
+- Suppress "Figure 1":
   ```latex
   \usepackage{caption}
   \DeclareCaptionFormat{empty}{}
   \captionsetup[figure]{format=empty,skip=0pt}
   ```
 
-## Paquetes por instalar en Fedora (session reference)
+## Packages to install on Fedora (session reference)
 
 ```bash
 sudo dnf install -y pandoc texlive-xetex texlive-collection-latexrecommended
@@ -221,4 +221,4 @@ sudo dnf install -y google-noto-emoji-fonts
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Written by Rodrigo Álvarez (@incognia)*

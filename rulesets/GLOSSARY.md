@@ -1,104 +1,104 @@
-# Glosario técnico para proyectos de Rodrigo Álvarez
+# Technical glossary for Rodrigo Álvarez's projects
 
-Este glosario recoge términos clave utilizados en los documentos de reglas y filosofía de desarrollo para proyectos personales y laborales. Su propósito es reforzar la coherencia y claridad en el uso de conceptos dentro del entorno profesional de Rodrigo Álvarez y su comunidad.
+This glossary collects key terms used in the rules and development philosophy documents for personal and corporate projects. Its purpose is to reinforce consistency and clarity in the use of concepts within Rodrigo Álvarez's professional environment and community.
 
 ---
 
-**Átomo / Atomicidad**
-: principio por el cual cada *commit* o contribución debe tener un solo propósito y ser autosuficiente, de manera que pueda ser aislada, comprendida y revertida sin afectar otros cambios.
+**Atom / Atomicity**
+: principle by which each commit or contribution must have a single purpose and be self-contained, so that it can be isolated, understood, and reverted without affecting other changes.
 
 **Argo CD**
-: herramienta de *GitOps* para la gestión de despliegue continuo en clústeres Kubernetes. Automatiza la sincronización de la configuración declarativa del repositorio con el estado real del clúster.
+: GitOps tool for continuous deployment management in Kubernetes clusters. Automates the synchronisation of declarative repository configuration with the actual cluster state.
 
-**Bare-metal** (en *bare-metal*)
-: infraestructura física directa, sin virtualización; comúnmente referido a servidores dedicados que no están bajo una capa de hipervisor.
+**Bare-metal** (in *bare-metal*)
+: direct physical infrastructure, without virtualisation; commonly refers to dedicated servers that are not under a hypervisor layer.
 
-**CI/CD** (*Integración Continua / Entrega Continua*)
-: prácticas y herramientas para automatizar el ciclo de integración y entrega de software. Incluye pruebas, compilación, y despliegue automáticos de código en diversos entornos.
+**CI/CD** (*Continuous Integration / Continuous Delivery*)
+: practices and tools for automating the software integration and delivery cycle. Includes automated testing, building, and deployment of code across various environments.
 
-**ChangeLog**
-: archivo donde se registra cronológicamente cada cambio relevante en el proyecto, asegurando trazabilidad y transparencia para todos los involucrados.
+**Changelog**
+: file where each relevant change to the project is recorded chronologically, ensuring traceability and transparency for all involved parties.
 
 **Chart (Helm Chart)**
-: plantillas y archivos de configuración usados con la herramienta Helm para describir, gestionar e instalar aplicaciones en Kubernetes.
+: templates and configuration files used with the Helm tool to describe, manage, and install applications on Kubernetes.
 
 **Cloud-init**
-: sistema de inicialización automatizada para instancias de nube y máquinas virtuales, que personaliza la configuración en el arranque.
+: automated initialisation system for cloud instances and virtual machines, customising configuration at boot time.
 
-**Commit** (en *commit*)
-: unidad básica de contribución o registro de cambio en un sistema de control de versiones. Debe escribirse en inglés internacional y describir de forma concisa el propósito de la modificación.
+**Commit** (in *commit*)
+: basic unit of contribution or change record in a version control system. Must be written in international English and concisely describe the purpose of the modification.
 
 **Commons** (*commons*)
-: recursos y conocimientos compartidos y mantenidos colectivamente por una comunidad, aquí se refiere especialmente al ecosistema de software libre.
+: resources and knowledge shared and maintained collectively by a community; here, refers especially to the free software ecosystem.
 
 **Containerd**
-: motor de ejecución de contenedores utilizado por Kubernetes y otras plataformas para gestionar contenedores Linux de forma estándar y eficiente.
+: container runtime used by Kubernetes and other platforms to manage Linux containers in a standard and efficient manner.
 
 **Copyleft**
-: filosofía y práctica de licenciamiento (por ejemplo, GPLv3) que requiere que las obras derivadas mantengan la misma licencia y derechos de libertad que la original.
+: licensing philosophy and practice (e.g. GPLv3) that requires derivative works to retain the same licence and freedom rights as the original.
 
-**Declarativo / automatización declarativa**
-: paradigma donde el estado deseado del sistema es descrito explícitamente, y las herramientas lo implementan automáticamente (ej. flujos GitOps, manifiestos YAML).
+**Declarative / declarative automation**
+: paradigm in which the desired state of the system is described explicitly, and tools implement it automatically (e.g. GitOps flows, YAML manifests).
 
 **DevOps**
-: cultura y conjunto de prácticas que buscan integrar equipos de desarrollo y operaciones para entregar software de manera más ágil, estable y segura.
+: culture and set of practices that seek to integrate development and operations teams to deliver software more efficiently, stably, and securely.
 
-**Dualidad de contextos (personal/laboral)**
-: distinción entre proyectos personales (licencia GPLv3, alias incognia) y laborales (licencia MIT, alias incogniaops), cada uno con reglas y atribución específicas.
+**Context duality (personal/corporate)**
+: distinction between personal projects (GPLv3 licence, alias incognia) and corporate projects (MIT licence, alias incogniaops), each with specific rules and attribution.
 
-**Emojis (en commits)**
-: iconos gráficos que se desaconsejan totalmente en mensajes de *commit* y documentación profesional dentro de este sistema.
+**Emojis (in commits)**
+: graphic icons that are strongly discouraged in commit messages and professional documentation within this system.
 
-**Flujo GitOps**
-: modelo donde todo el estado del entorno se describe y controla vía Git (versionamiento de infraestructura), de tal forma que los cambios a configuraciones se efectúan mediante *pull requests* y revisiones trazables.
+**GitOps flow**
+: model in which all environment state is described and controlled via Git (infrastructure versioning), so that configuration changes are made through pull requests and traceable reviews.
 
 **Helm**
-: gestor de paquetes para Kubernetes que simplifica la implementación y actualización de aplicaciones complejas mediante plantillas llamadas *charts*.
+: package manager for Kubernetes that simplifies the deployment and update of complex applications through templates called charts.
 
 **Istio**
-: malla de servicios o *service mesh* para Kubernetes que proporciona enrutamiento, balanceo, seguridad, política y observabilidad avanzada para microservicios.
+: service mesh for Kubernetes that provides advanced routing, load balancing, security, policy, and observability for microservices.
 
 **Kubernetes**
-: plataforma de orquestación de contenedores para automatizar el despliegue, gestión y escalado de aplicaciones en clústeres distribuidos.
+: container orchestration platform for automating the deployment, management, and scaling of applications in distributed clusters.
 
-**Manifiesto (manifest, manifiestos YAML)**
-: archivo de configuración en formato YAML/JSON que describe el estado deseado de los recursos en Kubernetes, GitOps u otra herramienta declarativa.
+**Manifest (manifest, YAML manifests)**
+: configuration file in YAML/JSON format that describes the desired state of resources in Kubernetes, GitOps, or another declarative tool.
 
 **Mermaid**
-: lenguaje de texto y herramienta para crear diagramas dinámicos y gráficos incrustados en archivos Markdown.
+: text language and tool for creating dynamic diagrams and charts embedded in Markdown files.
 
 **OpenTelemetry**
-: estándar para instrumentar, recopilar y exportar métricas, logs y trazas distribuidas en sistemas modernos.
+: standard for instrumenting, collecting, and exporting metrics, logs, and distributed traces in modern systems.
 
 **Pipeline** (*pipeline*)
-: flujo automatizado de pasos para construir, probar o desplegar software; gestionado por herramientas de CI/CD.
+: automated sequence of steps for building, testing, or deploying software; managed by CI/CD tools.
 
-**Políticas de red**
-: reglas implementadas en Kubernetes, Istio u otros sistemas para controlar el tráfico entre aplicaciones y evitar accesos no autorizados.
+**Network policies**
+: rules implemented in Kubernetes, Istio, or other systems to control traffic between applications and prevent unauthorised access.
 
 **Proxmox VE**
-: plataforma de virtualización de código abierto basada en KVM y LXC, usada para desplegar infraestructuras privadas y clústeres Kubernetes *bare-metal*.
+: open-source virtualisation platform based on KVM and LXC, used to deploy private infrastructure and bare-metal Kubernetes clusters.
 
 **Elsevier**
-: entidad laboral asociada a proyectos bajo licencia MIT y el alias profesional incogniaops.
+: corporate entity associated with projects under the MIT licence and the professional alias incogniaops.
 
-**RBAC (Control de Acceso Basado en Roles)**
-: mecanismo de seguridad que restringe el acceso a recursos en Kubernetes y aplicaciones según los roles asignados a usuarios/grupos.
+**RBAC (Role-Based Access Control)**
+: security mechanism that restricts access to resources in Kubernetes and applications based on roles assigned to users or groups.
 
-**Service mesh (malla de servicios)**
-: arquitectura que introduce una capa de red dedicada entre microservicios para gestionar tráfico, métricas y seguridad sin modificar los servicios originales.
+**Service mesh**
+: architecture that introduces a dedicated network layer between microservices to manage traffic, metrics, and security without modifying the original services.
 
-**Trazabilidad**
-: capacidad de rastrear el origen, motivo y responsable de cada cambio realizado en el código, configuraciones y documentación.
+**Traceability**
+: ability to track the origin, reason, and author of each change made to code, configurations, and documentation.
 
 **YAML**
-: lenguaje de serialización de datos ampliamente usado para archivos de configuración, especialmente en DevOps y Kubernetes.
+: data serialisation language widely used for configuration files, especially in DevOps and Kubernetes.
 
-**Cadena de razonamiento (Chain-of-Thought, CoT)**
-: técnica de prompting para modelos de lenguaje en la que se solicita que el modelo genere pasos intermedios de razonamiento antes de dar la respuesta final. Mejora el desempeño en tareas con múltiples pasos (aritmética, lógica, diagnóstico técnico) y facilita la verificación de unidades, supuestos y dependencias. Buenas prácticas en este repositorio: razonamiento en español mexicano; identificadores/código en inglés cuando corresponda; pasos numerados y conclusión verificable; no incluir secretos; usar rutas de referencia «~/rules/...». Véase [`~/rules/PROMPTS.md`](./PROMPTS.md) y Wei et al. (arXiv:2201.11903).
+**Reasoning chain (Chain-of-Thought, CoT)**
+: prompting technique for language models in which the model is asked to generate intermediate reasoning steps before giving the final answer. Improves performance on multi-step tasks (arithmetic, logic, technical diagnosis) and facilitates verification of units, assumptions, and dependencies. Best practices in this repository: reasoning in Mexican Spanish; identifiers/code in English where appropriate; numbered steps and a verifiable conclusion; no secrets included; use reference paths `~/rules/...`. See [`~/rules/PROMPTS.md`](./PROMPTS.md) and Wei et al. (arXiv:2201.11903).
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Written by Rodrigo Álvarez (@incognia)*
 
-**Para términos lingüísticos, consulta también [`~/rules/LINGUISTICS.md`](./LINGUISTICS.md)**
+**For linguistic terms, see also [`~/rules/LINGUISTICS.md`](./LINGUISTICS.md)**

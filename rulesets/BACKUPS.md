@@ -1,87 +1,87 @@
-# Políticas de respaldos
+# Backup policies
 
-## Convención de nomenclatura
+## Naming convention
 
-### Estructura del nombre de respaldo
+### Backup file name structure
 
-Cada archivo de respaldo sigue esta estructura de nomenclatura:
+Each backup file follows this naming structure:
 
 ```text
-[nombre_sin_extensión]_[timestamp].[extensión_original].bkp
+[name_without_extension]_[timestamp].[original_extension].bkp
 ```
 
-**Componentes:**
+**Components:**
 
-- **Nombre base:** el nombre del archivo original sin su extensión
-- **Separador:** guion bajo (_)
-- **Timestamp:** fecha y hora en formato ISO: `YYYY-MM-DDTHH-MM-SS` (zona horaria CST Ciudad de México, UTC-6)
-- **Extensión original:** se preserva la extensión del archivo original
-- **Extensión de respaldo:** se añade `.bkp` al final
+- **Base name:** the original file name without its extension
+- **Separator:** underscore (_)
+- **Timestamp:** date and time in ISO format: `YYYY-MM-DDTHH-MM-SS` (CST timezone, Ciudad de México, UTC-6)
+- **Original extension:** the original file extension is preserved
+- **Backup extension:** `.bkp` is appended at the end
 
-**Ejemplos de nomenclatura:**
+**Naming examples:**
 
 - `archivo.txt` → `archivo_2025-08-01T04-38-18.txt.bkp`
 - `config.yaml` → `config_2025-08-01T04-38-18.yaml.bkp`
 - `script.sh` → `script_2025-08-01T04-38-18.sh.bkp`
 - `database.sql` → `database_2025-08-01T04-38-18.sql.bkp`
 
-### Ubicación de respaldos
+### Backup location
 
-Los respaldos deben almacenarse en una carpeta llamada «backups», creada según el contexto del proyecto o sistema.
+Backups must be stored in a folder called `backups`, created according to the project or system context.
 
-Si se encuentra un archivo con extensión «.bak» o «.bkp» que no cumpla con los estándares establecidos, revisa su timestamp y actualiza el nombre para alinearlo con esta convención.
+If a file with a `.bak` or `.bkp` extension is found that does not comply with the established standards, review its timestamp and update the name to align with this convention.
 
-La inclusión de la hora garantiza nombres únicos y trazabilidad precisa, independientemente de la frecuencia de respaldos en el día.
+Including the time component guarantees unique names and precise traceability, regardless of how frequently backups are taken during the day.
 
-Evita sobrescribir respaldos previos. La convención de fecha y hora permite conservar la secuencia histórica de cada copia.
+Avoid overwriting previous backups. The date and time convention preserves the historical sequence of each copy.
 
-**Zona horaria obligatoria:** todos los timestamps deben generarse usando la zona horaria CST de Ciudad de México (UTC-6). Nunca usar UTC ni la zona horaria local del sistema si es diferente a CST.
+**Mandatory timezone:** all timestamps must be generated using the CST timezone of Ciudad de México (UTC-6). Never use UTC or the system's local timezone if it differs from CST.
 
-⚠️ **ADVERTENCIA CRÍTICA:** No es suficiente añadir el sufijo "CST" a una fecha UTC. Debes restar 6 horas a la fecha UTC para obtener la fecha CST correcta. Usar `TZ="America/Mexico_City"` en comandos `date` garantiza la conversión automática.
+⚠️ **CRITICAL WARNING:** It is not sufficient to append the suffix "CST" to a UTC date. You must subtract 6 hours from the UTC date to obtain the correct CST date. Using `TZ="America/Mexico_City"` in `date` commands guarantees automatic conversion.
 
-## Política de respaldos antes de operaciones destructivas
+## Backup policy before destructive operations
 
-### Definición
+### Definition
 
-Esta política aplica a cualquier script o comando que realice operaciones de eliminación permanente de archivos, registros, configuraciones o cualquier otro tipo de datos.
+This policy applies to any script or command that performs permanent deletion of files, records, configurations, or any other type of data.
 
-### Ejecución manual
+### Manual execution
 
-Si la ejecución del script o comando es manual (iniciada por un usuario), el sistema deberá:
+If the script or command is executed manually (initiated by a user), the system must:
 
-1. Mostrar un mensaje de advertencia que indique que se realizará un borrado irreversible
-1. Preguntar explícitamente si se desea realizar un respaldo antes de continuar
-1. Permitir al usuario elegir entre las siguientes opciones:
-   - Realizar respaldo automático siguiendo la política de respaldos establecida
-   - Cancelar la ejecución
-   - Continuar sin respaldo (solo si se confirma dos veces)
+1. Display a warning message indicating that an irreversible deletion will be performed
+1. Explicitly ask whether a backup should be created before continuing
+1. Allow the user to choose from the following options:
+   - Create an automatic backup following the established backup policy
+   - Cancel execution
+   - Continue without backup (only if confirmed twice)
 
-### Ejecución automática
+### Automated execution
 
-Si la ejecución es automatizada (por cron jobs, pipelines, bots u otros procesos no interactivos):
+If execution is automated (by cron jobs, pipelines, bots, or other non-interactive processes):
 
-1. El script deberá verificar si existe una política de respaldo activa
-1. Deberá realizar un respaldo completo conforme a dicha política antes de iniciar cualquier operación destructiva
-1. Si el respaldo falla, el script no deberá continuar con el borrado. Deberá registrar el error y salir de forma segura
+1. The script must verify whether an active backup policy exists
+1. It must perform a full backup in accordance with that policy before starting any destructive operation
+1. If the backup fails, the script must not proceed with the deletion. It must log the error and exit safely
 
-### Registro y auditoría
+### Logging and auditing
 
-Toda acción de borrado deberá ser registrada con:
+Every deletion action must be logged with:
 
-- Fecha y hora (formato 24 horas, zona horaria CST Ciudad de México, UTC-6)
-- Usuario o proceso que inició la ejecución
-- Resultado del respaldo
-- Elementos afectados por el borrado
+- Date and time (24-hour format, CST timezone, Ciudad de México, UTC-6)
+- User or process that initiated the execution
+- Backup result
+- Elements affected by the deletion
 
-⚠️ **IMPORTANTE:** Para el registro de auditoría, usar siempre `TZ="America/Mexico_City" date` para garantizar que la fecha se calcule correctamente en CST (restando 6 horas a UTC), no solo agregando el sufijo CST.
+⚠️ **IMPORTANT:** For audit logging, always use `TZ="America/Mexico_City" date` to ensure the date is calculated correctly in CST (subtracting 6 hours from UTC), not merely appending the CST suffix.
 
-### Buenas prácticas recomendadas
+### Recommended best practices
 
-- Implementar funciones de respaldo reutilizables en los scripts
-- Utilizar variables de entorno para definir rutas de respaldo
-- Incluir pruebas en entornos de staging antes de aplicar en producción
+- Implement reusable backup functions in scripts
+- Use environment variables to define backup paths
+- Include tests in staging environments before applying to production
 
-## Estructura de directorios de respaldos
+## Backup directory structure
 
 ```text
 backups/
@@ -92,20 +92,20 @@ backups/
 └── archive/        # Respaldos antiguos comprimidos
 ```
 
-Ejemplo con fecha del día (CST):
+Example with today's date (CST):
 
 ```bash
 DATE_CST=$(TZ="America/Mexico_City" date +"%Y-%m-%d")
 mkdir -p "backups/daily/${DATE_CST}"
 ```
 
-## Restauración
+## Restoration
 
-- Localiza el respaldo a restaurar y su archivo de checksum (.sha256 si existe).
-- Verifica integridad antes de restaurar.
-- Restaura preservando permisos cuando aplique y valida el resultado.
+- Locate the backup to restore and its checksum file (.sha256 if it exists).
+- Verify integrity before restoring.
+- Restore preserving permissions where applicable and validate the result.
 
-Ejemplo (archivo suelto):
+Example (single file):
 
 ```bash
 # Verificación previa (si hay checksum)
@@ -118,7 +118,7 @@ cp backups/daily/2025-08-18/archivo_2025-08-18T12-00-00.txt.bkp ./archivo.txt
 sha256sum ./archivo.txt
 ```
 
-Ejemplo (tar.zst):
+Example (tar.zst):
 
 ```bash
 # Verificar e inspeccionar
@@ -128,21 +128,21 @@ unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -tvf -
 unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -xvf - -C /ruta/destino
 ```
 
-## Verificación e integridad (checksums)
+## Verification and integrity (checksums)
 
-- Política: generar .sha256 solo para respaldos grandes (tamaño >= 100 MB) para optimizar costo/tiempo.
-  - Umbral configurable: `BACKUP_SHA_THRESHOLD_BYTES` (por defecto 104857600 = 100 MB).
-- Los archivos con .sha256 deben verificarse siempre; los menores al umbral pueden verificarse bajo demanda.
-- Verificación masiva:
+- Policy: generate .sha256 only for large backups (size >= 100 MB) to optimise cost/time.
+  - Configurable threshold: `BACKUP_SHA_THRESHOLD_BYTES` (default 104857600 = 100 MB).
+- Files with .sha256 must always be verified; those below the threshold may be verified on demand.
+- Bulk verification:
 
 ```bash
 find backups -type f -name "*.sha256" -exec sha256sum -c {} \;
 ```
 
-## Compresión recomendada (zstd)
+## Recommended compression (zstd)
 
-- Mejor relación/velocidad que gzip en muchos casos.
-- Ejemplo para empaquetar y comprimir un archivo/directorio:
+- Better ratio/speed than gzip in many cases.
+- Example for packaging and compressing a file/directory:
 
 ```bash
 TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")
@@ -150,10 +150,10 @@ TARGET="mi_carpeta"
 tar --mtime="$(date -d "$TS" +%Y-%m-%d)" --owner=0 --group=0 --numeric-owner -cf - "$TARGET" | zstd -T0 -19 -o "${TARGET}_${TS}.tar.zst"
 ```
 
-## Incrementales eficientes con rsync (--link-dest)
+## Efficient incrementals with rsync (--link-dest)
 
-- Permite snapshots diarios con hardlinks a archivos no cambiados.
-- Esquema:
+- Enables daily snapshots with hardlinks to unchanged files.
+- Scheme:
 
 ```bash
 BASE="/datos"
@@ -169,52 +169,52 @@ else
 fi
 ```
 
-## Cifrado y offsite
+## Encryption and offsite
 
-- Cifrado con age (recomendado) o gpg antes de enviar offsite.
-- Ejemplo age:
+- Encrypt with age (recommended) or gpg before sending offsite.
+- age example:
 
 ```bash
-age -r RECIPIENT -o backup.tar.zst.age backup.tar.zst
+age -r RECIPIENT -o backup.tar.zst.age backup.tar.zst
 ```
 
-- Subida offsite con rclone (S3/Backblaze/SSH):
+- Offsite upload with rclone (S3/Backblaze/SSH):
 
 ```bash
 rclone copy backups remote:bucket/path
 ```
 
-- Política 3-2-1: 3 copias, 2 medios, 1 offsite.
+- 3-2-1 policy: 3 copies, 2 media, 1 offsite.
 
-## Programación (Fedora, systemd)
+## Scheduling (Fedora, systemd)
 
-Ejemplo de unidades (ver carpeta systemd/backups/):
+Example units (see systemd/backups/ folder):
 
 - `backup@.service`
 - `backup@daily.timer`
 
-Variables recomendadas en el servicio:
+Recommended variables in the service:
 
 - Environment=TZ=America/Mexico_City
-- Logs a ruta fija en CST.
+- Logs to a fixed path in CST.
 
-## Registro y auditoría
+## Logging and auditing
 
-Formato sugerido de línea de log:
+Suggested log line format:
 
 ```text
-YYYY-MM-DD HH:MM:SS | acción | archivo | resultado | checksum
+YYYY-MM-DD HH:MM:SS | action | file | result | checksum
 ```
 
-- Rotar backup.log y deletion.log periódicamente.
+- Rotate backup.log and deletion.log periodically.
 
-## Seguridad y permisos
+## Security and permissions
 
-- Propietario/grupo: root:root para respaldos sensibles; permisos 0640.
-- Añade backups/ al .gitignore del repositorio.
-- SELinux: al restaurar en sistemas con SELinux, reetiquetar contextos: `restorecon -R /ruta/restaurada`.
+- Owner/group: root:root for sensitive backups; permissions 0640.
+- Add backups/ to the repository's .gitignore.
+- SELinux: when restoring on SELinux systems, relabel contexts: `restorecon -R /restored/path`.
 
-## Bases de datos (ejemplos)
+## Databases (examples)
 
 PostgreSQL (dump/restore):
 
@@ -234,11 +234,11 @@ mysqldump --single-transaction --routines --events "$MYSQL_DATABASE" > "backups/
 mysql "$MYSQL_DATABASE" < "db_${DATE_CST}.sql"
 ```
 
-## Ejemplos de implementación
+## Implementation examples
 
-### Script de respaldo básico
+### Basic backup script
 
-#### Respaldo rápido en el mismo directorio (archivos pequeños)
+#### Quick backup in the same directory (small files)
 
 ```bash
 # Uso: quick_bkp.sh archivo1 [archivo2 ...]
@@ -293,7 +293,7 @@ safe_delete() {
 }
 ```
 
-### Variables de entorno recomendadas
+### Recommended environment variables
 
 ```bash
 export BACKUP_DIR="/path/to/backups"
@@ -302,25 +302,25 @@ export BACKUP_COMPRESS_AFTER_DAYS="7"
 export BACKUP_LOG_FILE="$BACKUP_DIR/backup.log"
 ```
 
-## Mantenimiento de respaldos
+## Backup maintenance
 
-### Retención de archivos
+### File retention
 
-- Respaldos diarios: conservar por 30 días
-- Respaldos manuales: conservar por 90 días
-- Respaldos pre-deploy: conservar por 180 días
-- Respaldos pre-delete: conservar permanentemente (archivar después de 1 año)
+- Daily backups: retain for 30 days
+- Manual backups: retain for 90 days
+- Pre-deploy backups: retain for 180 days
+- Pre-delete backups: retain permanently (archive after 1 year)
 
-### Compresión automática
+### Automatic compression
 
-Respaldos mayores a 7 días deben comprimirse automáticamente para optimizar el espacio de almacenamiento:
+Backups older than 7 days should be compressed automatically to optimise storage space:
 
 ```bash
 # Comprimir respaldos antiguos
 find backups/ -name "*.bkp" -mtime +7 -exec gzip {} \;
 ```
 
-### Limpieza automática
+### Automatic cleanup
 
 ```bash
 # Eliminar respaldos expirados
@@ -329,5 +329,4 @@ find backups/manual/ -name "*.bkp*" -mtime +90 -delete
 ```
 
 ---
-*Elaborado por Rodrigo Álvarez (@incognia)*
-
+*Written by Rodrigo Álvarez (@incognia)*

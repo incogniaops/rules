@@ -1,50 +1,50 @@
-# REGLA CRÍTICA: Lectura Completa de Chain of Thoughts (CoTs)
+# CRITICAL RULE: Complete reading of Chain of Thoughts (CoTs)
 
-**PRECEDENCIA: MÁXIMA**
+**PRECEDENCE: MAXIMUM**
 
-## 🚨 OBLIGACIÓN CRÍTICA
+## CRITICAL OBLIGATION
 
-Cuando el usuario invoque un CoT (Chain of Thought) mediante referencia a `~/cot/*.md`, es **OBLIGATORIO**:
+When the user invokes a CoT (Chain of Thought) by referencing `~/cot/*.md`, it is **MANDATORY** to:
 
-1. **LEER COMPLETAMENTE** todo el archivo CoT desde la línea 1 hasta el final
-2. **NO COMENZAR** ninguna acción hasta haber leído todo el contenido
-3. **NO ASUMIR** o adivinar instrucciones basándose en las primeras líneas
-4. **ANALIZAR DETENIDAMENTE** todas las secciones: Razonamiento, Pasos, Conclusión
-5. **IDENTIFICAR CONTRADICCIONES** aparentes y resolverlas con el contexto completo
-6. **CONFIRMAR COMPRENSIÓN** de todos los pasos antes de proceder
+1. **READ COMPLETELY** the entire CoT file from line 1 to the end
+2. **NOT BEGIN** any action until all content has been read
+3. **NOT ASSUME** or guess instructions based on the first few lines
+4. **ANALYSE CAREFULLY** all sections: Reasoning, Steps, Conclusion
+5. **IDENTIFY APPARENT CONTRADICTIONS** and resolve them with full context
+6. **CONFIRM UNDERSTANDING** of all steps before proceeding
 
-## ❌ ERRORES PROHIBIDOS
+## FORBIDDEN ERRORS
 
-- Leer solo el inicio del CoT y comenzar a ejecutar
-- Saltarse secciones del CoT
-- Interpretar parcialmente las instrucciones
-- Adivinar el resto del proceso
-- Actuar sin confirmar que se entendió todo el flujo
+- Reading only the beginning of the CoT and starting execution
+- Skipping sections of the CoT
+- Partially interpreting the instructions
+- Guessing the rest of the process
+- Acting without confirming that the full flow was understood
 
-## ✅ FLUJO OBLIGATORIO
+## MANDATORY FLOW
 
 ```
-Usuario invoca CoT → Leer TODO el archivo → Analizar completamente → Confirmar entendimiento → Ejecutar paso a paso
+User invokes CoT → Read ENTIRE file → Analyse completely → Confirm understanding → Execute step by step
 ```
 
-## 🎯 PROPÓSITO
+## PURPOSE
 
-Los CoTs contienen:
-- **Razonamiento crítico** que explica el "por qué"
-- **Pasos detallados** que no pueden omitirse
-- **Validaciones** específicas requeridas
-- **Conclusiones** que confirman el éxito
+CoTs contain:
+- **Critical reasoning** that explains the "why"
+- **Detailed steps** that cannot be omitted
+- **Specific validations** required
+- **Conclusions** that confirm success
 
-**IGNORAR CUALQUIER PARTE CAUSA ERRORES CRÍTICOS**
+**IGNORING ANY PART CAUSES CRITICAL ERRORS**
 
-## 📋 VALIDACIÓN PERSONAL
+## PERSONAL VALIDATION
 
-Antes de actuar, preguntarse:
-- ¿Leí TODO el CoT completo?
-- ¿Entiendo cada paso y su propósito?
-- ¿Hay contradicciones que necesito resolver?
-- ¿Confirmé todos los criterios de validación?
+Before acting, ask:
+- Did I read the ENTIRE CoT?
+- Do I understand each step and its purpose?
+- Are there contradictions I need to resolve?
+- Did I confirm all validation criteria?
 
 ---
 
-**CONSECUENCIA DE INCUMPLIMIENTO**: Error crítico en la ejecución de tareas
+**CONSEQUENCE OF NON-COMPLIANCE**: Critical error in task execution
