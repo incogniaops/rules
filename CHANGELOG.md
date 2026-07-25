@@ -5,6 +5,8 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- feat: add ROADMAP.md with the full EN translation plan: bilingual policy, per-file checklist grouped by directory, ES-source pairs, and pending decisions
+- chore: consolidate TODO.md — merge rulesets/TODO.md into root TODO.md, remove stale completed items, delegate translation tracking to ROADMAP.md, and delete rulesets/TODO.md
 - docs: document Claude Code skill support in README.md installation notes and add a per-tool skill installation paths table comparing copy vs symlink methods across Warp, Claude Code, and other agents
 - docs: adjust tone and phrasing in `PHILOSOPHY.md` for a more direct and authentic voice throughout the manifesto
 - docs: update `README.md`: fix last-modified date, refresh badge counts (CoTs 21→25, Skills 10→16, Rulesets 16→21), correct remote URL from `incognia` to `incogniaops`

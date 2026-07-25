@@ -1,57 +1,22 @@
-# TODO — traducciones y ajustes pendientes
+# TODO
 
-Contexto de referencia:
-- Usar el mismo patrón aplicado en `linguistics/linguistica`:
-  1) definir versión canónica en inglés internacional,
-  2) crear alias espejo cuando aplique,
-  3) validar sincronía y referencias.
+## Translation migration
 
-## 1) CoTs por traducir/normalizar (prioridad alta)
-- Traducir a inglés internacional los CoTs que siguen con estructura o contenido principal en español:
-  - `cot/context.md`
-  - `cot/git_init.md`
-  - `cot/backup.md`
-  - `cot/quick_backup.md`
-  - `cot/lint.md`
-  - `cot/mail.md`
-  - `cot/release.md`
-  - `cot/styling.md`
-  - `cot/kube.md`
-  - `cot/kubetbs.md`
-  - `cot/github_metadata.md`
-  - `cot/repo_context.md`
-  - `cot/aws_naming.md`
-  - `cot/arithmetic.md`
-  - `cot/devops.md`
-  - `cot/latex.md`
-  - `cot/restore.md`
-- Mantener solo ejemplos en español cuando sean necesarios como ejemplo lingüístico, no como idioma operativo por defecto.
+See [ROADMAP.md](./ROADMAP.md) for the full plan and per-file checklist.
 
-## 2) Rulesets por traducir/ajustar (prioridad alta)
-- Auditar y traducir reglas operativas que sigan predominantemente en español:
-  - `rulesets/COMMITTING.md`
-  - `rulesets/GIT.md`
-  - `rulesets/BACKUPS.md`
-  - `rulesets/MAIL.md`
-  - `rulesets/RELEASING.md`
-  - `rulesets/TODO.md` (histórico, requiere depuración o archivo)
-  - `rulesets/TEACHING.md` (validar si queda como excepción por contexto personal)
-- Verificar que la política bilingüe por contexto quede explícita y consistente en cada archivo.
+## Content fixes (non-translation)
 
-## 3) Skills por ajustar (prioridad media)
-- Revisar skills con fragmentos aún en español y normalizar a inglés internacional en contexto corporativo:
-  - `.agents/skills/git-init/SKILL.md`
-  - `.agents/skills/release/SKILL.md`
-  - `.agents/skills/commit/SKILL.md` (terminología residual)
-- Validar consistencia entre skill ↔ CoT ↔ ruleset para cada flujo.
+- [ ] `docs/SYNC.md` — add Claude Code section; sync script was updated but doc was not
+- [ ] `cot/licensing.md` — remove stale Promad references when translating
+- [ ] `rulesets/CRITICAL_COT_READING.md` — remove emojis and update to current format when translating
 
-## 4) Ajustes de consistencia global (prioridad media)
-- Actualizar métricas/contadores en `README.md` (CoTs, skills, rulesets) para que coincidan con el estado real.
-- Unificar referencias de organización/usuario remotos (`incognia` vs `incogniaops`) donde ya aplique contexto laboral.
-- Definir criterio documental para `FILOSOFIA.md` (archivo espejo histórico en español) y su relación con `PHILOSOPHY.md`.
-- Añadir una verificación rápida de sincronía para pares alias/canónico (ej. `linguistica` vs `linguistics`) antes de commit.
+## Open decisions
 
-## 5) Cierre de migración (prioridad baja)
-- Ejecutar lint de markdown y revisión de enlaces cuando esté disponible la toolchain local.
-- Ejecutar una pasada final de QA lingüístico (UK English en contexto corporativo).
-- Registrar en `CHANGELOG.md` el cierre de cada bloque de migración.
+- [ ] `CHANGELOG.md` header — keep Spanish (`# Historial de cambios`) or migrate to English?
+- [ ] `rulesets/TEACHING.md` — translate in place or follow FILOSOFIA pattern (ES source + EN pair)?
+
+## Tooling
+
+- [ ] Configure markdownlint (`.markdownlint.json`) with project rules and exclusions
+- [ ] Add pre-commit hook to validate CoT files (≥3 numbered steps, conclusion section present)
+- [ ] Final QA pass (UK English spelling, broken links) after Phase 1 translations are complete
