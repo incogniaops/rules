@@ -1,73 +1,73 @@
-# Mecanismo de sincronización global
+# Global synchronisation mechanism
 
-*Última modificación: 30 de marzo de 2026 (CST)*
+*Last modified: 30 March 2026 (CST)*
 
-Este documento describe en detalle cómo funciona `scripts/sync_global.sh`: qué copia, a dónde lo copia, cómo detecta la plataforma y por qué cada decisión de diseño existe.
+This document describes in detail how `scripts/sync_global.sh` works: what it copies, where it copies to, how it detects the platform, and why each design decision exists.
 
-## Propósito
+## Purpose
 
-Warp y otros agentes de IA descubren *skills* y *workflows* a partir de rutas fijas en el sistema de archivos del usuario. El repositorio `rules` los almacena versionados bajo `.agents/skills/` y `.warp/workflows/`, pero esas rutas solo son útiles dentro del propio repositorio. `sync_global.sh` resuelve esa brecha: copia los artefactos a las rutas globales que cada herramienta y plataforma espera.
+Warp and other AI agents discover *skills* and *workflows* from fixed paths in the user's filesystem. The `rules` repository stores them under version control in `.agents/skills/` and `.warp/workflows/`, but those paths are only useful within the repository itself. `sync_global.sh` bridges that gap: it copies the artefacts to the global paths each tool and platform expects.
 
-## Qué se sincroniza y qué no
+## What is synchronised and what is not
 
-| Artefacto | ¿Se sincroniza? | Destino |
-|-----------|-----------------|---------|
-| *Skills* (`.agents/skills/*/SKILL.md`) | Sí | Varía por plataforma (ver tabla más abajo) |
-| *Workflows* (`.warp/workflows/*.yaml`) | Sí | Varía por plataforma (ver tabla más abajo) |
-| `scripts/` | No | Se accede directo desde `~/rules/scripts/` |
-| `templates/` | No | Se accede directo desde `~/rules/templates/` |
-| `rulesets/` | No | Se accede directo desde `~/rules/rulesets/` |
-| `cot/` | No | Se accede directo desde `~/rules/cot/` |
+| Artefact | Synchronised? | Destination |
+|----------|---------------|-------------|
+| *Skills* (`.agents/skills/*/SKILL.md`) | Yes | Varies by platform (see table below) |
+| *Workflows* (`.warp/workflows/*.yaml`) | Yes | Varies by platform (see table below) |
+| `scripts/` | No | Accessed directly from `~/rules/scripts/` |
+| `templates/` | No | Accessed directly from `~/rules/templates/` |
+| `rulesets/` | No | Accessed directly from `~/rules/rulesets/` |
+| `cot/` | No | Accessed directly from `~/rules/cot/` |
 
-Los artefactos que **no** se sincronizan no necesitan estar en una ruta global porque se referencian siempre con rutas canónicas del tipo `~/rules/rulesets/X.md`.
+Artefacts that are **not** synchronised do not need to be on a global path because they are always referenced via canonical paths such as `~/rules/rulesets/X.md`.
 
-## Flujo general de ejecución
+## General execution flow
 
 ```mermaid
 flowchart TD
-    A([Invocación del script]) --> B[Detectar raíz del repo]
-    B --> C{¿Existen .agents/skills/ y .warp/workflows/?}
-    C -->|No| D{¿Existe ~/rules/.agents/skills/?}
-    D -->|No| E([Error: clonar primero])
-    D -->|Sí| F[REPO_ROOT = ~/rules]
-    C -->|Sí| G[REPO_ROOT = directorio del script]
-    F --> H[Detectar plataforma]
+    A([Script invoked]) --> B[Detect repository root]
+    B --> C{".agents/skills/ and .warp/workflows/ exist?"}
+    C -->|No| D{"~/rules/.agents/skills/ exists?"}
+    D -->|No| E([Error: clone first])
+    D -->|Yes| F[REPO_ROOT = ~/rules]
+    C -->|Yes| G[REPO_ROOT = script directory]
+    F --> H[Detect platform]
     G --> H
-    H --> I[Calcular destinos]
-    I --> J[Sincronizar skills]
-    J --> K[Sincronizar workflows]
-    K --> L([Sincronización completa])
+    H --> I[Calculate destinations]
+    I --> J[Sync skills]
+    J --> K[Sync workflows]
+    K --> L([Sync complete])
 
     style A fill:#d0e8ff,stroke:#336
     style L fill:#d0ffd0,stroke:#363
     style E fill:#ffd0d0,stroke:#633
 ```
 
-## Detección de la raíz del repositorio
+## Repository root detection
 
-El script determina su ubicación con:
+The script determines its location with:
 
 ```bash
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 ```
 
-Esto permite invocarlo desde cualquier directorio: tanto `./scripts/sync_global.sh` (desde la raíz del repo) como `~/rules/scripts/sync_global.sh` (desde cualquier lugar) producen el mismo resultado. Si la ruta calculada no contiene los directorios esperados, cae al respaldo `~/rules`.
+This allows it to be invoked from any directory: both `./scripts/sync_global.sh` (from the repo root) and `~/rules/scripts/sync_global.sh` (from anywhere) produce the same result. If the calculated path does not contain the expected directories, it falls back to `~/rules`.
 
-## Detección de plataforma
+## Platform detection
 
-La detección usa `uname -s` como base, con un caso especial para WSL dentro de la rama `Linux`:
+Detection uses `uname -s` as the base, with a special case for WSL within the `Linux` branch:
 
 ```mermaid
 flowchart TD
-    A[uname -s] --> B{Resultado}
+    A[uname -s] --> B{Result}
     B -->|Darwin| C[PLATFORM = macos]
-    B -->|Linux| D{¿Es WSL?}
+    B -->|Linux| D{WSL?}
     D -->|grep -qi microsoft /proc/version| E[PLATFORM = wsl]
-    D -->|WSL_DISTRO_NAME definida| E
-    D -->|Ninguna condición| F[PLATFORM = linux]
+    D -->|WSL_DISTRO_NAME defined| E
+    D -->|Neither condition| F[PLATFORM = linux]
     B -->|MINGW* / MSYS* / CYGWIN*| G[PLATFORM = windows]
-    B -->|Otro| H[PLATFORM = unknown]
+    B -->|Other| H[PLATFORM = unknown]
 
     style C fill:#ffe0b0,stroke:#963
     style E fill:#b0d0ff,stroke:#336
@@ -76,22 +76,22 @@ flowchart TD
     style H fill:#f0f0f0,stroke:#999
 ```
 
-La separación WSL/Linux es crítica: aunque `uname -s` devuelve `Linux` en ambos casos, Warp corre sobre **Windows** en un entorno WSL y necesita leer los *skills* desde el sistema de archivos de Windows, no del de Linux.
+The WSL/Linux separation is critical: although `uname -s` returns `Linux` in both cases, Warp runs on **Windows** inside a WSL environment and needs to read *skills* from the Windows filesystem, not the Linux one.
 
-## Destinos por plataforma
+## Destinations by platform
 
 ### *Skills*
 
-Los *skills* deben estar en una ruta que Warp (u otro agente) pueda descubrir globalmente. En WSL la ruta de Linux (`~/.agents/skills/`) es invisible para Warp, por lo que el destino es el *home* de Windows:
+*Skills* must be in a path that Warp (or another agent) can discover globally. On WSL the Linux path (`~/.agents/skills/`) is invisible to Warp, so the destination is the Windows home directory:
 
 ```mermaid
 flowchart LR
-    SRC[".agents/skills/\n(en el repo)"]
+    SRC[".agents/skills/\n(in the repo)"]
 
     SRC --> MAC["macOS\n~/.agents/skills/"]
-    SRC --> LIN["Linux nativo\n~/.agents/skills/"]
-    SRC --> WSL["WSL\n%USERPROFILE%\\.agents\\skills\\\nvía wslpath + cmd.exe"]
-    SRC --> WIN["Windows nativo\n%USERPROFILE%\\.agents\\skills\\"]
+    SRC --> LIN["Native Linux\n~/.agents/skills/"]
+    SRC --> WSL["WSL\n%USERPROFILE%\\.agents\\skills\\\nvia wslpath + cmd.exe"]
+    SRC --> WIN["Native Windows\n%USERPROFILE%\\.agents\\skills\\"]
 
     style SRC fill:#fff8c0,stroke:#996
     style MAC fill:#ffe0b0,stroke:#963
@@ -100,27 +100,27 @@ flowchart LR
     style WIN fill:#e0d0ff,stroke:#639
 ```
 
-En WSL, el *home* de Windows se calcula en tiempo de ejecución:
+On WSL, the Windows home directory is resolved at runtime:
 
 ```bash
 WIN_HOME="$(wslpath "$(cmd.exe /C "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')")"
 SKILLS_DST="$WIN_HOME/.agents/skills"
 ```
 
-`cmd.exe /C "echo %USERPROFILE%"` devuelve la ruta Windows (p. ej. `C:\Users\incognia`), y `wslpath` la convierte a la ruta Linux equivalente (`/mnt/c/Users/incognia`).
+`cmd.exe /C "echo %USERPROFILE%"` returns the Windows path (e.g. `C:\Users\incognia`), and `wslpath` converts it to the equivalent Linux path (`/mnt/c/Users/incognia`).
 
 ### *Workflows*
 
-Los *workflows* de Warp tienen rutas distintas en cada plataforma, dictadas por las convenciones del sistema operativo:
+Warp *workflows* have different paths on each platform, dictated by operating system conventions:
 
 ```mermaid
 flowchart LR
-    SRC[".warp/workflows/\n(en el repo)"]
+    SRC[".warp/workflows/\n(in the repo)"]
 
     SRC --> MAC["macOS\n~/.warp/workflows/"]
-    SRC --> LIN["Linux nativo\n$XDG_DATA_HOME/warp-terminal/workflows/\no ~/.local/share/warp-terminal/workflows/"]
-    SRC --> WSL["WSL\n(mismo que Linux nativo;\nlos workflows los lee la sesión WSL)"]
-    SRC --> WIN["Windows nativo\n$APPDATA\\warp\\Warp\\data\\workflows\\"]
+    SRC --> LIN["Native Linux\n$XDG_DATA_HOME/warp-terminal/workflows/\nor ~/.local/share/warp-terminal/workflows/"]
+    SRC --> WSL["WSL\n(same as native Linux;\nworkflows are read by the WSL session)"]
+    SRC --> WIN["Native Windows\n$APPDATA\\warp\\Warp\\data\\workflows\\"]
 
     style SRC fill:#fff8c0,stroke:#996
     style MAC fill:#ffe0b0,stroke:#963
@@ -129,16 +129,16 @@ flowchart LR
     style WIN fill:#e0d0ff,stroke:#639
 ```
 
-> **Nota sobre WSL y *workflows*:** a diferencia de los *skills*, los *workflows* se sincronizan al *home* de Linux porque Warp los carga desde la sesión WSL activa, no desde Windows.
+> **Note on WSL and *workflows*:** unlike *skills*, *workflows* are synchronised to the Linux home because Warp loads them from the active WSL session, not from Windows.
 
-## Estructura copiada
+## Copied structure
 
-Cada *skill* es un directorio con al menos un `SKILL.md`. El script copia el directorio completo, preservando cualquier archivo adicional (plantillas, scripts auxiliares):
+Each *skill* is a directory containing at least one `SKILL.md`. The script copies the entire directory, preserving any additional files (templates, helper scripts):
 
 ```
 .agents/skills/
 ├── commit/
-│   └── SKILL.md          ← copiado íntegro a $SKILLS_DST/commit/
+│   └── SKILL.md          ← copied in full to $SKILLS_DST/commit/
 ├── changelog/
 │   └── SKILL.md
 ├── context/
@@ -146,55 +146,88 @@ Cada *skill* es un directorio con al menos un `SKILL.md`. El script copia el dir
 └── ...
 ```
 
-Los *workflows* son archivos YAML planos copiados directamente al directorio destino:
+*Workflows* are flat YAML files copied directly to the destination directory:
 
 ```
 .warp/workflows/
-├── backup_file.yaml       ← copiado a $WORKFLOWS_DST/
+├── backup_file.yaml       ← copied to $WORKFLOWS_DST/
 ├── commit_flow.yaml
 ├── cst_date.yaml
 └── lint_markdown.yaml
 ```
 
-## Flujo de actualización
+## Update flow
 
-Después de cualquier `git pull`, basta con volver a ejecutar el script. Como opera con `cp -r`, sobreescribe los archivos existentes sin necesidad de limpiar el destino manualmente:
+After any `git pull`, re-running the script is sufficient. Because it uses `cp -r`, it overwrites existing files without needing to clean the destination manually:
 
 ```mermaid
 sequenceDiagram
-    actor U as Usuario
+    actor U as User
     participant G as GitHub
     participant R as ~/rules (local)
     participant S as sync_global.sh
-    participant D as Destino global
+    participant D as Global destination
 
     U->>G: git pull origin main
-    G-->>R: cambios descargados
+    G-->>R: changes downloaded
     U->>S: ~/rules/scripts/sync_global.sh
-    S->>R: lee .agents/skills/ y .warp/workflows/
-    S->>D: cp -r (sobreescribe)
-    D-->>U: skills y workflows actualizados
+    S->>R: reads .agents/skills/ and .warp/workflows/
+    S->>D: cp -r (overwrites)
+    D-->>U: skills and workflows updated
 ```
 
-## Modos de invocación
+## Invocation modes
 
 ```bash
-# Desde la raíz del repo clonado
+# From the cloned repo root
 ./scripts/sync_global.sh
 
-# Desde cualquier directorio (ruta canónica)
+# From any directory (canonical path)
 ~/rules/scripts/sync_global.sh
 
-# Sin clonar — ejecución remota directa
+# Without cloning — direct remote execution
 bash <(curl -sL https://raw.githubusercontent.com/incognia/rules/main/scripts/sync_global.sh)
 
-# Actualización completa en un solo comando
+# Full update in a single command
 git -C ~/rules pull && ~/rules/scripts/sync_global.sh
 ```
 
-## Referencias
+## Claude Code integration
 
-- Script fuente: [`scripts/sync_global.sh`](../scripts/sync_global.sh)
-- *Skills* del repositorio: [`.agents/skills/`](../.agents/skills/)
-- *Workflows* del repositorio: [`.warp/workflows/`](../.warp/workflows/)
-- Configuración inicial: [`~/rules/README.md`](../README.md) — sección «Configuración inicial»
+After syncing skills to `~/.agents/skills/`, the script creates symlinks so that Claude Code can discover each skill as a slash command.
+
+### How it works
+
+For every skill directory found in `~/.agents/skills/`, the script creates a symlink:
+
+```
+~/.claude/commands/<name>.md  →  ~/.agents/skills/<name>/SKILL.md
+```
+
+This means the skill's instruction file is not copied — it is linked. Any update to the skill (via `sync_global.sh`) is reflected immediately in Claude Code without a separate step.
+
+### Paths
+
+| Element | Path |
+|---------|------|
+| Source (skill file) | `~/.agents/skills/<name>/SKILL.md` |
+| Destination (Claude Code command) | `~/.claude/commands/<name>.md` |
+
+### Invocation in Claude Code
+
+Once the symlinks exist, each skill is available as a slash command in Claude Code:
+
+```
+/commit       →  runs the commit skill
+/changelogger →  runs the changelogger skill
+/linguistics  →  runs the linguistics skill
+```
+
+Skills can also be invoked programmatically via the `Skill` tool in the Claude Code agent.
+
+## References
+
+- Source script: [`scripts/sync_global.sh`](../scripts/sync_global.sh)
+- Repository skills: [`.agents/skills/`](../.agents/skills/)
+- Repository workflows: [`.warp/workflows/`](../.warp/workflows/)
+- Initial setup: [`~/rules/README.md`](../README.md) — «Initial setup» section

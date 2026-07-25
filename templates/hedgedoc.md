@@ -6,25 +6,25 @@ tags: tag-1, tag-2, tag-3
 
 <img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
 
-# Título del documento
+# Document title
 
-<div style="text-align: right;"><em>Última modificación: DD de mes de AAAA, HH:MM (CST)</em></div><br>
+<div style="text-align: right;"><em>Last modified: DD Month YYYY, HH:MM (CST)</em></div><br>
 
-Breve descripción del propósito de este documento.
+Brief description of the purpose of this document.
 
-## Sección principal
+## Main section
 
-Contenido.
+Content.
 
-### Subsección
+### Subsection
 
-Contenido.
+Content.
 
 ---
 
 ![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/010e09ff-5e2d-4ba8-828b-850a1424eafa.png)
 
-[//]: # (CSS Corporativo)
+[//]: # (Corporate CSS)
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');

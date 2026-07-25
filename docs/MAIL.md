@@ -1,84 +1,84 @@
-# Envío de correo HTML desde CLI
+# Sending HTML email from the CLI
 
-## Propósito
+## Purpose
 
-Documenta los tres flujos disponibles para componer y enviar correos HTML desde la terminal usando las plantillas OWA del repositorio. Cada modo resuelve un escenario distinto según el sistema operativo y el nivel de automatización.
+Documents the three available flows for composing and sending HTML emails from the terminal using the OWA templates in this repository. Each mode addresses a different scenario depending on the operating system and the desired level of automation.
 
-## Modos de envío
+## Sending modes
 
-- **`owa`** — genera el HTML y lo guardas como archivo. Abres en el navegador, copias (Ctrl+A → Ctrl+C) y pegas en Outlook Web. Funciona en cualquier OS.
-- **`mac`** — genera el HTML y abre un borrador en Microsoft Outlook vía AppleScript. Outlook inyecta la firma «Kabat One» automáticamente. Envías con ⌘+Enter. Solo macOS.
-- **`graph`** — genera el HTML y lo envía directamente vía Microsoft Graph API con OAuth2. Incluye la firma como imagen *inline* (CID). Funciona en cualquier OS.
+- **`owa`** — generates the HTML and saves it as a file. Open it in the browser, select all (Ctrl+A → Ctrl+C), and paste into the Outlook Web composition window. Works on any OS.
+- **`mac`** — generates the HTML and opens a draft in Microsoft Outlook via AppleScript. Outlook injects the «Kabat One» signature automatically. Send with ⌘+Enter. macOS only.
+- **`graph`** — generates the HTML and sends it directly via the Microsoft Graph API with OAuth2. Includes the signature as an *inline* image (CID). Works on any OS.
 
-## Prerrequisitos
+## Prerequisites
 
-**Todos los modos:**
-- Plantillas HTML en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`)
-- Reglas de composición en `~/rules/rulesets/MAIL.md`
+**All modes:**
+- HTML templates in `~/rules/templates/mail/` (`delivery_template.html` and `generic_template.html`)
+- Composition rules in `~/rules/rulesets/MAIL.md`
 
-**Modo `mac` (adicional):**
-- macOS con Microsoft Outlook instalado y configurado
-- Firma «Kabat One» como firma predeterminada en Outlook
+**`mac` mode (additional):**
+- macOS with Microsoft Outlook installed and configured
+- «Kabat One» signature set as the default signature in Outlook
 
-**Modo `graph` (adicional):**
-- Cuenta de Microsoft 365 con buzón activo (por ejemplo, `ralvarez@kabatone.com`)
-- Aplicación registrada en Microsoft Entra (ver pasos abajo)
-- Python 3 y `curl` instalados
-- Imagen de firma en `~/rules/templates/mail/assets/ralvarez_firma_740.png`
-- Credenciales en `~/.secrets.yaml` bajo la clave `GRAPH_API`
-
----
-
-## Modo `owa` — copiar y pegar en Outlook Web
-
-1. Genera el HTML con la plantilla correspondiente (entrega o genérica)
-2. Guarda el archivo como `YYYY-MM-DD-{nombre-corto}.html` (fecha CST)
-3. Copia la imagen de firma junto al HTML en una subcarpeta `assets/`
-4. Abre el archivo en el navegador
-5. Selecciona todo (Ctrl+A), copia (Ctrl+C) y pega en la ventana de composición de OWA
-6. Outlook Web agrega la firma configurada automáticamente al enviar
-
-> **Nota:** no incluyas la firma en el HTML; OWA la inyecta sola.
+**`graph` mode (additional):**
+- Microsoft 365 account with an active mailbox (e.g. `ralvarez@kabatone.com`)
+- Application registered in Microsoft Entra (see steps below)
+- Python 3 and `curl` installed
+- Signature image at `~/rules/templates/mail/assets/ralvarez_firma_740.png`
+- Credentials in `~/.secrets.yaml` under the `GRAPH_API` key
 
 ---
 
-## Modo `mac` — borrador en Outlook vía AppleScript
+## `owa` mode — copy and paste into Outlook Web
 
-1. Genera el HTML con la plantilla correspondiente
-2. Guarda el archivo como `YYYY-MM-DD-{nombre-corto}.html` (fecha CST)
-3. Abre un borrador en Microsoft Outlook con AppleScript:
+1. Generate the HTML using the appropriate template (delivery or generic)
+2. Save the file as `YYYY-MM-DD-{short-name}.html` (CST date)
+3. Copy the signature image alongside the HTML in an `assets/` subdirectory
+4. Open the file in the browser
+5. Select all (Ctrl+A), copy (Ctrl+C), and paste into the OWA composition window
+6. Outlook Web appends the configured signature automatically on send
+
+> **Note:** do not include the signature in the HTML; OWA injects it on its own.
+
+---
+
+## `mac` mode — draft in Outlook via AppleScript
+
+1. Generate the HTML using the appropriate template
+2. Save the file as `YYYY-MM-DD-{short-name}.html` (CST date)
+3. Open a draft in Microsoft Outlook with AppleScript:
 
 ```applescript
 tell application "Microsoft Outlook"
     activate
     set newMsg to make new outgoing message with properties {subject:"...", content:"..."}
-    make new to recipient at newMsg with properties {email address:{address:"destinatario@ejemplo.com"}}
+    make new to recipient at newMsg with properties {email address:{address:"recipient@example.com"}}
     open newMsg
 end tell
 ```
 
-4. Outlook inyecta la firma «Kabat One» (con imagen embebida) automáticamente
-5. Revisa el correo y envía con ⌘+Enter
+4. Outlook injects the «Kabat One» signature (with embedded image) automatically
+5. Review the email and send with ⌘+Enter
 
-> **Nota:** no incluyas la firma en el HTML. Usa `open` (no `send`) para que Outlook la inyecte. El envío directo con `send` no agrega la firma.
+> **Note:** do not include the signature in the HTML. Use `open` (not `send`) so that Outlook injects it. Sending directly with `send` does not add the signature.
 
 ---
 
-## Modo `graph` — envío directo vía Microsoft Graph API
+## `graph` mode — direct send via Microsoft Graph API
 
-### Dimensiones del contenedor
+### Container dimensions
 
-- Tabla exterior: `width="800"` con `max-width:800px`
-- *Padding* del `<td>` interior: 30px por lado
-- Área útil de contenido: **740px** (800 − 30 − 30)
-- La firma debe medir 740px de ancho para llenar el área útil sin desbordar
+- Outer table: `width="800"` with `max-width:800px`
+- Inner `<td>` padding: 30px per side
+- Usable content area: **740px** (800 − 30 − 30)
+- The signature must be 740px wide to fill the usable area without overflow
 
-### Firma
+### Signature
 
-Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la imagen de firma como adjunto *inline* con `contentId` y referenciarla en el HTML con `cid:`:
+Microsoft Graph does not inject the signature configured in Outlook. You must include the signature image as an *inline* attachment with a `contentId` and reference it in the HTML with `cid:`:
 
-- **Archivo**: `~/rules/templates/mail/assets/ralvarez_firma_740.png` (740px de ancho)
-- **Variantes disponibles**: `ralvarez_firma.png` (original), `_740.png`, `_800.png`, `_1024.png`
+- **File**: `~/rules/templates/mail/assets/ralvarez_firma_740.png` (740px wide)
+- **Available variants**: `ralvarez_firma.png` (original), `_740.png`, `_800.png`, `_1024.png`
 
 ```html
 <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
@@ -86,44 +86,44 @@ Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la ima
      style="max-width:100%; display:block;">
 ```
 
-### Configuración inicial (una sola vez)
+### Initial setup (one time only)
 
-## Paso 1: registra la aplicación en Microsoft Entra
+## Step 1: register the application in Microsoft Entra
 
-1. Abre [entra.microsoft.com](https://entra.microsoft.com) e inicia sesión con tu cuenta corporativa
-2. Ve a **Entra ID → Registros de aplicaciones → Nuevo registro**
-3. Completa el formulario:
-   - **Nombre**: `Warp Mail CLI`
-   - **Tipos de cuenta compatibles**: «Solo inquilino único» (tu organización)
-   - **URI de redirección**: déjalo vacío
-4. Haz clic en **Registrar**
-5. Copia estos valores de la página de información general:
-   - **Id. de aplicación (cliente)**: tu `CLIENT_ID`
-   - **Id. de directorio (inquilino)**: tu `TENANT_ID`
+1. Open [entra.microsoft.com](https://entra.microsoft.com) and sign in with your corporate account
+2. Go to **Entra ID → App registrations → New registration**
+3. Fill in the form:
+   - **Name**: `Warp Mail CLI`
+   - **Supported account types**: «Single tenant» (your organisation)
+   - **Redirect URI**: leave blank
+4. Click **Register**
+5. Copy these values from the overview page:
+   - **Application (client) ID**: your `CLIENT_ID`
+   - **Directory (tenant) ID**: your `TENANT_ID`
 
-## Paso 2: agrega permisos de API
+## Step 2: add API permissions
 
-1. En la aplicación registrada, ve a **Permisos de API**
-2. Haz clic en **Agregar un permiso → Microsoft Graph → Permisos delegados**
-3. Busca y agrega los siguientes permisos:
-   - `Mail.Send` — enviar correo como usuario
-   - `email` — ver la dirección de correo electrónico
-   - `User.Read` — iniciar sesión y leer el perfil
+1. In the registered application, go to **API permissions**
+2. Click **Add a permission → Microsoft Graph → Delegated permissions**
+3. Search for and add the following permissions:
+   - `Mail.Send` — send email as the user
+   - `email` — view the email address
+   - `User.Read` — sign in and read the profile
 
-Los tres permisos deben quedar como **Delegada** y con **«No»** en la columna «Se necesita consentimiento de administrador».
+All three permissions must appear as **Delegated** with **«No»** in the «Admin consent required» column.
 
-## Paso 3: habilita flujos de cliente público
+## Step 3: enable public client flows
 
-1. Ve a **Autenticación** en el menú lateral de la aplicación
-2. Abre la pestaña **Configuración**
-3. Activa **«Permitir flujos de clientes públicos»** → **Habilitado**
-4. Haz clic en **Guardar**
+1. Go to **Authentication** in the application's left-hand menu
+2. Open the **Advanced settings** tab
+3. Enable **«Allow public client flows»** → **Enabled**
+4. Click **Save**
 
-> **Nota:** si el *toggle* no guarda correctamente (error `invalid_client` al autenticar), ve a **Manifiesto**, busca `"allowPublicClient"` y cámbialo a `true` manualmente.
+> **Note:** if the toggle does not save correctly (`invalid_client` error on authentication), go to **Manifest**, find `"allowPublicClient"`, and change it to `true` manually.
 
-## Paso 4: autenticación por *device code flow*
+## Step 4: authentication via device code flow
 
-Desde la terminal, solicita un código de dispositivo:
+From the terminal, request a device code:
 
 ```bash
 curl -s -X POST \
@@ -132,9 +132,9 @@ curl -s -X POST \
   -d "scope=https://graph.microsoft.com/Mail.Send"
 ```
 
-La respuesta incluye un `user_code` y un `device_code`. Abre la URL indicada (`https://login.microsoft.com/device`), ingresa el código de usuario y autentica con tu cuenta.
+The response includes a `user_code` and a `device_code`. Open the URL shown (`https://login.microsoft.com/device`), enter the user code, and authenticate with your account.
 
-Después, canjea el `device_code` por un *token* de acceso:
+Then exchange the `device_code` for an access token:
 
 ```bash
 curl -s -X POST \
@@ -144,11 +144,11 @@ curl -s -X POST \
   -d "device_code=$DEVICE_CODE"
 ```
 
-La respuesta contiene un `access_token` válido (típicamente por una hora) y un `refresh_token` para renovarlo.
+The response contains an `access_token` (valid for approximately one hour) and a `refresh_token` for renewal.
 
-## Paso 5: envía correo vía Microsoft Graph
+## Step 5: send email via Microsoft Graph
 
-Usa el *endpoint* `/me/sendMail` con el *token* obtenido:
+Use the `/me/sendMail` endpoint with the obtained token:
 
 ```bash
 curl -s -X POST "https://graph.microsoft.com/v1.0/me/sendMail" \
@@ -156,20 +156,20 @@ curl -s -X POST "https://graph.microsoft.com/v1.0/me/sendMail" \
   -H "Content-Type: application/json" \
   -d '{
     "message": {
-      "subject": "Asunto del correo",
+      "subject": "Email subject",
       "body": {
         "contentType": "HTML",
-        "content": "<html><body>Contenido HTML</body></html>"
+        "content": "<html><body>HTML content</body></html>"
       },
       "toRecipients": [
-        {"emailAddress": {"address": "destinatario@ejemplo.com"}}
+        {"emailAddress": {"address": "recipient@example.com"}}
       ],
       "attachments": [
         {
           "@odata.type": "#microsoft.graph.fileAttachment",
           "name": "ralvarez_firma.png",
           "contentType": "image/png",
-          "contentBytes": "<BASE64_DE_LA_IMAGEN>",
+          "contentBytes": "<BASE64_IMAGE_DATA>",
           "contentId": "firma_ralvarez",
           "isInline": true
         }
@@ -179,7 +179,7 @@ curl -s -X POST "https://graph.microsoft.com/v1.0/me/sendMail" \
   }'
 ```
 
-En el HTML del correo, referencia la firma como imagen *inline*:
+In the email HTML, reference the signature as an *inline* image:
 
 ```html
 <img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="740"
@@ -188,29 +188,29 @@ En el HTML del correo, referencia la firma como imagen *inline*:
 
 ---
 
-## Valores de la aplicación registrada
+## Registered application values
 
-Los valores de `CLIENT_ID`, `TENANT_ID` y demás parámetros de la aplicación están en `~/.secrets.yaml` bajo la clave `GRAPH_API`.
+The `CLIENT_ID`, `TENANT_ID`, and other application parameters are stored in `~/.secrets.yaml` under the `GRAPH_API` key.
 
 ---
 
-## Ciclo de vida del *token*
+## Token lifecycle
 
-El script `scripts/graph_auth.py` gestiona la autenticación con caché en `~/.graph_tokens.json`.
+The `scripts/graph_auth.py` script manages authentication with a cache at `~/.graph_tokens.json`.
 
 ```mermaid
 flowchart TD
-    A["/mail graph ..."] --> B{"~/.graph_tokens.json\nexiste?"}
-    B -- No --> C["Indicar al usuario:\n/mail token"]
-    B -- Sí --> D{"access_token\nválido?"}
-    D -- Sí --> G["Enviar correo\nvía Graph API"]
-    D -- No --> E{"refresh_token\nválido?"}
-    E -- Sí --> F["Renovar access_token\nsilenciosamente"]
+    A["/mail graph ..."] --> B{"~/.graph_tokens.json\nexists?"}
+    B -- No --> C["Prompt user:\n/mail token"]
+    B -- Yes --> D{"access_token\nvalid?"}
+    D -- Yes --> G["Send email\nvia Graph API"]
+    D -- No --> E{"refresh_token\nvalid?"}
+    E -- Yes --> F["Renew access_token\nsilently"]
     F --> G
     E -- No --> C
     C --> H["/mail token"]
-    H --> I["Device code flow\n(navegador)"]
-    I --> J["Guardar tokens\nen ~/.graph_tokens.json"]
+    H --> I["Device code flow\n(browser)"]
+    I --> J["Save tokens\nto ~/.graph_tokens.json"]
     J --> G
 
     style A fill:#3498db,color:#fff
@@ -220,38 +220,38 @@ flowchart TD
     style I fill:#ffc107,color:#333
 ```
 
-### Periodicidad
+### Periodicity
 
-- **`access_token`**: expira en ~1 hora. Se renueva automáticamente con el `refresh_token`.
-- **`refresh_token`**: expira en ~90 días. Cuando expira, debes ejecutar `/mail token` de nuevo.
-- **Uso diario**: nunca te pide autenticación. El `refresh_token` se renueva cada vez que se usa.
-- **Primer uso o después de 90 días sin uso**: ejecuta `/mail token` para reautenticar.
+- **`access_token`**: expires in ~1 hour. Renewed automatically using the `refresh_token`.
+- **`refresh_token`**: expires in ~90 days. When it expires, run `/mail token` again.
+- **Daily use**: never prompts for authentication. The `refresh_token` is renewed each time it is used.
+- **First use or after 90 days of inactivity**: run `/mail token` to re-authenticate.
 
-### Archivos involucrados
+### Files involved
 
-- **`scripts/graph_auth.py`** — lógica de autenticación (caché → *refresh* → *device code*)
-- **`~/.graph_tokens.json`** — caché de tokens (permisos 600, no se versiona)
-- **`~/.secrets.yaml`** — `CLIENT_ID` y `TENANT_ID` bajo la clave `GRAPH_API`
-
----
-
-## Notas técnicas
-
-- **SMTP AUTH**: deprecado por Microsoft a partir del 1 de marzo de 2026, con deshabilitación completa el 30 de abril de 2026. El modo `graph` es el reemplazo oficial.
-- **Firma en cada modo**: `owa` y `mac` delegan la firma a Outlook; `graph` la incluye como adjunto *inline* CID.
-- **Plantillas HTML**: las reglas de composición (estilos *inline*, `bgcolor` en `<td>`, sin CSS externo) están en `rulesets/MAIL.md`.
-- **Invocación**: usa el *skill* `/mail <token|owa|mac|graph> <delivery|generic> <asunto>`.
+- **`scripts/graph_auth.py`** — authentication logic (cache → refresh → device code)
+- **`~/.graph_tokens.json`** — token cache (permissions 600, not versioned)
+- **`~/.secrets.yaml`** — `CLIENT_ID` and `TENANT_ID` under the `GRAPH_API` key
 
 ---
 
-## Referencias
+## Technical notes
 
-- Reglas de composición HTML: `~/rules/rulesets/MAIL.md`
-- CoT de composición y entrega: `~/rules/cot/mail.md`
+- **SMTP AUTH**: deprecated by Microsoft from 1 March 2026, with full disablement on 30 April 2026. The `graph` mode is the official replacement.
+- **Signature per mode**: `owa` and `mac` delegate the signature to Outlook; `graph` includes it as an *inline* CID attachment.
+- **HTML templates**: composition rules (inline styles, `bgcolor` on `<td>`, no external CSS) are in `rulesets/MAIL.md`.
+- **Invocation**: use the *skill* `/mail <token|owa|mac|graph> <delivery|generic> <subject>`.
+
+---
+
+## References
+
+- HTML composition rules: `~/rules/rulesets/MAIL.md`
+- Composition and delivery CoT: `~/rules/cot/mail.md`
 - *Skill*: `~/rules/.agents/skills/mail/SKILL.md`
-- Script de autenticación: `~/rules/scripts/graph_auth.py`
-- Plantillas: `~/rules/templates/mail/`
+- Authentication script: `~/rules/scripts/graph_auth.py`
+- Templates: `~/rules/templates/mail/`
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Written by Rodrigo Álvarez (@incognia)*

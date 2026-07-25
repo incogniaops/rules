@@ -1,40 +1,40 @@
 ---
-title: "Nombre del proyecto"
-description: "Breve descripción del proyecto"
+title: "Project name"
+description: "Brief project description"
 ---
 
-# Nombre del proyecto
+# Project name
 
-*Última modificación: DD de mes de AAAA, HH:MM (CST)*
+*Last modified: DD Month YYYY, HH:MM (CST)*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
 
-Breve descripción del propósito del proyecto.
+Brief description of the project's purpose.
 
-## Requisitos previos
+## Prerequisites
 
-- Requisito 1
-- Requisito 2
+- Requirement 1
+- Requirement 2
 
-## Instalación
+## Installation
 
-Pasos de instalación.
+Installation steps.
 
-## Uso
+## Usage
 
-Ejemplos de uso.
+Usage examples.
 
-## Estructura del proyecto
+## Project structure
 
 ```
-proyecto/
+project/
 ├── src/
 └── README.md
 ```
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*This project was developed by Rodrigo Álvarez for Promad Business Solutions and is distributed under the MIT licence. For more details, see the LICENSE file.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © YYYY, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*

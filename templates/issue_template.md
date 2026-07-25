@@ -1,18 +1,17 @@
 ---
 domain: issue_tracking
-task: abrir issue
-prioridad: media
-impacto: describe brevemente
+task: open issue
+priority: medium
+impact: brief description
 ---
 <!-- markdownlint-disable MD041 -->
 
-Contexto
-- Qué problema/objetivo se busca atender.
+Context
+- Problem or objective to address.
 
-Criterios de aceptación
-- [ ] Condición 1
-- [ ] Condición 2
+Acceptance criteria
+- [ ] Condition 1
+- [ ] Condition 2
 
-Entregables
-- Resultado esperado y/o referencias.
-
+Deliverables
+- Expected result and/or references.
