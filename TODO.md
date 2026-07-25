@@ -10,11 +10,6 @@ See [ROADMAP.md](./ROADMAP.md) for the full plan and per-file checklist.
 - [ ] `cot/licensing.md` — remove stale Promad references when translating
 - [ ] `rulesets/CRITICAL_COT_READING.md` — remove emojis and update to current format when translating
 
-## Open decisions
-
-- [ ] `CHANGELOG.md` header — keep Spanish (`# Historial de cambios`) or migrate to English?
-- [ ] `rulesets/TEACHING.md` — translate in place or follow FILOSOFIA pattern (ES source + EN pair)?
-
 ## Tooling
 
 - [ ] Configure markdownlint (`.markdownlint.json`) with project rules and exclusions

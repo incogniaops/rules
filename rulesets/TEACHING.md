@@ -1,212 +1,214 @@
-# Perfil educativo y de divulgación científica de Rodrigo Álvarez
+# Educational and science outreach profile of Rodrigo Álvarez
 
-> Este perfil educativo se fundamenta en [PHILOSOPHY.md](./PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](./README.md).
+*English translation of [ENSEÑANZA.md](./ENSEÑANZA.md) — the Spanish source is canonical.*
 
-## Resumen educativo
+> This educational profile is grounded in [PHILOSOPHY.md](./PHILOSOPHY.md). For a general overview and quick navigation, see [README.md](./README.md).
 
-Ingeniero DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con 8 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
+## Educational summary
 
-Mi enfoque va más allá de la enseñanza tradicional: utilizo principios de infraestructura como código, automatización y contenedorización para democratizar el acceso a herramientas de desarrollo profesional en el aula.
+DevOps engineer specialised in the **application of modern software engineering methodologies and tools to STEM education**. With 8 years of teaching experience, I combine advanced technical knowledge in DevOps with practical pedagogy to create immersive and reproducible learning environments.
 
-## Filosofía educativa
+My approach goes beyond traditional teaching: I use infrastructure-as-code principles, automation, and containerisation to democratise access to professional development tools in the classroom.
 
-Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
+## Educational philosophy
 
-- **Aprendizaje *hands-on*:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
-- **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
-- **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
-- **Compromiso con el software libre:** en educación básica y media superior (primaria, secundaria y preparatoria) el uso es exclusivo por principio ético y pedagógico. Fuera de educación superior no hay justificación técnica o pedagógica para usar software privativo; su presencia suele responder al hábito de docentes en plataformas cerradas, no a necesidades reales del alumnado.
-- **Competencia multiplataforma:** enseñanza en Linux, Windows y macOS para formar profesionales versátiles y adaptables
+My pedagogical approach is grounded in clear, non-negotiable principles:
 
----
-
-## Principios transversales
-
-- **Política bilingüe (alineada con PHILOSOPHY.md):** el razonamiento, documentación y comentarios se escriben en español mexicano; los identificadores, nombres de archivos y código se mantienen en inglés internacional cuando corresponda por interoperabilidad.
-- **Infraestructura como código y reproducibilidad:** la configuración de laboratorios y contenidos se define declarativamente para garantizar entornos idénticos.
-- **Accesibilidad y cero barreras:** el acceso no depende de plataformas cerradas ni de licencias restrictivas.
-- **Timestamps correctos (CST Ciudad de México):** cuando se incluyan marcas de tiempo en ejemplos o bitácoras, se calculan con TZ=America/Mexico_City en formato de 24 horas.
-
-## Especialización en educación STEM
-
-### Metodologías pedagógicas innovadoras
-
-- **Infraestructura educativa como código:** uso de Docker Compose para orquestar entornos de aprendizaje personalizados
-- **Automatización educativa:** scripts en Python para distribución automatizada de ejercicios y tareas
-- **Entornos contenedorizados:** JupyterLab desplegado en contenedores Docker para garantizar consistencia
-- **Gestión de configuraciones:** volúmenes persistentes para preservar el progreso estudiantil
-- **Panel de administración:** interfaces web (panel web) para facilitar el acceso y el monitoreo de laboratorios
-
-### Herramientas técnicas en el aula
-
-| Categoría | Herramientas |
-|-----------|-------------|
-| **Contenedorización** | Docker, Docker Compose |
-| **Automatización** | scripts de Python, scripts de Bash |
-| **Entorno de desarrollo** | JupyterLab, VS Code, Neovim |
-| **Infraestructura** | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
-| **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
-| **Distribución de contenido** | Git, enlaces simbólicos, despliegue automatizado |
+- **Hands-on learning:** practical experience is fundamental to effective learning in STEM
+- **Reproducible environments:** every student must have access to the same professional tools and configurations
+- **Technology as a facilitator:** DevOps tools remove technical barriers and allow learners to focus on the subject matter
+- **Commitment to free software:** in primary and secondary education (primary school, secondary school, and sixth form) its use is exclusive on ethical and pedagogical grounds. Outside higher education there is no technical or pedagogical justification for using proprietary software; its presence usually reflects the habits of teachers on closed platforms, not the actual needs of students.
+- **Cross-platform competence:** teaching on Linux, Windows, and macOS to develop versatile, adaptable professionals
 
 ---
 
-## Competencias educativas principales
+## Cross-cutting principles
 
-### Diseño de currícula STEM
-- **Programación Python:** desde conceptos básicos hasta algoritmos intermedios
-- **Metodología *hands-on*:** 80% práctica, 20% teoría
-- **Progresión estructurada:** 21 lecciones organizadas por complejidad creciente
-- **Evaluación continua:** ejercicios interactivos en Jupyter Notebooks
+- **Bilingual policy (aligned with PHILOSOPHY.md):** reasoning, documentation, and comments are written in Mexican Spanish; identifiers, filenames, and code are kept in international English where interoperability requires it.
+- **Infrastructure as code and reproducibility:** laboratory and content configuration is defined declaratively to guarantee identical environments.
+- **Accessibility and zero barriers:** access does not depend on closed platforms or restrictive licences.
+- **Correct timestamps (CST, México City):** when timestamps are included in examples or logs, they are calculated with `TZ=America/Mexico_City` in 24-hour format.
 
-### Gestión de laboratorios tecnológicos
-- **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
-- **Resolución de problemas en tiempo real:** solución de incidencias de conectividad, permisos y configuración
-- **Mantenimiento automatizado:** scripts en Bash/Python para limpieza, actualización y respaldo de entornos
-- **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
+## Specialisation in STEM education
 
-### Adaptación tecnológica
-- **Compatibilidad multi-distribución:** Ubuntu, Debian, Fedora, RHEL
-- **Instalación automatizada:** scripts que detectan y configuran dependencias por distribución
-- **Personalización cultural:** JupyterLab en español mexicano, comentarios de código bilingües
-- **Accesibilidad:** interfaces web responsivas, documentación clara
+### Innovative pedagogical methodologies
 
-### Filosofía multiplataforma
+- **Educational infrastructure as code:** use of Docker Compose to orchestrate personalised learning environments
+- **Educational automation:** Python scripts for automated distribution of exercises and assignments
+- **Containerised environments:** JupyterLab deployed in Docker containers to guarantee consistency
+- **Configuration management:** persistent volumes to preserve student progress
+- **Administration panel:** web interfaces for simplified access and laboratory monitoring
 
-**Principio pedagógico:** aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
+### Technical tools in the classroom
 
-**Analogía de las herramientas:** la competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para hacer una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
+| Category | Tools |
+|----------|-------|
+| **Containerisation** | Docker, Docker Compose |
+| **Automation** | Python scripts, Bash scripts |
+| **Development environment** | JupyterLab, VS Code, Neovim |
+| **Infrastructure** | Linux (Debian/Ubuntu), SSH, persistent volumes |
+| **Monitoring** | web panel (Node.js), htop, container logs |
+| **Content distribution** | Git, symbolic links, automated deployment |
 
-**Aplicación a sistemas operativos:** el mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para hacer tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
+---
 
-**Enfoque pedagógico por plataformas:**
+## Core educational competencies
 
-1. **Linux (preferencia personal y profesional):**
-   - Sistema base para todos los laboratorios y proyectos educativos
-   - Énfasis en distribuciones Debian/Ubuntu para consistencia
-   - Enseñanza de principios Unix y administración de sistemas
+### STEM curriculum design
+- **Python programming:** from basic concepts to intermediate algorithms
+- **Hands-on methodology:** 80% practical, 20% theory
+- **Structured progression:** 21 lessons organised by increasing complexity
+- **Continuous assessment:** interactive exercises in Jupyter Notebooks
 
-2. **Windows (realidad laboral):**
-   - Reconocimiento de su prevalencia en entornos corporativos
-   - Enseñanza obligatoria de WSL (Windows Subsystem for Linux)
-   - WSL como puente hacia entornos Unix sin abandonar Windows
+### Technology laboratory management
+- **Multi-container administration:** simultaneous management of 20+ student environments
+- **Real-time problem-solving:** resolution of connectivity, permissions, and configuration issues
+- **Automated maintenance:** Bash/Python scripts for cleaning, updating, and backing up environments
+- **Resource monitoring:** oversight of CPU, memory, and storage
 
-3. **macOS (última opción, con análisis crítico):**
-   - Discusión sobre el sobreprecio artificial de dispositivos Apple
-   - Análisis ético de plataformas cerradas y restricciones de desarrollo
-   - Enseñanza práctica a pesar de las reservas filosóficas
+### Technological adaptation
+- **Multi-distribution compatibility:** Ubuntu, Debian, Fedora, RHEL
+- **Automated installation:** scripts that detect and configure dependencies per distribution
+- **Cultural localisation:** JupyterLab in Mexican Spanish, bilingual code comments
+- **Accessibility:** responsive web interfaces, clear documentation
 
-## Proyectos educativos destacados
+### Cross-platform philosophy
+
+**Pedagogical principle:** although I maintain a personal and professional preference for Linux, my educational approach aims to develop students who are competent on all three main platforms: Linux, Windows, and macOS, prioritised in that specific order.
+
+**The tools analogy:** technical competence transcends brand preferences. If I need a screwdriver to do a job, it would be absurd to refuse to work until I found a specific brand. A competent professional can use any quality tool to complete their work. Personally I prefer iFixit precision screwdrivers, but that preference must not prevent me from removing a screw with a different brand's tool.
+
+**Application to operating systems:** the same principle applies to computers. If you truly master computing, the operating system must not be an obstacle to getting your work done. Real technical competence is demonstrated by the ability to adapt and remain productive regardless of the available platform.
+
+**Pedagogical approach by platform:**
+
+1. **Linux (personal and professional preference):**
+   - Base system for all educational laboratories and projects
+   - Emphasis on Debian/Ubuntu distributions for consistency
+   - Teaching Unix principles and system administration
+
+2. **Windows (workplace reality):**
+   - Recognition of its prevalence in corporate environments
+   - Mandatory teaching of WSL (Windows Subsystem for Linux)
+   - WSL as a bridge to Unix environments without leaving Windows
+
+3. **macOS (last resort, with critical analysis):**
+   - Discussion of the artificial premium pricing of Apple devices
+   - Ethical analysis of closed platforms and development restrictions
+   - Practical teaching despite philosophical reservations
+
+## Outstanding educational projects
 
 ### Juno | JupyterLab-Based STEM Learning Environment
 
-**Descripción:** Entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
+**Description:** Immersive STEM learning environment for secondary school students (ages 12–15) using JupyterLab deployed via Docker Compose.
 
-**Características técnicas:**
-- **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
-- **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
-- **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
-- **Distribución de contenido:** script automatizado para copiar notebooks de Jupyter a todos los contenedores
-- **Panel web:** interfaz en Node.js para acceso simplificado y monitoreo de contenedores
+**Technical features:**
+- **Automated orchestration:** Python script generates personalised `compose.yaml` files based on the student list
+- **Scalability:** automatic assignment of SSH ports (1022, 1122, 1222…) and JupyterLab ports (1088, 1188, 1288…)
+- **Data persistence:** Docker volumes to preserve SSH configurations and student home directories
+- **Content distribution:** automated script to copy Jupyter notebooks to all containers
+- **Web panel:** Node.js interface for simplified access and container monitoring
 
-**Impacto educativo:**
-- Eliminó barreras técnicas de instalación y configuración
-- Permitió enfoque 100% en programación Python
-- Entornos idénticos para todos los estudiantes
-- Persistencia de trabajo estudiantil entre sesiones
+**Educational impact:**
+- Removed technical barriers to installation and configuration
+- Enabled 100% focus on Python programming
+- Identical environments for all students
+- Persistence of student work between sessions
 
-**Reconocimientos:** Inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
+**Acknowledgements:** Inspired by the work of Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
 
 ### Chicxulub | Post-Apocalyptic Programming
 
-**Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
+**Description:** Science outreach project combining Python programming and geophysics to teach cartography and navigation concepts using the Chicxulub crater as a case study.
 
-**Características educativas:**
-- **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
-- **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
-- **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
-- **Fórmulas matemáticas:** aplicación de ecuaciones geodésicas en código Python ejecutable
-- **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
+**Educational features:**
+- **Interdisciplinarity:** fusion of programming, mathematics, geography, and Earth sciences
+- **Historical contextualisation:** use of the K-Pg extinction event as a narrative framework
+- **Practical application:** conversion of geographic coordinates and distance calculations on the Earth's surface
+- **Mathematical formulae:** application of geodetic equations in executable Python code
+- **Hands-on methodology:** interactive exercises with real crater data
 
-**Impacto divulgativo:**
-- Democratiza conceptos de geodesia y cartografía mediante programación accesible
-- Conecta eventos históricos (extinción de dinosaurios) con herramientas técnicas modernas
-- Enseña trigonometría aplicada a través de casos de uso reales
-- Documentación bilingüe (español/código en inglés) siguiendo estándares profesionales
+**Outreach impact:**
+- Democratises concepts of geodesy and cartography through accessible programming
+- Connects historical events (dinosaur extinction) with modern technical tools
+- Teaches applied trigonometry through real-world use cases
+- Bilingual documentation (Spanish / code in English) following professional standards
 
-**Repositorio:** [github.com/incognia/Chicxulub](https://github.com/incognia/Chicxulub)
-
----
-
-## Contexto de enseñanza actual
-
-### Experiencia docente
-- **Años de experiencia:** 8 años en educación STEM
-- **Nivel educativo:** secundaria y preparatoria (12-18 años)
-- **Modalidad:** presencial con laboratorios técnicos
-- **Ubicación:** Ciudad de México
-- **Idioma de instrucción:** español mexicano con terminología técnica en inglés
-
-### Enfoques pedagógicos
-- **Educación Montessori:** Aplicación de principios de aprendizaje autodirigido, desarrollando la curiosidad innata y la auto-motivación en un entorno cuidadosamente preparado
-- **Secundarias activas:** Promoción de la participación activa de los estudiantes y la co-creación del conocimiento a través de proyectos colaborativos y aprendizaje práctico
-
-### Participación social
-- **Programas educativos en comunidades vulnerables:** Diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
-- **Enseñanza de C++ con Arduino:** Enfoque en programación de microcontroladores para proyectos prácticos de electrónica y robótica educativa
-
-### Integración de experiencia y filosofía
-
-Tu experiencia diversa en educación Montessori, secundarias activas y programas sociales te ha permitido entender y aplicar principios de democratización del conocimiento en contextos variados. Al usar herramientas libres en estos entornos, garantizas que todos los estudiantes, independientemente de su trasfondo socioeconómico, tengan acceso a una educación de calidad. Además, fomentas la autonomía y el aprendizaje autodirigido, alineándote con una filosofía educativa que empodera a los estudiantes a ser protagonistas de su propio proceso de aprendizaje.
-
-### Estudiantes destacados
-- **Carlos (@cgzdev):** desarrollo de funcionalidades avanzadas en proyectos colaborativos
-- **Ian (@calmestprism226):** contribuciones significativas en automatización y scripting
-- **Fernando (@fer1495):** liderazgo en depuración y optimización de entornos
-
-### Impacto cuantitativo
-- **Entornos desplegados:** 100+ contenedores Docker administrados
-- **Estudiantes impactados:** 60+ estudiantes a lo largo de 8 años
-- **Proyectos desarrollados:** 20+ laboratorios automatizados
-- **Tiempo de preparación reducido:** de 2 horas a 5 minutos por estudiante
+**Repository:** [github.com/incognia/Chicxulub](https://github.com/incognia/Chicxulub)
 
 ---
 
-## Divulgación científica y técnica
+## Current teaching context
 
-### Filosofía de divulgación
-- **Democratización del conocimiento:** herramientas profesionales accesibles para estudiantes
-- **Compromiso con la libertad de software:** uso exclusivo de herramientas libres (Linux, Docker, Python, JupyterLab) por principio ético y pedagógico
-- **Código abierto:** todos los proyectos educativos bajo licencia GPLv3 por principio ético
-- **Documentación exhaustiva:** README detallados, guías paso a paso
-- **Replicabilidad:** entornos completamente reproducibles en diferentes infraestructuras
-- **Educación en libertad:** enseñar con herramientas que los estudiantes pueden usar, modificar y redistribuir libremente
+### Teaching experience
+- **Years of experience:** 8 years in STEM education
+- **Educational level:** secondary school and sixth form (ages 12–18)
+- **Mode:** in-person with technical laboratories
+- **Location:** México City
+- **Language of instruction:** Mexican Spanish with technical terminology in English
 
-### Contribuciones a la comunidad
-- **Proyecto Juno:** plataforma educativa de software libre para enseñanza de programación
-- **Metodologías DevOps en educación:** aplicación de principios de ingeniería a la pedagogía
-- **Adaptación cultural:** localización de herramientas técnicas para el contexto mexicano
+### Pedagogical approaches
+- **Montessori education:** application of self-directed learning principles, developing innate curiosity and self-motivation in a carefully prepared environment
+- **Active secondary schools:** promotion of active student participation and co-creation of knowledge through collaborative projects and practical learning
 
-### Impacto en la comunidad educativa
-- **Inspiración pedagógica:** metodología replicada por otros educadores
-- **Contribución al ecosistema:** proyecto disponible públicamente en GitHub
-- **Mentoría técnica:** formación de nuevos talentos en DevOps y programación
+### Social engagement
+- **Educational programmes in vulnerable communities:** design and delivery of projects to provide accessible education to low-income populations using open technologies and inclusive methodologies
+- **C++ teaching with Arduino:** focus on microcontroller programming for practical electronics and educational robotics projects
 
----
----
-**Documento principal:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Entrada rápida:** [README.md](./README.md)
+### Integration of experience and philosophy
 
-## Evolución y aprendizaje continuo
+Diverse experience in Montessori education, active secondary schools, and social programmes has enabled a deep understanding and application of knowledge-democratisation principles across varied contexts. By using free tools in these environments, every student — regardless of socioeconomic background — is guaranteed access to a quality education. This also fosters autonomy and self-directed learning, aligned with an educational philosophy that empowers students to be the protagonists of their own learning process.
 
-### Adaptación tecnológica constante
-- **Actualización de herramientas:** migración de versiones, adopción de nuevas tecnologías
-- **Retroalimentación estudiantil:** incorporación de sugerencias para mejora continua
-- **Mejores prácticas:** integración de nuevos enfoques pedagógicos y técnicos
+### Outstanding students
+- **Carlos (@cgzdev):** development of advanced features in collaborative projects
+- **Ian (@calmestprism226):** significant contributions to automation and scripting
+- **Fernando (@fer1495):** leadership in debugging and environment optimisation
 
-### Desarrollo profesional
-- **Intersección DevOps-Educación:** especialización única en aplicar ingeniería de software a pedagogía
-- **Investigación educativa:** experimentación con nuevas metodologías de enseñanza técnica
-- **Colaboración académica:** trabajo conjunto con educadores y desarrolladores
+### Quantitative impact
+- **Environments deployed:** 100+ Docker containers managed
+- **Students reached:** 60+ students over 8 years
+- **Projects developed:** 20+ automated laboratories
+- **Preparation time reduced:** from 2 hours to 5 minutes per student
 
 ---
 
-*Elaborado por Rodrigo Álvarez (@incognia)*
+## Science and technical outreach
+
+### Outreach philosophy
+- **Democratisation of knowledge:** professional tools accessible to students
+- **Commitment to software freedom:** exclusive use of free tools (Linux, Docker, Python, JupyterLab) on ethical and pedagogical grounds
+- **Open source:** all educational projects under the GPLv3 licence on ethical grounds
+- **Comprehensive documentation:** detailed READMEs, step-by-step guides
+- **Replicability:** fully reproducible environments across different infrastructures
+- **Education in freedom:** teaching with tools that students can use, modify, and redistribute freely
+
+### Community contributions
+- **Project Juno:** free-software educational platform for programming instruction
+- **DevOps methodologies in education:** application of engineering principles to pedagogy
+- **Cultural adaptation:** localisation of technical tools for the Mexican context
+
+### Impact on the educational community
+- **Pedagogical inspiration:** methodology replicated by other educators
+- **Ecosystem contribution:** project publicly available on GitHub
+- **Technical mentoring:** development of new talent in DevOps and programming
+
+---
+
+**Main document:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Quick reference:** [README.md](./README.md)
+
+## Evolution and continuous learning
+
+### Constant technological adaptation
+- **Tool updates:** version migration, adoption of new technologies
+- **Student feedback:** incorporation of suggestions for continuous improvement
+- **Best practices:** integration of new pedagogical and technical approaches
+
+### Professional development
+- **DevOps–Education intersection:** unique specialisation in applying software engineering to pedagogy
+- **Educational research:** experimentation with new technical teaching methodologies
+- **Academic collaboration:** joint work with educators and developers
+
+---
+
+*Written by Rodrigo Álvarez (@incognia)*

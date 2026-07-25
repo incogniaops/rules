@@ -8,7 +8,7 @@ Migration of this repository's documentation from Mexican Spanish to Internation
 |---------|----------|-------|
 | Corporate (`@incogniaops`, `r.alvarez1@elsevier.com`) | International English (UK) | CoTs, rulesets, skills, CHANGELOG entries |
 | Personal (`@incognia`) | Mexican Spanish | Documentation and CHANGELOG entries |
-| Cultural / philosophical sources | Spanish (preserved) | `FILOSOFIA.md`, `LINGUISTICA.md`, `cot/linguistica.md` |
+| Cultural / philosophical sources | Spanish (preserved) | `FILOSOFIA.md`, `ENSEÑANZA.md`, `LINGUISTICA.md`, `cot/linguistica.md` |
 
 ## Translation patterns
 
@@ -40,6 +40,7 @@ Migration of this repository's documentation from Mexican Spanish to Internation
 | Spanish source | English translation |
 |----------------|---------------------|
 | `FILOSOFIA.md` | `PHILOSOPHY.md` |
+| `rulesets/ENSEÑANZA.md` | `rulesets/TEACHING.md` |
 | `rulesets/LINGUISTICA.md` | `rulesets/LINGUISTICS.md` |
 | `cot/linguistica.md` | `cot/linguistics.md` |
 
@@ -116,8 +117,7 @@ Replace content with International English (UK); keep filename unchanged.
 
 ---
 
-## Special cases — pending decisions ⬜
+## Special cases — resolved ✅
 
-- **`CHANGELOG.md` header**: heading (`# Historial de cambios`) and note are in Spanish. Decision: keep as historical archive header or migrate to English.
-- **`rulesets/TEACHING.md`**: confirm Phase 2 pattern or translate in place like the other rulesets.
-- **`CHANGELOG.md` older entries**: pre-2026-07 entries were written in personal context (Spanish). Leave historical entries as-is regardless of header decision.
+- **`CHANGELOG.md`**: translate the entire file to English — header, note, section titles, and all historical Spanish entries.
+- **`rulesets/TEACHING.md`**: follows the FILOSOFIA pattern — `TEACHING.md` renamed to `ENSEÑANZA.md` (Spanish source), new `TEACHING.md` created as English translation.

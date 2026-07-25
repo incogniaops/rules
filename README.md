@@ -135,9 +135,10 @@ flowchart LR
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - core philosophy and development manifesto
 - **[FILOSOFIA.md](./FILOSOFIA.md)** - original Spanish philosophy source (English version derives from this baseline)
+- **[TEACHING.md](./rulesets/TEACHING.md)** - educational and scientific outreach profile
+- **[ENSEÑANZA.md](./rulesets/ENSEÑANZA.md)** - original Spanish teaching profile source (English version derives from this baseline)
 - **[AGENTS.md](./AGENTS.md)** - guide for AI agents working with this repository
 - **[CORPORATE.md](./rulesets/CORPORATE.md)** - corporate professional profile
-- **[TEACHING.md](./rulesets/TEACHING.md)** - educational and scientific outreach profile
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - personal attribution rules
 - **[COMMITTING.md](./rulesets/COMMITTING.md)** - rules for *commit* messages and change management
 - **[GIT.md](./rulesets/GIT.md)** - initial setup for GitHub and GitLab accounts
@@ -195,7 +196,7 @@ Most rules in this repository follow a **dual-context model** (personal vs work)
 
 - **LICENSING.md**: defines which licence to use by context (personal: GPLv3, work: MIT)
 - **CORPORATE.md**: professional profile adapted to each environment
-- **TEACHING.md**: educational and outreach profile (personal context)
+- **TEACHING.md** / **ENSEÑANZA.md**: educational and outreach profile (personal context)
 
 ### 5. Personal-only rules
 
