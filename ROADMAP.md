@@ -46,66 +46,66 @@ Migration of this repository's documentation from Mexican Spanish to Internation
 
 ---
 
-## Phase 1 — Translate in place ⬜
+## Phase 1 — Translate in place ✅
 
 Replace content with International English (UK); keep filename unchanged.
 
 ### Skills
 
-- [ ] `.agents/skills/release/SKILL.md`
+- [x] `.agents/skills/release/SKILL.md`
 
 ### CoTs (`cot/`)
 
-- [ ] `_template.md`
-- [ ] `arithmetic.md`
-- [ ] `aws_naming.md`
-- [ ] `bmail.md`
-- [ ] `changelog.md`
-- [ ] `devops.md`
-- [ ] `git_init.md`
-- [ ] `git_workflow.md`
-- [ ] `github_metadata.md`
-- [ ] `kube.md`
-- [ ] `kubetbs.md`
-- [ ] `latex.md`
-- [ ] `licensing.md` — also remove stale Promad references
-- [ ] `lint.md`
-- [ ] `mail.md`
-- [ ] `release.md`
-- [ ] `repo_context.md`
-- [ ] `styling.md`
+- [x] `_template.md`
+- [x] `arithmetic.md`
+- [x] `aws_naming.md`
+- [x] `bmail.md`
+- [x] `changelog.md`
+- [x] `devops.md`
+- [x] `git_init.md`
+- [x] `git_workflow.md`
+- [x] `github_metadata.md`
+- [x] `kube.md`
+- [x] `kubetbs.md`
+- [x] `latex.md`
+- [x] `licensing.md` — Promad references removed
+- [x] `lint.md`
+- [x] `mail.md`
+- [x] `release.md`
+- [x] `repo_context.md`
+- [x] `styling.md`
 
 ### Rulesets (`rulesets/`)
 
-- [ ] `ATTRIBUTION.md`
-- [ ] `BACKUPS.md`
-- [ ] `BMAIL.md`
-- [ ] `COMMIT_LANGUAGE_PROTOCOL.md`
-- [ ] `COMMITTING.md`
-- [ ] `CORPORATE.md`
-- [ ] `CRITICAL_COT_READING.md` — also remove emojis and update format
-- [ ] `GIT.md`
-- [ ] `GLOSSARY.md`
-- [ ] `KUBE.md`
-- [ ] `KUBETBS.md`
-- [ ] `LATEX.md`
-- [ ] `LICENSING.md`
-- [ ] `MAIL.md`
-- [ ] `RELEASING.md`
-- [ ] `STYLING.md`
-- [ ] `VAULT.md`
+- [x] `ATTRIBUTION.md`
+- [x] `BACKUPS.md`
+- [x] `BMAIL.md`
+- [x] `COMMIT_LANGUAGE_PROTOCOL.md`
+- [x] `COMMITTING.md`
+- [x] `CORPORATE.md`
+- [x] `CRITICAL_COT_READING.md` — emojis removed, plain-text markers applied
+- [x] `GIT.md`
+- [x] `GLOSSARY.md`
+- [x] `KUBE.md`
+- [x] `KUBETBS.md`
+- [x] `LATEX.md`
+- [x] `LICENSING.md`
+- [x] `MAIL.md`
+- [x] `RELEASING.md`
+- [x] `STYLING.md`
+- [x] `VAULT.md`
 
 ### Docs (`docs/`)
 
-- [ ] `MAIL.md`
-- [ ] `SYNC.md` — also add Claude Code section (content is outdated)
+- [x] `MAIL.md`
+- [x] `SYNC.md` — translated and Claude Code section added
 
 ### Templates (`templates/`)
 
-- [ ] `github-readme.md`
-- [ ] `gitlab-readme.md`
-- [ ] `hedgedoc.md`
-- [ ] `issue_template.md`
+- [x] `github-readme.md`
+- [x] `gitlab-readme.md`
+- [x] `hedgedoc.md`
+- [x] `issue_template.md`
 
 ---
 
