@@ -147,4 +147,25 @@ else
 fi
 echo ""
 
+# --- Claude Code integration ---
+# ~/.claude/commands/<name>.md → skills (Skill tool / /nombre)
+# ~/.claude/agents/ → agent types — no tocar
+echo "=== Claude Code ==="
+
+CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
+mkdir -p "$CLAUDE_COMMANDS_DIR"
+
+CLAUDE_SKILL_COUNT=0
+for skill_dir in "$HOME/.agents/skills"/*/; do
+    skill_name="$(basename "$skill_dir")"
+    skill_src="$HOME/.agents/skills/$skill_name/SKILL.md"
+    skill_link="$CLAUDE_COMMANDS_DIR/$skill_name.md"
+    [ -f "$skill_src" ] || continue
+    ln -sfn "$skill_src" "$skill_link"
+    CLAUDE_SKILL_COUNT=$((CLAUDE_SKILL_COUNT + 1))
+    echo "  ✓ $skill_name.md → $skill_src"
+done
+echo "  $CLAUDE_SKILL_COUNT skills enlazados → $CLAUDE_COMMANDS_DIR"
+echo ""
+
 echo "Sincronización completa."

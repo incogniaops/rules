@@ -5,14 +5,14 @@ description: "Standards, philosophy, and chains of reasoning (CoT) that guide Ro
 
 # Technical rules: prompts and CoTs to accelerate LLM context
 
-*Last modified: 27 March 2026, 23:26 (CST)*
+*Last modified: 22 July 2026 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-21-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-10-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-16-orange.svg)](./rulesets/)
+[![CoTs](https://img.shields.io/badge/CoTs-25-blue.svg)](./cot/)
+[![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-21-orange.svg)](./rulesets/)
 
 ## Quick definitions
 
@@ -44,7 +44,7 @@ Operational principle: documents in `rulesets/` contain logic and rules; however
 
 ```bash
 # 1. Clone the repository
-git clone git@github.com:incognia/rules.git ~/rules
+git clone git@github.com:incogniaops/rules.git ~/rules
 
 # 2. Install global skills and workflows (platform auto-detected)
 ~/rules/scripts/sync_global.sh
@@ -54,7 +54,7 @@ git clone git@github.com:incognia/rules.git ~/rules
 
 ```bash
 # 1. Clone the repository (inside WSL)
-git clone git@github.com:incognia/rules.git ~/rules
+git clone git@github.com:incogniaops/rules.git ~/rules
 
 # 2. Install global skills and workflows
 ~/rules/scripts/sync_global.sh
@@ -64,7 +64,7 @@ git clone git@github.com:incognia/rules.git ~/rules
 
 ```bash
 # Install or update directly from the public repo
-git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rules pull
+git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/rules pull
 ~/rules/scripts/sync_global.sh
 ```
 
@@ -121,6 +121,7 @@ flowchart LR
 ## Included documents
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - core philosophy and development manifesto
+- **[FILOSOFIA.md](./FILOSOFIA.md)** - original Spanish philosophy source (English version derives from this baseline)
 - **[AGENTS.md](./AGENTS.md)** - guide for AI agents working with this repository
 - **[CORPORATE.md](./rulesets/CORPORATE.md)** - corporate professional profile
 - **[TEACHING.md](./rulesets/TEACHING.md)** - educational and scientific outreach profile
@@ -129,6 +130,7 @@ flowchart LR
 - **[GIT.md](./rulesets/GIT.md)** - initial setup for GitHub and GitLab accounts
 - **[LICENSING.md](./rulesets/LICENSING.md)** - project licensing rules
 - **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - Mexican Spanish linguistic rules as the cultural reference
+- **[LINGUISTICA.md](./rulesets/LINGUISTICA.md)** - original Spanish linguistics ruleset (English version derives from this baseline)
 - **[STYLING.md](./rulesets/STYLING.md)** - style rules for Markdown documents (work projects)
 - **[BACKUPS.md](./rulesets/BACKUPS.md)** - backup and destructive-operation policies
 - **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glossary of technical terms used
@@ -224,15 +226,21 @@ sequenceDiagram
 - **templates/** — reusable templates
 - **scripts/** — automation and backup scripts
 - **.agents/skills/** — AI-agent discoverable *skills*:
+  - `/aws-naming <source_path>` — normalise filenames for AWS/S3 naming workflows
   - `/commit` — full *commit* workflow with mandatory CHANGELOG
   - `/changelogger` — CHANGELOG.md maintenance with CST dates
+  - `/bmail <type> <subject>` — generate corporate business email HTML from templates
   - `/linguistics <file>` — apply Mexican Spanish language rules
+  - `/linguistica <file>` — alias of `/linguistics`
   - `/context` — quick project context detection
   - `/backup` — backup using standard naming
   - `/licensing` — automatic licensing (GPLv3 vs MIT)
   - `/git-init <personal|laboral> <key> <url> <branch>` — initialise repo with SSH
   - `/ssh-import <faraday|cad>` — import SSH key from GitHub into a server
   - `/mail <delivery|generic> <subject>` — compose OWA-compatible HTML email
+  - `/release <semver>` — non-interactive release workflow with validation
+  - `/kube <key> <user> <ip> <namespace>` — Kubernetes cluster analysis over SSH
+  - `/kubetbs <key> <user> <ip> <namespace> [service]` — Kubernetes troubleshooting workflow
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <file>` — apply Kabat One style to a Markdown document
 - **.warp/workflows/** — parameterised YAML commands (`Ctrl+Shift+R` in Warp):
   - `backup_file` — backup file/directory
@@ -251,8 +259,9 @@ sequenceDiagram
 
 ## How to use CoTs quickly
 
-- All CoTs: [cot/](./cot/) folder (22 files)
+- All CoTs: [cot/](./cot/) folder (25 files, including `_template.md`)
 - Linguistics: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
+- Linguistica (original Spanish): [cot/linguistica.md](./cot/linguistica.md) + [LINGUISTICA.md](./rulesets/LINGUISTICA.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Project context: [cot/context.md](./cot/context.md)
 - CHANGELOG: [cot/changelog.md](./cot/changelog.md)
@@ -266,7 +275,7 @@ sequenceDiagram
 - Zone to use in scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: date only (YYYY-MM-DD), no time.
 
-More details: see [LINGUISTICS.md – Dates and times (CST México City)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+More details: see [LINGUISTICS.md – Dates and times (CST, México City)](./rulesets/LINGUISTICS.md).
 
 ### Command examples
 

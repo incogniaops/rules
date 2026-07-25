@@ -1,4 +1,4 @@
-# Philosophy of a brown bastard who sometimes *codes* but always delivers
+# Philosophy of a brown bastard who sometimes *codes* but always goes all in
 
 *Last modified: 27 March 2026, 23:21 (CST)*
 
@@ -8,13 +8,13 @@
 
 Technology environments in Latin America suffer from three endemic issues that this manifesto confronts head-on:
 
-- **Mercenary work:** professionals delivering mediocre output because they are only driven by money, with no real commitment to excellence or to the client.
+- **Mercenary work:** professionals delivering mediocre output because they are only in it for the cash, with no real commitment to excellence or to the client.
 - **Technical selfishness:** hoarding knowledge and tools to create artificial dependency, blocking others’ growth for purely economic interest.
-- **Identity loss:** the insecure brown guy who speaks broken English, writes carelessly, and bastardises his own Spanish in a desperate attempt to feel gringo.
+- **Identity loss:** the insecure brown guy who speaks shitty English, writes with their ass, and bastardises his own Spanish in a desperate attempt to feel gringo.
 
 Against these three issues, here is the answer: honest work, shared knowledge, and the satisfaction that comes from doing things properly, without insecurities and without bullshit.
 
-This manifesto is not only about excelling in DevOps from the desk—where they call me «Agüelo» because I am a veteran, even though I stay as current as the latest *commit*—but also about applying that same philosophy in the classroom, where they say I look like Hagrid because I am big and bearded. Sure, mastering Kubernetes is cool, but what truly matters is sharing technical knowledge. We are not here to be code mercenaries hoarding secrets: we are here to teach without holding back, so everyone can master the tools that are genuinely worth it.
+This manifesto is not only about excelling in DevOps from the desk—where they call me «Agüelo» because I am a veteran, even though I stay as current as the latest *commit*—but also about applying that same philosophy in the classroom, where they say I look like Hagrid because I am big and bearded. Sure, mastering Kubernetes is awesome, but what's truly badass is sharing technical knowledge. We are not here to be code mercenaries hoarding secrets: we are here to teach without holding back, so everyone can master the tools that are genuinely worth it.
 
 ## 1. Coherent professional identity
 

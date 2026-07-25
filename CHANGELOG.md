@@ -3,12 +3,20 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-07-25] - Actualizar README, manifiesto y sincronización con Claude Code
+
+- docs: ajustar tono y lenguaje en `PHILOSOPHY.md`: reemplazar frases formales por expresiones más auténticas y directas («*always goes all in*», «*only in it for the cash*», «*shitty English, writes with their ass*», «*badass*»)
+- docs: actualizar `README.md`: fecha de última modificación, conteos de insignias (CoTs 21→25, Skills 10→16, Rulesets 16→21) y URL remota de `incognia` a `incogniaops`
+- docs: agregar referencias a `FILOSOFIA.md` y `LINGUISTICA.md` en `README.md` y completar lista de *skills* con `/aws-naming`, `/bmail`, `/linguistica`, `/release`, `/kube` y `/kubetbs`
+- feat: extender `scripts/sync_global.sh` con bloque de integración Claude Code que enlaza simbólicamente los *skills* hacia `~/.claude/commands/`
+
 ## [2026-07-22] - Align corporate profile and git initialisation standards
 
 - feat: apply context-based bilingual policy across core rules so personal projects document in Mexican Spanish while corporate projects remain fully in International English
 - docs: translate `AGENTS.md`, `cot/context.md`, and `cot/committing.md` to International English (UK) and standardise CoT labels in English
 - docs: enforce the `México` accent exception across bilingual references, including `México City`, in rules, skills, and CoT guidance
 - docs: add root `TODO.md` with a translation and consistency backlog aligned to the `linguistics`/`linguistica` migration pattern
+- docs: update `README.md` to expose `FILOSOFIA` and `LINGUISTICA` as original Spanish sources and clarify that English variants derive from those baselines
 - docs: translate `cot/quick_backup.md`, `cot/backup.md`, and `cot/restore.md` to International English (UK) while preserving operational commands and CST workflow
 - docs: document mandatory proper-noun accent exceptions (`México`, `Álvarez`) in `rulesets/LINGUISTICS.md` and `rulesets/LINGUISTICA.md`
 - docs: align linguistic skills and attribution guidance so the surname is always written as `Álvarez` in regular documentation text
