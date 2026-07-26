@@ -8,12 +8,14 @@ validacion: identify the affected service/deployment and list of impacted pods w
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Use an outside-in traversal: recent events → unstable pods → error patterns → owner (Deployment/StatefulSet) → Service/Ingress/VirtualService.
 - Maintain International English (UK) and repo CoT format (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Main reference: «~/rules/rulesets/KUBETBS.md» ([../rulesets/KUBETBS.md](../rulesets/KUBETBS.md)).
 - Use non-interactive commands and label selectors to cover all replicas.
 
 Steps:
+
 1) Action: list recent events to detect namespaces and resources with failures.
    Result: `kubectl get events --all-namespaces --sort-by=.lastTimestamp | tail -n 50` shows errors in the "payments" namespace (intermittent ImagePullBackOff and CrashLoopBackOff) and timeouts in "checkout".
 2) Action: list pods with high restart counts to prioritise.
@@ -36,6 +38,7 @@ Steps:
     Result: use the variable `REDIS_HOST=redis.infra.svc.cluster.local` or inject an appropriate `DNS search`; verify connectivity with a temporary pod: `kubectl -n payments run tmp --rm -it --image=busybox --restart=Never -- nslookup redis.infra.svc.cluster.local && nc -vz redis.infra.svc.cluster.local 6379`.
 
 Conclusion:
+
 - Affected microservice: «payments-api» (Deployment in namespace «payments»); pods with restarts: `payments-api-xxxx` (and replicas).
 - Root cause: `REDIS_HOST` variable points to the local `redis` in namespace «payments», but the Redis service lives in «infra». DNS/FQDN resolution failure causes `connection refused` and triggers timeouts in «checkout».
 - Fix: update the config (ConfigMap/vars) to `REDIS_HOST=redis.infra.svc.cluster.local` or create a local `Service` with `ExternalName` pointing to the «infra» redis. Validate with a temporary pod before deploying.

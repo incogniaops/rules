@@ -8,6 +8,7 @@ validacion: resulting names contain only safe characters, normalised extensions,
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Normalise filenames to be 100% safe as *Object Keys* in Amazon S3 and distributable via Amazon CloudFront.
 - Apply strict AWS rules: *case sensitivity*, removal of spaces, filtering of unsafe characters, path and length validation.
 - Normalise image and web resource extensions (.jpeg → .jpg, .png, .svg, .ico) for consistency in the *bucket*.
@@ -15,6 +16,7 @@ Reasoning:
 - Style and flow references: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) and «~/rules/README.md» ([../README.md](../README.md)).
 
 Steps:
+
 1) Action: convert the entire filename and extension to lowercase.
    Result: *Object Keys* in S3 are case-sensitive [1] and CloudFront cache patterns are too (`*.jpg` does not apply to `LOGO.JPG`) [2].
 
@@ -45,5 +47,6 @@ Steps:
    Result: log file enabling audit and rollback of renames.
 
 Conclusion:
+
 - Resulting names contain only safe characters for S3/CloudFront: lowercase letters, digits, hyphens, underscores, and one dot before the normalised extension.
 - The `normalisation_YYYYMMDD.tsv` file documents every transformation for full traceability.

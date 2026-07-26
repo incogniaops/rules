@@ -50,8 +50,8 @@ This policy applies to any script or command that performs permanent deletion of
 If the script or command is executed manually (initiated by a user), the system must:
 
 1. Display a warning message indicating that an irreversible deletion will be performed
-1. Explicitly ask whether a backup should be created before continuing
-1. Allow the user to choose from the following options:
+2. Explicitly ask whether a backup should be created before continuing
+3. Allow the user to choose from the following options:
    - Create an automatic backup following the established backup policy
    - Cancel execution
    - Continue without backup (only if confirmed twice)
@@ -61,8 +61,8 @@ If the script or command is executed manually (initiated by a user), the system 
 If execution is automated (by cron jobs, pipelines, bots, or other non-interactive processes):
 
 1. The script must verify whether an active backup policy exists
-1. It must perform a full backup in accordance with that policy before starting any destructive operation
-1. If the backup fails, the script must not proceed with the deletion. It must log the error and exit safely
+2. It must perform a full backup in accordance with that policy before starting any destructive operation
+3. If the backup fails, the script must not proceed with the deletion. It must log the error and exit safely
 
 ### Logging and auditing
 

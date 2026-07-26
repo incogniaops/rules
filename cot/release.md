@@ -10,6 +10,7 @@ last_updated: 2026-05-05
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Publication must follow a strict `vX.Y.Z` tag convention and the flow `dev -> main (ff-only) -> tag -> release -> back to dev`.
 - Before creating a new version, validate historical consistency to avoid carrying forward format errors.
 - The release name and notes must be derived from real changes since the last tag, not invented.
@@ -100,6 +101,7 @@ Steps:
     Result: flow closed and repository ready to continue work.
 
 Conclusion:
+
 - A release is considered correct only if it passes historical validation, avoids version collisions, derives the descriptor/notes from real changes, and completes the full non-interactive flow.
 - If there are pre-existing format inconsistencies, fix them first and then publish the new version.
 - References: `~/rules/rulesets/RELEASING.md`, `~/rules/rulesets/COMMITTING.md`, `AGENTS.md` of the target repo.

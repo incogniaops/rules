@@ -8,10 +8,12 @@ validacion: result matches hand-verified calculation
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Follow the CoT format of the repository and maintain International English (UK) (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Break the problem into simple steps and verify units.
 
 Steps:
+
 1) Action: identify base quantities.
    Result: Juan has 3 boxes with 4 apples each; María has 2 boxes with 5 apples each.
 2) Action: calculate Juan's apples.
@@ -22,4 +24,5 @@ Steps:
    Result: 12 + 10 = 22.
 
 Conclusion:
+
 - Final answer: 22 apples in total.

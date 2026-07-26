@@ -16,7 +16,7 @@ This document defines the conventions for analysing the state of Kubernetes clus
 
 Manifests are organised by *namespace*/project under the user's `$HOME`:
 
-```
+```text
 /home/<user>/kubernetes-<namespace>/
 ├── services/
 │   ├── base/                    # Base resources (Istio VirtualServices)

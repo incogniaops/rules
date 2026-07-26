@@ -7,11 +7,13 @@ validacion: findings list + proposed corrections aligned with es_MX and typograp
 ---
 <!-- markdownlint-disable MD041 -->
 Reasoning:
+
 - Main rule: content in Mexican Spanish must avoid English calques and non-Mexican regionalisms (see `~/rules/rulesets/LINGUISTICS.md` and `~/rules/PROMPTS.md`).
 - Review from general to specific: dialect/es_MX → calques → terminology → technical verbs → italics for loanwords → typography (titles and post-colon casing) → quotes (text vs code) → writing subtleties → acronyms → tense usage → dates/times (CST) → file naming → explicit anti-patterns → idiomatic expressions (usage/moderation) → International English spelling where applicable.
 - Produce concrete findings and minimal corrected wording where needed.
 
 Steps:
+
 1) Action: verify dialect and regionalisms.
    Result: flag peninsular forms (`ordenador`, `fichero`, `vale`), Argentinian forms (`piola`), Colombian forms (`bacano`), and other regionalisms (`chévere`), then replace with es_MX equivalents (`computadora`, `archivo`, `está bien`, `excelente`, etc.).
 2) Action: avoid common English calques.
@@ -47,6 +49,7 @@ Steps:
     Result: replace American spellings in English text (`color`→`colour`, `organization`→`organisation`, `virtualization`→`virtualisation`).
 
 Mandatory verification (before completion):
+
 - Run `grep -n "^#" archivo.md` and document every heading found.
 - Confirm no heading remains in Every-Word-Capitalised style.
 - List all capitalisation fixes applied.
@@ -55,5 +58,6 @@ Mandatory verification (before completion):
 - Verify all English content uses International English (UK) spelling.
 
 Conclusion:
+
 - Deliver: (a) findings list and proposed replacements; (b) corrected fragments with proper quotes and capitalisation; (c) if timestamps appear, provide correct TZ examples; (d) note whether idiomatic expressions were kept or moderated.
 - References: `~/rules/LINGUISTICS.md`, `~/rules/README.md`, and `~/rules/PROMPTS.md`.

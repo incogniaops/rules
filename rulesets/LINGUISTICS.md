@@ -112,6 +112,7 @@ Use idioms only when context allows it.
 - After a colon, use lowercase unless a proper noun follows.
 
 Examples:
+
 - ✅ `### Configuración de Proxmox VE`
 - ❌ `### Configuración De Proxmox VE`
 - ✅ **Regla:** los nombres de archivos deben estar en inglés
@@ -132,6 +133,7 @@ Examples:
   - `28 de julio de 2025, 14:30 CST (Ciudad de México)`
 
 Shell examples:
+
 - `TZ=America/Mexico_City date '+%F %H:%M %Z'`
 - `TS=$(TZ=America/Mexico_City date '+%F %H:%M %Z'); echo "$TS"`
 

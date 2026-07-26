@@ -5,12 +5,14 @@ This document defines the conventions for generating corporate LaTeX documents o
 ## Pandoc vs. LaTeX from scratch
 
 **Pandoc can convert Markdown to PDF via LaTeX, but the result is mediocre and inconsistent:**
+
 - Tables do not fill the page width and have incorrect column widths.
 - Code blocks (`listings`) leave blank lines between the background and the text.
 - The corporate header/footer requires external patches (`--include-in-header`) that accumulate and are fragile.
 - Missing-package errors are hard to anticipate and block compilation.
 
 **Correct workflow:**
+
 1. Use the Markdown as a **content reference** (text, tables, data).
 2. Write the `.tex` from scratch following this document.
 3. Compile directly with `xelatex`.
@@ -22,11 +24,14 @@ Pandoc is only acceptable for quick internal drafts with no visual quality requi
 - **Mandatory engine:** `xelatex` — native Unicode support, fontspec, and emoji without conversions.
 - **Compilation:** `xelatex -interaction=nonstopmode file.tex`
 - **Error checking:** use single quotes in `grep` to avoid issues with `!` in zsh:
+
   ```bash
   xelatex -interaction=nonstopmode file.tex 2>&1 | grep -iE 'error|missing|not found'
   ```
+
 - **Note:** `grep` returns exit code 1 when no matches are found (no errors). Do not confuse this with a real failure.
 - **Installing missing packages:**
+
   ```bash
   sudo dnf install -y 'tex(name.sty)'
   ```
@@ -37,6 +42,7 @@ Pandoc is only acceptable for quick internal drafts with no visual quality requi
 - **Code:** `Liberation Mono`
 - **Emoji:** `Noto Emoji` (already installed on Fedora via `google-noto-emoji-fonts`)
 - Minimal configuration:
+
   ```latex
   \usepackage{fontspec}
   \setmainfont{Liberation Sans}
@@ -66,6 +72,7 @@ Pandoc is only acceptable for quick internal drafts with no visual quality requi
 ```
 
 **Rules:**
+
 - The timestamp goes **below the logo**, right-aligned with `\makebox[\linewidth][r]{...}`
 - Do **not** use `\hfill` at the start of a line — it does not work in that context
 - Title in `\LARGE\bfseries`; subtitle in `\large` without bold
@@ -100,6 +107,7 @@ Use the `\meta` command for consistency:
 ## Tables
 
 **Required packages:**
+
 ```latex
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -110,11 +118,13 @@ Use the `\meta` command for consistency:
 ```
 
 **Border colour:** define once in the preamble:
+
 ```latex
 \arrayrulecolor{promad}   % borders in PROMAD blue
 ```
 
 **Standard structure** (full-width table):
+
 ```latex
 \begin{tabularx}{\linewidth}{>{\bfseries}l X}
 \toprule
@@ -126,12 +136,14 @@ Value A & Long description that wraps automatically \\
 ```
 
 **Recommended column specifiers:**
+
 - `X` — flexible column that absorbs remaining space
 - `l` — fixed left-aligned
 - `c` — fixed centred
 - `>{\bfseries}l` — left-aligned bold (for parameter column)
 
 **Critical rules:**
+
 - Always use `\linewidth` as the table width, **never** `\textwidth` inside minipages
 - `\toprule`, `\midrule`, `\bottomrule` from `booktabs` — **not** `\hline`
 - `\rowcolor{rowhead}` on the header row for a soft grey background
@@ -164,6 +176,7 @@ Value A & Long description that wraps automatically \\
 ```
 
 Usage:
+
 ```latex
 \begin{codebox}
 apt update && apt dist-upgrade
@@ -192,6 +205,7 @@ apt update && apt dist-upgrade
 ```
 
 **Rules:**
+
 - Separator: thin grey line (`0.4pt`), **not** blue
 - **No avatar** — profile images do not work well in LaTeX without CSS
 - Contact in one or two lines of plain text
@@ -202,6 +216,7 @@ apt update && apt dist-upgrade
 - **Do not use URLs** in `\includegraphics` with XeLaTeX
 - Verify with `file image.png` that the download was successful
 - Suppress "Figure 1":
+
   ```latex
   \usepackage{caption}
   \DeclareCaptionFormat{empty}{}

@@ -10,6 +10,7 @@ last_updated: 2025-10-12
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - **CRITICAL**: avoid any command that opens interactive editors (gh repo edit with certain flags, commands without fully specified parameters).
 - Use the GitHub REST API directly with curl for complex operations.
 - Simple gh commands only for operations guaranteed to be non-interactive.
@@ -17,6 +18,7 @@ Reasoning:
 - Validate changes without opening browsers or editors.
 
 Steps:
+
 1) Action: verify that gh is installed and correctly authenticated.
    Result:
    - `gh --version` to confirm installation
@@ -77,6 +79,7 @@ Steps:
    ```
 
 Commands to AVOID (may open editors):
+
 - `gh repo edit` without specific flags
 - `gh repo edit --add-topic` (known to open editor)
 - `gh issue create` without `-t` and `-b`
@@ -84,6 +87,7 @@ Commands to AVOID (may open editors):
 - Any gh command that does not fully specify all parameters
 
 SAFE commands (guaranteed non-interactive):
+
 - `gh repo edit --description "text"`
 - `gh repo view --json field`
 - `curl` with GitHub REST API
@@ -126,6 +130,7 @@ curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.g
 ```
 
 Conclusion:
+
 - Use curl + REST API for maximum control and to avoid editors.
 - Only use gh for simple, fully specified commands.
 - Always validate changes with GET queries to the API.

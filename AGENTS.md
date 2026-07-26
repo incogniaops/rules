@@ -15,6 +15,7 @@ The repository combats three endemic problems in Latin American technology:
 - **Cultural identity loss**: abandoning Spanish cultural identity for perceived professional advancement
 
 Language policy is context-based:
+
 - **Personal context**: documentation and `CHANGELOG.md` in **Mexican Spanish**; code and commits in **International English**.
 - **Corporate context**: **100% International English** (documentation, `CHANGELOG.md`, code, and commits).
 
@@ -33,6 +34,7 @@ npm run check:links
 ### Working with documentation
 
 Documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md` and the active context:
+
 - Personal: use **Mexican Spanish** terminology and expressions.
 - Corporate: use **International English** consistently.
 - Apply correct capitalisation (only the first word and proper nouns in titles).
@@ -76,7 +78,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 
 ### Directory organisation
 
-```
+```text
 ├── rulesets/           # Core rules and documentation
 │   ├── LINGUISTICS.md      # Mexican Spanish language standards
 │   ├── COMMITTING.md       # Git workflow and CHANGELOG rules
@@ -101,14 +103,14 @@ The repository supports dual contexts with different rules:
 **Personal projects (`@incognia`)**:
 
 - Licence: GPLv3 (copyleft)
-- Email: incognia@gmail.com
+- Email: <incognia@gmail.com>
 - SSH key: ~/.ssh/incognia
 - Documentation: Mexican Spanish
 
 **Corporate projects (`@incogniaops` for Elsevier)**:
 
 - Licence: MIT (permissive)
-- Email: r.alvarez1@elsevier.com
+- Email: <r.alvarez1@elsevier.com>
 - SSH key: ~/.ssh/elsevier
 - Documentation: International English with STYLING.md rules
 

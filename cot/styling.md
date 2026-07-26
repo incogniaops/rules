@@ -8,11 +8,13 @@ validacion: correct header/footer, valid CST timestamp, structure and styles con
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Use International English (UK) and repo CoT format (see «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) and «~/rules/README.md» ([../README.md](../README.md))).
 - Traverse top to bottom: standard header → content → footer → CSS → validations (timestamps, links, accessibility).
 - Ensure consistency with CST (México City) and mermaid where applicable.
 
 Steps:
+
 1) Action: insert the standard header following «~/rules/STYLING.md» (tags + logo + H1 + right-aligned timestamp).
    Result: YAML block with tags and header block with Kabat One logo and H1 title.
 2) Action: detect and remove existing date fields before inserting the new timestamp.
@@ -46,6 +48,7 @@ Steps:
     Result: all edits apply without search errors.
 
 Conclusion:
+
 - Deliver the document with correct header/footer, valid CST timestamp, hierarchical content, and consistent style.
 - Confirm the single-date policy: no redundant date remains after styling.
 - References: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/README.md» ([../README.md](../README.md)).

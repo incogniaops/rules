@@ -148,6 +148,7 @@ Specific implementation details of this philosophy are organised in the followin
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - personal attribution rules
 
 ### Work-only rules
+
 - **[STYLING.md](./rulesets/STYLING.md)** - style rules for corporate Markdown documents
 
 *This document was created by Rodrigo Álvarez (@incognia) and is distributed under the GPLv3 licence. For details, see the LICENSE file.*

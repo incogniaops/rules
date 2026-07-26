@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD029 -->
+
 # Sending HTML email from the CLI
 
 ## Purpose
@@ -13,14 +15,17 @@ Documents the three available flows for composing and sending HTML emails from t
 ## Prerequisites
 
 **All modes:**
+
 - HTML templates in `~/rules/templates/mail/` (`delivery_template.html` and `generic_template.html`)
 - Composition rules in `~/rules/rulesets/MAIL.md`
 
 **`mac` mode (additional):**
+
 - macOS with Microsoft Outlook installed and configured
 - «Kabat One» signature set as the default signature in Outlook
 
 **`graph` mode (additional):**
+
 - Microsoft 365 account with an active mailbox (e.g. `ralvarez@kabatone.com`)
 - Application registered in Microsoft Entra (see steps below)
 - Python 3 and `curl` installed

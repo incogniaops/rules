@@ -8,12 +8,14 @@ validacion: repo initialised, correct identity, SSH forced, remote on SSH, and f
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Avoid HTTPS and SSH aliases; use SSH with the appropriate key per repo (core.sshCommand).
 - Configure identity (user.name, user.email) according to Personal/Corporate context.
 - Set the default branch to main and origin remote in SSH format.
 - Main reference: «~/rules/rulesets/GIT.md» (section "Initial configuration and SSH by context").
 
 Steps (recommended option: interactive assistant):
+
 1) Action: initialise the repository.
    Result: `git init`.
 2) Action: run the context assistant.
@@ -38,6 +40,7 @@ Steps (recommended option: interactive assistant):
    Result: `git push -u origin main`.
 
 Steps (manual alternative, if not using the assistant):
+
 1) `git init`
 2) Choose context and configure identity + SSH:
    - Personal:
@@ -53,5 +56,6 @@ Steps (manual alternative, if not using the assistant):
 5) Commit and first push as in steps 5-6 of the recommended option.
 
 Conclusion:
+
 - After initial configuration, the daily flow uses a simple push: `git push`.
 - References: «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)) and «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)).

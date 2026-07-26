@@ -101,11 +101,12 @@ git commit -F /tmp/commit-msg.txt
 🔥 **CRITICAL RULE: the `/commit` flow does NOT modify `CHANGELOG.md`; it only validates that it has already been updated.**
 
 **MANDATORY PROCESS:**
+
 1. **FIRST:** Update `CHANGELOG.md` using `/changelogger` (or an equivalent dedicated flow).
-1. **SECOND:** Validate that `CHANGELOG.md` has changes relative to the repository.
-1. **THIRD:** Run `git add` for the required files (including `CHANGELOG.md`).
-1. **FOURTH:** Run `git commit`.
-1. **FIFTH:** Run `git push`.
+2. **SECOND:** Validate that `CHANGELOG.md` has changes relative to the repository.
+3. **THIRD:** Run `git add` for the required files (including `CHANGELOG.md`).
+4. **FOURTH:** Run `git commit`.
+5. **FIFTH:** Run `git push`.
 
 **⚠️ WARNING:** If `CHANGELOG.md` has no changes, the flow must abort and suggest `/changelogger`.
 
@@ -114,12 +115,14 @@ git commit -F /tmp/commit-msg.txt
 Before proceeding to `git add`/`git commit`, this protocol must be followed:
 
 1. Run the `CHANGELOG.md` change gate:
+
    ```bash
    if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
        echo "ERROR: CHANGELOG.md has no changes. Run /changelogger and retry /commit."
        exit 1
    fi
    ```
+
 2. If the gate fails (no changes), stop execution immediately.
 3. If the gate passes (staged or unstaged changes exist), proceed with `git add`/`git commit`.
 4. CHANGELOG format and language maintenance is delegated to `/changelogger` + `~/rules/cot/changelog.md`.
@@ -230,6 +233,7 @@ git config --global pager.diff false
 **Solutions:**
 
 1. **Escape quotes correctly:**
+
    ```bash
    # BAD: double quotes inside double quotes without escaping
    git commit -m "fix: correct "user" validation"
@@ -242,12 +246,14 @@ git config --global pager.diff false
    ```
 
 2. **Cancel the `quote>` prompt if it appears:**
+
    ```bash
    # Press Ctrl+C to cancel the incomplete command
    # Then rewrite the message correctly
    ```
 
 3. **Preferred method: use a detailed temporary file**
+
    ```bash
    cat > /tmp/commit-msg.txt <<EOF
    fix: correct user validation
@@ -263,6 +269,7 @@ git config --global pager.diff false
    ```
 
 **Prevention:**
+
 - Avoid double quotes inside double-quoted messages
 - Prefer single quotes for messages that contain double quotes
 - Verify quote balance before running the command

@@ -8,6 +8,7 @@ validacion: PDF generated without errors, full-width tables, solid code blocks w
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Use XeLaTeX as the engine (native Unicode, fontspec, emoji); never pdflatex for corporate documents.
 - CRITICAL: do NOT use pandoc for direct Markdown→PDF conversion. The result is mediocre: tables without consistent width, broken-background code blocks, headers/footers impossible to control cleanly. Use the Markdown only as a content reference and write the .tex from scratch.
 - The flow is: read the Markdown → download images → write .tex → compile → fix missing packages → compile again.
@@ -15,6 +16,7 @@ Reasoning:
 - Apply language rules from LINGUISTICS.md to document content as appropriate.
 
 Steps:
+
 1) Action: download images locally before writing the .tex.
    CRITICAL: XeLaTeX cannot load URLs in `\includegraphics`. Always `curl -sL URL -o file.png` and verify with `file file.png`.
    Result: images available in the same directory as the .tex.
@@ -57,6 +59,7 @@ Steps:
    Compile twice if the document contains internal references or a table of contents.
 
 Conclusion:
+
 - Deliver: clean .tex file + generated PDF + locally downloaded images.
 - Verify: full-width tables, solid-background code blocks, right-aligned timestamp, no «Figure 1» on the logo.
 - If a missing package is detected during compilation, install it with `dnf` and recompile — never try to omit the package.

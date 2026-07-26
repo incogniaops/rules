@@ -9,6 +9,7 @@ description: "Maintain CHANGELOG.md with correct CST dates and reverse chronolog
 
 When adding or updating entries in CHANGELOG.md for any project following rules conventions.
 Language policy for entries:
+
 - Personal context: Mexican Spanish.
 - Corporate context: International English (UK).
 
@@ -30,11 +31,13 @@ Language policy for entries:
    - **Spacing rule (MANDATORY)**: keep exactly one blank line between the last bullet of the target date block and the next `## [YYYY-MM-DD]` heading.
    - **Fallback rule (MANDATORY, new date only)**: if insertion preview still shows no blank separator line after creating a new date block, switch immediately to a two-hunk edit (first hunk inserts the new block, second hunk enforces `blank line + next heading`).
    - Base format:
+
      ```markdown
      ## [YYYY-MM-DD] - Short descriptive title
 
      - type/tipo: context-appropriate change description
      ```
+
 7. **Language**: Personal entries in Mexican Spanish; corporate entries in International English (UK); no emojis.
 8. **Type in bullets**: Use context-appropriate prefix:
    - Personal: `tipo:`
@@ -57,6 +60,7 @@ Language policy for entries:
 - NEVER edit entries from dates different than `DATE_CST` (current day) unless explicitly instructed by the user
 
 ## Anti-error and anti-pattern protocol (MANDATORY)
+
 1. Run `git --no-pager status --short` as the first operation of the run to validate all current changes.
 2. HARD STOP gate: if there is no explicit evidence that step 1 happened in the current run, stop immediately and restart from step 1; absolutely no further action is allowed.
 3. Read `CHANGELOG.md` lines `1-200` as the second operation of the run (before `grep`, extra search, or patch attempts).
@@ -68,8 +72,8 @@ Language policy for entries:
 9. Acceptance criterion: insertion-only diff inside the target date block (only `+` lines); any deleted line (`-`) invalidates the attempt unless the user explicitly requested deletion.
 10. If validation fails: do one minimal correction after re-reading the exact block.
 11. If creating a new date block and blank separator line is missing, apply mandatory two-hunk fallback:
-   - Hunk 1: insert the new date block above the next date heading.
-   - Hunk 2: anchor on the next heading and replace with `blank line + same heading` to force spacing.
+    - Hunk 1: insert the new date block above the next date heading.
+    - Hunk 2: anchor on the next heading and replace with `blank line + same heading` to force spacing.
 12. If validation shows changes outside the target date block: stop and ask user confirmation; do NOT auto-correct historical entries.
 13. If it fails again: stop and ask user confirmation before any further attempt.
 14. Never chain 3+ consecutive attempts on CHANGELOG without an intermediate successful diff validation.
@@ -77,6 +81,7 @@ Language policy for entries:
 16. If an insertion-only attempt shows any deleted line (`-`) anywhere in `CHANGELOG.md`, abort that patch and rebuild the anchor before retrying; deletions are allowed only with explicit user instruction.
 
 Forbidden anti-patterns:
+
 - Continuing the run without explicit evidence that `git --no-pager status --short` was executed in the current execution.
 - Continuing the run without explicit evidence that `CHANGELOG.md` lines `1-200` were read after step 0 in the current execution.
 - Attempting to recover mid-run after skipping step 0 or step 1 instead of hard-stopping and restarting from step 0.

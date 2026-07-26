@@ -8,6 +8,7 @@ validacion: CHANGELOG.md in reverse chronological order, correct CST dates, no d
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Main rule: CHANGELOG.md must follow reverse chronological order (most recent first) with correctly calculated CST México City dates and language by context (personal in Mexican Spanish, corporate in International English) (see «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) and «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Common critical errors: (1) incorrect chronological order, (2) wrong CST calculation (labelling UTC as CST), (3) duplicating identical entries, (4) mixing International English with Mexican Spanish.
 - Flow: verify current timezone → review chronological order → detect duplicates → apply linguistic rules → validate structure.
@@ -30,6 +31,7 @@ Steps:
    Validation: require explicit evidence in the current run of `git --no-pager status --short` and of the precise read of `CHANGELOG.md` (1-200).
    Stop rule: if evidence of either step is missing, IMMEDIATE HARD STOP and restart from 0; continuing or recovering mid-run is forbidden.
    Result: no subsequent section may execute without steps 0 and 0b validated.
+
 1) Action: calculate the correct current CST date and time.
    MANDATORY COMMAND: `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"`
    Validation: confirm mathematical calculation CST = UTC - 6 hours
@@ -67,16 +69,17 @@ Steps:
 6b) Action: insert bullets in reverse chronological order within the date entry.
    CRITICAL RULE: the new bullet goes FIRST within the date block.
    MANDATORY EDITING TECHNIQUE for `edit_files`:
-   - GOLDEN RULE: `search` ends on the LAST LINE to be used as anchor. `replace` reproduces that line intact and ADDS the new content BEFORE or AFTER it. NEVER include in `search` a line that is then reproduced truncated or modified in `replace`.
-   - MANDATORY OPERATIONAL RULE for existing date: direct, simple edit in a single hunk; once the target block is identified, do not repeat exploratory searches.
-   - CROSS-CUTTING HARD STOP: if at any section evidence of steps 0 or 0b is absent from the current run, stop immediately and restart from 0; no exceptions exist.
-   - MANDATORY FIRST ATTEMPT for existing date: use exact micro-block in a single hunk with `search` = `## [DATE] - ...` + immediate blank line + first existing bullet.
-   - In that same hunk, `replace` reproduces the heading and blank line intact, inserts the new bullet at the top, and preserves the previous bullet below.
-   - Partial anchors for existing dates are forbidden (e.g., `search` with heading only).
-   - Inserting a blank line between bullets of the same date block is forbidden.
-   - For existing dates, anchoring `search` on `# Changelog` or including that heading in the insertion hunk is forbidden.
-   - Replacing the top section of the file to insert bullets in an existing date is forbidden.
-   - INCREMENTAL INSERTION MODE (MANDATORY): by default only additions (`+`) are permitted. If any deleted line (`-`) appears in `CHANGELOG.md`, abort the patch and reconstruct the anchor; deletions are permitted only with explicit user instruction.
+
+- GOLDEN RULE: `search` ends on the LAST LINE to be used as anchor. `replace` reproduces that line intact and ADDS the new content BEFORE or AFTER it. NEVER include in `search` a line that is then reproduced truncated or modified in `replace`.
+- MANDATORY OPERATIONAL RULE for existing date: direct, simple edit in a single hunk; once the target block is identified, do not repeat exploratory searches.
+- CROSS-CUTTING HARD STOP: if at any section evidence of steps 0 or 0b is absent from the current run, stop immediately and restart from 0; no exceptions exist.
+- MANDATORY FIRST ATTEMPT for existing date: use exact micro-block in a single hunk with `search` = `## [DATE] - ...` + immediate blank line + first existing bullet.
+- In that same hunk, `replace` reproduces the heading and blank line intact, inserts the new bullet at the top, and preserves the previous bullet below.
+- Partial anchors for existing dates are forbidden (e.g., `search` with heading only).
+- Inserting a blank line between bullets of the same date block is forbidden.
+- For existing dates, anchoring `search` on `# Changelog` or including that heading in the insertion hunk is forbidden.
+- Replacing the top section of the file to insert bullets in an existing date is forbidden.
+- INCREMENTAL INSERTION MODE (MANDATORY): by default only additions (`+`) are permitted. If any deleted line (`-`) appears in `CHANGELOG.md`, abort the patch and reconstruct the anchor; deletions are permitted only with explicit user instruction.
    - To insert a new `## [DATE]` entry at the top of the file: `search` is ONLY the immediately preceding anchor line (e.g. the `<!-- markdownlint-disable -->` comment or the blank line that follows it). `replace` reproduces that exact anchor line and adds the new entry after. NEVER include the first existing `## [DATE]` in `search` unless it is reproduced FULLY and INTACT in `replace`.
    - MANDATORY FALLBACK (two hunks) for a new date when the blank line before the next heading is missing:
      - Hunk 1: insert the `## [DATE]` block with its bullets above the next `## [PREVIOUS_DATE]`.

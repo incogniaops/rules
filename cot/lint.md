@@ -8,12 +8,14 @@ validacion: errors significantly reduced after applying corrections and re-runni
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Prioritise high-impact mechanical fixes (blank lines around headings/lists: MD022/MD032; fences and languages: MD031/MD040; ordered list prefixes: MD029).
 - Maintain consistency with the current configuration (.markdownlint.yaml with MD013 disabled and exceptions in CHANGELOG).
 - Avoid semantic changes to content; limit changes to Markdown formatting.
 - Use non-interactive execution to measure progress between iterations.
 
 Steps:
+
 1) Action: run the linter to establish the baseline.
    Result:
    - `npx markdownlint-cli2 "**/*.md" "#node_modules"`
@@ -54,6 +56,7 @@ Steps:
    - Review broken links and update internal references as needed.
 
 Conclusion:
+
 - The set of mechanical fixes should substantially reduce linter errors and leave minimal pending items.
 - If specific warnings persist (e.g. MD036 in footers), decide whether to adjust the content or document a local per-file exception.
 - References: «~/rules/.markdownlint.yaml», «~/rules/CHANGELOG.md», «~/rules/README.md».

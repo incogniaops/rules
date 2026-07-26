@@ -1,6 +1,7 @@
 ---
 tags: tag-1, tag-2, tag-3
 ---
+<!-- markdownlint-disable MD033 -->
 
 <img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
 

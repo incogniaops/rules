@@ -8,11 +8,13 @@ validacion: inventory of key files, flows, dependencies, and policies; sources c
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Start with entry documents, then move to structure, dependencies, CI/CD, deployment, style, tests, licences, and contribution.
 - Maintain International English (UK) and CoT format; do not execute destructive actions or expose secrets.
 - If CLI tools are available (gh/glab), use them only for listing (non-interactive); otherwise navigate the repo files.
 
 Steps:
+
 1) Action: identify base documents at the root.
    Result: README.md (purpose/usage), PHILOSOPHY.md or equivalent (framework), CONTRIBUTING.md, CODE_OF_CONDUCT.md.
 2) Action: review licensing and attribution.
@@ -41,4 +43,5 @@ Steps:
     Result: report covering: purpose, structure, dependencies, CI/CD, deployment, config/secrets, style, tests, version, and contribution. Cite paths/files.
 
 Conclusion:
+
 - Deliver a reproducible inventory and synthesis with references to files/paths and, where applicable, read-only commands (not destructive). Use standard English typography and avoid adding 's' to acronyms.

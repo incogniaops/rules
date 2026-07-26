@@ -27,7 +27,7 @@ Usage examples.
 
 ## Project structure
 
-```
+```text
 project/
 ├── src/
 └── README.md

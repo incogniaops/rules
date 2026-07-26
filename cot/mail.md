@@ -8,6 +8,7 @@ validacion: HTML file generated with inline styles, bgcolor on td, no external C
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Emails are composed as HTML using OWA templates with *inline* styles.
 - OWA strips `<style>` blocks, CSS classes, `background-color` on `<table>`, `border-radius`, flexbox, grid, and *media queries*.
 - All styling must be *inline* on `<td>` elements, duplicating `bgcolor` as an HTML attribute.
@@ -17,6 +18,7 @@ Reasoning:
 - Graph API credentials: `~/.secrets.yaml` (key `GRAPH_API`).
 
 Steps:
+
 1) Action: determine the email type.
    - Microservice delivery → use `templates/mail/delivery_template.html`
    - Any other (change, decision, report, correction) → use `templates/mail/generic_template.html`
@@ -71,6 +73,7 @@ Steps:
     Result: email delivered or draft opened.
 
 Conclusion:
+
 - The resulting HTML must comply with OWA rules (`bgcolor` on `<td>`, *inline* styles, no external CSS).
 - The signature is only included in the HTML when the mode is `graph` (as an inline CID image).
 - In `owa` and `mac`, Outlook adds the signature automatically.

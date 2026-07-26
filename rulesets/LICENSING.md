@@ -7,24 +7,29 @@ This document establishes the guidelines for creating a formal LICENSE file in p
 ## 2. Licence selection by project type
 
 ### 2.1. Corporate projects
+
 - **Recommended licence:** MIT
 - **Reason:** Permissive nature that facilitates integration and commercial adoption.
 
 ### 2.2. Personal projects (software)
+
 - **Recommended licence:** GNU GPLv3
 - **Reason:** Ensures that the code and derivatives remain free, promoting *copyleft*.
 
 (Can apply to both personal and corporate projects, depending on the specific needs of the project)
 
 ### 2.3. Hardware design projects
+
 - **Standard licence:** CERN OHL v2
 - **Reason:** Allows free modification and distribution within the open hardware domain.
 
 ### 2.4. Documentation projects
+
 - **Licence:** GNU LGPLv3
 - **Alternative:** Creative Commons for general documents not tied to software.
 
 ### 2.5. Creative projects
+
 - **Standard licence:** CC BY 4.0
 - **Reason:** Facilitates maximum dissemination and use, requiring only attribution.
 

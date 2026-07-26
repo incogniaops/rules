@@ -23,6 +23,7 @@ git config --list | grep ^user\.
 ```
 
 **Platform credentials:**
+
 - **GitHub:** incognia
 - **GitLab:** incognia
 - **SSH Key:** `~/.ssh/incognia`

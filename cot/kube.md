@@ -8,12 +8,14 @@ validacion: status report covering nodes, pods, services, VirtualServices, and I
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - Clusters run on bare-metal with Istio, ArgoCD, Prometheus, Grafana, and Kiali.
 - Access is via SSH with user `ubuntu` (or other) and key `kone` (own infra) or `cad` (clients).
 - Manifests are in `/home/<user>/kubernetes-<namespace>/services/`.
 - Main reference: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
 
 Steps:
+
 1) Action: connect to the server via SSH.
    Result: `ssh -i ~/.ssh/<key> <user>@<ip>`
    Verify: successful connection, `kubectl` available.
@@ -69,6 +71,7 @@ Steps:
     - Verify access: `curl -s -o /dev/null -w "%{http_code}" http://<ip>:<port>`
 
 Conclusion:
+
 - Deliver a report covering: node state, problematic pods, services and VirtualServices, ArgoCD state, recent events, and observability state.
 - If there are issues, include relevant logs (`kubectl logs <pod> -n <namespace> --tail=50`).
 - References: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).

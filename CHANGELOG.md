@@ -5,6 +5,8 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
+- style: run markdownlint QA pass — fix MD040 (missing code block language labels), MD029 (ordered list numbering across CoTs, rulesets, and skills), MD033 (inline HTML in hedgedoc template), and MD025/MD036 overrides; reduce linting errors from 851 to 0 across 76 files
+- chore: update package.json lint scripts — add correct glob pattern and node_modules exclusion to npm run lint:md; enable autofix via lint:md:fix
 - fix: replace «Promad Business Solutions» with [Client Name] placeholder in github-readme.md and gitlab-readme.md templates
 - fix: repair broken relative links across CoTs and rulesets: correct ../../ depth errors, remove stale PROMPTS.md references, and fix ./PHILOSOPHY.md and ./README.md paths in rulesets/ENSEÑANZA.md and rulesets/TEACHING.md
 - i18n: translate 18 CoTs and skills/release to International English (UK) as Phase 1 of the full repository translation plan

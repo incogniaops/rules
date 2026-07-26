@@ -38,7 +38,7 @@ git commit -m "docs: actualizar guía de instalación"
 
 ### Step 0: Language checkpoint (BEFORE any commit)
 
-```
+```text
 🔍 CHECKPOINT: Verifying commit language...
 📋 RULE: Commit messages in ENGLISH (~/rules/cot/committing.md line 15)
 ⚠️  CRITICAL: Do NOT proceed until correct language is confirmed
@@ -77,7 +77,7 @@ If either fails:
 
 ### Example of correct application
 
-```
+```text
 🔍 CHECKPOINT: Verifying commit language...
 📋 RULE: Commit messages in ENGLISH
 

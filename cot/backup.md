@@ -7,12 +7,14 @@ validation: backup created, checksum generated and verified, log entry recorded
 ---
 <!-- markdownlint-disable MD041 -->
 Reasoning:
+
 - Always use CST (México City) for timestamps (`TZ=America/Mexico_City`) and log actions.
 - Generate a checksum (`.sha256`) for integrity.
 - For directories, package and compress with `zstd` for efficiency.
 - Reference: `~/rules/rulesets/BACKUPS.md` (restore, verification, compression, incremental rsync).
 
 Steps:
+
 1) Action: decide what to back up (file or directory) and destination.
    Result: variables defined, e.g. `SRC=./my_folder DEST=backups/daily`.
 2) Action: create (if applicable) the CST day folder.
@@ -31,6 +33,6 @@ Steps:
    Result: review/use `$DEST/backup.log` (or `$BACKUP_LOG_FILE`).
 
 Conclusion:
+
 - Copy is created and verified; log records the operation in CST.
 - References: `~/rules/BACKUPS.md` and scripts in `~/rules/scripts/`.
-

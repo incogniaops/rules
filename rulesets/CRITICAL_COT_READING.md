@@ -23,13 +23,14 @@ When the user invokes a CoT (Chain of Thought) by referencing `~/cot/*.md`, it i
 
 ## MANDATORY FLOW
 
-```
+```text
 User invokes CoT → Read ENTIRE file → Analyse completely → Confirm understanding → Execute step by step
 ```
 
 ## PURPOSE
 
 CoTs contain:
+
 - **Critical reasoning** that explains the "why"
 - **Detailed steps** that cannot be omitted
 - **Specific validations** required
@@ -40,6 +41,7 @@ CoTs contain:
 ## PERSONAL VALIDATION
 
 Before acting, ask:
+
 - Did I read the ENTIRE CoT?
 - Do I understand each step and its purpose?
 - Are there contradictions I need to resolve?

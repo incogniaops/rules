@@ -135,7 +135,7 @@ flowchart LR
 
 Each *skill* is a directory containing at least one `SKILL.md`. The script copies the entire directory, preserving any additional files (templates, helper scripts):
 
-```
+```text
 .agents/skills/
 ├── commit/
 │   └── SKILL.md          ← copied in full to $SKILLS_DST/commit/
@@ -148,7 +148,7 @@ Each *skill* is a directory containing at least one `SKILL.md`. The script copie
 
 *Workflows* are flat YAML files copied directly to the destination directory:
 
-```
+```text
 .warp/workflows/
 ├── backup_file.yaml       ← copied to $WORKFLOWS_DST/
 ├── commit_flow.yaml
@@ -200,7 +200,7 @@ After syncing skills to `~/.agents/skills/`, the script creates symlinks so that
 
 For every skill directory found in `~/.agents/skills/`, the script creates a symlink:
 
-```
+```text
 ~/.claude/commands/<name>.md  →  ~/.agents/skills/<name>/SKILL.md
 ```
 
@@ -217,7 +217,7 @@ This means the skill's instruction file is not copied — it is linked. Any upda
 
 Once the symlinks exist, each skill is available as a slash command in Claude Code:
 
-```
+```text
 /commit       →  runs the commit skill
 /changelogger →  runs the changelogger skill
 /linguistics  →  runs the linguistics skill

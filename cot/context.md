@@ -13,7 +13,9 @@ version: "2.1"
 # CoT: get context for the current project
 
 ## Purpose
+
 Obtain full project context in the current directory through:
+
 - Identifying project location and structure
 - Analysing primary documentation files and subdirectory docs
 - Understanding purpose, current status, and planning
@@ -21,6 +23,7 @@ Obtain full project context in the current directory through:
 - Identifying Kubernetes and Talos infrastructure
 
 ## Use cases
+
 - **New work session**: establish quick context in any project
 - **Repository exploration**: understand unfamiliar projects
 - **Progress review**: assess current status versus objectives
@@ -28,6 +31,7 @@ Obtain full project context in the current directory through:
 - **Diagnostics**: identify structure and available tools
 
 ## Reasoning
+
 1. **`pwd`** identifies the current project location.
 2. **`tree`** reveals the full file and directory structure.
 3. **Key files** (README, CHANGELOG, etc.) provide primary documentation.
@@ -35,7 +39,9 @@ Obtain full project context in the current directory through:
 5. **Automatic detection** reveals the technologies and tools in use.
 
 ## Steps
+
 ### 1. Identify location and context
+
 ```bash
 # Get current directory
 pwd
@@ -45,6 +51,7 @@ tree -L 3 -a
 ```
 
 **If `tree` is not installed, install it by system**:
+
 ```bash
 # Fedora/RHEL/CentOS
 sudo dnf install tree
@@ -63,6 +70,7 @@ brew install tree
 ```
 
 ### 2. Identify documentation files
+
 ```bash
 # Search primary documentation files in the root directory
 ls -la | grep -i -E '(readme|changelog|roadmap|contributing|license|warp)'
@@ -78,6 +86,7 @@ find . -maxdepth 3 -name "README.md" -not -path "./README.md" 2>/dev/null | head
 ```
 
 **Record discovered files**:
+
 - ✅ **README**: [exists/does not exist]
 - ✅ **CHANGELOG**: [exists/does not exist]
 - ✅ **ROADMAP**: [exists/does not exist]
@@ -86,6 +95,7 @@ find . -maxdepth 3 -name "README.md" -not -path "./README.md" 2>/dev/null | head
 - ✅ **WARP**: [exists/does not exist]
 
 ### 3. Read primary documentation
+
 ```bash
 # Read documentation files (if present)
 if [ -f README.md ]; then echo "=== README.md ==="; head -50 README.md; fi
@@ -103,12 +113,14 @@ done
 ```
 
 **Extract key information**:
+
 - ✅ **Project purpose**: [main description]
 - ✅ **Technologies used**: [languages, frameworks, tools]
 - ✅ **Current status**: [version, latest update]
 - ✅ **Future goals**: [roadmap, next steps]
 
 ### 4. Analyse technical structure
+
 ```bash
 # Detect project type and technologies
 echo "=== Technology detection ==="
@@ -147,6 +159,7 @@ find . -name "*talosconfig*" -o -name "*talos.config*" -o -name "*.talosconfig" 
 ```
 
 **Record findings**:
+
 - ✅ **Project type**: [web, CLI, library, infrastructure, etc.]
 - ✅ **Primary technologies**: [detected languages]
 - ✅ **Build tools**: [npm, pip, cargo, etc.]
@@ -157,6 +170,7 @@ find . -name "*talosconfig*" -o -name "*talos.config*" -o -name "*.talosconfig" 
 - ✅ **Additional READMEs**: [subdirectories with documentation]
 
 ### 5. Inspect configuration and scripts
+
 ```bash
 # Search important configuration files
 echo "=== Configuration files ==="
@@ -174,13 +188,16 @@ git branch --show-current 2>/dev/null || echo "❌ No active branch"
 ```
 
 **Summarise operational information**:
+
 - ✅ **Directory organisation**: [main structure]
 - ✅ **Available scripts**: [tools found]
 - ✅ **Configuration**: [important config files]
 - ✅ **Version control**: [Git, current branch, remotes]
 
 ### 6. Validate understanding and generate summary
+
 **Verify understanding**:
+
 - ✅ Is the project purpose clear?
 - ✅ Were the primary technologies identified?
 - ✅ Is the directory structure understood?
@@ -188,7 +205,9 @@ git branch --show-current 2>/dev/null || echo "❌ No active branch"
 - ✅ Is the current development status understood?
 
 ## Conclusion
+
 After completing this CoT, you will have full context to:
+
 - **Work effectively** in any project
 - **Understand quickly** the structure and technologies in use
 - **Identify tools** available for development
@@ -196,7 +215,9 @@ After completing this CoT, you will have full context to:
 - **Plan contributions** aligned with project goals
 
 ## Expected output
+
 A structured summary including:
+
 ```text
 ## Project context: [name/directory]
 
@@ -224,6 +245,7 @@ A structured summary including:
 ```
 
 ## References
+
 - **./README.md** — main project documentation
 - **./CHANGELOG.md** — change history (if present)
 - **./ROADMAP.md** — future planning (if present)

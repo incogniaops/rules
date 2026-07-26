@@ -8,12 +8,14 @@ validacion: HTML generated with complete placeholders, professional tone, and cl
 <!-- markdownlint-disable MD041 -->
 
 Reasoning:
+
 - The goal of `bmail` is to accelerate the drafting of professional emails in English.
 - Thematic templates and phrase banks derived from `docs/business_email.pdf` will be used.
 - The output must be reusable as an editable draft with a consistent structure:
   clear subject, contextual opening, actionable body, and courteous close.
 
 Steps:
+
 1) Action: identify the type of email requested.
    - opening, enquiry, informing-good, informing-bad, apology-delay, order-status, meeting-request.
    Result: target template selected.
@@ -41,5 +43,6 @@ Steps:
    Result: file saved at the agreed path.
 
 Conclusion:
+
 - `bmail` transforms book examples into actionable templates.
 - The focus is speed + consistency + contextual personalisation.

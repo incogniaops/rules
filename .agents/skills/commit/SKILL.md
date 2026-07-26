@@ -15,9 +15,11 @@ Before making any git commit in projects that follow the rules repository conven
 2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS). For `laboral`, expected profile is `Rodrigo Álvarez`, `r.alvarez1@elsevier.com`, role `Systems Engineering Lead`, company Elsevier, location `Tech Hub Ciudad de México (México City)`, GitHub user/org `incogniaops`.
 3. **Validate CHANGELOG gate BEFORE staging (MANDATORY)**:
    a. Run change validation (staged or unstaged):
+
       ```bash
       git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md
       ```
+
    b. Interpretation:
       - **Exit code 0**: `CHANGELOG.md` has NO changes versus repo → **abort** `/commit` flow.
       - **Exit code 1**: `CHANGELOG.md` has changes → continue.
@@ -30,6 +32,7 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Stage files**: `git add .`
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
+
    ```text
    type(scope): short summary in english
    
@@ -40,6 +43,7 @@ Before making any git commit in projects that follow the rules repository conven
 
    Co-Authored-By: Oz <oz-agent@warp.dev>
    ```
+
    **Mandatory formatting rules for bullets and long lines:**
    - Bullet marker `-` MUST start at column 1 (no leading spaces or tabs before `-`).
    - If a bullet is too long, split it manually into a new line.
@@ -62,6 +66,7 @@ Before making any git commit in projects that follow the rules repository conven
 6. Stop immediately if any forbidden anti-pattern appears and request user confirmation before continuing.
 
 Forbidden anti-patterns:
+
 - Commit/push while `CHANGELOG.md` has no diff versus repo.
 - Editing `CHANGELOG.md` from `/commit` instead of using `/changelogger`.
 - Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.
