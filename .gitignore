@@ -28,4 +28,8 @@ build/
 *.swp
 *.swo
 
+# Source documents (binary, not tracked)
+*.docx
+*.doc
+
 __pycache__/
