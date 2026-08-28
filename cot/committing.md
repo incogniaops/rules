@@ -78,7 +78,7 @@ Steps:
      aligned with the bullet text
    - detail 3 in english
 
-   Co-Authored-By: Oz <oz-agent@warp.dev>
+   Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
    ```
 
    Critical validations:
@@ -95,7 +95,8 @@ Steps:
 - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
    Validation:
 - Show/review `/tmp/commit-msg.txt` content and confirm English in subject/body.
-- Confirm presence of `Co-Authored-By: Oz <oz-agent@warp.dev>`.
+- Confirm presence of `Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>` — substitute with
+  the active AI agent's name and email (e.g. Claude Code → `Claude Sonnet 4.6 <noreply@anthropic.com>`).
    Result: message validated in International English and ready for non-interactive commit.
 
 4) Action: perform atomic commits based on step 1 analysis using the temporary file from step 3.

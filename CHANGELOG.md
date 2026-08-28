@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-08-28] - Personalise bmail templates with Elsevier branding
 
+- feat: update cot/committing.md — replace hardcoded Co-Authored-By footer with {{AGENT_NAME}}/{{AGENT_EMAIL}} placeholders for agent-agnostic commit messages
 - chore: add *.docx and *.doc patterns to .gitignore to exclude binary source documents from tracking
 - feat: apply Elsevier brand palette (Graphite #1E1E1E, Vital Orange #FF551D) and personalised signature to all seven bmail templates — name, title, ELSEVIER | ELS-MEX, mobile, LinkedIn, and elsevier.com footer link
 - feat: embed clickable Elsevier banner (base64 inline, 760 px, links to elsevier.com) at the foot of all seven bmail templates
