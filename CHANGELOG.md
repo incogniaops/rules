@@ -3,6 +3,13 @@
 **Note:** All dates are in CST (México City, UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-08-28] - Personalise bmail templates with Elsevier branding
+
+- feat: apply Elsevier brand palette (Graphite #1E1E1E, Vital Orange #FF551D) and personalised signature to all seven bmail templates — name, title, ELSEVIER | ELS-MEX, mobile, LinkedIn, and elsevier.com footer link
+- feat: embed clickable Elsevier banner (base64 inline, 760 px, links to elsevier.com) at the foot of all seven bmail templates
+- feat: create templates/mail/elsevier_signature.html — standalone HTML file for copy-paste into Outlook with personalised signature and embedded banner
+- chore: extract elsevier_banner.png (760×146) and elsevier_wordmark.png (7844×2351) from Elsevier Email Signature.docx into templates/mail/assets/
+
 ## [2026-07-25] - Update README, philosophy manifest, and Claude Code sync integration
 
 - style: run markdownlint QA pass — fix MD040 (missing code block language labels), MD029 (ordered list numbering across CoTs, rulesets, and skills), MD033 (inline HTML in hedgedoc template), and MD025/MD036 overrides; reduce linting errors from 851 to 0 across 76 files
