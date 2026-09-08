@@ -5,6 +5,8 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-09-08] - Add Codex skill synchronisation
 
+- docs: add Codex (ChatGPT CLI) row to skill installation paths table in README.md — symlink to `~/.codex/agents/skills/<name>/SKILL.md`, invoked with `$name`
+- docs: add "Codex skill invocation" subsection to README.md: document `$name` prefix for custom skills vs `/command` for built-in Codex commands; note that custom slash commands are not supported in Codex
 - feat: extend `scripts/sync_global.sh` to synchronise skills into `~/.codex/agents/skills/`
 
 ## [2026-08-28] - Personalise bmail templates with Elsevier branding
