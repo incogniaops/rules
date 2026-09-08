@@ -159,7 +159,11 @@ Available skills:
 - **backup** — File/directory backup with standard naming
 - **licensing** — Apply the correct licence based on project context (GPLv3 vs MIT)
 
-Invoke with natural language (e.g. "use the commit skill") or slash command (e.g. `/commit`).
+Invoke with the tool-specific prefix:
+
+- **Claude Code**: `/commit`, `/changelogger`, etc. (slash command via `~/.claude/commands/`)
+- **Codex**: `$commit`, `$changelogger`, etc. (`$` prefix)
+- **Warp**: `/skill-name` slash command or via the Agents panel; the Warp agent auto-discovers skills from `~/.agents/skills/` and picks the right one by context
 
 ## Workflows
 
@@ -259,3 +263,34 @@ Never use `git add .` when the working tree contains mixed change types.
 ### Memory
 
 Project memory lives at `~/.claude/projects/-Users-alvarezr3-rules/memory/`. Check `MEMORY.md` there for stored feedback and preferences before starting non-trivial work.
+
+---
+
+## Codex specifics
+
+> **Note for non-Codex agents:** This section applies to OpenAI Codex CLI. Other AI tools can safely skip it.
+
+Skills are synced to `~/.codex/agents/skills/<name>/SKILL.md` by `scripts/sync_global.sh`.
+
+### Skill invocation in Codex
+
+Codex uses `$` as the prefix for custom skills — **not** `/`:
+
+| Prefix | What it does |
+| ------ | ------------ |
+| `$name` | Invokes a custom skill from `~/.codex/agents/skills/` (e.g. `$commit`, `$changelogger`) |
+| `/command` | Built-in Codex commands only — `/resume`, `/title`, `/help`, `/plugins`, `/share`, etc. |
+
+Typing `/changelogger` in Codex silently fails — it expects a built-in command under that name. Always use `$changelogger` for custom skills.
+
+**Auto-discovery**: skills can also be triggered by describing the task in natural language; Codex matches the description against skill metadata and loads the appropriate `SKILL.md` automatically.
+
+**There is no way to define custom `/` slash commands in Codex.** The `/` namespace belongs to Codex built-ins only.
+
+### Sync command
+
+```bash
+~/rules/scripts/sync_global.sh
+```
+
+This installs (symlinks) all skills from `~/.agents/skills/` into `~/.codex/agents/skills/`. Re-run after pulling updates or adding new skills.
