@@ -3,6 +3,10 @@
 **Note:** All dates are in CST (México City, UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-09-08] - Add Codex skill synchronisation
+
+- feat: extend `scripts/sync_global.sh` to synchronise skills into `~/.codex/agents/skills/`
+
 ## [2026-08-28] - Personalise bmail templates with Elsevier branding
 
 - docs: add stale-commit-subject anti-pattern to AGENTS.md — warn that /tmp/commit-msg.txt persists across session invocations and requires a fresh subject per commit

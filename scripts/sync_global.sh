@@ -168,4 +168,26 @@ done
 echo "  $CLAUDE_SKILL_COUNT skills enlazados → $CLAUDE_COMMANDS_DIR"
 echo ""
 
+# --- Codex integration ---
+# ~/.codex/agents/skills/<name>/SKILL.md → invocable con $skill-name o auto-descubrimiento
+echo "=== Codex ==="
+
+CODEX_SKILLS_DIR="$HOME/.codex/agents/skills"
+mkdir -p "$CODEX_SKILLS_DIR"
+
+CODEX_SKILL_COUNT=0
+for skill_dir in "$HOME/.agents/skills"/*/; do
+    skill_name="$(basename "$skill_dir")"
+    skill_src="$HOME/.agents/skills/$skill_name/SKILL.md"
+    skill_dst_dir="$CODEX_SKILLS_DIR/$skill_name"
+    skill_dst="$skill_dst_dir/SKILL.md"
+    [ -f "$skill_src" ] || continue
+    mkdir -p "$skill_dst_dir"
+    ln -sfn "$skill_src" "$skill_dst"
+    CODEX_SKILL_COUNT=$((CODEX_SKILL_COUNT + 1))
+    echo "  ✓ $skill_name/SKILL.md → $skill_src"
+done
+echo "  $CODEX_SKILL_COUNT skills enlazados → $CODEX_SKILLS_DIR"
+echo ""
+
 echo "Sincronización completa."
