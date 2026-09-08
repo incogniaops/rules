@@ -4,11 +4,11 @@ Migration of this repository's documentation from Mexican Spanish to Internation
 
 ## Bilingual policy
 
-| Context | Language | Scope |
-|---------|----------|-------|
-| Corporate (`@incogniaops`, `r.alvarez1@elsevier.com`) | International English (UK) | CoTs, rulesets, skills, CHANGELOG entries |
-| Personal (`@incognia`) | Mexican Spanish | Documentation and CHANGELOG entries |
-| Cultural / philosophical sources | Spanish (preserved) | `FILOSOFIA.md`, `ENSEÑANZA.md`, `LINGUISTICA.md`, `cot/linguistica.md` |
+| Context                                               | Language                   | Scope                                                                  |
+| ----------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------- |
+| Corporate (`@incogniaops`, `r.alvarez1@elsevier.com`) | International English (UK) | CoTs, rulesets, skills, CHANGELOG entries                              |
+| Personal (`@incognia`)                                | Mexican Spanish            | Documentation and CHANGELOG entries                                    |
+| Cultural / philosophical sources                      | Spanish (preserved)        | `FILOSOFIA.md`, `ENSEÑANZA.md`, `LINGUISTICA.md`, `cot/linguistica.md` |
 
 ## Translation patterns
 
@@ -37,12 +37,12 @@ Migration of this repository's documentation from Mexican Spanish to Internation
 
 ### ES ↔ EN pairs already in place
 
-| Spanish source | English translation |
-|----------------|---------------------|
-| `FILOSOFIA.md` | `PHILOSOPHY.md` |
-| `rulesets/ENSEÑANZA.md` | `rulesets/TEACHING.md` |
+| Spanish source            | English translation       |
+| ------------------------- | ------------------------- |
+| `FILOSOFIA.md`            | `PHILOSOPHY.md`           |
+| `rulesets/ENSEÑANZA.md`   | `rulesets/TEACHING.md`    |
 | `rulesets/LINGUISTICA.md` | `rulesets/LINGUISTICS.md` |
-| `cot/linguistica.md` | `cot/linguistics.md` |
+| `cot/linguistica.md`      | `cot/linguistics.md`      |
 
 ---
 
@@ -111,8 +111,8 @@ Replace content with International English (UK); keep filename unchanged.
 
 ## Phase 2 — ES source + EN pair ✅
 
-| Spanish source | English translation | Status |
-|----------------|---------------------|--------|
+| Spanish source          | English translation    | Status                       |
+| ----------------------- | ---------------------- | ---------------------------- |
 | `rulesets/ENSEÑANZA.md` | `rulesets/TEACHING.md` | done — pair already in place |
 
 ---

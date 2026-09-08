@@ -86,12 +86,12 @@ git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/r
 
 ### Skill installation paths by tool
 
-| Tool | Method | Source path | Destination path | Invocation |
-|------|--------|-------------|------------------|------------|
-| Warp (macOS / Linux) | Copy (`cp -r`) | `.agents/skills/<name>/` in repo | `~/.agents/skills/<name>/` | Agents panel |
-| Warp (WSL / Windows) | Copy (`cp -r`) | `.agents/skills/<name>/` in repo | `%USERPROFILE%\.agents\skills\<name>\` | Agents panel |
-| Claude Code | Symlink (`ln -sfn`) | `~/.agents/skills/<name>/SKILL.md` | `~/.claude/commands/<name>.md` | `/name` or Skill tool |
-| Cursor / Copilot / Gemini | Copy (shared with Warp) | `.agents/skills/<name>/` in repo | `~/.agents/skills/<name>/` | Varies by tool |
+| Tool                      | Method                  | Source path                        | Destination path                       | Invocation            |
+| ------------------------- | ----------------------- | ---------------------------------- | -------------------------------------- | --------------------- |
+| Warp (macOS / Linux)      | Copy (`cp -r`)          | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`             | Agents panel          |
+| Warp (WSL / Windows)      | Copy (`cp -r`)          | `.agents/skills/<name>/` in repo   | `%USERPROFILE%\.agents\skills\<name>\` | Agents panel          |
+| Claude Code               | Symlink (`ln -sfn`)     | `~/.agents/skills/<name>/SKILL.md` | `~/.claude/commands/<name>.md`         | `/name` or Skill tool |
+| Cursor / Copilot / Gemini | Copy (shared with Warp) | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`             | Varies by tool        |
 
 The Claude Code symlink points to the copy in `~/.agents/skills/`, not directly to the repository. Running `sync_global.sh` refreshes the copy first and the symlink picks up the new content automatically.
 
@@ -171,17 +171,17 @@ Most rules in this repository follow a **dual-context model** (personal vs work)
 
 ### 2. Rule application by context
 
-| Aspect | Personal (`@incognia`) | Work (`@incogniaops`) |
-|---------|------------------------|---------------------------|
-| **Licensing** | GPLv3 (copyleft) | MIT (permissive) |
-| **Authorship** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniaops) |
-| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [r.alvarez1@elsevier.com](mailto:r.alvarez1@elsevier.com) |
-| **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/elsevier |
-| **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
-| **Document style** | Not defined yet | [STYLING.md](./rulesets/STYLING.md) applies |
-| **Documentation language** | Mexican Spanish | International English |
-| **CHANGELOG.md language** | Mexican Spanish | International English |
-| **Code/commit language** | International English | International English |
+| Aspect                     | Personal (`@incognia`)                          | Work (`@incogniaops`)                                     |
+| -------------------------- | ----------------------------------------------- | --------------------------------------------------------- |
+| **Licensing**              | GPLv3 (copyleft)                                | MIT (permissive)                                          |
+| **Authorship**             | Rodrigo Álvarez (@incognia)                     | Rodrigo Álvarez (@incogniaops)                            |
+| **Email**                  | [incognia@gmail.com](mailto:incognia@gmail.com) | [r.alvarez1@elsevier.com](mailto:r.alvarez1@elsevier.com) |
+| **SSH Key (repos)**        | ~/.ssh/incognia                                 | ~/.ssh/elsevier                                           |
+| **SSH Key (servers)**      | ~/.ssh/faraday                                  | ~/.ssh/cad                                                |
+| **Document style**         | Not defined yet                                 | [STYLING.md](./rulesets/STYLING.md) applies               |
+| **Documentation language** | Mexican Spanish                                 | International English                                     |
+| **CHANGELOG.md language**  | Mexican Spanish                                 | International English                                     |
+| **Code/commit language**   | International English                           | International English                                     |
 
 ### 3. Universal rules (apply to both contexts)
 

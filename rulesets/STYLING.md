@@ -127,15 +127,15 @@ Every HedgeDoc document must conclude with the following footer (no licence):
 
 ### Corporate colour palette
 
-| Variable | Colour | Hexadecimal | Use |
-|----------|--------|-------------|-----|
-| `--midday` | Kabat One blue | `#00A1FF` | Primary brand colour |
-| `--midnight` | Navy | `#24326A` | Links (light mode) |
-| `--ice` | Ice | `#C3D8F3` | Hover in dark mode |
-| `--connect` | Connect | `#31D8FF` | Complementary accent |
-| `--code` | Code | `#007EB5` | Secondary accent |
-| `--deep` | Deep | `#060E40` | Very dark blue |
-| `--video` | Video | `#7252D8` | Visited links |
+| Variable     | Colour         | Hexadecimal | Use                  |
+| ------------ | -------------- | ----------- | -------------------- |
+| `--midday`   | Kabat One blue | `#00A1FF`   | Primary brand colour |
+| `--midnight` | Navy           | `#24326A`   | Links (light mode)   |
+| `--ice`      | Ice            | `#C3D8F3`   | Hover in dark mode   |
+| `--connect`  | Connect        | `#31D8FF`   | Complementary accent |
+| `--code`     | Code           | `#007EB5`   | Secondary accent     |
+| `--deep`     | Deep           | `#060E40`   | Very dark blue       |
+| `--video`    | Video          | `#7252D8`   | Visited links        |
 
 ### Format rules
 
@@ -160,18 +160,18 @@ Every HedgeDoc document must conclude with the following footer (no licence):
 
 HedgeDoc supports extensions that **do not work** in GitLab or GitHub:
 
-| Feature | HedgeDoc | GitLab | GitHub |
-|---------|----------|--------|--------|
-| `[TOC]` table of contents | ✅ | ❌ | ❌ |
-| `:::` admonition blocks (`:::info`, `:::warning`, etc.) | ✅ | ❌ | ❌ |
-| `[name=Author]` author metadata | ✅ | ❌ | ❌ |
-| `[time=date]` date metadata | ✅ | ❌ | ❌ |
-| `[color=#hex]` text colour | ✅ | ❌ | ❌ |
-| Native `mermaid` blocks | ✅ | ✅ | ✅ |
-| Inline CSS (`<style>`) | ✅ | ❌ (ignored) | ❌ (ignored) |
-| Arbitrary HTML | ✅ | partial | partial |
-| Badges (`shields.io`) | ✅ | ✅ | ✅ |
-| YAML frontmatter (`---`) | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (horizontal table) |
+| Feature                                                 | HedgeDoc    | GitLab                       | GitHub               |
+| ------------------------------------------------------- | ----------- | ---------------------------- | -------------------- |
+| `[TOC]` table of contents                               | ✅           | ❌                            | ❌                    |
+| `:::` admonition blocks (`:::info`, `:::warning`, etc.) | ✅           | ❌                            | ❌                    |
+| `[name=Author]` author metadata                         | ✅           | ❌                            | ❌                    |
+| `[time=date]` date metadata                             | ✅           | ❌                            | ❌                    |
+| `[color=#hex]` text colour                              | ✅           | ❌                            | ❌                    |
+| Native `mermaid` blocks                                 | ✅           | ✅                            | ✅                    |
+| Inline CSS (`<style>`)                                  | ✅           | ❌ (ignored)                  | ❌ (ignored)          |
+| Arbitrary HTML                                          | ✅           | partial                      | partial              |
+| Badges (`shields.io`)                                   | ✅           | ✅                            | ✅                    |
+| YAML frontmatter (`---`)                                | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (horizontal table) |
 
 **Critical rule:** when applying styling in GitLab or GitHub, remove or adapt any HedgeDoc-exclusive syntax.
 

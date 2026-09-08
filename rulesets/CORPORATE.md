@@ -18,17 +18,17 @@ My working approach is guided by three key principles:
 
 ## Technology stack
 
-| Category           | Key tools |
-|--------------------|-----------|
-| Infrastructure     | **Proxmox VE (bare-metal)**, cloud-init, bridges/VLAN |
-| Orchestration      | Kubernetes (kubeadm, containerd) |
-| Networking         | Cilium, MetalLB |
-| Service mesh       | Istio, Envoy, Kiali |
-| Observability      | Prometheus, Grafana, Fluentd, Elasticsearch, Kibana, OpenTelemetry |
-| CI/CD              | Jenkins, GitLab CI |
-| GitOps             | Helm, Argo CD, Kro |
-| Repository         | GitLab |
-| Languages          | Bash, YAML, JSON, Go (intermediate level) |
+| Category       | Key tools                                                          |
+| -------------- | ------------------------------------------------------------------ |
+| Infrastructure | **Proxmox VE (bare-metal)**, cloud-init, bridges/VLAN              |
+| Orchestration  | Kubernetes (kubeadm, containerd)                                   |
+| Networking     | Cilium, MetalLB                                                    |
+| Service mesh   | Istio, Envoy, Kiali                                                |
+| Observability  | Prometheus, Grafana, Fluentd, Elasticsearch, Kibana, OpenTelemetry |
+| CI/CD          | Jenkins, GitLab CI                                                 |
+| GitOps         | Helm, Argo CD, Kro                                                 |
+| Repository     | GitLab                                                             |
+| Languages      | Bash, YAML, JSON, Go (intermediate level)                          |
 
 ---
 

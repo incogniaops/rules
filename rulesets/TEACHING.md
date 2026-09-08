@@ -41,14 +41,14 @@ My pedagogical approach is grounded in clear, non-negotiable principles:
 
 ### Technical tools in the classroom
 
-| Category | Tools |
-|----------|-------|
-| **Containerisation** | Docker, Docker Compose |
-| **Automation** | Python scripts, Bash scripts |
-| **Development environment** | JupyterLab, VS Code, Neovim |
-| **Infrastructure** | Linux (Debian/Ubuntu), SSH, persistent volumes |
-| **Monitoring** | web panel (Node.js), htop, container logs |
-| **Content distribution** | Git, symbolic links, automated deployment |
+| Category                    | Tools                                          |
+| --------------------------- | ---------------------------------------------- |
+| **Containerisation**        | Docker, Docker Compose                         |
+| **Automation**              | Python scripts, Bash scripts                   |
+| **Development environment** | JupyterLab, VS Code, Neovim                    |
+| **Infrastructure**          | Linux (Debian/Ubuntu), SSH, persistent volumes |
+| **Monitoring**              | web panel (Node.js), htop, container logs      |
+| **Content distribution**    | Git, symbolic links, automated deployment      |
 
 ---
 

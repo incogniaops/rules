@@ -39,14 +39,14 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 ### Herramientas técnicas en el aula
 
-| Categoría | Herramientas |
-|-----------|-------------|
-| **Contenedorización** | Docker, Docker Compose |
-| **Automatización** | scripts de Python, scripts de Bash |
-| **Entorno de desarrollo** | JupyterLab, VS Code, Neovim |
-| **Infraestructura** | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
-| **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
-| **Distribución de contenido** | Git, enlaces simbólicos, despliegue automatizado |
+| Categoría                     | Herramientas                                       |
+| ----------------------------- | -------------------------------------------------- |
+| **Contenedorización**         | Docker, Docker Compose                             |
+| **Automatización**            | scripts de Python, scripts de Bash                 |
+| **Entorno de desarrollo**     | JupyterLab, VS Code, Neovim                        |
+| **Infraestructura**           | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
+| **Monitoreo**                 | panel web (Node.js), htop, registros de contenedor |
+| **Distribución de contenido** | Git, enlaces simbólicos, despliegue automatizado   |
 
 ---
 

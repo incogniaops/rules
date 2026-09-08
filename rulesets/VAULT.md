@@ -36,14 +36,14 @@ vault token renew
 
 ### Namespace: kv (Key-Value v2)
 
-| Path | Purpose | Format |
-|------|---------|--------|
-| `kv/incognia/passwords` | Credentials and temporary passwords | JSON with fields: `username`, `password`, `expires` |
-| `kv/incognia/ssh` | Private and public SSH keys | JSON with fields: `private_key`, `public_key`, `comment` |
-| `kv/incognia/tokens` | API tokens and external service tokens | JSON with fields: `token`, `service`, `expires`, `scope` |
-| `kv/incognia/certificates` | SSL/TLS certificates | JSON with fields: `cert`, `key`, `ca`, `expires` |
-| `kv/incognia/database` | Database credentials | JSON with fields: `host`, `port`, `username`, `password`, `database` |
-| `kv/incognia/kubernetes` | Kubernetes secrets | JSON with fields: `kubeconfig`, `token`, `namespace` |
+| Path                       | Purpose                                | Format                                                               |
+| -------------------------- | -------------------------------------- | -------------------------------------------------------------------- |
+| `kv/incognia/passwords`    | Credentials and temporary passwords    | JSON with fields: `username`, `password`, `expires`                  |
+| `kv/incognia/ssh`          | Private and public SSH keys            | JSON with fields: `private_key`, `public_key`, `comment`             |
+| `kv/incognia/tokens`       | API tokens and external service tokens | JSON with fields: `token`, `service`, `expires`, `scope`             |
+| `kv/incognia/certificates` | SSL/TLS certificates                   | JSON with fields: `cert`, `key`, `ca`, `expires`                     |
+| `kv/incognia/database`     | Database credentials                   | JSON with fields: `host`, `port`, `username`, `password`, `database` |
+| `kv/incognia/kubernetes`   | Kubernetes secrets                     | JSON with fields: `kubeconfig`, `token`, `namespace`                 |
 
 ## Basic operations
 

@@ -25,12 +25,12 @@ git commit -m "docs: actualizar guía de instalación"
 
 ## Language distribution
 
-| Context | Personal | Corporate |
-|---------|----------|-----------|
+| Context             | Personal                | Corporate               |
+| ------------------- | ----------------------- | ----------------------- |
 | **Commit messages** | 🇺🇸 International English | 🇺🇸 International English |
-| **CHANGELOG.md** | 🇲🇽 Mexican Spanish | 🇺🇸 International English |
-| **Documentation** | 🇲🇽 Mexican Spanish | 🇺🇸 International English |
-| **Code/comments** | 🇺🇸 International English | 🇺🇸 International English |
+| **CHANGELOG.md**    | 🇲🇽 Mexican Spanish       | 🇺🇸 International English |
+| **Documentation**   | 🇲🇽 Mexican Spanish       | 🇺🇸 International English |
+| **Code/comments**   | 🇺🇸 International English | 🇺🇸 International English |
 
 ## Mandatory protocol for the assistant
 
