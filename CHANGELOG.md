@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-09-08] - Add Codex skill synchronisation
 
+- fix: update `check:links` in `package.json` to expand Markdown files with `find` and `xargs`
 - docs: add Codex specifics section to AGENTS.md — document `$name` skill invocation, `/command` built-in distinction, auto-discovery mechanism, and sync command
 - docs: correct Warp skill invocation in AGENTS.md: Agents panel or `/skill-name`; remove incorrect "natural language" qualifier from skill invocation description
 - docs: add Codex (ChatGPT CLI) row to skill installation paths table in README.md — symlink to `~/.codex/agents/skills/<name>/SKILL.md`, invoked with `$name`
