@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-08-28] - Personalise bmail templates with Elsevier branding
 
+- docs: add stale-commit-subject anti-pattern to AGENTS.md — warn that /tmp/commit-msg.txt persists across session invocations and requires a fresh subject per commit
 - style: align Markdown table columns in README.md, ROADMAP.md, and rulesets (COMMIT_LANGUAGE_PROTOCOL.md, CORPORATE.md, ENSEÑANZA.md, STYLING.md, TEACHING.md, VAULT.md)
 - feat: update cot/committing.md — replace hardcoded Co-Authored-By footer with {{AGENT_NAME}}/{{AGENT_EMAIL}} placeholders for agent-agnostic commit messages
 - chore: add *.docx and *.doc patterns to .gitignore to exclude binary source documents from tracking

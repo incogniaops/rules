@@ -254,6 +254,8 @@ Each commit must represent a single logical change type. Workflow:
 
 Never use `git add .` when the working tree contains mixed change types.
 
+**Anti-pattern — stale commit subject**: `/tmp/commit-msg.txt` persists across invocations in the same session. Always rewrite the subject line from scratch for each commit; never assume it matches the current staged changes. Verify subject matches staged files before running `git commit -F`.
+
 ### Memory
 
 Project memory lives at `~/.claude/projects/-Users-alvarezr3-rules/memory/`. Check `MEMORY.md` there for stored feedback and preferences before starting non-trivial work.
