@@ -3,6 +3,10 @@
 **Note:** All dates are in CST (México City, UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-09-17] - Add timezone parameters to the changelogger skill
+
+- feat: add optional `utc`, `est`, and `ist` arguments to the `/changelogger` skill to date entries in UTC, EST (UTC-5), or IST (UTC+5:30) instead of the default CST (UTC-6)
+
 ## [2026-09-08] - Add Codex skill synchronisation
 
 - fix: update `check:links` in `package.json` to expand Markdown files with `find` and `xargs`

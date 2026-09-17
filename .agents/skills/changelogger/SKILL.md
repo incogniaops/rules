@@ -1,6 +1,6 @@
 ---
 name: changelogger
-description: "Maintain CHANGELOG.md with correct CST dates and reverse chronological order, using context language policy: personal in Mexican Spanish, corporate in International English (UK). Use this skill when updating the changelog."
+description: "Maintain CHANGELOG.md with correct CST dates and reverse chronological order, using context language policy: personal in Mexican Spanish, corporate in International English (UK). Accepts an optional 'utc', 'est' or 'ist' argument to date entries in that timezone instead of CST. Use this skill when updating the changelog."
 ---
 
 # CHANGELOG.md maintenance
@@ -13,6 +13,15 @@ Language policy for entries:
 - Personal context: Mexican Spanish.
 - Corporate context: International English (UK).
 
+## Parameters
+
+| Argument | Behaviour |
+| -------- | --------- |
+| _(none)_ | Default: use CST date (`TZ=America/Mexico_City`) — always correct for México City |
+| `utc`    | Use UTC date (`date -u`) — for when the work is being done and logged in UTC |
+| `est`    | Use EST date (`TZ=America/New_York`) — Eastern Standard Time (UTC-5) |
+| `ist`    | Use IST date (`TZ=Asia/Kolkata`) — Indian Standard Time (UTC+5:30) |
+
 ## Instructions
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/changelog.md` from line 1 to end
@@ -20,7 +29,11 @@ Language policy for entries:
    If this exact status check has not been executed in the current run, HARD STOP immediately, restart from this step, and do absolutely nothing else (no read, `grep`, search, date calculation, anchor calculation, diff, or patch).
 3. **Step 1 (MANDATORY)**: read `CHANGELOG.md` lines `1-200` before any `grep`, search loop, or patch attempt.
    If this exact read has not been executed in the current run, HARD STOP immediately, restart from step 2, and do absolutely nothing else.
-4. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
+4. **Get target date** — choose based on the argument passed:
+   - Default (no argument): `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — CST (UTC - 6 h); NEVER append "CST" to a UTC value without subtracting 6 hours
+   - `utc`: `DATE_CST=$(date -u +"%Y-%m-%d")` — UTC
+   - `est`: `DATE_CST=$(TZ=America/New_York date +"%Y-%m-%d")` — EST (UTC - 5 h)
+   - `ist`: `DATE_CST=$(TZ=Asia/Kolkata date +"%Y-%m-%d")` — IST (UTC + 5:30 h)
 5. **Check existing entries**: Verify if `## [YYYY-MM-DD]` already exists to avoid duplicate headings
 6. **Update the target date block** (reverse chronological order):
    - **If the date already exists**: add new typed bullets inside that existing block; do NOT create a duplicate heading.
@@ -48,7 +61,7 @@ Language policy for entries:
 ## Critical rules
 
 - Date format: `[YYYY-MM-DD]` only — no time component
-- CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
+- Default date: CST = UTC - 6 h (`TZ=America/Mexico_City date`); `utc` → UTC, `est` → UTC - 5 h (`TZ=America/New_York`), `ist` → UTC + 5:30 h (`TZ=Asia/Kolkata`)
 - No emojis in CHANGELOG entries
 - Descriptive title after the date: `## [YYYY-MM-DD] - Short descriptive title`
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
@@ -65,7 +78,7 @@ Language policy for entries:
 2. HARD STOP gate: if there is no explicit evidence that step 1 happened in the current run, stop immediately and restart from step 1; absolutely no further action is allowed.
 3. Read `CHANGELOG.md` lines `1-200` as the second operation of the run (before `grep`, extra search, or patch attempts).
 4. HARD STOP gate: if there is no explicit evidence that step 3 happened in the current run, stop immediately and restart from step 1; absolutely no further action is allowed.
-5. Verify CST date and existing heading before editing (`TZ=America/Mexico_City date` + `grep -n "^## \\[${DATE_CST}\\]" CHANGELOG.md`).
+5. Verify target date and existing heading before editing (run the date command matching the argument: default → `TZ=America/Mexico_City date`, `utc` → `date -u`, `est` → `TZ=America/New_York date`, `ist` → `TZ=Asia/Kolkata date`; then `grep -n "^## \\[${DATE_CST}\\]" CHANGELOG.md`).
 6. Read the exact target date block before inserting bullets.
 7. If `DATE_CST` heading exists, first attempt MUST be one single-hunk micro-block replacement (`heading + blank line + first bullet`) and insertion of the new bullet at top of the block (no blank line between bullets).
 8. Validate immediately with `git --no-pager diff -- CHANGELOG.md`.
