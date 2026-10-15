@@ -5,6 +5,9 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-15] - Add Copilot CLI commit attribution
 
+- docs: align `AGENTS.md` with attribution from the active session, helper fallbacks, Copilot skill invocation, synchronisation paths, and the separate responsibilities of `changelogger` and `commit`
+- docs: expand `README.md` with commit-attribution usage, session identifiers, shared examples, tool selection, and fallback behaviour; document Copilot's corrected stale-identity rejection and model-name normalisation in `rulesets/COMMITTING.md`
+- docs: link the three completed attribution issues in `TODO.md` to their fixing commits and clarify that the proposed manual author-model override is separate from the implemented automatic detection
 - fix: make Copilot attribution fail when the latest root-agent usage record has no valid model, rather than reusing an earlier model and effort
 - fix: restrict Claude Code model detection in `scripts/commit_trailer.py` to the requested session's records, skip `<synthetic>` placeholders, and fail when the latest main-thread assistant turn has no valid model instead of reusing an earlier or foreign model
 - fix: normalise Copilot's model identifier with the shared GPT display-name formatter when its session record lacks a valid `modelDisplayName`, keeping the attribution trailer consistent

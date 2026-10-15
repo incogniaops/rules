@@ -5,7 +5,7 @@ description: "Standards, philosophy, and chains of reasoning (CoT) that guide Ro
 
 # Technical rules: prompts and CoTs to accelerate LLM context
 
-*Last modified: 14 October 2026 (CST)*
+*Last modified: 15 October 2026 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
@@ -315,6 +315,28 @@ sequenceDiagram
   - scripts/verify_backups.sh (bulk .sha256 verification)
 - Email: scripts/graph_auth.py (Microsoft Graph authentication with token cache for `/mail graph`)
 - Atlassian: scripts/atlassian/ (Confluence REST client, ADF builder, and previous-evaluation finder used by `/tio-readiness`)
+
+### Commit attribution
+
+The commit skill runs the attribution helper before composing each commit message:
+
+```bash
+python3 ~/rules/scripts/commit_trailer.py
+```
+
+The helper reads the active session and formats the co-author as `[Tool ]Model (effort)`. These examples illustrate the format; the model and effort must come from the current session:
+
+| Tool | Active session identifier | Example co-author name |
+| ---- | ------------------------- | ---------------------- |
+| Codex | `CODEX_THREAD_ID` or `CODEX_SESSION_ID` | `Codex GPT-6.1 Sol (high)` |
+| Claude Code | `CLAUDE_CODE_SESSION_ID` | `Claude Opus 5.5 (medium)` |
+| GitHub Copilot CLI | `COPILOT_AGENT_SESSION_ID` | `Copilot GPT-6 Luna (low)` |
+
+If the effort is unavailable, the helper reports the limitation and omits the parentheses. If the latest relevant turn or usage record has no valid model, detection fails instead of reusing an earlier identity. The commit skill then uses an attribution supplied by the active tool or harness, formatted consistently; if neither source verifies the model, it reports the limitation and omits the trailer.
+
+When multiple tool identifiers are present, select the tool running the commit with `--tool codex`, `--tool claude`, or `--tool copilot`. This selects the parser; it does not supply a model or effort.
+
+After updating the skill, run `~/rules/scripts/sync_global.sh` to refresh its installed copy. The helper is accessed directly from `~/rules/scripts/`. See [COMMITTING.md — Agent attribution](./rulesets/COMMITTING.md#26-agent-attribution) for provider emails, session filtering, and fallback rules.
 
 ### Local credentials (`.env`)
 

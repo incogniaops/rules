@@ -55,10 +55,10 @@ Documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md` and
 
 **MANDATORY PROCESS - Always follow this exact order:**
 
-1. **FIRST**: Update `CHANGELOG.md` with changes in the active context language (personal: Mexican Spanish, corporate: International English)
-2. **SECOND**: Analyse changed files with `git status` and group them by logical type
+1. **FIRST**: Update `CHANGELOG.md` through `changelogger` in the active context language (personal: Mexican Spanish, corporate: International English). The `commit` skill only validates this prerequisite.
+2. **SECOND**: Analyse changed files with `git status`, group them by logical type, and validate that `CHANGELOG.md` has a staged or unstaged diff before staging
 3. **THIRD**: Stage selectively per logical group: `git add file1 file2` — never `git add .` across mixed change types
-4. **FOURTH**: Commit each group atomically: `git commit -F /tmp/commit-msg.txt`
+4. **FOURTH**: Resolve the current session's co-author, rewrite `/tmp/commit-msg.txt` for the staged group, and commit atomically: `git commit -F /tmp/commit-msg.txt`
 5. **FIFTH**: Push all commits: `git push`
 
 **Date calculation for CHANGELOG.md:**
@@ -73,6 +73,22 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 - Always use **International English** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Use non-interactive commands: `git --no-pager log --oneline -5`
+
+### Commit attribution
+
+Before each commit in Codex, Claude Code, or GitHub Copilot CLI, run:
+
+```bash
+python3 ~/rules/scripts/commit_trailer.py
+```
+
+Use stdout only when the helper succeeds. It reads the active session and generates `Co-Authored-By: [<Tool> ]<Model> (<effort>) <email>`, for example `Codex GPT-6.1 Sol (high)`, `Claude Opus 5.5 (medium)`, or `Copilot GPT-6 Luna (low)`. These are format examples; resolve the actual identity again for every commit.
+
+- If multiple tool identifiers are present, rerun with `--tool codex`, `--tool claude`, or `--tool copilot`, matching the tool executing the commit.
+- If effort is unavailable, use the verified model without parentheses. If detection fails, report the limitation and use an attribution supplied by the active tool or harness in the shared format; if the model remains unverified, omit the trailer.
+- Never infer the model or effort from previous commits, another session, examples, or configuration defaults. The helper rejects an invalid latest model rather than reusing an earlier identity; Claude's synthetic placeholders and sidechain turns are excluded from model selection.
+
+Provider emails, session identifiers, filtering, and fallback behaviour are defined in [COMMITTING.md — Agent attribution](./rulesets/COMMITTING.md#26-agent-attribution). Keep that ruleset as the detailed reference.
 
 ## Architecture and structure
 
@@ -152,7 +168,7 @@ Skills are lightweight, agent-discoverable instruction sets in `.agents/skills/`
 
 Available skills:
 
-- **commit** — Full commit workflow with mandatory CHANGELOG update
+- **commit** — Full commit workflow with CHANGELOG validation and attribution from the active model and reasoning effort
 - **changelogger** — CHANGELOG.md maintenance with CST dates (optional `utc`, `est`, `ist`)
 - **linguistics** — Apply Mexican Spanish linguistic rules
 - **linguistica** — Spanish alias of `linguistics` with its own skill identifier
@@ -173,6 +189,7 @@ Available skills:
 Invoke with the tool-specific prefix:
 
 - **Claude Code**: `/commit`, `/changelogger`, etc. (slash command via `~/.claude/commands/`)
+- **GitHub Copilot CLI**: `/commit`, `/changelogger`, etc.; discovers the shared skills copied to `~/.agents/skills/` directly
 - **Codex**: `$commit`, `$changelogger`, etc. (`$` prefix)
 - **Warp**: `/skill-name` slash command or via the Agents panel; the Warp agent auto-discovers skills from `~/.agents/skills/` and picks the right one by context
 
@@ -247,7 +264,7 @@ This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as p
 
 ### Skill invocation
 
-Skills in `.agents/skills/` are symlinked to `~/.claude/commands/<name>.md` by `scripts/sync_global.sh`. Invoke them with the `Skill` tool or the `/name` slash command:
+`scripts/sync_global.sh` copies repository skills to `~/.agents/skills/`, then links each copied `SKILL.md` to `~/.claude/commands/<name>.md`. Invoke them with the `Skill` tool or the `/name` slash command:
 
 - `/commit` — full commit workflow (reads `cot/committing.md`)
 - `/changelogger` — CHANGELOG maintenance (reads `cot/changelog.md`)
@@ -292,7 +309,7 @@ Codex uses `$` as the prefix for custom skills — **not** `/`:
 | `$name` | Invokes a custom skill from `~/.codex/agents/skills/` (e.g. `$commit`, `$changelogger`) |
 | `/command` | Built-in Codex commands only — `/resume`, `/title`, `/help`, `/plugins`, `/share`, etc. |
 
-Typing `/changelogger` in Codex silently fails — it expects a built-in command under that name. Always use `$changelogger` for custom skills.
+To invoke the `changelogger` skill explicitly in Codex, use `$changelogger`. `/changelogger` is the Claude Code and Copilot form.
 
 **Auto-discovery**: skills can also be triggered by describing the task in natural language; Codex matches the description against skill metadata and loads the appropriate `SKILL.md` automatically.
 
@@ -304,4 +321,4 @@ Typing `/changelogger` in Codex silently fails — it expects a built-in command
 ~/rules/scripts/sync_global.sh
 ```
 
-This installs (symlinks) all skills from `~/.agents/skills/` into `~/.codex/agents/skills/`. Re-run after pulling updates or adding new skills.
+This first refreshes the copies from the repository into `~/.agents/skills/`, then links their `SKILL.md` files into `~/.codex/agents/skills/`. Re-run after pulling updates or changing skills. The attribution helper is accessed directly from `~/rules/scripts/`.
