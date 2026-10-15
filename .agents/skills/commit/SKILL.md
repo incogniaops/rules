@@ -31,13 +31,13 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Analyse and stage changes**: run `git status --short`, classify changes by logical type, and stage only the files for the intended commit with `git add -- <file>`. For mixed change types, create separate atomic commits and stage each group separately; never use `git add .` or `git add -A` across mixed changes.
-6. **Resolve attribution and build the commit message**: before each commit, follow the active-session attribution rules in `~/rules/rulesets/COMMITTING.md` section 2.6. Use a trailer supplied by the active tool or harness verbatim. Otherwise, in Codex, Claude Code, or GitHub Copilot CLI run:
+6. **Resolve attribution and build the commit message**: before each commit, follow the active-session attribution rules in `~/rules/rulesets/COMMITTING.md` section 2.6. In Codex, Claude Code, or GitHub Copilot CLI, run the helper first; every agent uses the shared format `Co-Authored-By: [<Tool> ]<Model> (<effort>) <email>`, for example `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)`, or `Copilot GPT-6 Luna (low)`:
 
    ```bash
    python3 ~/rules/scripts/commit_trailer.py
    ```
 
-   Use its stdout only on success; it detects the tool and includes the active model and reasoning effort. For other tools, use the model identity supplied by their current session. Never copy attribution from examples, Git history, another thread, or configuration defaults. If the model cannot be verified, report the limitation and omit the trailer; if only effort is unavailable, use the verified model alone.
+   Use its stdout only on success; it detects the tool and includes the active model and reasoning effort. If it fails, fall back to a trailer supplied by the tool or harness, rewritten to the shared format. For other tools, use the model identity supplied by their current session in the same format. Never copy attribution from examples, Git history, another thread, or configuration defaults. If the model cannot be verified, report the limitation and omit the trailer; if only effort is unavailable, use the verified model alone.
    Create `/tmp/commit-msg.txt` using this detailed structure (English international), replacing the attribution placeholders with the resolved identity:
 
    ```text

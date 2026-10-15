@@ -5,6 +5,8 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-15] - Add Copilot CLI commit attribution
 
+- feat: make `scripts/commit_trailer.py` the primary attribution source in the commit skill, CoT, rules, and README for Claude Code, Codex, and Copilot CLI, with tool-supplied trailers as a fallback, so Claude Code commits also record the reasoning effort
+- feat: unify co-author trailers as `[Tool ]Model (effort)` — `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)`, and `Copilot GPT-6 Luna (low)` — and render GPT model names in Copilot's display style (`gpt-6.1-sol` → `GPT-6.1 Sol`)
 - feat: extend `scripts/commit_trailer.py` to identify the active GitHub Copilot CLI session and read its effective model and reasoning effort from root-agent usage records
 - fix: reject ambiguous coding-agent sessions and fail clearly when Copilot session metadata is unavailable instead of inferring attribution
 - docs: update the commit skill, CoT, rules, and README for Copilot attribution and selective staging of atomic changes

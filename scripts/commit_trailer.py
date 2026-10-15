@@ -39,8 +39,20 @@ def valid_effort(effort):
     return effort or None
 
 
-def format_name(model, effort):
-    return f"{model} ({effort})" if effort else model
+def format_trailer(prefix, model, effort, email):
+    """Build the shared trailer format: '[Tool ]Model (effort) <email>'; effort is optional."""
+    name = f"{prefix} {model}" if prefix else model
+    if effort:
+        name += f" ({effort})"
+    return f"Co-Authored-By: {name} <{email}>"
+
+
+def gpt_display_name(model):
+    """Turn 'gpt-6.1-sol' into 'GPT-6.1 Sol', matching Copilot's 'GPT-6 Luna' style."""
+    if not model.startswith("gpt-"):
+        return model
+    version, *rest = model[4:].split("-")
+    return " ".join([f"GPT-{version}", *(part.capitalize() for part in rest)])
 
 
 # ---------------------------------------------------------------- Codex
@@ -92,9 +104,7 @@ def codex_trailer(context):
         or context.get("model_reasoning_effort")
         or settings.get("reasoning_effort")
     )
-    if model.startswith("gpt-"):
-        model = "GPT-" + "-".join(part.capitalize() for part in model[4:].split("-"))
-    return f"Co-Authored-By: {format_name(model, effort)} <noreply@openai.com>", bool(effort)
+    return format_trailer("Codex", gpt_display_name(model), effort, "noreply@openai.com"), bool(effort)
 
 
 # ---------------------------------------------------------------- Claude Code
@@ -148,8 +158,7 @@ def claude_display_name(model):
 
 def claude_trailer(model, effort):
     effort = valid_effort(effort)
-    name = format_name(claude_display_name(model), effort)
-    return f"Co-Authored-By: {name} <noreply@anthropic.com>", bool(effort)
+    return format_trailer(None, claude_display_name(model), effort, "noreply@anthropic.com"), bool(effort)
 
 
 # ---------------------------------------------------------------- Copilot CLI
@@ -214,11 +223,7 @@ def copilot_identity(state_dir, session_id):
     if not isinstance(display_name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._:+/-]*", display_name):
         display_name = model
     effort = valid_effort(effort)
-    name = f"GitHub Copilot ({display_name}"
-    if effort:
-        name += f", {effort}"
-    name += ")"
-    return f"Co-Authored-By: {name} <{COPILOT_EMAIL}>", bool(effort)
+    return format_trailer("Copilot", display_name, effort, COPILOT_EMAIL), bool(effort)
 
 
 # ---------------------------------------------------------------- CLI
