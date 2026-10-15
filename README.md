@@ -72,6 +72,7 @@ git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/r
 
 - `sync_global.sh` detects platform (macOS, Linux, Windows/WSL) and installs to the correct locations:
   - *Skills* (`SKILL.md`) — copied to `~/.agents/skills/<name>/` (recognised by Warp, Cursor, Copilot, Gemini, and others)
+  - *Skills for GitHub Copilot* — discovered directly from `~/.agents/skills/<name>/SKILL.md` and invoked with `/name`; the shared copy is sufficient, with no additional Copilot installation step
   - *Skills for Claude Code* — symlinked from `~/.agents/skills/<name>/SKILL.md` → `~/.claude/commands/<name>.md` (invoked with `/name` or via the Skill tool)
   - *Skills for Codex* — symlinked from `~/.agents/skills/<name>/SKILL.md` → `~/.codex/agents/skills/<name>/SKILL.md` (invoked with `$name` or auto-discovery)
   - *Workflows* (`*.yaml`) on macOS: `~/.warp/workflows/`
@@ -92,25 +93,36 @@ git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/r
 | Warp (macOS / Linux)      | Copy (`cp -r`)          | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`                       | Agents panel                |
 | Warp (WSL / Windows)      | Copy (`cp -r`)          | `.agents/skills/<name>/` in repo   | `%USERPROFILE%\.agents\skills\<name>\`           | Agents panel                |
 | Claude Code               | Symlink (`ln -sfn`)     | `~/.agents/skills/<name>/SKILL.md` | `~/.claude/commands/<name>.md`                   | `/name` or Skill tool       |
+| GitHub Copilot            | Copy (shared with Warp) | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`                       | `/name`                     |
 | Codex (ChatGPT CLI)       | Symlink (`ln -sfn`)     | `~/.agents/skills/<name>/SKILL.md` | `~/.codex/agents/skills/<name>/SKILL.md`         | `$name` or auto-discovery   |
-| Cursor / Copilot / Gemini | Copy (shared with Warp) | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`                       | Varies by tool              |
+| Cursor / Gemini           | Copy (shared with Warp) | `.agents/skills/<name>/` in repo   | `~/.agents/skills/<name>/`                       | Varies by tool              |
 
 The Claude Code symlink points to the copy in `~/.agents/skills/`, not directly to the repository. Running `sync_global.sh` refreshes the copy first and the symlink picks up the new content automatically.
 
-#### Codex skill invocation
+#### Skill invocation by tool
 
-Codex uses a **different invocation prefix** from Claude Code:
+The same skill uses the invocation prefix of the tool running it. **Claude Code and GitHub Copilot use `/name`; Codex uses `$name`.** Skill names and arguments stay the same:
+
+| Tool | Invoke a skill | Invoke a skill with arguments |
+| ---- | -------------- | ----------------------------- |
+| Claude Code | `/changelogger` | `/linguistics README.md` |
+| GitHub Copilot | `/changelogger` | `/linguistics README.md` |
+| Codex | `$changelogger` | `$linguistics README.md` |
+
+In this setup, Copilot discovers the skills copied by `sync_global.sh` into `~/.agents/skills/` transparently. It reads the shared `SKILL.md` files directly; no Copilot-specific copy or symlink is required. Claude Code receives symlinks under `~/.claude/commands/`, and the script also creates Codex symlinks under `~/.codex/agents/skills/`. These installation paths and the invocation prefix are separate concerns: storing a skill in `.agents/skills/` does not determine whether its command starts with `/` or `$`.
+
+For Codex, distinguish skill mentions from built-in commands:
 
 | Prefix | Meaning |
 | ------ | ------- |
 | `$`    | Custom skill — e.g. `$changelogger`, `$commit`. Loads from `~/.codex/agents/skills/`. |
 | `/`    | Built-in Codex commands only — `/resume`, `/title`, `/help`, `/plugins`, etc. |
 
-Typing `/changelogger` in Codex does **not** invoke the custom skill; it looks for a built-in command and fails silently. Use `$changelogger` instead.
+To invoke the `changelogger` skill explicitly in Codex, type `$changelogger`. `/changelogger` is the Claude Code and Copilot form.
 
 Auto-discovery also works: describe the task in natural language and Codex selects the matching skill automatically from `~/.codex/agents/skills/`.
 
-> **Why the difference?** Claude Code reserves `/` for user-defined slash commands (files in `~/.claude/commands/`) while Codex reserves `/` for its own built-in commands and uses `$` for custom skills from the skills directory. There is no way to define custom `/` slash commands in Codex.
+Throughout this README, skill examples written as `/name` use the Claude Code and Copilot syntax. When using Codex, replace that prefix with `$`, for example `/tio-readiness ./spec.md` becomes `$tio-readiness ./spec.md`.
 
 ### Daily usage
 
@@ -242,7 +254,7 @@ sequenceDiagram
     participant C as CoT<br/>(cot/)
     participant R as Ruleset<br/>(rulesets/)
 
-    U->>S: /skill argument1 argument2
+    U->>S: Invoke skill with tool prefix and arguments
     activate S
     S->>C: read full CoT (step 1 to N)
     activate C
@@ -266,7 +278,7 @@ sequenceDiagram
 - **cot/** — reasoning chains (CoT) for daily execution
 - **templates/** — reusable templates
 - **scripts/** — automation and backup scripts
-- **.agents/skills/** — AI-agent discoverable *skills*:
+- **.agents/skills/** — AI-agent discoverable *skills* (examples use `/` for Claude Code and Copilot; use `$` in Codex):
   - `/aws-naming <source_path>` — normalise filenames for AWS/S3 naming workflows
   - `/commit` — full *commit* workflow with mandatory CHANGELOG
   - `/changelogger` — CHANGELOG.md maintenance with CST dates
