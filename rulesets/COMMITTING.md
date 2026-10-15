@@ -98,13 +98,18 @@ git commit -F /tmp/commit-msg.txt
 
 Resolve `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` from the current session before each commit. Use an attribution supplied by the active tool or harness verbatim. Otherwise, use its verified model identity; this repository uses `noreply@anthropic.com` for Anthropic attribution and `noreply@openai.com` for OpenAI attribution.
 
-In Codex, resolve the active model and reasoning effort with:
+When the tool supplies no trailer, resolve the active model and reasoning effort in Codex or Claude Code with:
 
 ```bash
-python3 ~/rules/scripts/codex_commit_trailer.py
+python3 ~/rules/scripts/commit_trailer.py
 ```
 
-The helper locates only the thread identified by `CODEX_THREAD_ID` (falling back to `CODEX_SESSION_ID`) under `$CODEX_HOME/sessions/`, or `~/.codex/sessions/` when `CODEX_HOME` is unset. It verifies the session metadata and reads the latest `turn_context`, supporting model and effort fields at the top level and in `collaboration_mode.settings`. For a turn reporting `gpt-6.1-sol` and `high`, it prints `Co-Authored-By: GPT-6.1-Sol (high) <noreply@openai.com>`.
+The helper detects the tool from the environment (`--tool codex|claude` forces it) and reads only the active session:
+
+- **Codex**: the thread identified by `CODEX_THREAD_ID` (falling back to `CODEX_SESSION_ID`) under `$CODEX_HOME/sessions/`, or `~/.codex/sessions/` when `CODEX_HOME` is unset. It verifies the session metadata and reads the latest `turn_context`, supporting model and effort fields at the top level and in `collaboration_mode.settings`. For a turn reporting `gpt-6.1-sol` and `high`, it prints `Co-Authored-By: GPT-6.1-Sol (high) <noreply@openai.com>`.
+- **Claude Code**: the transcript identified by `CLAUDE_CODE_SESSION_ID` under `~/.claude/projects/` (or `$CLAUDE_CONFIG_DIR/projects/`). It verifies the `sessionId` of the records, takes the model of the latest main-thread assistant turn (sidechain turns are ignored), and the effort from `CLAUDE_EFFORT`. For `claude-opus-5-5` and `medium`, it prints `Co-Authored-By: Claude Opus 5.5 (medium) <noreply@anthropic.com>`.
+
+In Claude Code the harness normally supplies the trailer, which takes precedence and is used verbatim even when it omits the effort; the helper is the fallback when no trailer is supplied (for example in a subagent).
 
 Use the helper's stdout only when it exits successfully. Its diagnostics go to stderr. If effort is unavailable, it reports that limitation and prints the verified model alone. If the session or model cannot be verified, it exits unsuccessfully without printing a trailer; report the limitation and omit the trailer unless the user supplies the missing identity. Session storage is an implementation detail: if its format changes, report detection failure rather than inferring a model from defaults.
 

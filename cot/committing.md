@@ -92,7 +92,7 @@ Steps:
 3a) Action: resolve the co-author from the current session before every commit, following [COMMITTING.md — Agent attribution](../rulesets/COMMITTING.md#26-agent-attribution).
 
 - Use an attribution supplied by the active tool or harness verbatim.
-- In Codex, otherwise run `python3 ~/rules/scripts/codex_commit_trailer.py` and use its stdout as the trailer. It reads the latest turn of the thread identified by `CODEX_THREAD_ID` (or `CODEX_SESSION_ID`), including the active model and reasoning effort.
+- In Codex or Claude Code, otherwise run `python3 ~/rules/scripts/commit_trailer.py` and use its stdout as the trailer. It detects the tool and reads only the active session: in Codex the latest turn of the thread identified by `CODEX_THREAD_ID` (or `CODEX_SESSION_ID`); in Claude Code the latest main-thread assistant turn of the transcript identified by `CLAUDE_CODE_SESSION_ID`, with the effort from `CLAUDE_EFFORT`.
 - Other tools: use the model identity provided by their current session and their attribution email.
 - Replace `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` with the resolved identity; never copy a model from an example, a previous commit, another thread, or configuration defaults.
 - If the model cannot be verified, report the limitation and omit the trailer. If only the effort is unavailable, use the verified model alone.

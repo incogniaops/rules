@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Add TIO readiness assessment for AWS infrastructure specifications
 
+- feat: replace `scripts/codex_commit_trailer.py` with the shared `scripts/commit_trailer.py`, adding Claude Code session and effort detection alongside Codex, and update the commit skill, CoT, README, and rules while retaining precedence for attribution supplied by the active tool
 - feat: detect the active Codex model and reasoning effort with `scripts/codex_commit_trailer.py`, and align the commit skill, CoT, and rules to resolve attribution from the current session instead of fixed agent examples
 - docs: clarify skill invocation in `README.md` — `/name` for Claude Code and GitHub Copilot, `$name` for Codex, examples with arguments, and Copilot's direct discovery from `~/.agents/skills/` after synchronisation
 - fix: correct the `linguistica` skill frontmatter so its `name` and usage are `linguistica` instead of duplicating `linguistics`
