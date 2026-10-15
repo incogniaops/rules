@@ -205,11 +205,13 @@ def copilot_identity(state_dir, session_id):
 
             usage = data.get("usage", data)
             if not isinstance(usage, dict):
+                identity = None
                 continue
             interaction_type = usage.get("interactionType")
             if interaction_type and interaction_type != "conversation-agent":
                 continue
 
+            identity = None
             model = usage.get("model")
             if isinstance(model, str) and re.fullmatch(MODEL_RE, model):
                 identity = (model, usage.get("modelDisplayName"), usage.get("reasoningEffort"))
