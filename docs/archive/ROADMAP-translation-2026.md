@@ -1,5 +1,7 @@
 # Translation roadmap
 
+> **Archived on 2026-10-14.** Every phase below is complete; this file is kept as a historical record of the Spanish → International English (UK) migration. Current pending work lives in [TODO.md](../../TODO.md).
+
 Migration of this repository's documentation from Mexican Spanish to International English (UK), following the bilingual context policy.
 
 ## Bilingual policy

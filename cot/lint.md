@@ -23,7 +23,7 @@ Steps:
 
 2) Action: fix MD022/MD032 (blank lines) in priority files.
    Result:
-   - Targets: rulesets/LINGUISTICS.md, rulesets/GIT.md, rulesets/TEACHING.md, ROADMAP.md, README.md.
+   - Targets: rulesets/LINGUISTICS.md, rulesets/GIT.md, rulesets/TEACHING.md, TODO.md, README.md.
    - Practical rule: add a blank line after each heading and before/after lists.
 
 3) Action: fix MD031/MD040 (code fences and language).
