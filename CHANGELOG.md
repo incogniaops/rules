@@ -5,6 +5,11 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Add TIO readiness assessment for AWS infrastructure specifications
 
+- fix: correct the `linguistica` skill frontmatter so its `name` and usage are `linguistica` instead of duplicating `linguistics`
+- docs: refresh `README.md` — last-modified date, badge counts (26 CoTs, 17 skills, 22 rulesets), English (UK) language badge, Codex sync destination, all rulesets in the included documents, `/tio-readiness`, missing scripts, and `.env` setup
+- docs: list all 17 skills in `AGENTS.md`
+- docs: rewrite `TODO.md` with current pending work — upstream changes to port, `/styling` rebranding, and `/tio-readiness` calibration
+- chore: archive the completed translation roadmap as `docs/archive/ROADMAP-translation-2026.md` and point `cot/lint.md` to `TODO.md`
 - chore: ignore `.env` files and add `.env.example` with Atlassian credential and `TIO_READINESS_MENTIONS` placeholders
 - feat: add `scripts/atlassian/` adapted from upstream — ADF builder, Confluence REST client, and previous-evaluation finder keyed on the `/tio-readiness` footer
 - feat: create the `/tio-readiness` skill with `type:`, `scope:`, and `out:` arguments; sources can be Confluence URLs, local files, or knowledge-base copies linked through their frontmatter `confluence_id`

@@ -5,14 +5,14 @@ description: "Standards, philosophy, and chains of reasoning (CoT) that guide Ro
 
 # Technical rules: prompts and CoTs to accelerate LLM context
 
-*Last modified: 25 July 2026 (CST)*
+*Last modified: 14 October 2026 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
-[![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-25-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-21-orange.svg)](./rulesets/)
+[![English](https://img.shields.io/badge/Language-English%20(UK)-green.svg)](./docs/archive/ROADMAP-translation-2026.md)
+[![CoTs](https://img.shields.io/badge/CoTs-26-blue.svg)](./cot/)
+[![Skills](https://img.shields.io/badge/Skills-17-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-22-orange.svg)](./rulesets/)
 
 ## Quick definitions
 
@@ -73,6 +73,7 @@ git clone git@github.com:incogniaops/rules.git ~/rules 2>/dev/null || git -C ~/r
 - `sync_global.sh` detects platform (macOS, Linux, Windows/WSL) and installs to the correct locations:
   - *Skills* (`SKILL.md`) — copied to `~/.agents/skills/<name>/` (recognised by Warp, Cursor, Copilot, Gemini, and others)
   - *Skills for Claude Code* — symlinked from `~/.agents/skills/<name>/SKILL.md` → `~/.claude/commands/<name>.md` (invoked with `/name` or via the Skill tool)
+  - *Skills for Codex* — symlinked from `~/.agents/skills/<name>/SKILL.md` → `~/.codex/agents/skills/<name>/SKILL.md` (invoked with `$name` or auto-discovery)
   - *Workflows* (`*.yaml`) on macOS: `~/.warp/workflows/`
   - *Workflows* on Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
   - *Workflows* on Windows/WSL: `%APPDATA%\warp\Warp\data\workflows\`
@@ -165,7 +166,17 @@ flowchart LR
 - **[BACKUPS.md](./rulesets/BACKUPS.md)** - backup and destructive-operation policies
 - **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glossary of technical terms used
 - **[MAIL.md](./rulesets/MAIL.md)** - HTML email composition rules for OWA
+- **[BMAIL.md](./rulesets/BMAIL.md)** - corporate business email rules and templates
+- **[COMMIT_LANGUAGE_PROTOCOL.md](./rulesets/COMMIT_LANGUAGE_PROTOCOL.md)** - language checkpoint for commit messages
+- **[CRITICAL_COT_READING.md](./rulesets/CRITICAL_COT_READING.md)** - mandatory full reading of CoT files
+- **[KUBE.md](./rulesets/KUBE.md)** - Kubernetes cluster analysis rules
+- **[KUBETBS.md](./rulesets/KUBETBS.md)** - Kubernetes microservice troubleshooting rules
+- **[LATEX.md](./rulesets/LATEX.md)** - LaTeX document rules
+- **[RELEASING.md](./rulesets/RELEASING.md)** - semantic release rules (`vX.Y.Z` tagging, notes, verification)
+- **[TIO_READINESS.md](./rulesets/TIO_READINESS.md)** - readiness rubric for AWS infrastructure specifications under TIO conventions
+- **[VAULT.md](./rulesets/VAULT.md)** - HashiCorp Vault CLI rules for authentication and secret management
 - **[docs/MAIL.md](./docs/MAIL.md)** - sending email from CLI (owa/mac/graph modes, Graph API setup, *token* lifecycle)
+- **[docs/SYNC.md](./docs/SYNC.md)** - synchronisation mechanism for skills and workflows
 - **[CHANGELOG.md](./CHANGELOG.md)** - project change history
 
 ## Technical specialisation
@@ -261,7 +272,7 @@ sequenceDiagram
   - `/changelogger` — CHANGELOG.md maintenance with CST dates
   - `/bmail <type> <subject>` — generate corporate business email HTML from templates
   - `/linguistics <file>` — apply Mexican Spanish language rules
-  - `/linguistica <file>` — alias of `/linguistics`
+  - `/linguistica <file>` — Spanish alias of `/linguistics`, with its own skill identifier for Copilot
   - `/context` — quick project context detection
   - `/backup` — backup using standard naming
   - `/licensing` — automatic licensing (GPLv3 vs MIT)
@@ -272,6 +283,7 @@ sequenceDiagram
   - `/kube <key> <user> <ip> <namespace>` — Kubernetes cluster analysis over SSH
   - `/kubetbs <key> <user> <ip> <namespace> [service]` — Kubernetes troubleshooting workflow
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <file>` — apply Kabat One style to a Markdown document
+  - `/tio-readiness <source> [type:] [scope:] [out:]` — assess whether an AWS infrastructure specification is ready to implement under TIO conventions
 - **.warp/workflows/** — parameterised YAML commands (`Ctrl+Shift+R` in Warp):
   - `backup_file` — backup file/directory
   - `lint_markdown` — run *markdownlint*
@@ -282,14 +294,29 @@ sequenceDiagram
 
 - Synchronisation: scripts/sync_global.sh (installs global *skills* and *workflows*, cross-platform)
 - Git (post-init): scripts/git-init-context.sh
+- Dates: scripts/cst_date.sh (current date in CST, `YYYY-MM-DD`)
 - Backups:
   - scripts/backup_file.sh (files/directories, .tar.zst, *checksum* >=100 MB, CST log)
+  - scripts/quick_bkp.sh (quick same-directory copy: `file` → `file_YYYY-MM-DD.ext.bkp`)
   - scripts/backup_rsync_snapshot.sh (daily incrementals with rsync --link-dest)
   - scripts/verify_backups.sh (bulk .sha256 verification)
+- Email: scripts/graph_auth.py (Microsoft Graph authentication with token cache for `/mail graph`)
+- Atlassian: scripts/atlassian/ (Confluence REST client, ADF builder, and previous-evaluation finder used by `/tio-readiness`)
+
+### Local credentials (`.env`)
+
+Scripts that call external APIs read credentials from an untracked `.env` at the repository root (`~/rules/.env`). Create it from the template and restrict its permissions:
+
+```bash
+cp ~/rules/.env.example ~/rules/.env
+chmod 600 ~/rules/.env
+```
+
+`.env` and `.env.*` are git-ignored; only `.env.example`, with placeholders, is tracked.
 
 ## How to use CoTs quickly
 
-- All CoTs: [cot/](./cot/) folder (25 files, including `_template.md`)
+- All CoTs: [cot/](./cot/) folder (26 files, including `_template.md`)
 - Linguistics: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - Linguistica (original Spanish): [cot/linguistica.md](./cot/linguistica.md) + [LINGUISTICA.md](./rulesets/LINGUISTICA.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)

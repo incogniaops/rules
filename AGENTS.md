@@ -153,11 +153,22 @@ Skills are lightweight, agent-discoverable instruction sets in `.agents/skills/`
 Available skills:
 
 - **commit** — Full commit workflow with mandatory CHANGELOG update
-- **changelogger** — CHANGELOG.md maintenance with CST dates
+- **changelogger** — CHANGELOG.md maintenance with CST dates (optional `utc`, `est`, `ist`)
 - **linguistics** — Apply Mexican Spanish linguistic rules
+- **linguistica** — Spanish alias of `linguistics` with its own skill identifier
 - **context** — Quick project context detection
 - **backup** — File/directory backup with standard naming
 - **licensing** — Apply the correct licence based on project context (GPLv3 vs MIT)
+- **git-init** — Initialise a repository with SSH, identity, and remote by context
+- **ssh-import** — Import an SSH public key from GitHub into the current server
+- **release** — Non-interactive semantic release with tag and notes validation
+- **aws-naming** — Normalise filenames for S3 and CloudFront with a `.tsv` audit log
+- **mail** — Compose and send OWA-compatible HTML email (`owa`, `mac`, `graph`)
+- **bmail** — Compose structured business-email drafts in English from templates
+- **styling** — Apply corporate Markdown styling by platform (HedgeDoc, GitLab, GitHub)
+- **kube** — Kubernetes cluster analysis over SSH
+- **kubetbs** — Kubernetes microservice troubleshooting across namespaces
+- **tio-readiness** — Assess whether an AWS infrastructure specification is ready to implement under TIO conventions
 
 Invoke with the tool-specific prefix:
 
