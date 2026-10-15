@@ -3,6 +3,14 @@
 **Note:** All dates are in CST (México City, UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-14] - Add TIO readiness assessment for AWS infrastructure specifications
+
+- chore: ignore `.env` files and add `.env.example` with Atlassian credential and `TIO_READINESS_MENTIONS` placeholders
+- feat: add `scripts/atlassian/` adapted from upstream — ADF builder, Confluence REST client, and previous-evaluation finder keyed on the `/tio-readiness` footer
+- feat: create the `/tio-readiness` skill with `type:`, `scope:`, and `out:` arguments; sources can be Confluence URLs, local files, or knowledge-base copies linked through their frontmatter `confluence_id`
+- feat: add `cot/tio_readiness.md` with the assessment flow from invocation parsing to confirmed Confluence publication
+- feat: add `rulesets/TIO_READINESS.md` with the TIO reference platform, weighted rubric (dimensions A–H, platform readiness P, and service-specific S for Terraform, Lambda, Glue, S3, Step Functions, ECS, and GitHub Actions), blockers BL1–BL10, and report structure
+
 ## [2026-09-17] - Add timezone parameters to the changelogger skill
 
 - feat: add optional `utc`, `est`, and `ist` arguments to the `/changelogger` skill to date entries in UTC, EST (UTC-5), or IST (UTC+5:30) instead of the default CST (UTC-6)
