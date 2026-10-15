@@ -1,6 +1,6 @@
 ---
-name: linguistics
-description: "Apply Spanish Mexican linguistic rules to a file: sentence-case titles, angular quotes, italics for loanwords, no anglicisms. Usage: /linguistics <file>"
+name: linguistica
+description: "Apply Spanish Mexican linguistic rules to a file: sentence-case titles, angular quotes, italics for loanwords, no anglicisms. Usage: /linguistica <file>"
 ---
 
 # Spanish Mexican linguistic rules
