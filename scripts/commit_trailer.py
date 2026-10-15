@@ -221,7 +221,7 @@ def copilot_identity(state_dir, session_id):
 
     model, display_name, effort = identity
     if not isinstance(display_name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._:+/-]*", display_name):
-        display_name = model
+        display_name = gpt_display_name(model)
     effort = valid_effort(effort)
     return format_trailer("Copilot", display_name, effort, COPILOT_EMAIL), bool(effort)
 

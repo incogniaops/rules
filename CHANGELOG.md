@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-15] - Add Copilot CLI commit attribution
 
+- fix: normalise Copilot's model identifier with the shared GPT display-name formatter when its session record lacks a valid `modelDisplayName`, keeping the attribution trailer consistent
 - docs: add three commit-attribution issues to `TODO.md`, assigning stale Copilot identity and model-name normalisation to Copilot CLI, and Claude session filtering and stale-model handling to Claude Code, with priorities and validation criteria
 - feat: make `scripts/commit_trailer.py` the primary attribution source in the commit skill, CoT, rules, and README for Claude Code, Codex, and Copilot CLI, with tool-supplied trailers as a fallback, so Claude Code commits also record the reasoning effort
 - feat: unify co-author trailers as `[Tool ]Model (effort)` — `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)`, and `Copilot GPT-6 Luna (low)` — and render GPT model names in Copilot's display style (`gpt-6.1-sol` → `GPT-6.1 Sol`)

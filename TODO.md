@@ -24,7 +24,7 @@ Issues reproduced during review of `a2a89de` and `c4bfb28` in [scripts/commit_tr
 
 - [ ] **Copilot CLI — medium:** fix `copilot_identity()` retaining an earlier model and effort when the latest root-agent usage record has no valid model. Fail detection so the commit skill can use its attribution fallback. Validate with a valid usage record followed by one without a model; the earlier identity must not be returned.
 - [ ] **Claude Code — medium:** fix `claude_model()` accepting a model from a record with a different `sessionId` after any record verifies the session. Filter each assistant candidate by the requested session, continue ignoring sidechain turns, and fail detection when the latest relevant assistant turn has no valid model. Validate mixed-session records and a final assistant turn without a model; neither may yield another session's or an earlier turn's model.
-- [ ] **Copilot CLI — low:** normalise the model identifier when `modelDisplayName` is missing or invalid in `copilot_identity()`, using the shared `gpt_display_name()` formatter. Validate that `gpt-6-luna` without a display name produces `Copilot GPT-6 Luna`, matching the shared trailer format.
+- [x] **Copilot CLI — low:** normalise the model identifier when `modelDisplayName` is missing or invalid in `copilot_identity()`, using the shared `gpt_display_name()` formatter. Validate that `gpt-6-luna` without a display name produces `Copilot GPT-6 Luna`, matching the shared trailer format.
 
 ## Tooling
 
