@@ -118,7 +118,7 @@ def claude_model(projects_dir, session_id):
         raise ValueError("expected exactly one transcript for the active Claude Code session")
 
     verified = False
-    model = None
+    latest = None
     with matches[0].open(encoding="utf-8") as stream:
         for line in stream:
             if not line.strip():
@@ -127,21 +127,21 @@ def claude_model(projects_dir, session_id):
                 record = json.loads(line)
             except json.JSONDecodeError:
                 continue  # the active transcript may end with a partially written line
-            if not isinstance(record, dict):
+            if not isinstance(record, dict) or record.get("sessionId") != session_id:
                 continue
-            if record.get("sessionId") == session_id:
-                verified = True
+            verified = True
             if record.get("type") != "assistant" or record.get("isSidechain"):
                 continue
             message = record.get("message")
             candidate = message.get("model") if isinstance(message, dict) else None
-            if isinstance(candidate, str) and re.fullmatch(r"claude-[a-z0-9-]+", candidate):
-                model = candidate
+            if candidate == "<synthetic>":
+                continue  # placeholder written for interruptions and errors, not a model turn
+            latest = candidate
     if not verified:
         raise ValueError("transcript records do not match the active Claude Code session")
-    if not model:
-        raise ValueError("active Claude Code session has no assistant turn with a valid model")
-    return model
+    if not isinstance(latest, str) or not re.fullmatch(r"claude-[a-z0-9-]+", latest):
+        raise ValueError("latest Claude Code assistant turn has no valid model")
+    return latest
 
 
 def claude_display_name(model):

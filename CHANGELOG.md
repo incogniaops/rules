@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-15] - Add Copilot CLI commit attribution
 
+- fix: restrict Claude Code model detection in `scripts/commit_trailer.py` to the requested session's records, skip `<synthetic>` placeholders, and fail when the latest main-thread assistant turn has no valid model instead of reusing an earlier or foreign model
 - fix: normalise Copilot's model identifier with the shared GPT display-name formatter when its session record lacks a valid `modelDisplayName`, keeping the attribution trailer consistent
 - docs: add three commit-attribution issues to `TODO.md`, assigning stale Copilot identity and model-name normalisation to Copilot CLI, and Claude session filtering and stale-model handling to Claude Code, with priorities and validation criteria
 - feat: make `scripts/commit_trailer.py` the primary attribution source in the commit skill, CoT, rules, and README for Claude Code, Codex, and Copilot CLI, with tool-supplied trailers as a fallback, so Claude Code commits also record the reasoning effort
