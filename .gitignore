@@ -33,3 +33,8 @@ build/
 *.doc
 
 __pycache__/
+
+# Local credentials (never tracked)
+.env
+.env.*
+!.env.example
