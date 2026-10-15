@@ -3,6 +3,12 @@
 **Note:** All dates are in CST (México City, UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-15] - Add Copilot CLI commit attribution
+
+- feat: extend `scripts/commit_trailer.py` to identify the active GitHub Copilot CLI session and read its effective model and reasoning effort from root-agent usage records
+- fix: reject ambiguous coding-agent sessions and fail clearly when Copilot session metadata is unavailable instead of inferring attribution
+- docs: update the commit skill, CoT, rules, and README for Copilot attribution and selective staging of atomic changes
+
 ## [2026-10-14] - Add TIO readiness assessment for AWS infrastructure specifications
 
 - feat: replace `scripts/codex_commit_trailer.py` with the shared `scripts/commit_trailer.py`, adding Claude Code session and effort detection alongside Codex, and update the commit skill, CoT, README, and rules while retaining precedence for attribution supplied by the active tool

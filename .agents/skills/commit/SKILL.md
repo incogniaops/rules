@@ -30,8 +30,8 @@ Before making any git commit in projects that follow the rules repository conven
 4. **(Optional) Inspect CHANGELOG diff**:
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
-5. **Stage files**: `git add .`
-6. **Resolve attribution and build the commit message**: before each commit, follow the active-session attribution rules in `~/rules/rulesets/COMMITTING.md` section 2.6. Use a trailer supplied by the active tool or harness verbatim. Otherwise, in Codex or Claude Code run:
+5. **Analyse and stage changes**: run `git status --short`, classify changes by logical type, and stage only the files for the intended commit with `git add -- <file>`. For mixed change types, create separate atomic commits and stage each group separately; never use `git add .` or `git add -A` across mixed changes.
+6. **Resolve attribution and build the commit message**: before each commit, follow the active-session attribution rules in `~/rules/rulesets/COMMITTING.md` section 2.6. Use a trailer supplied by the active tool or harness verbatim. Otherwise, in Codex, Claude Code, or GitHub Copilot CLI run:
 
    ```bash
    python3 ~/rules/scripts/commit_trailer.py

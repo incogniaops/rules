@@ -306,7 +306,7 @@ sequenceDiagram
 
 - Synchronisation: scripts/sync_global.sh (installs global *skills* and *workflows*, cross-platform)
 - Git (post-init): scripts/git-init-context.sh
-- Commit attribution: scripts/commit_trailer.py (detects the active Codex or Claude Code model and reasoning effort from the current session; used by the commit skill when the tool supplies no trailer)
+- Commit attribution: scripts/commit_trailer.py (detects the active Codex, Claude Code, or Copilot CLI model and reasoning effort from the current session; used by the commit skill when the tool supplies no trailer)
 - Dates: scripts/cst_date.sh (current date in CST, `YYYY-MM-DD`)
 - Backups:
   - scripts/backup_file.sh (files/directories, .tar.zst, *checksum* >=100 MB, CST log)

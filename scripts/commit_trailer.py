@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Print a co-author trailer for the model running the active coding-agent session.
 
-Supports Codex (CODEX_THREAD_ID or CODEX_SESSION_ID, CODEX_HOME) and Claude Code
-(CLAUDE_CODE_SESSION_ID, CLAUDE_EFFORT). Reads only the active session; config
-defaults and Git history are never used.
+Supports Codex, Claude Code, and GitHub Copilot CLI. Reads only the active
+session; config defaults and Git history are never used.
 """
 
 import argparse
@@ -15,14 +14,23 @@ import sys
 
 ID_RE = r"[A-Za-z0-9_-]+"
 EFFORT_RE = r"[A-Za-z0-9][A-Za-z0-9_-]*"
+MODEL_RE = r"[A-Za-z0-9][A-Za-z0-9._:-]*"
+COPILOT_EMAIL = "223556219+Copilot@users.noreply.github.com"
 
 
 def detect_tool():
+    active = []
     if os.environ.get("CODEX_THREAD_ID") or os.environ.get("CODEX_SESSION_ID"):
-        return "codex"
+        active.append("codex")
     if os.environ.get("CLAUDE_CODE_SESSION_ID"):
-        return "claude"
-    raise ValueError("no active Codex or Claude Code session detected")
+        active.append("claude")
+    if os.environ.get("COPILOT_AGENT_SESSION_ID"):
+        active.append("copilot")
+    if len(active) > 1:
+        raise ValueError("multiple active coding-agent sessions detected; specify --tool")
+    if not active:
+        raise ValueError("no active Codex, Claude Code, or Copilot CLI session detected")
+    return active[0]
 
 
 def valid_effort(effort):
@@ -76,7 +84,7 @@ def codex_trailer(context):
     if not isinstance(settings, dict):
         settings = {}
     model = context.get("model") or settings.get("model")
-    if not isinstance(model, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", model):
+    if not isinstance(model, str) or not re.fullmatch(MODEL_RE, model):
         raise ValueError("latest Codex turn has no valid model identifier")
     effort = valid_effort(
         context.get("effort")
@@ -144,11 +152,80 @@ def claude_trailer(model, effort):
     return f"Co-Authored-By: {name} <noreply@anthropic.com>", bool(effort)
 
 
+# ---------------------------------------------------------------- Copilot CLI
+
+def copilot_identity(state_dir, session_id):
+    """Return the latest root-agent model and effort from the active CLI session."""
+    if not session_id or not re.fullmatch(ID_RE, session_id):
+        raise ValueError("missing or invalid active Copilot CLI session ID")
+
+    events_file = state_dir / "session-state" / session_id / "events.jsonl"
+    if not events_file.is_file():
+        raise ValueError("active Copilot CLI session event log is unavailable")
+
+    session_verified = False
+    identity = None
+    with events_file.open(encoding="utf-8") as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError:
+                raise ValueError("active Copilot session contains an incomplete or invalid event") from None
+            if not isinstance(event, dict):
+                continue
+
+            data = event.get("data")
+            if not isinstance(data, dict):
+                continue
+
+            if event.get("type") == "session.start":
+                if data.get("sessionId") != session_id:
+                    raise ValueError("session metadata does not match the active Copilot CLI session")
+                producer = data.get("producer")
+                if not isinstance(producer, str) or "copilot" not in producer.lower():
+                    raise ValueError("active session is not identified as a Copilot CLI session")
+                session_verified = True
+                continue
+
+            if event.get("type") not in ("assistant.usage", "session.usage_record"):
+                continue
+            if not session_verified or event.get("agentId"):
+                continue
+
+            usage = data.get("usage", data)
+            if not isinstance(usage, dict):
+                continue
+            interaction_type = usage.get("interactionType")
+            if interaction_type and interaction_type != "conversation-agent":
+                continue
+
+            model = usage.get("model")
+            if isinstance(model, str) and re.fullmatch(MODEL_RE, model):
+                identity = (model, usage.get("modelDisplayName"), usage.get("reasoningEffort"))
+
+    if not session_verified:
+        raise ValueError("active Copilot session has no matching session-start event")
+    if identity is None:
+        raise ValueError("active Copilot session has no root-agent model usage record")
+
+    model, display_name, effort = identity
+    if not isinstance(display_name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._:+/-]*", display_name):
+        display_name = model
+    effort = valid_effort(effort)
+    name = f"GitHub Copilot ({display_name}"
+    if effort:
+        name += f", {effort}"
+    name += ")"
+    return f"Co-Authored-By: {name} <{COPILOT_EMAIL}>", bool(effort)
+
+
 # ---------------------------------------------------------------- CLI
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tool", choices=("codex", "claude"), help="force the tool instead of detecting it")
+    parser.add_argument("--tool", choices=("codex", "claude", "copilot"), help="force the tool instead of detecting it")
     parser.add_argument(
         "--sessions-dir",
         type=Path,
@@ -176,13 +253,26 @@ def main():
         default=os.environ.get("CLAUDE_EFFORT"),
         help="Claude Code effort (defaults to CLAUDE_EFFORT)",
     )
+    parser.add_argument(
+        "--copilot-state-dir",
+        type=Path,
+        default=Path(os.environ.get("COPILOT_HOME") or Path.home() / ".copilot"),
+        help="Copilot CLI state directory (defaults to COPILOT_HOME or ~/.copilot)",
+    )
+    parser.add_argument(
+        "--copilot-session-id",
+        default=os.environ.get("COPILOT_AGENT_SESSION_ID"),
+        help="Copilot CLI session to inspect (defaults to the active session)",
+    )
     args = parser.parse_args()
     try:
         tool = args.tool or detect_tool()
         if tool == "codex":
             trailer, effort_known = codex_trailer(codex_context(args.sessions_dir, args.thread_id))
-        else:
+        elif tool == "claude":
             trailer, effort_known = claude_trailer(claude_model(args.projects_dir, args.session_id), args.effort)
+        else:
+            trailer, effort_known = copilot_identity(args.copilot_state_dir, args.copilot_session_id)
     except (OSError, UnicodeError, ValueError) as error:
         print(f"commit_trailer: {error}", file=sys.stderr)
         return 1

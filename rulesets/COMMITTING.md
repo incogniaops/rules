@@ -96,18 +96,21 @@ git commit -F /tmp/commit-msg.txt
 
 ### 2.6. Agent attribution
 
-Resolve `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` from the current session before each commit. Use an attribution supplied by the active tool or harness verbatim. Otherwise, use its verified model identity; this repository uses `noreply@anthropic.com` for Anthropic attribution and `noreply@openai.com` for OpenAI attribution.
+Resolve `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` from the current session before each commit. Use an attribution supplied by the active tool or harness verbatim. Otherwise, use its verified model identity; this repository uses `noreply@anthropic.com` for Anthropic attribution, `noreply@openai.com` for OpenAI attribution, and `223556219+Copilot@users.noreply.github.com` for GitHub Copilot CLI.
 
-When the tool supplies no trailer, resolve the active model and reasoning effort in Codex or Claude Code with:
+When the tool supplies no trailer, resolve the active model and reasoning effort in Codex, Claude Code, or GitHub Copilot CLI with:
 
 ```bash
 python3 ~/rules/scripts/commit_trailer.py
 ```
 
-The helper detects the tool from the environment (`--tool codex|claude` forces it) and reads only the active session:
+The helper detects the tool from the environment (`--tool codex|claude|copilot` forces it) and reads only the active session:
 
 - **Codex**: the thread identified by `CODEX_THREAD_ID` (falling back to `CODEX_SESSION_ID`) under `$CODEX_HOME/sessions/`, or `~/.codex/sessions/` when `CODEX_HOME` is unset. It verifies the session metadata and reads the latest `turn_context`, supporting model and effort fields at the top level and in `collaboration_mode.settings`. For a turn reporting `gpt-6.1-sol` and `high`, it prints `Co-Authored-By: GPT-6.1-Sol (high) <noreply@openai.com>`.
 - **Claude Code**: the transcript identified by `CLAUDE_CODE_SESSION_ID` under `~/.claude/projects/` (or `$CLAUDE_CONFIG_DIR/projects/`). It verifies the `sessionId` of the records, takes the model of the latest main-thread assistant turn (sidechain turns are ignored), and the effort from `CLAUDE_EFFORT`. For `claude-opus-5-5` and `medium`, it prints `Co-Authored-By: Claude Opus 5.5 (medium) <noreply@anthropic.com>`.
+- **GitHub Copilot CLI**: the session identified by `COPILOT_AGENT_SESSION_ID` under `$COPILOT_HOME/session-state/` (or `~/.copilot/session-state/`). It verifies the session-start record and reads the latest root-agent usage record, not subagent usage. The model and effort are taken from that call's recorded usage; it does not infer either from the configured model, Auto routing, or a previous call. For `GPT-6 Luna` and `medium`, it prints `Co-Authored-By: GitHub Copilot (GPT-6 Luna, medium) <223556219+Copilot@users.noreply.github.com>`.
+
+Copilot CLI's session event schema is not a documented external API and may change. If the active session or latest root-agent usage cannot be verified, the helper fails instead of guessing; if the model is known but the effort is missing, it reports that limitation and uses the verified model alone.
 
 In Claude Code the harness normally supplies the trailer, which takes precedence and is used verbatim even when it omits the effort; the helper is the fallback when no trailer is supplied (for example in a subagent).
 
