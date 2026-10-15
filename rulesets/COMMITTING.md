@@ -78,7 +78,7 @@ docs: add frontend/backend GitLab cross-references
 - Add SSH key alignment and relay host-key stability notes in README and docs/SERVERS.md
 - Update CHANGELOG.md with the 2026-05-01 (CST) entry before commit
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
 ```
 
 Mandatory formatting rules for this template:
@@ -93,6 +93,22 @@ Then run the commit with:
 ```bash
 git commit -F /tmp/commit-msg.txt
 ```
+
+### 2.6. Agent attribution
+
+Resolve `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` from the current session before each commit. Use an attribution supplied by the active tool or harness verbatim. Otherwise, use its verified model identity; this repository uses `noreply@anthropic.com` for Anthropic attribution and `noreply@openai.com` for OpenAI attribution.
+
+In Codex, resolve the active model and reasoning effort with:
+
+```bash
+python3 ~/rules/scripts/codex_commit_trailer.py
+```
+
+The helper locates only the thread identified by `CODEX_THREAD_ID` (falling back to `CODEX_SESSION_ID`) under `$CODEX_HOME/sessions/`, or `~/.codex/sessions/` when `CODEX_HOME` is unset. It verifies the session metadata and reads the latest `turn_context`, supporting model and effort fields at the top level and in `collaboration_mode.settings`. For a turn reporting `gpt-6.1-sol` and `high`, it prints `Co-Authored-By: GPT-6.1-Sol (high) <noreply@openai.com>`.
+
+Use the helper's stdout only when it exits successfully. Its diagnostics go to stderr. If effort is unavailable, it reports that limitation and prints the verified model alone. If the session or model cannot be verified, it exits unsuccessfully without printing a trailer; report the limitation and omit the trailer unless the user supplies the missing identity. Session storage is an implementation detail: if its format changes, report detection failure rather than inferring a model from defaults.
+
+Never take the model or effort from previous commits, another thread, a fixed example, or `config.toml` defaults. A model can change during a conversation, so repeat attribution detection immediately before creating each commit message.
 
 ## 3. Workflow and change management
 
@@ -157,7 +173,7 @@ docs: validate changelog gate before commit
 - Abort commit flow when changelog has no repo diff
 - Keep commit message workflow in English using temporary file
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
 EOF
 git commit -F /tmp/commit-msg.txt
 
@@ -263,7 +279,7 @@ git config --global pager.diff false
      preserve backward compatibility for existing callers
    - Add explicit error handling for invalid identifiers
 
-   Co-Authored-By: Oz <oz-agent@warp.dev>
+   Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
    EOF
    git commit -F /tmp/commit-msg.txt
    ```

@@ -89,7 +89,7 @@ feat: integrate Loki and Promtail for centralized logging
   Promtail
 - Document deployment and rollback procedure in project docs
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
 
 ✅ Message in English validated — proceeding with:
 git commit -F /tmp/commit-msg.txt
@@ -100,6 +100,8 @@ Mandatory body format before validating language:
 - The bullet `-` must start at column 1 (no leading spaces).
 - If a line is too long, break it and continue on the next line.
 - Continuation lines must be indented with two spaces to align with the bullet text.
+
+Resolve the attribution placeholders from the active session following [COMMITTING.md — Agent attribution](./COMMITTING.md#26-agent-attribution); examples do not supply the model identity.
 
 ## Protocol failure
 

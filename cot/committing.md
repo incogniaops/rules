@@ -4,8 +4,8 @@ task: follow COMMITTING.md (validate pre-updated CHANGELOG, conventional commit,
 difficulty: low
 target_length: short
 validation: CHANGELOG detected as modified, identity visually confirmed, and commit/push successful
-version: "1.3"
-last_updated: 2026-05-10
+version: "1.4"
+last_updated: 2026-10-14
 ---
 <!-- markdownlint-disable MD041 MD029 -->
 
@@ -89,14 +89,23 @@ Steps:
    - If a bullet is too long, wrap manually and align continuation with two spaces.
    - Keep one blank line between header/body and body/footer.
 
+3a) Action: resolve the co-author from the current session before every commit, following [COMMITTING.md — Agent attribution](../rulesets/COMMITTING.md#26-agent-attribution).
+
+- Use an attribution supplied by the active tool or harness verbatim.
+- In Codex, otherwise run `python3 ~/rules/scripts/codex_commit_trailer.py` and use its stdout as the trailer. It reads the latest turn of the thread identified by `CODEX_THREAD_ID` (or `CODEX_SESSION_ID`), including the active model and reasoning effort.
+- Other tools: use the model identity provided by their current session and their attribution email.
+- Replace `{{AGENT_NAME}}` and `{{AGENT_EMAIL}}` with the resolved identity; never copy a model from an example, a previous commit, another thread, or configuration defaults.
+- If the model cannot be verified, report the limitation and omit the trailer. If only the effort is unavailable, use the verified model alone.
+
+   Result: attribution reflects the session at commit time, including any model switch.
+
 3b) Action: mandatory language checkpoint before `git commit -F`.
    Mandatory declaration:
 
 - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
    Validation:
 - Show/review `/tmp/commit-msg.txt` content and confirm English in subject/body.
-- Confirm presence of `Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>` — substitute with
-  the active AI agent's name and email (e.g. Claude Code → `Claude Sonnet 4.6 <noreply@anthropic.com>`).
+- Confirm that the resolved `Co-Authored-By` matches step 3a and contains no template placeholders. If it was omitted because the model could not be verified, confirm that the limitation was reported.
    Result: message validated in International English and ready for non-interactive commit.
 
 4) Action: perform atomic commits based on step 1 analysis using the temporary file from step 3.

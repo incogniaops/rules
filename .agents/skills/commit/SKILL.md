@@ -31,7 +31,14 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Stage files**: `git add .`
-6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
+6. **Resolve attribution and build the commit message**: before each commit, follow the active-session attribution rules in `~/rules/rulesets/COMMITTING.md` section 2.6. Use a trailer supplied by the active tool or harness verbatim. Otherwise, in Codex run:
+
+   ```bash
+   python3 ~/rules/scripts/codex_commit_trailer.py
+   ```
+
+   Use its stdout only on success; it includes the active model and reasoning effort. For other tools, use the model identity supplied by their current session. Never copy attribution from examples, Git history, another thread, or configuration defaults. If the model cannot be verified, report the limitation and omit the trailer; if only effort is unavailable, use the verified model alone.
+   Create `/tmp/commit-msg.txt` using this detailed structure (English international), replacing the attribution placeholders with the resolved identity:
 
    ```text
    type(scope): short summary in english
@@ -41,7 +48,7 @@ Before making any git commit in projects that follow the rules repository conven
      aligned with the bullet text (continuation line)
    - Detail 3 in english
 
-   Co-Authored-By: Oz <oz-agent@warp.dev>
+   Co-Authored-By: {{AGENT_NAME}} <{{AGENT_EMAIL}}>
    ```
 
    **Mandatory formatting rules for bullets and long lines:**
@@ -49,6 +56,7 @@ Before making any git commit in projects that follow the rules repository conven
    - If a bullet is too long, split it manually into a new line.
    - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
    - Keep exactly one blank line between subject/body and body/footer.
+   - Verify that the trailer matches the current session and contains no unresolved placeholders; report any omission caused by unavailable model metadata.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits

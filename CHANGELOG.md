@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Add TIO readiness assessment for AWS infrastructure specifications
 
+- feat: detect the active Codex model and reasoning effort with `scripts/codex_commit_trailer.py`, and align the commit skill, CoT, and rules to resolve attribution from the current session instead of fixed agent examples
 - docs: clarify skill invocation in `README.md` — `/name` for Claude Code and GitHub Copilot, `$name` for Codex, examples with arguments, and Copilot's direct discovery from `~/.agents/skills/` after synchronisation
 - fix: correct the `linguistica` skill frontmatter so its `name` and usage are `linguistica` instead of duplicating `linguistics`
 - docs: refresh `README.md` — last-modified date, badge counts (26 CoTs, 17 skills, 22 rulesets), English (UK) language badge, Codex sync destination, all rulesets in the included documents, `/tio-readiness`, missing scripts, and `.env` setup

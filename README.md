@@ -306,6 +306,7 @@ sequenceDiagram
 
 - Synchronisation: scripts/sync_global.sh (installs global *skills* and *workflows*, cross-platform)
 - Git (post-init): scripts/git-init-context.sh
+- Commit attribution: scripts/codex_commit_trailer.py (detects the active Codex model and reasoning effort from the current thread; used by the commit skill)
 - Dates: scripts/cst_date.sh (current date in CST, `YYYY-MM-DD`)
 - Backups:
   - scripts/backup_file.sh (files/directories, .tar.zst, *checksum* >=100 MB, CST log)
